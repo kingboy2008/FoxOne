@@ -1,0 +1,150 @@
+﻿@{Layout = null;}
+@using FoxOne.Business
+@using FoxOne.Controls
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    @System.Web.Optimization.Styles.Render("~/style/common.css")
+    @System.Web.Optimization.Scripts.Render("~/script/common.js")
+    @System.Web.Optimization.Scripts.Render("~/script/widget.js")
+    <script src="~/Scripts/WorkflowUserSelect.js"></script>
+    <style>
+        h1 {
+            font-size: 14px;
+            font-weight: bold;
+            padding: 10px;
+            background-color: #f6f8f9;
+            border-bottom: 1px solid #dcdcdc;
+        }
+
+        .user-select {
+            width: 700px;
+            background-color: white;
+            padding: 15px;
+            display: none;
+        }
+
+        .user-select-table td {
+            vertical-align: top;
+            border: 1px solid #DCDCDC;
+            color: black;
+            font-weight: bold;
+            font-size: 14px;
+            padding: 6px;
+        }
+
+        .user-select-td-bg {
+            background-color: #F6F8F9;
+        }
+
+        .step-list-td {
+            width: 50%;
+        }
+
+        .step-list {
+            overflow-y: auto;
+            height: 250px;
+            font-size: 14px;
+        }
+
+            .step-list p {
+                margin-top: 5px;
+            }
+
+        .tree-list-td {
+            width: 50%;
+        }
+
+        .selected-list {
+            width: 100%;
+            height: 145px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body class="easyui-layout">
+    <h1>@ViewData["Title"]</h1>
+    <div widget="Tab" initindex="0">
+        <div class="tab-box">
+            <span class="tab-item" key="formInfo">表单信息</span>
+            <span class="tab-item" key="attachementInfo">附件信息</span>
+            <span class="tab-item" key="approvalInfo">审批信息</span>
+            <span class="tab-item" key="noticeInfo">知会信息</span>
+        </div>
+        <div tabitem="formInfo">
+            @Html.CustomControl((ViewData["Form"] as Form))
+        </div>
+        <div tabitem="attachementInfo"></div>
+        <div tabitem="approvalInfo">
+            @Html.CustomControl((ViewData["Table"] as Table))
+        </div>
+        <div tabitem="noticeInfo">
+            @Html.CustomControl((ViewData["NoticeTable"] as Table))
+        </div>
+    </div>
+    <div class="toolbar" style="position:fixed;bottom:0;left:0;width:100%;padding:20px;border-top:1px solid #dcdcdc;">
+        <p style="margin-bottom:10px;"><textarea class="form-control" placeholder="输入您的审批意见" id="opinionContent" style="width:500px;height:100px;"></textarea></p>
+        <input class="btn btn-success" id="btnSaveAndSend" type="button" value="保存并发送" />
+        <input class="btn btn-primary" id="btnSend" type="button" value="发送" />
+        <input class="btn btn-primary" id="btnSave" type="button" value="保存" />
+        <input class="btn btn-danger" id="btnPushback" type="button" value="退回" />
+        <input class="btn btn-default" id="btnFoceEnd" type="button" value="强制结束" />
+        <input class="btn btn-default" id="btnPushbackToRoot" type="button" value="退回拟稿人" />
+        <input class="btn btn-default" id="btnSendOtherToRead" type="button" value="传阅" />
+    </div>
+    <script type="text/javascript">
+        var isSaveAndSend = false;
+        $(function () {
+            $("[tabitem]").css("height", $(window).height() - $(".toolbar").height() - 130).css("overflow-y","auto");
+            $("body").on("click", ".toolbar", function (e) {
+                var btn = $(e.target);
+                if (!btn.is("input")) return;
+                var id = btn.attr("id").substr(3);
+                var flowEvent = $.Event("before" + id);
+                switch (id) {
+                    case "Send":
+                        foxOne.workflow.runParameter.OpinionContent = $("#opinionContent").val();
+                        foxOne.workflow.getNextStep();
+                        break;
+                    case "Save":
+                        $("[defaultForm]").submit();
+                        break;
+                    case "SaveAndSend":
+                        isSaveAndSend = true;
+                        $("[defaultForm]").submit();
+                        break;
+                    case "SendOtherToRead": break;
+                    default:
+                        foxOne.workflow.exec(id);
+                        break;
+                }
+            });
+
+            $("[defaultForm]").bind("form.afterSubmit", function (e) {
+                var result = e.d;
+                if (result.Insert) {
+                    $("#btnSend").show();
+                }
+                foxOne.workflow.runParameter.InstanceId = result.InstanceId;
+                foxOne.workflow.runParameter.ItemId = result.ItemId;
+                if(isSaveAndSend)
+                {
+                    foxOne.workflow.runParameter.OpinionContent = $("#opinionContent").val();
+                    foxOne.workflow.getNextStep();
+                }
+            });
+            var parameter = foxOne.getQueryString();
+            if (parameter.hasOwnProperty("InstanceId")) {
+                $("#btnSend").show();
+                foxOne.workflow.runParameter.InstanceId = parameter.InstanceId;
+                foxOne.workflow.runParameter.ItemId = parameter.ItemId;
+            }
+            $("#btnSave").show();
+        });
+    </script>
+</body>
+</html>

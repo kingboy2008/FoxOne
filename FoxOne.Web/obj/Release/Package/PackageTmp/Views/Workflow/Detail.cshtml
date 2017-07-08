@@ -1,0 +1,115 @@
+﻿@{Layout = null;}
+@using FoxOne.Business
+@using FoxOne.Controls
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    @System.Web.Optimization.Styles.Render("~/style/common.css")
+    @System.Web.Optimization.Scripts.Render("~/script/common.js")
+    @System.Web.Optimization.Scripts.Render("~/script/widget.js")
+    <script src="~/Scripts/WorkflowUserSelect.js"></script>
+    <style>
+        h1{font-size:14px;font-weight:bold;padding:10px;background-color:#f6f8f9;border-bottom:1px solid #dcdcdc;}
+        .user-select {
+            width: 700px;
+            background-color: white;
+            padding: 15px;
+            display: none;
+        }
+
+        .user-select-table td {
+            vertical-align: top;
+            border: 1px solid #DCDCDC;
+            color: black;
+            font-weight: bold;
+            font-size: 14px;
+            padding: 6px;
+        }
+
+        .user-select-td-bg {
+            background-color: #F6F8F9;
+        }
+
+        .step-list-td {
+            width: 50%;
+        }
+
+        .step-list {
+            overflow-y: auto;
+            height: 250px;
+            font-size: 14px;
+        }
+
+            .step-list p {
+                margin-top: 5px;
+            }
+
+        .tree-list-td {
+            width: 50%;
+        }
+
+        .selected-list {
+            width: 100%;
+            height: 145px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body class="easyui-layout">
+    <h1>@ViewData["Title"]</h1>
+    <div widget="Tab" initindex="0" pageId="">
+        <div class="tab-box">
+            
+            <span class="tab-item" key="formInfo">表单信息</span>
+            <span class="tab-item" key="attachementInfo">附件信息</span>
+            <span class="tab-item" key="approvalInfo">审批信息</span>
+            <span class="tab-item" key="noticeInfo">知会信息</span>
+        </div>
+        <div tabitem="formInfo">
+            @Html.CustomControl((ViewData["Form"] as Form))
+        </div>
+        <div tabitem="attachementInfo"></div>
+        <div tabitem="approvalInfo">
+            @Html.CustomControl((ViewData["Table"] as Table))
+        </div>
+        <div tabitem="noticeInfo">
+            @Html.CustomControl((ViewData["NoticeTable"] as Table))
+        </div>
+    </div>
+    <div class="toolbar" style="position:fixed;bottom:0;left:0;width:100%;padding:20px;border-top:1px solid #dcdcdc;">
+        <input class="btn btn-danger" id="btnRollback" type="button" value="撤回" />
+        <input class="btn btn-default" id="btnForceEnd" type="button" value="强制结束" />
+        <input class="btn btn-default" id="btnSendOtherToRead" type="button" value="传阅" />
+        <input class="btn btn-default" id="btnWF" type="button" value="流程图" />
+    </div>
+    <script type="text/javascript">
+        $(function () {
+            $("[tabitem]").css("height", $(window).height() - $(".toolbar").height() - 130).css("overflow-y", "auto");
+            $("body").on("click", ".toolbar", function (e) {
+                var btn = $(e.target);
+                if (!btn.is("input")) return;
+                var id = btn.attr("id").substr(3);
+                var flowEvent = $.Event("before" + id);
+                switch (id) {
+                    case "SendOtherToRead": break;
+                    case "WF":
+                        $.modal({title:'流程图', url: '/WorkflowDesigner/FlowImage/@ViewData["DefinitionId"].ToString()', width: 1100, height: 650, overlayClose: true });
+                        break;
+                    default:
+                        foxOne.workflow.exec(id);
+                        break;
+                }
+            });
+            var parameter = foxOne.getQueryString();
+            if (parameter.hasOwnProperty("InstanceId")) {
+                foxOne.workflow.runParameter.InstanceId = parameter.InstanceId;
+                foxOne.workflow.runParameter.ItemId = parameter.ItemId;
+            }
+        });
+    </script>
+</body>
+</html>
