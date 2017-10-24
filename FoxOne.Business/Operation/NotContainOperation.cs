@@ -12,7 +12,7 @@ using System.Web;
 
 namespace FoxOne.Business
 {
-    [DisplayName("不包含")]
+    [DisplayName("分隔不包含")]
     public class NotContainOperation:ContainOperation
     {
         public override bool Operate(object obj1, object obj2)

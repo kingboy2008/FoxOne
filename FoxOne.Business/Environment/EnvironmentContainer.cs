@@ -35,6 +35,7 @@ namespace FoxOne.Business.Environment
         }
         public virtual bool TryResolve(string expression, out object value)
         {
+            expression = expression.Trim('$');
             value = expression;
             if (expression.IsNullOrEmpty()) return false;
             if (expression.IndexOf(".") < 0)

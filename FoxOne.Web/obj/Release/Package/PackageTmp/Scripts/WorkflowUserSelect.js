@@ -9,12 +9,12 @@
         _TREE_LIST_DIV: 'userList',
         _TREE_CTRL_TEMP: 'userTree',
         startParameter: { AppCode: '', InstanceName: '', DataLocator: '', ImportLevel: 0, SecurityLevel: 0 },
-        runParameter: { Command: '', InstanceId: '', ItemId: 1, OpinionContent: '', OpinionArea: 0, UserChoice: [] },
+        runParameter: { IsSimulate: '0', Command: '', InstanceId: '', ItemId: 1, OpinionContent: '', OpinionArea: 0, UserChoice: [] },
         getNextStepUrl: '/Workflow/GetNextStep',
         startUrl: '/Workflow/Start',
-        saveUrl:'/Workflow/Save',
+        saveUrl: '/Workflow/Save',
         execUrl: '/Workflow/ExecCommand',
-        userSelectDivHtml: "<div class='user-select'><table cellspacing='10' cellpadding='5' class='user-select-table' width='100%'><tr><td colspan='2' class='user-select-td-bg'>选择后续步骤以及相关处理人员</td></tr><tr><td>可选步骤：<div class='step-list' id='stepListDiv'></div></td><td class='tree-list-td'><div id='treeViewDiv' style='height: 450px;'></div></td></tr><tr><td colspan='2' class='user-select-td-bg tar'><input type='button' id='btnRunFlow' class='btn btn-success btn-sm' value=' 发 送 ' />&nbsp;<input type='button' id='btnCancelRun' class='btn btn-danger btn-sm' value=' 取 消 ' /></td></tr></table></div>",
+        userSelectDivHtml: "<div class='user-select'><table cellspacing='10' cellpadding='5' class='user-select-table' width='100%'><tr><td colspan='2' class='user-select-td-bg'>选择后续步骤以及相关处理人员</td></tr><tr><td>可选步骤：<div class='step-list' id='stepListDiv'></div></td><td class='tree-list-td'><div id='treeViewDiv' style='height: 450px;overflow-y:auto;'></div></td></tr><tr><td colspan='2' class='user-select-td-bg tar'><input type='button' id='btnRunFlow' class='btn btn-success btn-sm' value=' 发 送 ' />&nbsp;<input type='button' id='btnCancelRun' class='btn btn-danger btn-sm' value=' 取 消 ' /></td></tr></table></div>",
         setting: {
             view: {
                 showLine: true,
@@ -45,11 +45,11 @@
             if ($(".user-select").length == 0) {
                 $(that.userSelectDivHtml).appendTo("body");
                 $("#btnRunFlow").bind("click", function () {
-                    that.run.call(that);
+                    that.run.call(foxOne.workflow);
                 });
                 $("#btnCancelRun").bind("click", $.closeModal);
             }
-            foxOne.dataService(this.getNextStepUrl, that.runParameter, function (nextStep) {
+            foxOne.dataService(that.getNextStepUrl, that.runParameter, function (nextStep) {
                 var canPostback = false;
                 if (nextStep == null || nextStep.length == 0) {
                     foxOne.alert("无可用迁移！");
@@ -57,7 +57,12 @@
                 }
                 if (nextStep != null && nextStep[0].StepName == "自动发送") {
                     foxOne.alert("发送成功");
-                    window.close();
+                    if (that.runParameter.IsSimulate == '1') {
+                        window.location.href = "/Workflow/AutoRun/" + that.runParameter.InstanceId;
+                    }
+                    else {
+                        window.close();
+                    }
                 }
                 else {
                     $("#stepListDiv").html("");
@@ -97,7 +102,7 @@
         },
         exec: function (command) {
             this.runParameter.Command = command;
-            foxOne.dataService(this.execUrl, this.runParameter, function (res) {
+            foxOne.dataService(this.execUrl, this.runParameter, function (data) {
                 if (data == true) {
                     foxOne.alert("操作成功");
                     window.close();
@@ -106,13 +111,19 @@
         },
         run: function () {
             try {
-                this.getUserChoice();
-                this.runParameter.Command = "run";
-                if (this.runParameter.UserChoice.length > 0) {
-                    foxOne.dataService(this.execUrl, this.runParameter, function (data) {
+                var that = this;
+                that.getUserChoice();
+                that.runParameter.Command = "run";
+                if (that.runParameter.UserChoice.length > 0) {
+                    foxOne.dataService(that.execUrl, that.runParameter, function (data) {
                         if (data == true) {
                             foxOne.alert("发送成功");
-                            window.close();
+                            if (that.runParameter.IsSimulate == '1') {
+                                window.location.href = "/Workflow/AutoRun/" + that.runParameter.InstanceId;
+                            }
+                            else {
+                                window.close();
+                            }
                         }
                     }, "post", true);
                 }
@@ -126,7 +137,7 @@
         getUserChoice: function () {
             var that = this;
             that.runParameter.OpinionArea = 0;
-            that.runParameter.OpinionContent = '';
+            //that.runParameter.OpinionContent = '';
             that.runParameter.UserChoice = [];
             var selected = $("#" + that._STEP_LIST_DIV).find(":checked");
             if (selected.length <= 0) {

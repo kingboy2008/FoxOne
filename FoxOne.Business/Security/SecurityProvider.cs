@@ -95,7 +95,7 @@ namespace FoxOne.Business.Security
             //获取当前页面中所有受权限控制的控件。
             var permissions = DBContext<IPermission>.Instance.Where(o =>
                 o.Type == PermissionType.Control
-                && o.Parent.Url.StartsWith(virtualPath, StringComparison.OrdinalIgnoreCase));
+                && !o.ParentId.IsNullOrEmpty() && o.Parent!=null && o.Parent.Url.StartsWith(virtualPath, StringComparison.OrdinalIgnoreCase));
 
             //获取当前用户的所有权限
             var allUserPermission = GetAllUserPermission();
@@ -185,7 +185,7 @@ namespace FoxOne.Business.Security
         {
             user = user ?? (user = GetCurrentUser());
             string key = UserPermissionKeyFormat.FormatTo(user.LoginId);
-            IList<IPermission> result = AppSession[key] as IList<IPermission>;
+            IList<IPermission> result = AppSession.IsValid ? AppSession[key] as IList<IPermission> : null;
             if (result == null)
             {
                 result = new List<IPermission>();
@@ -199,7 +199,23 @@ namespace FoxOne.Business.Security
                         }
                     });
                 }
-                AppSession[key] = result;
+
+                //如果用户角色为空，则用户角色中不包含“部门成员”角色的权限，则默认加上“部门成员”拥有的权限。
+                if (user.Roles.IsNullOrEmpty() || user.Roles.Count(o=>o.RoleType.Name==SysConfig.DefaultUserRole)==0)
+                {
+                    IRoleType roleType = DBContext<IRoleType>.Instance.FirstOrDefault(o => o.Name == SysConfig.DefaultUserRole);
+                    foreach (var p in roleType.Permissions)
+                    {
+                        if (result.Count(o => o.Id.Equals(p.Id, StringComparison.OrdinalIgnoreCase)) == 0)
+                        {
+                            result.Add(p);
+                        }
+                    }
+                }
+                if (AppSession.IsValid)
+                {
+                    AppSession[key] = result;
+                }
             }
             return result;
         }

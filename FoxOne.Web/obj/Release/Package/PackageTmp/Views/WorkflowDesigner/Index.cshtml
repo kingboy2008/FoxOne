@@ -17,7 +17,7 @@
     <style>
         html, body {
             background-color: #666;
-            overflow:hidden;
+            overflow: hidden;
         }
 
         .demo {
@@ -117,7 +117,7 @@
             width: 200px;
             background-color: #EEE;
             text-align: center;
-            padding-top:10px;
+            padding-top: 10px;
         }
 
         #canvas {
@@ -156,9 +156,10 @@
             border-left: 1px solid #666;
             border-top: 1px solid #666;
         }
+
         .input-width {
-            width:100px;
-            margin:auto;
+            width: 100px;
+            margin: auto;
         }
     </style>
 </head>
@@ -188,6 +189,7 @@
             { type: 'ParallelStartActivity', name: '并行开始步骤' },
             { type: 'ParallelEndActivity', name: '并行结束步骤' },
             { type: 'DispenseDeptActivity', name: '分发部门步骤' },
+            { type: 'WebServiceActivity', name: '接口调用步骤' },
             { type: 'EndActivity', name: '结束步骤' }];
         var designerInstance = null;
 
@@ -307,7 +309,7 @@
             param.Top = top;
             url = foxOne.buildUrl(url, param);
             $.modal({
-                title: '添加流程步骤', url: url, overlayClose: true, width:1000, height: 600, onClose: function (res) {
+                title: '添加流程步骤', url: url, overlayClose: true, width: 1000, height: 600, onClose: function (res) {
                     //foxOne.alert(res);
                 }
             });
@@ -384,7 +386,8 @@
                 else {
                     if (connContext.TargetId == '') {
                         connContext.TargetId = tar.attr("id");
-                        foxOne.dataService("/WorkflowDesigner/AddTran", { To: connContext.TargetId, From: connContext.SourceId, DefinitionId: definitionId }, function (res) {
+                        var toName = tar.text();
+                        foxOne.dataService("/WorkflowDesigner/AddTran", { To: connContext.TargetId, From: connContext.SourceId, DefinitionId: definitionId, ToName: toName }, function (res) {
                             if (res) {
                                 connNode(connContext.SourceId, connContext.TargetId, designerInstance);
                                 connContext.SourceId = '';
@@ -412,7 +415,9 @@
                 var ofParent = $(this).parent().offset();
                 var left = of.left - ofParent.left;
                 var top = of.top - ofParent.top;
-                foxOne.dataService("/WorkflowDesigner/ChangePosition", { id: $(this).attr("id"), definitionId: definitionId, left: parseInt(left), top: parseInt(top) }, function (res) { }, "post", true);
+                foxOne.dataService("/WorkflowDesigner/ChangePosition", { id: $(this).attr("id"), definitionId: definitionId, left: parseInt(left), top: parseInt(top) }, function (res) {
+                    window.location.reload();
+                }, "post", true);
                 $(this).removeAttr("changePos");
             }
             //e.stopPropagation();
@@ -549,6 +554,7 @@
                             $.modal({
                                 title: '编辑流程步骤', url: url, width: 1000, height: 600, overlayClose: true, onClose: function (res) {
                                     //foxOne.alert(res);
+                                    window.location.reload();
                                 }
                             });
                         }

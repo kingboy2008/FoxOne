@@ -26,28 +26,4 @@ namespace FoxOne.Business
             }
         }
     }
-
-
-
-
-
-
-    [DisplayName("my转换器")]
-    public class MyConverter:ControlBase,IFieldConverter
-    {
-        public object Converter(string columnName, object columnValue, IDictionary<string, object> rowData)
-        {
-            if(columnValue!=null)
-            {
-                if(columnValue.ToString().Equals("财务部"))
-                {
-                    var td = new CustomTd() { Value = columnValue };
-                    td.Attribute.Add("style", "background-color:red;");
-                    return td;
-                } 
-            }
-            return columnValue;
-        }
-
-    }
 }

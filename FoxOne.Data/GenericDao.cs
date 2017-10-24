@@ -206,10 +206,11 @@ namespace FoxOne.Data
             CreateTable(typeof(T));
         }
 
-        public override void CreateTable(Type type)
+        public override void CreateTable(Type type, bool existThenDrop = false)
         {
             var table = TableMapper.ReadTable(type);
-            if (TableMapper.ExistTable(type, this))
+            bool isTableExist = TableMapper.ExistTable(type, this);
+            if (isTableExist && existThenDrop)
             {
                 ExecuteNonQuery(MappingProvider.GetDropTableCommand(table));
             }
@@ -648,11 +649,11 @@ namespace FoxOne.Data
                 sw.Stop();
                 if (isKey)
                 {
-                    Logger.Info("Dao -> Execute Command '{0}' Used {1}ms", sql, sw.ElapsedMilliseconds);
+                    Logger.Debug("Dao -> Execute Command '{0}' Used {1}ms", sql, sw.ElapsedMilliseconds);
                 }
                 else
                 {
-                    Logger.Info("Dao -> Execute Sql Used {0}ms", sw.ElapsedMilliseconds);
+                    Logger.Debug("Dao -> Execute Sql Used {0}ms", sw.ElapsedMilliseconds);
                 }
                 Logger.Debug("\n------------End-----------\n");
             }

@@ -19,7 +19,8 @@
         param[foxOne.ctrlId] = widget.attr("id");
         param[foxOne.pageId] = widget.attr("pageId");
         var url = foxOne.buildUrl(form.attr('action'), param);
-        foxOne.dataService(url, form.serialize(), function (res) {
+        var formData = form.serialize();
+        foxOne.dataService(url, formData, function (res) {
             try {
                 var afterSubmit = $.Event("form.afterSubmit", { d: res });
                 form.trigger(afterSubmit);
@@ -35,7 +36,7 @@
     $("[description]").each(function () {
         var desc = $(this).attr("description");
         if (desc != '') {
-            $(this).append("<img alt='' title='" + desc + "' src=\"../../Content/themes/default/images/icon-tip.png\" />");
+            $(this).append("<img alt='' title='" + desc + "' src=\"../../images/default/icon-tip.png\" />");
         }
     });
 })(window, jQuery);

@@ -17,4 +17,19 @@ namespace FoxOne.Business
         [Description("查看")]
         View
     }
+
+    public enum ControlSecurityBehaviour
+    {
+        [Description("启用")]
+        Enabled = 1,
+
+        [Description("禁用")]
+        Disabled = 2,
+
+        [Description("可见")]
+        Visible = 3,
+
+        [Description("不可见")]
+        Invisible = 4
+    }
 }

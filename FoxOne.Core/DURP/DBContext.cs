@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using System.Transactions;
 
 namespace FoxOne.Core
 {
@@ -13,7 +14,8 @@ namespace FoxOne.Core
             get
             {
                 var type = ObjectHelper.GetRegisterType<TEntity>();
-                return CacheHelper.GetFromCache<EntityCollection<TEntity>>(type.FullName, () => {
+                return CacheHelper.GetFromCache<EntityCollection<TEntity>>(type.FullName, () =>
+                {
                     return new EntityCollection<TEntity>();
                 });
             }
@@ -22,7 +24,12 @@ namespace FoxOne.Core
         public static bool ClearCache()
         {
             var type = ObjectHelper.GetRegisterType<TEntity>();
-            return CacheHelper.Remove(type.FullName);
+            if (CacheHelper.Remove(type.FullName))
+            {
+                Logger.Info("清除缓存：{0}", type.FullName);
+                return true;
+            }
+            return false;
         }
 
         private static IService<TEntity> _service = null;
@@ -36,32 +43,44 @@ namespace FoxOne.Core
 
         public static bool Insert(TEntity item)
         {
-            var result =  Service.Insert(item) > 0;
-            if(result)
+            using (TransactionScope tran = new TransactionScope())
             {
-                ClearCache();
+                var result = Service.Insert(item) > 0;
+                if (result)
+                {
+                    ClearCache();
+                    tran.Complete();
+                }
+                return result;
             }
-            return result;
         }
 
         public static bool Update(TEntity item)
         {
-            var result = Service.Update(item) > 0;
-            if (result)
+            using (TransactionScope tran = new TransactionScope())
             {
-                ClearCache();
+                var result = Service.Update(item) > 0;
+                if (result)
+                {
+                    ClearCache();
+                    tran.Complete();
+                }
+                return result;
             }
-            return result;
         }
 
         public static bool Delete(object item)
         {
-            var result = Service.Delete(item) > 0;
-            if (result)
+            using (TransactionScope tran = new TransactionScope())
             {
-                ClearCache();
+                var result = Service.Delete(item) > 0;
+                if (result)
+                {
+                    ClearCache();
+                    tran.Complete();
+                }
+                return result;
             }
-            return result;
         }
 
         public static TEntity Get(string id)

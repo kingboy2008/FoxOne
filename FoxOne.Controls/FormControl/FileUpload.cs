@@ -7,8 +7,13 @@ using System.Text;
 namespace FoxOne.Controls
 {
     [DisplayName("文件上传")]
-    public class FileFiled : FormControlBase
+    public class FileUpload : FormControlBase
     {
+
+        public FileUpload()
+        {
+            EditColSpan = true;
+        }
 
         protected override string TagName
         {

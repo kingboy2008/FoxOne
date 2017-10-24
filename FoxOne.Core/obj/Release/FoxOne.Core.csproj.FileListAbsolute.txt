@@ -17,3 +17,13 @@ D:\项目\FoxOne\FoxOne.Core\bin\Release\Microsoft.Practices.ServiceLocation.dll
 D:\项目\FoxOne\FoxOne.Core\obj\Release\FoxOne.Core.dll
 D:\项目\FoxOne\FoxOne.Core\obj\Release\FoxOne.Core.pdb
 D:\项目\FoxOne\FoxOne.Core\obj\Release\FoxOne.Core.csprojResolveAssemblyReference.cache
+E:\FoxOne-New\FoxOne.Core\bin\Release\FoxOne.Core.dll
+E:\FoxOne-New\FoxOne.Core\bin\Release\FoxOne.Core.pdb
+E:\FoxOne-New\FoxOne.Core\bin\Release\log4net.dll
+E:\FoxOne-New\FoxOne.Core\bin\Release\Microsoft.Practices.Unity.Configuration.dll
+E:\FoxOne-New\FoxOne.Core\bin\Release\Microsoft.Practices.Unity.dll
+E:\FoxOne-New\FoxOne.Core\bin\Release\Microsoft.Practices.Unity.Interception.dll
+E:\FoxOne-New\FoxOne.Core\bin\Release\Microsoft.Practices.ServiceLocation.dll
+E:\FoxOne-New\FoxOne.Core\obj\Release\FoxOne.Core.csprojResolveAssemblyReference.cache
+E:\FoxOne-New\FoxOne.Core\obj\Release\FoxOne.Core.dll
+E:\FoxOne-New\FoxOne.Core\obj\Release\FoxOne.Core.pdb

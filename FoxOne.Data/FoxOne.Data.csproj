@@ -58,9 +58,16 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\MySql.Data.dll</HintPath>
     </Reference>
+    <Reference Include="Oracle.ManagedDataAccess">
+      <HintPath>..\Lib\Oracle.ManagedDataAccess.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\System.Data.SqlServerCe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -76,29 +83,19 @@
     <Compile Include="Attributes\TableAttribute.cs" />
     <Compile Include="Attributes\TablePrefixAttribute.cs" />
     <Compile Include="Dao.cs" />
-    <Compile Include="DaoCommand.cs" />
     <Compile Include="DaoFactory.cs" />
-    <Compile Include="DatabaseDao.cs" />
-    <Compile Include="GenericDao.cs" />
+    <Compile Include="ExpressionResolve\ExpressionTool.cs" />
+    <Compile Include="FoxQueryable.cs" />
     <Compile Include="IDaoProvider.cs" />
     <Compile Include="ISqlActionExecutor.cs" />
     <Compile Include="ISqlCommand.cs" />
     <Compile Include="ISqlParameters.cs" />
     <Compile Include="ISqlSource.cs" />
     <Compile Include="ISqlStatement.cs" />
-    <Compile Include="Mapping\IMappingProvider.cs" />
-    <Compile Include="Mapping\Provider\GenericMappingProvider.cs" />
-    <Compile Include="Mapping\Provider\MySqlMappingProvider.cs" />
-    <Compile Include="Mapping\Provider\OracleMappingProvider.cs" />
-    <Compile Include="Mapping\Provider\SqlServerCeMappingProvider.cs" />
-    <Compile Include="Mapping\Provider\SqlServerMappingProvider.cs" />
     <Compile Include="Mapping\Table.cs" />
     <Compile Include="Mapping\TableMapper.cs" />
     <Compile Include="Mapping\TableMapping.cs" />
     <Compile Include="Mapping\TypeMapper.cs" />
-    <Compile Include="MySql\Configuration\MySqlDatabaseData.cs" />
-    <Compile Include="MySql\ConnectionException.cs" />
-    <Compile Include="MySql\MySqlDatabase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Provider\DaoProvider.cs" />
     <Compile Include="Provider\MySqlProvider.cs" />
@@ -127,6 +124,7 @@
       <Name>FoxOne.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -26,12 +26,12 @@ namespace FoxOne.Core
 
         public string Domain
         {
-            get { return ""; }
+            get { return string.Empty; }
         }
 
         public bool EnableSsl
         {
-            get { return true; }
+            get { return false; }
         }
 
         public bool UseDefaultCredentials
@@ -46,7 +46,7 @@ namespace FoxOne.Core
 
         public string DefaultFromDisplayName
         {
-            get { return "0124"; }
+            get { return "三维家"; }
         }
     }
 }

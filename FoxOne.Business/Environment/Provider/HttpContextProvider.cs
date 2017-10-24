@@ -22,6 +22,11 @@ namespace FoxOne.Business.Environment
 
         public bool TryResolve(string name, out object value)
         {
+            if (HttpContext.Current == null || HttpContext.Current.Request == null)
+            {
+                value = null;
+                return false;
+            }
             if (name.IndexOf(":") > 0)
             {
                 name = name.Substring(name.IndexOf(":"));

@@ -6,7 +6,7 @@
     <meta name="renderer" content="webkit" />
     <meta name="renderer" content="ie-stand" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <title>@FoxOne.Core.SysConfig.SystemTitle</title>
     @System.Web.Optimization.Styles.Render("~/style/common.css")
     @System.Web.Optimization.Scripts.Render("~/script/common.js")
 </head>
@@ -15,7 +15,7 @@
         <div class="top">
             <p class="logo">
                 <a href="javascript:goHome();">
-                    @*<img src="~/images/default/logo.png" border="0">*@
+                    <img src="~/images/logo-top.png" style="height:30px;padding:10px;" border="0">
                 </a>
             </p>
             <div class="info">
@@ -53,6 +53,7 @@
         </div>
         <div class="navigation">
             <div class="navigation-main">
+
                 <h3 class="navigation-title">功能菜单</h3>
                 <div class="navigation-content">
                     <ul id="treeMenu" class="ztree ztree-menu"></ul>
@@ -120,7 +121,7 @@
                         a = $("#" + node.tId + "_a");
                         a.addClass("cur");
                     }
-                    else  {//当遇到非一级菜单时如下处理
+                    else {//当遇到非一级菜单时如下处理
                         if (pNode && pNode !== node) {//原本是if (pNode !== node)   因为三级菜单时pNode为 null
                             var a = $("#" + pNode.tId + "_a");
                             a.removeClass("cur");

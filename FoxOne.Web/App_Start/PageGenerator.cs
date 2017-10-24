@@ -243,7 +243,7 @@ namespace FoxOne.Web
         public CRUDEntity GetCRUDEntity()
         {
             var mapping = new TableMapping(Table);
-            var provider = Dao.Get().MappingProvider;
+            var provider = Dao.Get().Provider;
             string pkName = "";
             string parentField = "";
             string titleField = "";

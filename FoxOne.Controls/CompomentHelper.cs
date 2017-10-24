@@ -12,68 +12,76 @@ using System.IO;
 using System.Collections;
 using System.ComponentModel;
 using FoxOne.Data.Attributes;
+using System.Transactions;
+
 namespace FoxOne.Controls
 {
     public static class ComponentHelper
     {
         public static void RecSave(IControl instance)
         {
-            SaveComponent(instance);
-            var pis = FastType.Get(instance.GetType()).Setters;
-            foreach (var p in pis)
+            using (TransactionScope tran = new TransactionScope())
             {
-                if (typeof(IControl).IsAssignableFrom(p.Type))
+                SaveComponent(instance);
+                var pis = FastType.Get(instance.GetType()).Setters;
+                foreach (var p in pis)
                 {
-                    var newInstance = p.GetValue(instance) as IControl;
-                    if (newInstance != null)
+                    if (typeof(IControl).IsAssignableFrom(p.Type))
                     {
-                        newInstance.PageId = instance.PageId;
-                        newInstance.TargetId = p.Name;
-                        newInstance.ParentId = instance.Id;
-                        if (newInstance.Id.IsNullOrEmpty())
+                        var newInstance = p.GetValue(instance) as IControl;
+                        if (newInstance != null)
                         {
-                            newInstance.Id = newInstance.ParentId + newInstance.GetType().Name;
-                        }
-                        RecSave(newInstance);
-                    }
-                }
-                if (p.Type.IsGenericType && typeof(IEnumerable).IsAssignableFrom(p.Type) && !p.Name.Equals("Controls", StringComparison.CurrentCultureIgnoreCase))
-                {
-                    var lists = p.GetValue(instance) as IEnumerable;
-                    if (lists != null)
-                    {
-                        int i = 0;
-                        foreach (var list in lists)
-                        {
-                            var newInstance = list as IControl;
                             newInstance.PageId = instance.PageId;
                             newInstance.TargetId = p.Name;
                             newInstance.ParentId = instance.Id;
                             if (newInstance.Id.IsNullOrEmpty())
                             {
-                                newInstance.Id = newInstance.ParentId + newInstance.GetType().Name + i;
+                                newInstance.Id = newInstance.ParentId + newInstance.GetType().Name;
                             }
                             RecSave(newInstance);
-                            i++;
+                        }
+                    }
+                    if (p.Type.IsGenericType && typeof(IEnumerable).IsAssignableFrom(p.Type) && !p.Name.Equals("Controls", StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        var lists = p.GetValue(instance) as IEnumerable;
+                        if (lists != null)
+                        {
+                            int i = 0;
+                            foreach (var list in lists)
+                            {
+                                var newInstance = list as IControl;
+                                newInstance.PageId = instance.PageId;
+                                newInstance.TargetId = p.Name;
+                                newInstance.ParentId = instance.Id;
+                                if (newInstance.Id.IsNullOrEmpty())
+                                {
+                                    newInstance.Id = newInstance.ParentId + newInstance.GetType().Name + i;
+                                }
+                                RecSave(newInstance);
+                                i++;
+                            }
                         }
                     }
                 }
+                tran.Complete();
             }
         }
 
         public static void SaveComponent(IControl entity, bool isInsert = true)
         {
-            var componentEntity = DBContext<ComponentEntity>.Instance.FirstOrDefault(o => o.Id.Equals(entity.Id, StringComparison.OrdinalIgnoreCase)
-                && o.PageId.Equals(entity.PageId, StringComparison.OrdinalIgnoreCase));
-            if (componentEntity != null)
+            var componentEntity = DBContext<ComponentEntity>.Instance.FirstOrDefault(o => o.Id.Equals(entity.Id, StringComparison.OrdinalIgnoreCase)  && o.PageId.Equals(entity.PageId, StringComparison.OrdinalIgnoreCase));
+            if(isInsert)
             {
-                if (isInsert)
+                //插入新控件时，ID与现有控件重复，加后缀，直到不重复为止
+                if (componentEntity != null)
                 {
-                    throw new FoxOneException("Ctrl_Id_Repeat", entity.Id);
+                    int i = 0;
+                    do
+                    {
+                        entity.Id += (++i);
+                    }
+                    while (DBContext<ComponentEntity>.Instance.Count(o => o.Id.Equals(entity.Id, StringComparison.OrdinalIgnoreCase) && o.PageId.Equals(entity.PageId, StringComparison.OrdinalIgnoreCase)) > 0);
                 }
-            }
-            else
-            {
                 componentEntity = new ComponentEntity();
                 componentEntity.Id = entity.Id;
                 componentEntity.PageId = entity.PageId;
@@ -92,6 +100,7 @@ namespace FoxOne.Controls
                     componentEntity.DataType = "DataSource";
                 }
             }
+            if (componentEntity == null) return;
             componentEntity.LastUpdateTime = DateTime.Now;
             if (entity is ISortableControl)
             {
@@ -100,25 +109,29 @@ namespace FoxOne.Controls
             JavaScriptSerializer serializer = new JavaScriptSerializer();
             serializer.RegisterConverters(new[] { new FoxOne.Business.ComponentConverter() });
             componentEntity.JsonContent = serializer.Serialize(entity);
-            if (!isInsert)
+            using (TransactionScope tran = new TransactionScope())
             {
-                var item = DBContext<ComponentEntity>.Instance.FirstOrDefault(o => o.PageId.Equals(entity.PageId, StringComparison.OrdinalIgnoreCase) && o.Id.Equals(entity.Id, StringComparison.OrdinalIgnoreCase));
-                if (item != null && item.Type.Equals(entity.GetType().FullName, StringComparison.OrdinalIgnoreCase))
+                if (!isInsert)
                 {
-                    DBContext<ComponentEntity>.Update(componentEntity);
+                    var item = DBContext<ComponentEntity>.Instance.FirstOrDefault(o => o.PageId.Equals(entity.PageId, StringComparison.OrdinalIgnoreCase) && o.Id.Equals(entity.Id, StringComparison.OrdinalIgnoreCase));
+                    if (item != null && item.Type.Equals(entity.GetType().FullName, StringComparison.OrdinalIgnoreCase))
+                    {
+                        DBContext<ComponentEntity>.Update(componentEntity);
+                    }
+                    else
+                    {
+                        componentEntity.Type = entity.GetType().FullName;
+                        //如果在设计器中改变了control的类型（原来是DropDownList，变成了TextBox），则需要把原来该控件及其子控件全部删除，然后再添加进去。
+                        DeleteComponent(entity.PageId, entity.Id);
+                        DBContext<ComponentEntity>.Insert(componentEntity);
+                    }
                 }
                 else
                 {
                     componentEntity.Type = entity.GetType().FullName;
-                    //如果在设计器中改变了control的类型（原来是DropDownList，变成了TextBox），则需要把原来该控件及其子控件全部删除，然后再添加进去。
-                    DeleteComponent(entity.PageId, entity.Id);
                     DBContext<ComponentEntity>.Insert(componentEntity);
                 }
-            }
-            else
-            {
-                componentEntity.Type = entity.GetType().FullName;
-                DBContext<ComponentEntity>.Insert(componentEntity);
+                tran.Complete();
             }
         }
 
@@ -133,9 +146,13 @@ namespace FoxOne.Controls
                 RecGet(item, children, allControl);
                 children.Add(item);
             }
-            foreach (var i in children)
+            using (TransactionScope tran = new TransactionScope())
             {
-                DBContext<ComponentEntity>.Delete(i);
+                foreach (var i in children)
+                {
+                    DBContext<ComponentEntity>.Delete(i);
+                }
+                tran.Complete();
             }
         }
 
@@ -234,6 +251,7 @@ namespace FoxOne.Controls
                     object defaultValue = null;
                     string label = string.Empty;
                     FormControlBase fieldComponent = null;
+                    bool canModify = true;
                     var formAttr = p.GetCustomAttribute<FormFieldAttribute>(true);
                     if (formAttr != null)
                     {
@@ -277,6 +295,7 @@ namespace FoxOne.Controls
                                     break;
                             }
                         }
+                        canModify = formAttr.CanModity;
                     }
                     if (fieldComponent == null)
                     {
@@ -322,7 +341,7 @@ namespace FoxOne.Controls
                     }
                     fieldComponent.Label = label;
                     fieldComponent.Id = p.Name;
-
+                    fieldComponent.CanModity = canModify;
                     fieldComponent.Rank = (++rank);
                     fieldComponent.Value = defaultValue == null ? "" : defaultValue.ToString();
                     returnValue.Fields.Add(fieldComponent);

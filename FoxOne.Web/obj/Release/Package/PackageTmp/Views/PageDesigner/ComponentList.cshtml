@@ -89,10 +89,15 @@
     </style>
     @System.Web.Optimization.Scripts.Render("~/script/common.js")
     <script>
+        var rank = '@ViewData["Rank"]';
+        var label = '@ViewData["Label"]';
         var urlPara = foxOne.getQueryString();
+        var isSideShow = true;
         $(function () {
             $(".component-item").bind("click", function () {
                 urlPara._TYPE_NAME = $(this).attr("title");
+                urlPara.Label = label;
+                urlPara.Rank = rank;
                 var src = "/PageDesigner/ComponentEditor";
                 $("#editorFramer").attr("src", foxOne.buildUrl(src, urlPara));
                 $(".component-item-selected").removeClass("component-item-selected");
@@ -139,10 +144,10 @@
             $(".component-list").css("height", listHeight).css("overflow-y", "scroll");
             var typeWidth = 0, listWidth = 0;
             if ($(".component-container").length > 0) {
-                listWidth = $(".component-container").outerWidth()+10;
+                listWidth = $(".component-container").outerWidth() + 10;
             }
             if ($(".component-type").length > 0) {
-                typeWidth = $(".component-type").outerWidth()+10;
+                typeWidth = $(".component-type").outerWidth() + 10;
             }
             var width = $(window).width() - listWidth - typeWidth - 20;
             $(".component-editor").css("width", width);

@@ -66,6 +66,15 @@ namespace FoxOne.Business
             set;
         }
 
+        [DisplayName("邮箱")]
+        [Column(Length = "100")]
+        public string Mail { get; set; }
+
+        [DisplayName("身份证")]
+        [Column(Length = "20")]
+        public string Identity { get; set; }
+
+
         [DisplayName("出生日期")]
         public DateTime Birthdate
         {
@@ -81,4 +90,37 @@ namespace FoxOne.Business
             set;
         }
     }
+
+    [DisplayName("用户外部授权信息")]
+    [Table("SYS_UserClaim")]
+    public class UserClaim:EntityBase,IAutoCreateTable
+    {
+        [PrimaryKey]
+        public override string Id
+        {
+            get;set;
+        }
+        /// <summary>
+        /// 用户Id
+        /// </summary>
+        public string UserId { get; set; }
+
+
+        public string LoginId { get; set; }
+
+        /// <summary>
+        /// 用户认证类型
+        /// </summary>
+        public string Tag { get; set; }
+
+        public string OpenId { get; set; }
+
+        public string UnionId { get; set; }
+
+        public string Token { get; set; }
+
+        public string RefreshKey { get; set; }
+
+    }
+
 }

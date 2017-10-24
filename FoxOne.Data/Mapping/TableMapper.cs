@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Threading;
 using FoxOne.Data.Attributes;
-using FoxOne.Data.Mapping.Provider;
 using FoxOne.Core;
 using System.Linq;
 namespace FoxOne.Data.Mapping
@@ -65,31 +64,6 @@ namespace FoxOne.Data.Mapping
         {
             var table = ReadTable(dao, tableName, string.Empty);
             return new TableMapping(table);
-        }
-
-        /// <summary>
-        /// 清空对实体与数据表映射关系的缓存
-        /// </summary>
-        public static void ClearTableMapping()
-        {
-            _mappingsLock.EnterUpgradeableReadLock();
-            try
-            {
-                _mappingsLock.EnterWriteLock();
-                try
-                {
-                    _mappings.Clear();
-                    _tables.Clear();
-                }
-                finally
-                {
-                    _mappingsLock.ExitWriteLock();
-                }
-            }
-            finally
-            {
-                _mappingsLock.ExitUpgradeableReadLock();
-            }
         }
 
         internal static T Read<T>(IDataReader reader, TableMapping mapping)
@@ -223,13 +197,15 @@ namespace FoxOne.Data.Mapping
             return ReadTable(dao, tableName, schemaName) != null;
         }
 
-        public static void RefreshTableCache(Dao dao)
+        public static void RefreshTableCache()
         {
             _tablesLock.EnterWriteLock();
             try
             {
+                _mappings.Clear();
                 _tables.Clear();
-                var tables = dao.MappingProvider.ReadTables(dao);
+                var dao = Dao.Get();
+                var tables = dao.Provider.ReadTables(dao);
                 _tables.Add(dao.ConnectionString, tables);
             }
             finally
@@ -250,7 +226,7 @@ namespace FoxOne.Data.Mapping
                     _tablesLock.EnterWriteLock();
                     try
                     {
-                        tables = dao.MappingProvider.ReadTables(dao);
+                        tables = dao.Provider.ReadTables(dao);
                         _tables.Add(dao.ConnectionString, tables);
                     }
                     finally

@@ -12,6 +12,7 @@ namespace FoxOne.Business
         {
             ControlType = ControlType.None;
             Editable = true;
+            CanModity = true;
         }
         public string FormDisplayName { get; set; }
 
@@ -20,5 +21,7 @@ namespace FoxOne.Business
         public bool Editable { get; set; }
 
         public object DefaultValue { get; set; }
+
+        public bool CanModity { get; set; }
     }
 }

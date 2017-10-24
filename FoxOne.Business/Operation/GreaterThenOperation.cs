@@ -47,4 +47,13 @@ namespace FoxOne.Business
             return DateTime.Compare(dt1, dt2) > 0;
         }
     }
+
+    [DisplayName("大于或等于")]
+    public class GreaterOrEqualOperation : ColumnOperator
+    {
+        public override bool Operate(object obj1, object obj2)
+        {
+            return new GreaterThenOperation().Operate(obj1, obj2) || new EqualsOperation().Operate(obj1, obj2);
+        }
+    }
 }

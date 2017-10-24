@@ -26,8 +26,8 @@
                                 foxOne.refresh(tableId);
                             }
                         },
-                        width: 900,
-                        height: 500,
+                        width: 980,
+                        height: 600,
                         title: '新增',
                         overlayClose: true
                     });

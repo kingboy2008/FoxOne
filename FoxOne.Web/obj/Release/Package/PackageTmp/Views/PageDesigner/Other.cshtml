@@ -37,12 +37,9 @@
     <div style="text-align:center;width:100%;">
         <fieldset>
             <legend>导出</legend>
-            <form action="/PageDesigner/BatchExport" method="post" id="exportForm">
-                <input type="text" id="LastUpdateTime" name="LastUpdateTime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" />
-                <button onclick="batchExport()" class="btn btn-success btn-big">按更新时间批量导出</button>
-                <button onclick="exportPage(); return false;" class="btn btn-success btn-big">导出当前配置</button>
-                <button onclick="exportSystem(); return false;" class="btn btn-success btn-big">导出系统</button>
-            </form>
+            <input type="text" id="LastUpdateTime" name="LastUpdateTime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" />
+            <button onclick="batchExport()" class="btn btn-success btn-big">按更新时间批量导出</button>
+            <button onclick="exportPage(); return false;" class="btn btn-success btn-big">导出当前配置</button>
         </fieldset>
         <fieldset>
             <legend>导入</legend>
@@ -103,9 +100,10 @@
             }, "post", true);
         }
 
-        function exportSystem() {
-            window.open("/PageDesigner/ExportSystem");
+        function exportPage() {
+            window.open("/PageDesigner/ExportPage/"+pageId);
         }
+
     </script>
 </body>
 </html>

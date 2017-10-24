@@ -16,7 +16,13 @@
       <publishTime>05/26/2016 13:52:11</publishTime>
     </File>
     <File Include="App_Config/log4net.config">
-      <publishTime>01/04/2017 15:02:51</publishTime>
+      <publishTime>09/25/2017 10:53:34</publishTime>
+    </File>
+    <File Include="App_Config/MSMConfig.config">
+      <publishTime>09/20/2017 10:24:13</publishTime>
+    </File>
+    <File Include="App_Config/SqlCommands/Security.config">
+      <publishTime>10/16/2017 11:19:44</publishTime>
     </File>
     <File Include="Areas/HomePage/Views/Web.config">
       <publishTime>06/03/2017 17:05:36</publishTime>
@@ -30,41 +36,47 @@
     <File Include="bin/Antlr3.Runtime.dll">
       <publishTime>05/09/2016 14:13:08</publishTime>
     </File>
+    <File Include="bin/App_Config/MSMConfig.config">
+      <publishTime>09/20/2017 10:24:13</publishTime>
+    </File>
     <File Include="bin/en-us/FoxOne.Web.resources.dll">
-      <publishTime>06/19/2017 14:52:04</publishTime>
+      <publishTime>10/23/2017 18:32:18</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>05/09/2016 14:12:57</publishTime>
+    </File>
+    <File Include="bin/FoxOne.3VJ.dll">
+      <publishTime>10/23/2017 18:32:16</publishTime>
     </File>
     <File Include="bin/FoxOne.Air.dll">
       <publishTime>06/03/2017 17:17:00</publishTime>
     </File>
     <File Include="bin/FoxOne.Business.dll">
-      <publishTime>06/19/2017 14:51:54</publishTime>
+      <publishTime>10/23/2017 18:32:15</publishTime>
     </File>
     <File Include="bin/FoxOne.Controls.dll">
-      <publishTime>06/19/2017 14:51:57</publishTime>
+      <publishTime>10/23/2017 18:32:16</publishTime>
     </File>
     <File Include="bin/FoxOne.Core.dll">
-      <publishTime>06/19/2017 14:51:52</publishTime>
+      <publishTime>10/19/2017 18:22:04</publishTime>
     </File>
     <File Include="bin/FoxOne.Data.dll">
-      <publishTime>06/19/2017 14:51:53</publishTime>
+      <publishTime>10/19/2017 18:22:04</publishTime>
     </File>
     <File Include="bin/FoxOne.Vote.dll">
       <publishTime>06/19/2017 14:52:01</publishTime>
     </File>
     <File Include="bin/FoxOne.Web.dll">
-      <publishTime>06/03/2017 17:17:03</publishTime>
+      <publishTime>10/23/2017 18:32:17</publishTime>
     </File>
     <File Include="bin/FoxOne.Workflow.Business.dll">
-      <publishTime>06/03/2017 17:16:58</publishTime>
+      <publishTime>10/23/2017 18:32:16</publishTime>
     </File>
     <File Include="bin/FoxOne.Workflow.DataAccess.dll">
-      <publishTime>06/19/2017 14:51:57</publishTime>
+      <publishTime>10/23/2017 18:32:16</publishTime>
     </File>
     <File Include="bin/FoxOne.Workflow.Kernel.dll">
-      <publishTime>06/19/2017 14:51:56</publishTime>
+      <publishTime>10/23/2017 18:32:15</publishTime>
     </File>
     <File Include="bin/log4net.dll">
       <publishTime>02/18/2016 17:54:05</publishTime>
@@ -97,19 +109,43 @@
       <publishTime>08/29/2016 08:28:57</publishTime>
     </File>
     <File Include="bin/MySql.Data.dll">
-      <publishTime>02/18/2016 17:54:05</publishTime>
+      <publishTime>10/01/2017 07:48:40</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
-      <publishTime>05/09/2016 14:13:04</publishTime>
+      <publishTime>06/22/2015 11:06:54</publishTime>
     </File>
     <File Include="bin/NPOI.dll">
       <publishTime>06/28/2016 09:31:58</publishTime>
     </File>
+    <File Include="bin/Oracle.ManagedDataAccess.dll">
+      <publishTime>10/01/2017 07:48:40</publishTime>
+    </File>
+    <File Include="bin/SuppliersHelper.dll">
+      <publishTime>09/20/2017 10:37:55</publishTime>
+    </File>
+    <File Include="bin/Swashbuckle.Core.dll">
+      <publishTime>07/08/2017 01:30:56</publishTime>
+    </File>
+    <File Include="bin/System.Data.SqlServerCe.dll">
+      <publishTime>09/11/2017 16:02:55</publishTime>
+    </File>
     <File Include="bin/System.Net.Http.dll">
       <publishTime>07/10/2012 12:07:38</publishTime>
     </File>
+    <File Include="bin/System.Net.Http.Formatting.dll">
+      <publishTime>05/07/2013 13:09:16</publishTime>
+    </File>
     <File Include="bin/System.Net.Http.WebRequest.dll">
       <publishTime>07/10/2012 12:07:38</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.dll">
+      <publishTime>05/07/2013 13:09:16</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.SelfHost.dll">
+      <publishTime>05/20/2013 08:04:52</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.WebHost.dll">
+      <publishTime>05/07/2013 13:09:18</publishTime>
     </File>
     <File Include="bin/System.Web.Mvc.dll">
       <publishTime>08/29/2016 08:28:58</publishTime>
@@ -131,6 +167,9 @@
     </File>
     <File Include="bin/System.Web.WebPages.Razor.dll">
       <publishTime>08/29/2016 08:29:00</publishTime>
+    </File>
+    <File Include="bin/WebActivatorEx.dll">
+      <publishTime>02/08/2013 16:42:28</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>05/09/2016 14:13:08</publishTime>
@@ -164,6 +203,45 @@
     </File>
     <File Include="bin/zh-Hans/System.Web.WebPages.resources.dll">
       <publishTime>08/29/2016 08:29:00</publishTime>
+    </File>
+    <File Include="DDStatic/add.html">
+      <publishTime>09/28/2017 14:13:20</publishTime>
+    </File>
+    <File Include="DDStatic/css/reset.css">
+      <publishTime>09/28/2017 14:13:20</publishTime>
+    </File>
+    <File Include="DDStatic/css/task.css">
+      <publishTime>09/28/2017 17:04:22</publishTime>
+    </File>
+    <File Include="DDStatic/detail.html">
+      <publishTime>09/28/2017 14:13:20</publishTime>
+    </File>
+    <File Include="DDStatic/index.html">
+      <publishTime>09/28/2017 14:13:20</publishTime>
+    </File>
+    <File Include="DDStatic/js/add.js">
+      <publishTime>09/29/2017 10:39:54</publishTime>
+    </File>
+    <File Include="DDStatic/js/detail.js">
+      <publishTime>09/28/2017 14:13:20</publishTime>
+    </File>
+    <File Include="DDStatic/js/dingtalk.js">
+      <publishTime>09/28/2017 14:13:20</publishTime>
+    </File>
+    <File Include="DDStatic/js/fastclick.js">
+      <publishTime>09/28/2017 14:13:20</publishTime>
+    </File>
+    <File Include="DDStatic/js/index-temp.js">
+      <publishTime>09/28/2017 14:55:06</publishTime>
+    </File>
+    <File Include="DDStatic/js/index.js">
+      <publishTime>09/29/2017 10:19:34</publishTime>
+    </File>
+    <File Include="DDStatic/js/test.js">
+      <publishTime>09/28/2017 14:13:20</publishTime>
+    </File>
+    <File Include="favicon.ico">
+      <publishTime>09/15/2017 12:05:28</publishTime>
     </File>
     <File Include="Global.asax">
       <publishTime>05/09/2016 14:12:56</publishTime>
@@ -219,6 +297,12 @@
     <File Include="images/Controls/FoxOne.Controls.Chart.png">
       <publishTime>10/14/2016 14:44:08</publishTime>
     </File>
+    <File Include="images/Controls/FoxOne.Controls.Checkbox.png">
+      <publishTime>10/14/2016 14:44:08</publishTime>
+    </File>
+    <File Include="images/Controls/FoxOne.Controls.CheckBoxList.png">
+      <publishTime>10/14/2016 14:44:08</publishTime>
+    </File>
     <File Include="images/Controls/FoxOne.Controls.ColumnSeries.png">
       <publishTime>10/14/2016 14:44:08</publishTime>
     </File>
@@ -240,6 +324,9 @@
     <File Include="images/Controls/FoxOne.Controls.ErrorbarSeries.png">
       <publishTime>10/14/2016 14:44:08</publishTime>
     </File>
+    <File Include="images/Controls/FoxOne.Controls.FileUpload.png">
+      <publishTime>09/30/2017 11:45:55</publishTime>
+    </File>
     <File Include="images/Controls/FoxOne.Controls.Form.png">
       <publishTime>10/14/2016 14:44:08</publishTime>
     </File>
@@ -256,6 +343,9 @@
       <publishTime>10/14/2016 14:44:08</publishTime>
     </File>
     <File Include="images/Controls/FoxOne.Controls.RadioButton.png">
+      <publishTime>10/14/2016 14:44:08</publishTime>
+    </File>
+    <File Include="images/Controls/FoxOne.Controls.RadioButtonList.png">
       <publishTime>10/14/2016 14:44:08</publishTime>
     </File>
     <File Include="images/Controls/FoxOne.Controls.Repeater.png">
@@ -276,7 +366,13 @@
     <File Include="images/Controls/FoxOne.Controls.Table.png">
       <publishTime>10/14/2016 14:44:08</publishTime>
     </File>
+    <File Include="images/Controls/FoxOne.Controls.TextArea.png">
+      <publishTime>10/14/2016 14:44:08</publishTime>
+    </File>
     <File Include="images/Controls/FoxOne.Controls.TextBox.png">
+      <publishTime>10/14/2016 14:44:08</publishTime>
+    </File>
+    <File Include="images/Controls/FoxOne.Controls.TimeRangePicker.png">
       <publishTime>10/14/2016 14:44:08</publishTime>
     </File>
     <File Include="images/Controls/FoxOne.Controls.Toolbar.png">
@@ -287,6 +383,9 @@
     </File>
     <File Include="images/cookie.png">
       <publishTime>10/14/2016 14:44:08</publishTime>
+    </File>
+    <File Include="images/dd.png">
+      <publishTime>09/25/2017 15:50:12</publishTime>
     </File>
     <File Include="images/default/btn-add-d.png">
       <publishTime>10/14/2016 15:27:01</publishTime>
@@ -627,6 +726,9 @@
     <File Include="images/down-arrow.png">
       <publishTime>10/14/2016 14:44:08</publishTime>
     </File>
+    <File Include="images/F.png">
+      <publishTime>09/14/2017 15:10:05</publishTime>
+    </File>
     <File Include="images/FoxOne.Workflow.Business.DispenseDeptActivity.png">
       <publishTime>02/13/2017 11:27:14</publishTime>
     </File>
@@ -888,8 +990,14 @@
     <File Include="images/login-title.png">
       <publishTime>10/14/2016 14:44:08</publishTime>
     </File>
+    <File Include="images/logo-top.png">
+      <publishTime>09/16/2017 10:43:31</publishTime>
+    </File>
     <File Include="images/logo.png">
-      <publishTime>02/04/2017 10:42:40</publishTime>
+      <publishTime>09/15/2017 11:54:14</publishTime>
+    </File>
+    <File Include="images/M.png">
+      <publishTime>09/14/2017 15:10:05</publishTime>
     </File>
     <File Include="images/m1.jpg">
       <publishTime>10/14/2016 14:44:08</publishTime>
@@ -906,6 +1014,9 @@
     <File Include="images/m5.jpg">
       <publishTime>10/14/2016 14:44:08</publishTime>
     </File>
+    <File Include="images/new-flow.png">
+      <publishTime>09/12/2017 15:11:42</publishTime>
+    </File>
     <File Include="images/no2.png">
       <publishTime>10/14/2016 14:44:08</publishTime>
     </File>
@@ -917,6 +1028,9 @@
     </File>
     <File Include="images/product1.jpg">
       <publishTime>02/04/2017 10:42:40</publishTime>
+    </File>
+    <File Include="images/qq.png">
+      <publishTime>09/16/2017 12:48:52</publishTime>
     </File>
     <File Include="images/responsive_devices_small.jpg">
       <publishTime>02/04/2017 10:42:40</publishTime>
@@ -957,6 +1071,9 @@
     <File Include="images/top-bottom-bg.png">
       <publishTime>10/14/2016 14:44:08</publishTime>
     </File>
+    <File Include="images/user.png">
+      <publishTime>09/14/2017 15:03:39</publishTime>
+    </File>
     <File Include="images/ztree/line_conn.gif">
       <publishTime>10/14/2016 14:44:08</publishTime>
     </File>
@@ -970,13 +1087,13 @@
       <publishTime>10/14/2016 14:44:08</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>01/29/2017 17:53:24</publishTime>
+      <publishTime>10/23/2017 17:11:08</publishTime>
     </File>
     <File Include="Scripts/AffairDetail.js">
       <publishTime>02/04/2017 11:21:18</publishTime>
     </File>
     <File Include="Scripts/common.js">
-      <publishTime>10/14/2016 15:34:01</publishTime>
+      <publishTime>10/14/2017 14:09:42</publishTime>
     </File>
     <File Include="Scripts/datepicker/calendar.js">
       <publishTime>10/14/2016 15:34:00</publishTime>
@@ -1165,7 +1282,7 @@
       <publishTime>10/14/2016 15:34:01</publishTime>
     </File>
     <File Include="Scripts/layout/jquery.easyui.js">
-      <publishTime>10/14/2016 15:34:00</publishTime>
+      <publishTime>10/14/2017 14:54:14</publishTime>
     </File>
     <File Include="Scripts/modal.js">
       <publishTime>02/13/2017 18:03:24</publishTime>
@@ -1192,7 +1309,7 @@
       <publishTime>10/14/2016 15:34:00</publishTime>
     </File>
     <File Include="Scripts/Validator/jquery.validation.js">
-      <publishTime>10/14/2016 15:34:00</publishTime>
+      <publishTime>09/29/2017 11:33:16</publishTime>
     </File>
     <File Include="Scripts/widget.js">
       <publishTime>10/14/2016 15:34:01</publishTime>
@@ -1201,28 +1318,28 @@
       <publishTime>10/14/2016 15:34:00</publishTime>
     </File>
     <File Include="Scripts/widget/Form.js">
-      <publishTime>02/04/2017 16:26:57</publishTime>
+      <publishTime>10/16/2017 12:28:10</publishTime>
     </File>
     <File Include="Scripts/widget/Pager.js">
       <publishTime>10/14/2016 15:34:00</publishTime>
     </File>
     <File Include="Scripts/widget/Search.js">
-      <publishTime>02/06/2017 15:55:15</publishTime>
+      <publishTime>10/11/2017 09:59:59</publishTime>
     </File>
     <File Include="Scripts/widget/Tab.js">
-      <publishTime>02/06/2017 15:54:29</publishTime>
+      <publishTime>09/12/2017 10:07:43</publishTime>
     </File>
     <File Include="Scripts/widget/TabCondition.js">
       <publishTime>02/06/2017 15:55:07</publishTime>
     </File>
     <File Include="Scripts/widget/Table.js">
-      <publishTime>10/14/2016 15:34:00</publishTime>
+      <publishTime>10/10/2017 12:59:45</publishTime>
     </File>
     <File Include="Scripts/widget/TextValueTextBox.js">
       <publishTime>10/14/2016 15:34:00</publishTime>
     </File>
     <File Include="Scripts/widget/Toolbar.js">
-      <publishTime>02/06/2017 15:54:55</publishTime>
+      <publishTime>10/23/2017 12:48:26</publishTime>
     </File>
     <File Include="Scripts/widget/Tree.js">
       <publishTime>10/24/2016 16:23:08</publishTime>
@@ -1249,7 +1366,7 @@
       <publishTime>02/08/2017 11:10:40</publishTime>
     </File>
     <File Include="Scripts/WorkflowUserSelect.js">
-      <publishTime>06/02/2017 10:05:50</publishTime>
+      <publishTime>09/20/2017 17:31:53</publishTime>
     </File>
     <File Include="Scripts/xheditor/xheditor-1.1.14-zh-cn.min.js">
       <publishTime>10/14/2016 15:34:00</publishTime>
@@ -2070,11 +2187,14 @@
     <File Include="Scripts/xheditor/xheditor_skin/vista/ui.css">
       <publishTime>10/14/2016 15:34:01</publishTime>
     </File>
+    <File Include="Scripts/zepto.min.js">
+      <publishTime>09/27/2017 12:17:56</publishTime>
+    </File>
     <File Include="Scripts/zTree/jquery.ztree.all-3.5.js">
       <publishTime>10/14/2016 15:34:01</publishTime>
     </File>
     <File Include="Styles/common.css">
-      <publishTime>10/14/2016 15:33:50</publishTime>
+      <publishTime>10/14/2017 11:15:39</publishTime>
     </File>
     <File Include="Styles/default.css">
       <publishTime>10/14/2016 15:34:29</publishTime>
@@ -2097,6 +2217,21 @@
     <File Include="Styles/zTreeStyle.css">
       <publishTime>10/14/2016 15:33:51</publishTime>
     </File>
+    <File Include="Views/Attachment/Index.cshtml">
+      <publishTime>09/22/2017 18:16:17</publishTime>
+    </File>
+    <File Include="Views/DD/Add.cshtml">
+      <publishTime>09/28/2017 18:42:19</publishTime>
+    </File>
+    <File Include="Views/DD/Detail.cshtml">
+      <publishTime>09/29/2017 10:20:16</publishTime>
+    </File>
+    <File Include="Views/DD/Index.cshtml">
+      <publishTime>09/29/2017 09:34:05</publishTime>
+    </File>
+    <File Include="Views/DD/List.cshtml">
+      <publishTime>09/30/2017 10:56:17</publishTime>
+    </File>
     <File Include="Views/Default/Index.cshtml">
       <publishTime>02/04/2017 10:52:08</publishTime>
     </File>
@@ -2113,16 +2248,16 @@
       <publishTime>10/21/2016 15:22:58</publishTime>
     </File>
     <File Include="Views/Home/ChangePassword.cshtml">
-      <publishTime>01/04/2017 18:34:48</publishTime>
+      <publishTime>09/16/2017 14:51:26</publishTime>
     </File>
     <File Include="Views/Home/Error.cshtml">
-      <publishTime>01/04/2017 11:55:07</publishTime>
+      <publishTime>10/14/2017 14:07:07</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>06/02/2017 17:00:28</publishTime>
+      <publishTime>09/16/2017 11:00:29</publishTime>
     </File>
     <File Include="Views/Home/LogOn.cshtml">
-      <publishTime>06/03/2017 09:41:10</publishTime>
+      <publishTime>10/19/2017 16:27:51</publishTime>
     </File>
     <File Include="Views/Home/TableDemo.cshtml">
       <publishTime>10/21/2016 15:24:07</publishTime>
@@ -2130,14 +2265,17 @@
     <File Include="Views/Home/TreeForm.cshtml">
       <publishTime>10/24/2016 16:12:17</publishTime>
     </File>
+    <File Include="Views/Home/UserBind.cshtml">
+      <publishTime>09/27/2017 16:07:51</publishTime>
+    </File>
     <File Include="Views/Init/Index.cshtml">
-      <publishTime>10/13/2016 17:02:59</publishTime>
+      <publishTime>09/13/2017 11:14:18</publishTime>
     </File>
     <File Include="Views/PageDesigner/ComponentEditor.cshtml">
-      <publishTime>10/21/2016 10:20:49</publishTime>
+      <publishTime>10/14/2017 10:57:58</publishTime>
     </File>
     <File Include="Views/PageDesigner/ComponentList.cshtml">
-      <publishTime>10/21/2016 10:20:11</publishTime>
+      <publishTime>09/30/2017 14:03:49</publishTime>
     </File>
     <File Include="Views/PageDesigner/ControlList.cshtml">
       <publishTime>08/03/2016 13:03:44</publishTime>
@@ -2149,7 +2287,7 @@
       <publishTime>08/03/2016 14:48:59</publishTime>
     </File>
     <File Include="Views/PageDesigner/Other.cshtml">
-      <publishTime>10/22/2016 17:03:31</publishTime>
+      <publishTime>10/13/2017 11:27:30</publishTime>
     </File>
     <File Include="Views/PageDesigner/PageEdit.cshtml">
       <publishTime>10/21/2016 10:21:22</publishTime>
@@ -2158,16 +2296,16 @@
       <publishTime>08/03/2016 14:54:48</publishTime>
     </File>
     <File Include="Views/PageDesigner/TableList.cshtml">
-      <publishTime>10/21/2016 16:04:04</publishTime>
+      <publishTime>10/10/2017 16:02:19</publishTime>
     </File>
     <File Include="Views/Permission/List.cshtml">
-      <publishTime>10/21/2016 15:25:00</publishTime>
+      <publishTime>10/23/2017 08:59:12</publishTime>
     </File>
     <File Include="Views/Vote/Detail.cshtml">
-      <publishTime>01/18/2017 16:26:05</publishTime>
+      <publishTime>06/19/2017 15:45:37</publishTime>
     </File>
     <File Include="Views/Vote/Edit.cshtml">
-      <publishTime>01/18/2017 15:23:10</publishTime>
+      <publishTime>06/19/2017 15:12:40</publishTime>
     </File>
     <File Include="Views/Vote/Index.cshtml">
       <publishTime>01/19/2017 17:43:59</publishTime>
@@ -2184,23 +2322,26 @@
     <File Include="Views/Web.config">
       <publishTime>05/26/2016 13:52:11</publishTime>
     </File>
+    <File Include="Views/Workflow/Attachment.cshtml">
+      <publishTime>09/22/2017 12:18:32</publishTime>
+    </File>
     <File Include="Views/Workflow/Detail.cshtml">
-      <publishTime>06/02/2017 10:26:33</publishTime>
+      <publishTime>10/23/2017 12:11:48</publishTime>
     </File>
     <File Include="Views/Workflow/Index.cshtml">
-      <publishTime>06/03/2017 10:03:39</publishTime>
+      <publishTime>10/23/2017 14:23:22</publishTime>
     </File>
     <File Include="Views/WorkflowDesigner/FlowImage.cshtml">
       <publishTime>02/13/2017 11:55:36</publishTime>
     </File>
     <File Include="Views/WorkflowDesigner/Index.cshtml">
-      <publishTime>06/02/2017 08:59:01</publishTime>
+      <publishTime>09/25/2017 16:48:27</publishTime>
     </File>
     <File Include="Views/_LayoutPage.cshtml">
       <publishTime>02/04/2017 10:52:02</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>06/19/2017 14:52:08</publishTime>
+      <publishTime>10/23/2017 18:32:19</publishTime>
     </File>
   </ItemGroup>
 </Project>

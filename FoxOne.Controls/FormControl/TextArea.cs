@@ -16,7 +16,13 @@ namespace FoxOne.Controls
         public TextArea()
             : base()
         {
+            EditColSpan = true;
         }
+
+        [DisplayName("宽度")]
+        public string Width { get; set; }
+
+        [DisplayName("高度")]
         public string Height { get; set; }
         protected override string TagName
         {
@@ -33,12 +39,19 @@ namespace FoxOne.Controls
 
         public override string Render()
         {
-            if(!Height.IsNullOrWhiteSpace())
+            if(!Height.IsNullOrEmpty())
             {
                 if (Attributes.ContainsKey("style"))
-                    Attributes["style"] += "height:{0}px".FormatTo(Height);
+                    Attributes["style"] += "height:{0}px;".FormatTo(Height);
                 else
-                    Attributes["style"] = "height:{0}px".FormatTo(Height);
+                    Attributes["style"] = "height:{0}px;".FormatTo(Height);
+            }
+            if (Width.IsNotNullOrEmpty())
+            {
+                if (Attributes.ContainsKey("style"))
+                    Attributes["style"] += "width:{0}px;".FormatTo(Width);
+                else
+                    Attributes["style"] = "width:{0}px;".FormatTo(Width);
             }
             return base.Render();
         }

@@ -97,7 +97,7 @@ namespace FoxOne.Controls
             return string.Empty;
         }
 
-        public virtual object Clone()
+        public override object Clone()
         {
             var result = this.MemberwiseClone() as PageControlBase;
             result.Attributes = new Dictionary<string, string>();

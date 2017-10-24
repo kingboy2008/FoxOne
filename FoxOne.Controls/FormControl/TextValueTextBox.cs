@@ -84,7 +84,7 @@ namespace FoxOne.Controls
                         }
                     }
                 }
-                string text = string.Empty;
+                string text = Value;
                 if(texts.Count>0)
                 {
                     text = string.Join(",", texts.ToArray());

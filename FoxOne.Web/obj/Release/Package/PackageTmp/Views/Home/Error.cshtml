@@ -7,7 +7,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>所有投票主题</title>
+    <title>异常信息</title>
     <style>
         html, body {
             background-color: #EEE;
@@ -78,17 +78,9 @@
 </head>
 <body>
     <div class="container">
-        <h1>广东旭诚科技投票系统</h1>
-        <div class="user-info">
-            当前登录：@FoxOne.Business.Security.Sec.User.Name
-            [<a href="/Home/LogOut">注销</a>]
-        </div>
         <div class="item">
             <p style="color:red;text-align:center;">
                 @(ViewData["ErrorMessage"] == null ? "处理过程中发生了异常" : ViewData["ErrorMessage"].ToString())
-            </p>
-            <p>
-                <a href="/Vote/Index">返回首页</a>
             </p>
         </div>
     </div>

@@ -9,14 +9,14 @@ namespace FoxOne.Data.Sql
     public class SqlCommand : ISqlCommand
     {
         private string _commandText;
-        private IList<KeyValuePair<string, object>> _parameters;
+        private IDictionary<string, object> _parameters;
 
         protected SqlCommand()
         {
             
         }
 
-        public SqlCommand(string commandText,IList<KeyValuePair<string,object>> parameters)
+        public SqlCommand(string commandText, IDictionary<string, object> parameters)
         {
             _commandText = commandText;
             _parameters  = parameters;
@@ -34,7 +34,7 @@ namespace FoxOne.Data.Sql
         /// <summary>
         /// SQL语句中的命名参数对应的参数集合
         /// </summary>
-        public virtual IList<KeyValuePair<string, object>> Parameters
+        public virtual IDictionary<string, object> Parameters
         {
             get { return _parameters; }
             protected set { _parameters = value; }

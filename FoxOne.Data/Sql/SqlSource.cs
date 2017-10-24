@@ -179,7 +179,7 @@ namespace FoxOne.Data.Sql
                 {
                     if (!_sqlsMap.ContainsKey(pair.Key) || (_sqlsMap.ContainsKey(pair.Key) && overrideSql))
                     {
-                        Logger.Info("load sql command '{0}' from assembly '{1}'", pair.Key, assembly.GetName().Name);
+                        Logger.Debug("load sql command '{0}' from assembly '{1}'", pair.Key, assembly.GetName().Name);
                         _sqlsMapLock.EnterWriteLock();
                         try
                         {

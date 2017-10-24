@@ -17,6 +17,7 @@ namespace FoxOne.Controls
             Target = TableButtonTarget.Self;
         }
 
+        [DisplayName("标签")]
         public string Name
         {
             get;

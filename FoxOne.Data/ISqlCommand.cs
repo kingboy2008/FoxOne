@@ -10,6 +10,6 @@ namespace FoxOne.Data
         string CommandText { get; }
 
         //sql中参数的参数名和对应的值
-        IList<KeyValuePair<string, object>> Parameters { get; }
+        IDictionary<string,object> Parameters { get; }
     }
 }

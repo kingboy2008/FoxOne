@@ -22,12 +22,31 @@ namespace FoxOne.Web.Controllers
         [CustomUnAuthorize]
         public ActionResult Index()
         {
+            if (SysConfig.SystemStatus.Equals("Run", StringComparison.OrdinalIgnoreCase))
+            {
+                throw new PageNotFoundException();
+            }
+            var allEntity = new List<SelectListItem>();
+            foreach (Type item in TypeHelper.GetAllSubType<EntityBase>())
+            {
+                allEntity.Add(new SelectListItem()
+                {
+                    Selected = false,
+                    Text = item.GetDisplayName(),
+                    Value = item.FullName
+                });
+            }
+            ViewData["AllEntity"] = allEntity;
             return View();
         }
 
         [CustomUnAuthorize]
         public ActionResult HomeIndex()
         {
+            if (SysConfig.SystemStatus.Equals("Run", StringComparison.OrdinalIgnoreCase))
+            {
+                throw new Exception("不允许此操作");
+            }
             Sec.Provider.ResetPassword("liuhf", "123");
             FormsAuthentication.SetAuthCookie("liuhf", false);
             return RedirectToAction("Index", "Home");
@@ -35,23 +54,39 @@ namespace FoxOne.Web.Controllers
 
         [CustomUnAuthorize]
         [HttpPost]
-        public JsonResult CreateTable()
+        public JsonResult CreateTable(string id)
         {
-            types.ForEach(o =>
+            if (SysConfig.SystemStatus.Equals("Run", StringComparison.OrdinalIgnoreCase))
             {
-                Dao.Get().CreateTable(o);
-            });
-            TableMapper.ClearTableMapping();
+                throw new Exception("不允许此操作");
+            }
+            if (id.IsNullOrEmpty())
+            {
+                types.ForEach(o =>
+                {
+                    Dao.Get().CreateTable(o, true);
+                });
+            }
+            else
+            {
+                Dao.Get().CreateTable(TypeHelper.GetType(id));
+            }
+            TableMapper.RefreshTableCache();
             return Json(true, JsonRequestBehavior.AllowGet);
         }
 
+        
         [CustomUnAuthorize]
         [HttpPost]
         public JsonResult ClearTable()
         {
+            if (SysConfig.SystemStatus.Equals("Run", StringComparison.OrdinalIgnoreCase))
+            {
+                throw new Exception("不允许此操作");
+            }
             types.ForEach(o =>
             {
-                Dao.Get().BatchDelete(o, null);
+                Dao.Get().Delete(o, null);
             });
             return Json(true, JsonRequestBehavior.AllowGet);
         }
@@ -60,13 +95,18 @@ namespace FoxOne.Web.Controllers
         [HttpPost]
         public JsonResult InitData()
         {
+            if (SysConfig.SystemStatus.Equals("Run", StringComparison.OrdinalIgnoreCase))
+            {
+                throw new Exception("不允许此操作");
+            }
             var dirInfo = new DirectoryInfo(Server.MapPath("~/InitData"));
             var files = dirInfo.GetFiles("*.xml", SearchOption.TopDirectoryOnly);
             foreach (var file in files)
             {
                 var type = typeof(List<>);
-                if (type == null) continue;
-                type = type.MakeGenericType(TypeHelper.GetType(file.Name.Replace(file.Extension, "")));
+                var targetType = TypeHelper.GetType(file.Name.Replace(file.Extension, ""));
+                if (targetType == null) continue;
+                type = type.MakeGenericType(targetType);
                 var serializer = new XmlSerializer(type);
                 var result = serializer.Deserialize(file.OpenRead()) as IEnumerable;
                 foreach (var item in result)
@@ -76,8 +116,7 @@ namespace FoxOne.Web.Controllers
             }
             return Json(true, JsonRequestBehavior.AllowGet);
         }
-
-        [CustomUnAuthorize]
+        
         public JsonResult Out()
         {
             var dirInfo = Server.MapPath("~");

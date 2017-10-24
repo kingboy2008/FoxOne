@@ -65,7 +65,9 @@
                                 window.top.location.href = foxOne.contextPath + "/Home/LogOn";
                             }
                             else {
-                                callback(response.Data);
+                                if (callback && typeof (callback) == 'function') {
+                                    callback(response.Data);
+                                }
                             }
                         }
                     }

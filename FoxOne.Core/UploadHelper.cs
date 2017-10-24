@@ -22,11 +22,11 @@ namespace FoxOne.Core
         /// <param name="fileName">保存的文件名，如果要用上传文件的文件名，则传空值</param>
         /// <param name="useDateFolder">是否在子目录中建立以当前日期为名称的子目录来保存文件</param>
         /// <returns></returns>
-        public static string Upload(HttpPostedFile file, string subDir, string fileName,bool useDateFolder)
+        public static string Upload(HttpPostedFileBase file, string subDir, string fileName, bool useDateFolder)
         {
             string requestFileName = file.FileName;
             string fileExtension = System.IO.Path.GetExtension(requestFileName).ToLower();
-            if(fileName.IsNullOrEmpty())
+            if (fileName.IsNullOrEmpty())
             {
                 fileName = requestFileName;
             }
@@ -34,12 +34,12 @@ namespace FoxOne.Core
             {
                 fileName = fileName + fileExtension;
             }
-            if(BaseDirectory.IsNullOrEmpty())
+            if (BaseDirectory.IsNullOrEmpty())
             {
                 BaseDirectory = AppDomain.CurrentDomain.BaseDirectory;
             }
 
-            if(!BaseDirectory.EndsWith("\\"))
+            if (!BaseDirectory.EndsWith("\\"))
             {
                 BaseDirectory = string.Format("{0}\\", BaseDirectory);
             }
@@ -49,18 +49,54 @@ namespace FoxOne.Core
             if (useDateFolder)
             {
                 fullDirectory = string.Format("{0}{1}\\{2}\\", BaseDirectory, subDir, DateTime.Now.ToString("yyyy-MM-dd"));
-                url = string.Format("{0}/{1}/{2}", subDir, DateTime.Now.ToString("yyyy-MM-dd"),fileName);
+                url = string.Format("{0}/{1}/{2}", subDir, DateTime.Now.ToString("yyyy-MM-dd"), fileName);
             }
             else
             {
                 fullDirectory = string.Format("{0}{1}\\", BaseDirectory, subDir);
                 url = string.Format("{0}/{1}", subDir, fileName);
             }
-            if(!Directory.Exists(fullDirectory))
+            if (!Directory.Exists(fullDirectory))
             {
                 Directory.CreateDirectory(fullDirectory);
             }
             file.SaveAs(fullDirectory + fileName);
+            return url;
+        }
+
+        public static string UploadStream(Stream inputStream, string subDir, string fileName, bool useDateFolder)
+        {
+            if (BaseDirectory.IsNullOrEmpty())
+            {
+                BaseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            }
+
+            if (!BaseDirectory.EndsWith("\\"))
+            {
+                BaseDirectory = string.Format("{0}\\", BaseDirectory);
+            }
+
+            string fullDirectory = string.Empty;
+            string url = string.Empty;
+            if (useDateFolder)
+            {
+                fullDirectory = string.Format("{0}{1}\\{2}\\", BaseDirectory, subDir, DateTime.Now.ToString("yyyy-MM-dd"));
+                url = string.Format("{0}/{1}/{2}", subDir, DateTime.Now.ToString("yyyy-MM-dd"), fileName);
+            }
+            else
+            {
+                fullDirectory = string.Format("{0}{1}\\", BaseDirectory, subDir);
+                url = string.Format("{0}/{2}", subDir, fileName);
+            }
+            if (!Directory.Exists(fullDirectory))
+            {
+                Directory.CreateDirectory(fullDirectory);
+            }
+            using (var file = File.Create(fullDirectory + fileName))
+            {
+                inputStream.CopyTo(file);
+                fileName = file.Name;
+            }
             return url;
         }
     }

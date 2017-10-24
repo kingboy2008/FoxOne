@@ -16,6 +16,7 @@ namespace FoxOne.Controls
         {
             Enable = true;
             Visiable = true;
+            CanModity = true;
             _tagBuilder = new TagBuilder(TagName);
             CssClass = "form-control";
         }
@@ -37,18 +38,26 @@ namespace FoxOne.Controls
             set;
         }
 
+        [DisplayName("是否启用")]
         public bool Enable
         {
             get;
             set;
         }
 
-        public string Value
+        public virtual string Value
         {
             get;
             set;
         }
 
+        [DisplayName("是否跨行")]
+        public bool EditColSpan { get; set; }
+
+        [FormField(Editable =false)]
+        public bool CanModity { get; set; }
+
+        [DisplayName("标签")]
         public string Label { get; set; }
 
         /// <summary>
@@ -145,6 +154,7 @@ namespace FoxOne.Controls
             if (!Validator.IsNullOrEmpty())
             {
                 Attributes["validator"] = Validator;
+                Attributes["validatorFieldLabel"] = Label;
             }
             if (!AttributeString.IsNullOrEmpty())
             {

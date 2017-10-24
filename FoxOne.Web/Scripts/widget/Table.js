@@ -19,7 +19,7 @@
         if (a.attr("sortField")) {
             field = a.attr("sortField");
             var tableContext = foxOne.setting(tableId);
-            var exp = tableContext.sortExpression;
+            var exp = tableContext[foxOne.sortExpression];
             if (exp == "") {
                 exp = field + " asc";
             }
@@ -33,11 +33,12 @@
                     }
                 }
                 else {
-                    exp += "," + field + " asc";
+                    //exp += "," + field + " asc";
+                    exp = field + " asc";
                 }
             }
-            tableContext.sortExpression = exp;
-            tableContext.pageIndex = 1;
+            tableContext[foxOne.sortExpression] = exp;
+            tableContext[foxOne.pageIndex] = 1;
             foxOne.refresh(tableId);
         }
         if (a.attr("trButton") && !a.attr("onclick")) {
@@ -64,8 +65,21 @@
                             }
                         },
                         title: '编辑',
-                        width: 800,
-                        height: 500
+                        width: 980,
+                        height: 600
+                    });
+                    break;
+                case "btnView":
+                    delete keyValue[foxOne.ctrlId]
+                    delete keyValue[foxOne.pageId]
+                    keyValue[foxOne.formViewMode] = "View";
+                    $.modal({
+                        url: foxOne.buildUrl(editUrl, keyValue, true),
+                        overlayClose: true,
+                        onClose: function (res) {},
+                        title: '查看详情',
+                        width: 980,
+                        height: 600
                     });
                     break;
                 case "btnDelete":

@@ -1,6 +1,9 @@
 ﻿
 using System.Collections.Generic;
 using FoxOne.Data.Sql;
+using System.Data;
+using System.Data.Common;
+using FoxOne.Data.Mapping;
 
 namespace FoxOne.Data
 {
@@ -62,6 +65,13 @@ namespace FoxOne.Data
         string EscapeParam(string name);
 
         /// <summary>
+        /// 对字段进行转义处理
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        string EscapeIdentifier(string name);
+
+        /// <summary>
         /// 对SQL语句中Like后面%value%中的value进行转义处理
         /// </summary>
         /// <param name="value"></param>
@@ -79,5 +89,44 @@ namespace FoxOne.Data
         /// </summary>
         /// <returns></returns>
         string PageParamNameEnd { get; }
+
+        DbCommand CreateDbCommand(string sql);
+
+        DbConnection CreateDbConnection(string connectionString);
+
+        IList<Table> ReadTables(Dao dao);
+
+        string CreateTableCommand(Table mapping);
+
+        string GetDropTableCommand(Table table);
+
+        string CreateSelectStatement(TableMapping mapping);
+
+        string CreateInsertStatement(TableMapping mapping);
+
+        string CreateUpdateStatement(TableMapping mapping);
+
+        string CreateDeleteStatement(TableMapping mapping);
+
+        string CreateGetOneStatement(TableMapping mapping);
+
+        ISqlCommand CreateSelectCommand(TableMapping mapping, object parameters);
+
+        ISqlCommand CreateSelectCountCommand(TableMapping mapping, object parameters);
+
+        ISqlCommand CreateSelectAllCommand(TableMapping mapping, object parameter);
+
+        ISqlCommand CreateInsertCommand(TableMapping mapping, object parameters);
+
+        ISqlCommand CreateUpdateCommand(TableMapping mapping, object parameters);
+
+        ISqlCommand CreateUpdateCommand(TableMapping mapping, object parameters, string[] fields, bool inclusive);
+
+        ISqlCommand CreateDeleteCommand(TableMapping mapping, object parameters);
+
+
+        ISqlCommand CreateBatchUpdateCommand(TableMapping mapping, object parameters, object whereParameter);
+
+        ISqlCommand CreateBatchDeleteCommand(TableMapping mapping, object whereParameter);
     }
 }

@@ -39,7 +39,7 @@ namespace FoxOne.Controls
 
         public object Data { get; set; }
 
-        [DisplayName("附加URL参数为隐藏域")]
+        [DisplayName("附加URL参数")]
         public bool AppendQueryString { get; set; }
 
 
@@ -111,8 +111,15 @@ namespace FoxOne.Controls
                     var tempData = FormService.Get(Key);
                     if (!tempData.IsNullOrEmpty())
                     {
-                        FormMode = FormMode.Edit;
+                        if (FormMode != FormMode.View)
+                        {
+                            FormMode = FormMode.Edit;
+                        }
                         Data = tempData;
+                    }
+                    if (request != null && request.QueryString[NamingCenter.PARAM_FORM_VIEW_MODE] != null && request.QueryString[NamingCenter.PARAM_FORM_VIEW_MODE].Equals(FormMode.View.ToString(), StringComparison.OrdinalIgnoreCase))
+                    {
+                        FormMode = FormMode.View;
                     }
                 }
             }
@@ -129,7 +136,7 @@ namespace FoxOne.Controls
             ///隐藏域和按钮属于特殊群体放在表单的指定位置
             StringBuilder hiddenResult = new StringBuilder();
             StringBuilder buttonResult = new StringBuilder();
-            if (!Buttons.IsNullOrEmpty())
+            if (!Buttons.IsNullOrEmpty() && FormMode != FormMode.View)
             {
                 foreach (var button in Buttons)
                 {
@@ -151,8 +158,14 @@ namespace FoxOne.Controls
                 }
                 renderQuerystringFinished = true;
             }
+            var renderFields = new List<FormControlBase>();
             foreach (var field in Fields.OrderBy(o => o.Rank))
             {
+                if ((FormMode == FormMode.Edit && !field.CanModity) || FormMode == FormMode.View)
+                {
+                    //如果当前Form的模式为编辑模式，而字段又不允许修改，则改为不可用。
+                    field.Enable = false;
+                }
                 if (field.Name.IsNullOrEmpty())
                 {
                     field.Name = field.Id;
@@ -190,7 +203,19 @@ namespace FoxOne.Controls
                     {
                         field.ContainerTemplate = TemplateGenerator.GetFormFieldTemplate();
                     }
-                    result.AppendLine(field.Render());
+                    renderFields.Add(field);
+                }
+            }
+            string groupTemplate = TemplateGenerator.GetFormGroupTemplate();
+            for (int i = 0; i < renderFields.Count; i++)
+            {
+                if (!renderFields[i].EditColSpan && ((i + 1) < renderFields.Count) && !renderFields[i + 1].EditColSpan)
+                {
+                    result.Append(groupTemplate.FormatTo(renderFields[i].Render() + renderFields[++i].Render()));
+                }
+                else
+                {
+                    result.Append(groupTemplate.FormatTo(renderFields[i].Render()));
                 }
             }
             return formTemplate.FormatTo(PostUrl, FormCssClass, hiddenResult.ToString(), result.ToString(), buttonResult.ToString());

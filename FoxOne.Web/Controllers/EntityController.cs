@@ -1,16 +1,10 @@
 ﻿using FoxOne.Controls;
-using FoxOne.Data;
 using FoxOne.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Web;
 using System.Web.Mvc;
 using System.IO;
-using System.Text;
-using System.Globalization;
-using FoxOne.Business.Environment;
 using System.Transactions;
 using FoxOne.Business;
 
@@ -24,60 +18,85 @@ namespace FoxOne.Web.Controllers
         {
             IDictionary<string, object> data = Request.Form.ToDictionary();
             string key = Request.Form[NamingCenter.PARAM_KEY_NAME];
-            string pageId = Request.QueryString[NamingCenter.PARAM_PAGE_ID];
-            string ctrlId = Request.QueryString[NamingCenter.PARAM_CTRL_ID];
             string formViewMode = Request.Form[NamingCenter.PARAM_FORM_VIEW_MODE];
+            var ds = GetFormService();
+            using (TransactionScope tran = new TransactionScope())
+            {
+                int effectCount = 0;
+                if (formViewMode.Equals(FormMode.Edit.ToString(), StringComparison.OrdinalIgnoreCase))
+                {
+                    effectCount = ds.Update(key, data);
+                }
+                else
+                {
+                    effectCount = ds.Insert(data);
+                }
+                tran.Complete();
+                return Json(effectCount > 0);
+            }
+        }
+
+        private IFormService GetFormService()
+        {
+            string pageId = Request.Params[NamingCenter.PARAM_PAGE_ID];
+            string ctrlId = Request.Params[NamingCenter.PARAM_CTRL_ID];
             var page = PageBuilder.BuildPage(pageId);
             if (page == null)
             {
                 throw new FoxOneException("Page_Not_Found");
             }
-            var form = page.FindControl(ctrlId) as Form;
+            var control = page.FindControl(ctrlId);
+            IFormService ds = null;
+            var form = control as Form;
             if (form == null)
             {
-                throw new FoxOneException("Ctrl_Not_Found");
-            }
-            var ds = form.FormService as IFormService;
-            int effectCount = 0;
-            if (formViewMode.Equals(FormMode.Edit.ToString(), StringComparison.OrdinalIgnoreCase))
-            {
-                effectCount = ds.Update(key, data);
+                var table = control as Table;
+                if (table == null)
+                {
+                    throw new FoxOneException("Ctrl_Not_Found");
+                }
+                else
+                {
+                    ds = table.DataSource as IFormService;
+                }
             }
             else
             {
-                effectCount = ds.Insert(data);
+                ds = form.FormService as IFormService;
             }
-            return Json(effectCount > 0);
+            if (ds == null)
+            {
+                throw new FoxOneException("DataSource_Need_To_Be_IFormSerevice");
+            }
+            return ds;
         }
 
         [HttpPost]
         public JsonResult Delete()
         {
             string key = Request.Form[NamingCenter.PARAM_KEY_NAME];
-            string pageId = Request.Form[NamingCenter.PARAM_PAGE_ID];
-            string ctrlId = Request.Form[NamingCenter.PARAM_CTRL_ID];
-            var page = PageBuilder.BuildPage(pageId);
-            if (page == null)
+            var ds = GetFormService();
+            int effectCount = 0;
+            bool result = false;
+            using (TransactionScope tran = new TransactionScope())
             {
-                throw new FoxOneException("Page_Not_Found");
-            }
-            var table = page.FindControl(ctrlId) as Table;
-            if (table == null)
-            {
-                throw new FoxOneException("Ctrl_Not_Found");
-            }
-            var ds = table.DataSource as IFormService;
-            if (key.IndexOf(",") > 0)
-            {
-                var keys = key.Split(',');
-                int i = 0;
-                foreach (var k in keys)
+                if (key.IndexOf(",") > 0)
                 {
-                    i += ds.Delete(k);
+                    var keys = key.Split(',');
+                    foreach (var k in keys)
+                    {
+                        effectCount += ds.Delete(k);
+                    }
+                    result = effectCount == keys.Length;
                 }
-                return Json(i == keys.Length);
+                else
+                {
+                    effectCount = ds.Delete(key);
+                    result = effectCount > 0;
+                }
+                tran.Complete();
+                return Json(result);
             }
-            return Json(ds.Delete(key) > 0);
         }
 
         [HttpPost]
@@ -174,6 +193,39 @@ namespace FoxOne.Web.Controllers
                 }
             }
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public JsonResult UserProfile()
+        {
+            var data = Request.Form.ToEntity<User>();
+            string key = Request.Form[NamingCenter.PARAM_KEY_NAME];
+
+            var user = DBContext<IUser>.Instance.Get(key);
+            if(user!=null)
+            {
+                user.Name = data.Name;
+                user.Birthdate = data.Birthdate;
+                user.Alias = data.Alias;
+                user.Code = data.Code;
+                user.QQ = data.QQ;
+                user.MobilePhone = data.MobilePhone;
+                user.LastUpdateTime = DateTime.Now;
+                user.Sex = data.Sex;
+                user.Mail = data.Mail;
+                user.Identity = data.Identity;
+                Logger.GetLogger("SystemUse").InfoFormat("{0}:【{1}】修改个人信息，IP：{2}，修改的信息有：{3}", user.Id, user.Name, Utility.GetWebClientIp(), JSONHelper.Serialize(data));
+                return Json(DBContext<IUser>.Update(user));
+            }
+            return Json(false);
+        }
+
+        [HttpPost]
+        public JsonResult RefreshTable()
+        {
+            FoxOne.Data.Mapping.TableMapper.RefreshTableCache();
+            return Json(true);
         }
     }
 }

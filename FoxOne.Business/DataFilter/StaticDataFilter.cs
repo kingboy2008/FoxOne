@@ -10,15 +10,6 @@ namespace FoxOne.Business
     [DisplayName("变量过滤器")]
     public class StaticDataFilter:DataFilterBase
     {
-        private static IDictionary<string, ColumnOperator> OperatorMapping = new Dictionary<string, ColumnOperator>(StringComparer.OrdinalIgnoreCase);
-
-        static StaticDataFilter()
-        {
-            foreach(var item in TypeHelper.GetAllSubTypeInstance<ColumnOperator>())
-            {
-                OperatorMapping.Add(item.GetType().FullName, item);
-            }
-        }
         public string ColumnName { get; set; }
 
         [DisplayName("运算符")]
@@ -45,7 +36,7 @@ namespace FoxOne.Business
                 }
                 if (data.Keys.Contains(ColumnName, StringComparer.OrdinalIgnoreCase))
                 {
-                    var columnOperator = OperatorMapping[Operator];
+                    var columnOperator = AllColumnOperator.OperatorMapping[Operator];
                     var obj1 = data[ColumnName];
                     object obj2;
                     if(Value.IsNotNullOrEmpty() && Env.TryResolve(Value,out obj2))
@@ -91,4 +82,16 @@ namespace FoxOne.Business
         NotNullOrEmpty
     }
 
+
+    public static class AllColumnOperator
+    {
+        public static IDictionary<string, ColumnOperator> OperatorMapping = new Dictionary<string, ColumnOperator>(StringComparer.OrdinalIgnoreCase);
+        static AllColumnOperator()
+        {
+            foreach (var item in TypeHelper.GetAllSubTypeInstance<ColumnOperator>())
+            {
+                OperatorMapping.Add(item.GetType().FullName, item);
+            }
+        }
+    }
 }

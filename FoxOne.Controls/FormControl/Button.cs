@@ -47,6 +47,12 @@ namespace FoxOne.Controls
             }
         }
 
+        [DisplayName("标签")]
+        public override string Value
+        {
+            get;set;
+        }
+
         /// <summary>
         /// 单击事件
         /// </summary>

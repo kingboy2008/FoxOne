@@ -44,7 +44,7 @@ namespace FoxOne.Core
 
         public void SetValue(object instance, object value)
         {
-            _setter(instance, new object[] { value });
+            _setter(instance, new object[] { value.ConvertToType(Type) });
         }
 
         private void InitializeGetter(PropertyInfo propertyInfo)

@@ -6,7 +6,7 @@ namespace FoxOne.Data.Sql
     public class SqlCommandBuilder
     {
         private readonly StringBuilder _sql = new StringBuilder();
-        private readonly IList<KeyValuePair<string, object>> _params = new List<KeyValuePair<string, object>>();
+        private readonly IDictionary<string, object> _params = new Dictionary<string, object>();
 
         internal SqlCommandBuilder()
         {
@@ -18,7 +18,7 @@ namespace FoxOne.Data.Sql
             get { return _sql; }
         }
 
-        public IList<KeyValuePair<string,object>> Params
+        public IDictionary<string, object> Params
         {
             get { return _params; }
         }
@@ -31,13 +31,16 @@ namespace FoxOne.Data.Sql
 
         public SqlCommandBuilder AddCommandParameter(string name, object value)
         {
-            _params.Add(new KeyValuePair<string, object>(name, value));
+            if (!_params.Keys.Contains(name))
+            {
+                _params.Add(name, value);
+            }
             return this;
         }
 
         public SqlCommandBuilder AddCommandParameter(KeyValuePair<string,object> param)
         {
-            _params.Add(param);
+            AddCommandParameter(param.Key, param.Value);
             return this;
         }
 

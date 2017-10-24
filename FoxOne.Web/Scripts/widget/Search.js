@@ -25,4 +25,19 @@
         }
         return false;
     });
+
+    $(window.document).on("click", "div[widget='Search']", function (e) {
+        var input = $(e.target);
+        if (!input.is("input")) return;
+        var id = input.attr("id");
+        var pageId=$(this).attr("pageid");
+        var tableId = $(this).data().target;
+        if (id == "btnExportExcel") {
+            var setting = foxOne.setting(tableId);
+            setting[foxOne.ctrlId] = tableId;
+            setting[foxOne.pageId] = pageId;
+            var url = foxOne.buildUrl("/Entity/ExportToExcel", setting);
+            window.open(url);
+        }
+    });
 })(window, jQuery);

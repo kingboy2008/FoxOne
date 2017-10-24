@@ -10,7 +10,7 @@ using System.Web.Script.Serialization;
 using FoxOne.Business.Security;
 namespace FoxOne.Business
 {
-    public class Page
+    public class Page : ICloneable
     {
         private IList<TagBuilder> links;
         private IList<TagBuilder> scripts;
@@ -50,17 +50,17 @@ namespace FoxOne.Business
             }
             foreach (var e in Controls)
             {
-                if (e.ParentId.Equals(pageEntity.Id))
+                if (e.ParentId.Equals(Id))
                 {
                     Children.Add(e as IComponent);
-                    GetChildren(e);
+                    GetChildren(e, Controls);
                 }
             }
         }
 
-        private void GetChildren(IControl e)
+        private void GetChildren(IControl e, IList<IControl> controls)
         {
-            var children = Controls.Where(o => o.ParentId.Equals(e.Id));
+            var children = controls.Where(o => o.ParentId.Equals(e.Id));
             if (children.IsNullOrEmpty()) return;
             var fastType = FastType.Get(e.GetType());
             foreach (var ee in children)
@@ -84,7 +84,7 @@ namespace FoxOne.Business
                 {
                     gettter.SetValue(e, ee);
                 }
-                GetChildren(ee);
+                GetChildren(ee, controls);
             }
         }
 
@@ -144,6 +144,10 @@ namespace FoxOne.Business
             get
             {
                 return _layout ?? (_layout = new Layout(this, PageEntity.Layout));
+            }
+            set
+            {
+                _layout = value;
             }
         }
 
@@ -366,6 +370,32 @@ namespace FoxOne.Business
             }
             return result.ToString();
         }
+
+        public object Clone()
+        {
+            throw new NotImplementedException();
+            /*
+            var page = this.MemberwiseClone() as Page;
+            page.Reset();
+            page.Controls = new List<IControl>();
+            page.Children = new List<IComponent>();
+            foreach (var item in this.Children)
+            {
+                page.Children.Add((item as ICloneable).Clone() as IComponent);
+            }
+            page.ExtFiles = new List<ExternalFileEntity>();
+            foreach (var item in this.ExtFiles)
+            {
+                page.ExtFiles.Add(item);
+            }
+
+            foreach (var e in page.Children)
+            {
+                page.Controls.Add(e);
+                GetChildren(e, page.Controls);
+            }
+            return page;*/
+        }
     }
 
 
@@ -381,6 +411,19 @@ namespace FoxOne.Business
     {
         public static Page BuildPage(string id)
         {
+            /*string key = NamingCenter.GetCacheKey(CacheType.PAGE_CONFIG, id);
+            Page result = CacheHelper.GetFromCache<Page>(key, () =>
+            {
+                return new FoxOne.Business.Page(BuildPageEntity(id));
+            });
+            return result.Clone() as Page;*/
+            var page = new Page(BuildPageEntity(id));
+            page.Reset();
+            return page;
+        }
+
+        public static PageEntity BuildPageEntity(string id)
+        {
             var pageEntity = DBContext<PageEntity>.Instance.FirstOrDefault(o => o.Id.Equals(id.ToString(), StringComparison.CurrentCultureIgnoreCase));
             if (pageEntity == null)
             {
@@ -392,21 +435,7 @@ namespace FoxOne.Business
             pageEntity.ExtFiles = DBContext<ExternalFileEntity>.Instance.Where(o => pageFiles.Contains(o.Id, StringComparer.OrdinalIgnoreCase)).ToList();
             var layoutFiles = DBContext<PageLayoutFileEntity>.Instance.Where(o => o.PageOrLayoutId.Equals(pageEntity.LayoutId, StringComparison.OrdinalIgnoreCase)).Select(o => o.FileId);
             pageEntity.Layout.ExtFiles = DBContext<ExternalFileEntity>.Instance.Where(o => layoutFiles.Contains(o.Id, StringComparer.OrdinalIgnoreCase)).ToList();
-            Page result = null;
-            if (!SysConfig.SystemStatus.Equals("Develop", StringComparison.CurrentCultureIgnoreCase))
-            {
-                string key = NamingCenter.GetCacheKey(CacheType.PAGE_CONFIG, pageEntity.Id);
-                result = CacheHelper.GetFromCache<Page>(key, () =>
-                {
-                    return new FoxOne.Business.Page(pageEntity);
-                });
-            }
-            else
-            {
-                result = new FoxOne.Business.Page(pageEntity);
-            }
-            result.Reset();
-            return result;
+            return pageEntity;
         }
     }
 }

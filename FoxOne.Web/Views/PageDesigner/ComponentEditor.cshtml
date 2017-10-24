@@ -16,12 +16,6 @@
             height: 300px;
             width: 60%;
         }
-
-        .form-group textarea.form-control {
-            height: 100px;
-            width: 70%;
-        }
-
         h1 {
             font-weight: bold;
             font-size: 13px;
@@ -39,6 +33,7 @@
         @System.Web.Optimization.Scripts.Render("~/script/widget.js")
     <script>
         $(function () {
+            $("[disabled]").css("background-color","#EEE");
             $("form").bind("submit", function () {
                 if ($.validation.validate(this).isError) {
                     return false;

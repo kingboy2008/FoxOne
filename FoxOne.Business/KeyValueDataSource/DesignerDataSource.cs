@@ -4,6 +4,7 @@ using FoxOne.Data.Mapping;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
@@ -11,13 +12,13 @@ namespace FoxOne.Business
 {
     [Category("None")]
     [DisplayName("AllEnum")]
-    public class AllEnumDataSource:KeyValueDataSourceBase
+    public class AllEnumDataSource : KeyValueDataSourceBase
     {
         public override IEnumerable<TreeNode> SelectItems()
         {
             var result = new List<TreeNode>();
             var types = TypeHelper.GetAllEnum();
-            foreach(var type in types)
+            foreach (var type in types)
             {
                 result.Add(new TreeNode()
                 {
@@ -31,7 +32,7 @@ namespace FoxOne.Business
 
     [Category("None")]
     [DisplayName("DictionaryCode")]
-    public class DictionaryCodeDataSource:KeyValueDataSourceBase
+    public class DictionaryCodeDataSource : KeyValueDataSourceBase
     {
         public override IEnumerable<TreeNode> SelectItems()
         {
@@ -39,13 +40,22 @@ namespace FoxOne.Business
         }
     }
 
-    [Category("None")]
-    [DisplayName("AllTable")]
-    public class AllTableDataSource:KeyValueDataSourceBase
+    [DisplayName("ParentDictionary")]
+    public class ParentDictionaryDataSource : KeyValueDataSourceBase
     {
         public override IEnumerable<TreeNode> SelectItems()
         {
-            return TableMapper.Tables[Dao.Get().ConnectionString].OrderBy(o=>o.Name).Select(o => new TreeNode() { Text = o.Name, Value = o.Name }).ToList();
+            return DBContext<DataDictionary>.Instance.Where(o => o.ParentId.IsNullOrEmpty()).Select(o => new TreeNode() { Text = o.Name, Value = o.Id }).ToList();
+        }
+    }
+
+    [Category("None")]
+    [DisplayName("AllTable")]
+    public class AllTableDataSource : KeyValueDataSourceBase
+    {
+        public override IEnumerable<TreeNode> SelectItems()
+        {
+            return TableMapper.Tables[Dao.Get().ConnectionString].OrderBy(o => o.Name).Select(o => new TreeNode() { Text = o.Name, Value = o.Name }).ToList();
         }
     }
 
@@ -102,11 +112,32 @@ namespace FoxOne.Business
     }
 
     [Category("None")]
-    public class AllCRUDDataSource:KeyValueDataSourceBase
+    public class AllCRUDDataSource : KeyValueDataSourceBase
     {
         public override IEnumerable<TreeNode> SelectItems()
         {
             return DBContext<CRUDEntity>.Instance.Where(o => true).OrderBy(o => o.Id).Select(o => new TreeNode() { Text = o.Id, Value = o.Id }).ToList();
+        }
+    }
+    [DisplayName("ICON图标数据源")]
+    public class IconSelectDataSource : ListDataSourceBase
+    {
+        public override IEnumerable<IDictionary<string, object>> GetList()
+        {
+            string path = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "images/icons/");
+            var dirInfo = new DirectoryInfo(path);
+            var files = dirInfo.GetFiles("*.gif", SearchOption.TopDirectoryOnly);
+            var result = new List<IDictionary<string, object>>();
+            foreach (var item in files)
+            {
+                result.Add(new Dictionary<string, object>()
+                {
+                    { "Name", item.Name },
+                    { "Path", "../../images/icons/"+item.Name },
+                    { "Url","../images/icons/"+item.Name}
+                });
+            }
+            return result;
         }
     }
 }

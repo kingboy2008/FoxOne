@@ -14,7 +14,7 @@ namespace FoxOne.Business
     [Table("SYS_Permission")]
     public class Permission : DURPBase, IPermission, IAutoCreateTable
     {
-        [Column(Length="500")]
+        [Column(Length = "500")]
         public string Url
         {
             get;
@@ -28,7 +28,7 @@ namespace FoxOne.Business
             set;
         }
 
-        [Column(Length="20")]
+        [Column(Length = "20")]
         public string Behaviour { get; set; }
 
         [XmlIgnore]
@@ -44,10 +44,10 @@ namespace FoxOne.Business
         [Column(Length = "200", Showable = false)]
         public string Icon { get; set; }
 
-        [Column(Length = "500",Showable=false)]
+        [Column(Length = "500", Showable = false)]
         public string Description { get; set; }
 
-        
+
         public PermissionType Type
         {
             get;
@@ -58,13 +58,9 @@ namespace FoxOne.Business
         [ScriptIgnore]
         public IEnumerable<IPermission> Childrens
         {
-            get 
+            get
             {
-                if (ParentId.IsNotNullOrEmpty())
-                {
-                    return DBContext<IPermission>.Instance.Where(o => o.ParentId.IsNotNullOrEmpty() && o.ParentId.Equals(Id, StringComparison.OrdinalIgnoreCase));
-                }
-                return null;
+                return DBContext<IPermission>.Instance.Where(o => o.ParentId.IsNotNullOrEmpty() && o.ParentId.Equals(Id, StringComparison.OrdinalIgnoreCase));
             }
         }
     }

@@ -89,7 +89,7 @@ namespace FoxOne.Core
             }
             else
             {
-                Logger.Debug("cache hit with key:{0}", key);
+                //Logger.Debug("cache hit with key:{0}", key);
             }
             return returnValue;
         }

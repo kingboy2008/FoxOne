@@ -14,7 +14,7 @@ namespace FoxOne.Business
         private static IDictionary<Type, ColumnOperator> TypeOperatorMapping = new Dictionary<Type, ColumnOperator>();
         static RequestParameterDataFilter()
         {
-            TypeOperatorMapping.Add(typeof(string), new EqualsOperation());
+            TypeOperatorMapping.Add(typeof(string), new IndexOfOperation());
             TypeOperatorMapping.Add(typeof(int), new EqualsOperation());
             TypeOperatorMapping.Add(typeof(long), new EqualsOperation());
             TypeOperatorMapping.Add(typeof(decimal), new EqualsOperation());

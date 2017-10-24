@@ -1,6 +1,26 @@
 <?xml version="1.0"?>
 <ArrayOfPageEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <PageEntity>
+    <Id>ApplicationEdit</Id>
+    <RentId>1</RentId>
+    <Title>流程应用编辑</Title>
+    <CssClass>easyui-layout</CssClass>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>Workflow</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-09-12T10:47:03</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>ApplicationList</Id>
+    <RentId>1</RentId>
+    <Title>流程应用列表</Title>
+    <CssClass>easyui-layout</CssClass>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>Workflow</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-09-12T10:47:08</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
     <Id>CRUDEntityList</Id>
     <RentId>1</RentId>
     <Title>增删改查列表</Title>
@@ -8,7 +28,7 @@
     <LayoutId>Normal</LayoutId>
     <ParentId>Y</ParentId>
     <Type>Page</Type>
-    <LastUpdateTime>2016-07-22T16:55:52.303</LastUpdateTime>
+    <LastUpdateTime>2016-07-22T16:55:52</LastUpdateTime>
   </PageEntity>
   <PageEntity>
     <Id>DataDictionaryEdit</Id>
@@ -18,17 +38,42 @@
     <LayoutId>Normal</LayoutId>
     <ParentId>X</ParentId>
     <Type>Page</Type>
-    <LastUpdateTime>2016-08-03T14:46:35.29</LastUpdateTime>
+    <LastUpdateTime>2016-08-03T14:46:35</LastUpdateTime>
   </PageEntity>
   <PageEntity>
     <Id>DataDictionaryList</Id>
-    <RentId>0</RentId>
+    <RentId>1</RentId>
     <Title>数据字典列表</Title>
     <CssClass>easyui-layout</CssClass>
+    <StartUpScript>$("#DataDictionaryListTree").bind("nodeClick",function(e){
+var setting=foxOne.setting("DataDictionaryListTable");
+setting.ParentId=e.id;
+foxOne.refresh("DataDictionaryListTable");
+});</StartUpScript>
     <LayoutId>RightLeft</LayoutId>
     <ParentId>X</ParentId>
     <Type>Page</Type>
-    <LastUpdateTime>2016-08-08T17:07:35.51</LastUpdateTime>
+    <LastUpdateTime>2017-10-09T21:20:27</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>DefinitionEdit</Id>
+    <RentId>1</RentId>
+    <Title>流程定义编辑</Title>
+    <CssClass>easyui-layout</CssClass>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>Workflow</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-09-12T10:47:15</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>DefinitionList</Id>
+    <RentId>1</RentId>
+    <Title>流程定义列表</Title>
+    <CssClass>easyui-layout</CssClass>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>Workflow</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-09-12T10:47:21</LastUpdateTime>
   </PageEntity>
   <PageEntity>
     <Id>DepartmentEdit</Id>
@@ -38,7 +83,7 @@
     <LayoutId>Normal</LayoutId>
     <ParentId>X</ParentId>
     <Type>Page</Type>
-    <LastUpdateTime>2016-07-22T16:55:54.053</LastUpdateTime>
+    <LastUpdateTime>2016-07-22T16:55:54</LastUpdateTime>
   </PageEntity>
   <PageEntity>
     <Id>DepartmentList</Id>
@@ -53,7 +98,7 @@ foxOne.refresh("DepartmentListTable");
     <LayoutId>RightLeft</LayoutId>
     <ParentId>X</ParentId>
     <Type>Page</Type>
-    <LastUpdateTime>2016-08-03T15:29:51.963</LastUpdateTime>
+    <LastUpdateTime>2016-08-03T15:29:51</LastUpdateTime>
   </PageEntity>
   <PageEntity>
     <Id>DepartmentSelector</Id>
@@ -68,7 +113,7 @@ $("#"+param._input_text,window.parent.document).val(e.name);
     <LayoutId>Normal</LayoutId>
     <ParentId>Selector</ParentId>
     <Type>Page</Type>
-    <LastUpdateTime>2016-08-04T15:23:36.093</LastUpdateTime>
+    <LastUpdateTime>2016-08-04T15:23:36</LastUpdateTime>
   </PageEntity>
   <PageEntity>
     <Id>ExternalFileEntityEdit</Id>
@@ -78,7 +123,7 @@ $("#"+param._input_text,window.parent.document).val(e.name);
     <LayoutId>Normal</LayoutId>
     <ParentId>Y</ParentId>
     <Type>Page</Type>
-    <LastUpdateTime>2016-07-22T16:55:55.607</LastUpdateTime>
+    <LastUpdateTime>2016-07-22T16:55:55</LastUpdateTime>
   </PageEntity>
   <PageEntity>
     <Id>ExternalFileEntityList</Id>
@@ -88,7 +133,7 @@ $("#"+param._input_text,window.parent.document).val(e.name);
     <LayoutId>Normal</LayoutId>
     <ParentId>Y</ParentId>
     <Type>Page</Type>
-    <LastUpdateTime>2016-07-22T16:55:55.853</LastUpdateTime>
+    <LastUpdateTime>2016-07-22T16:55:55</LastUpdateTime>
   </PageEntity>
   <PageEntity>
     <Id>LayoutEntityEdit</Id>
@@ -98,7 +143,7 @@ $("#"+param._input_text,window.parent.document).val(e.name);
     <LayoutId>Normal</LayoutId>
     <ParentId>Y</ParentId>
     <Type>Page</Type>
-    <LastUpdateTime>2016-07-22T16:55:56.367</LastUpdateTime>
+    <LastUpdateTime>2016-07-22T16:55:56</LastUpdateTime>
   </PageEntity>
   <PageEntity>
     <Id>LayoutEntityList</Id>
@@ -108,7 +153,7 @@ $("#"+param._input_text,window.parent.document).val(e.name);
     <LayoutId>Normal</LayoutId>
     <ParentId>Y</ParentId>
     <Type>Page</Type>
-    <LastUpdateTime>2016-07-22T16:55:56.61</LastUpdateTime>
+    <LastUpdateTime>2016-07-22T16:55:56</LastUpdateTime>
   </PageEntity>
   <PageEntity>
     <Id>PageEntityList</Id>
@@ -118,7 +163,7 @@ $("#"+param._input_text,window.parent.document).val(e.name);
     <LayoutId>Normal</LayoutId>
     <ParentId>Y</ParentId>
     <Type>Page</Type>
-    <LastUpdateTime>2016-07-22T16:55:57.51</LastUpdateTime>
+    <LastUpdateTime>2016-07-22T16:55:57</LastUpdateTime>
   </PageEntity>
   <PageEntity>
     <Id>PageLayoutFileEntityEdit</Id>
@@ -128,7 +173,7 @@ $("#"+param._input_text,window.parent.document).val(e.name);
     <LayoutId>Normal</LayoutId>
     <ParentId>X</ParentId>
     <Type>Page</Type>
-    <LastUpdateTime>2016-07-22T16:55:58.17</LastUpdateTime>
+    <LastUpdateTime>2016-07-22T16:55:58</LastUpdateTime>
   </PageEntity>
   <PageEntity>
     <Id>PageLayoutFileEntityList</Id>
@@ -138,7 +183,27 @@ $("#"+param._input_text,window.parent.document).val(e.name);
     <LayoutId>Normal</LayoutId>
     <ParentId>X</ParentId>
     <Type>Page</Type>
-    <LastUpdateTime>2016-07-22T16:55:58.403</LastUpdateTime>
+    <LastUpdateTime>2016-07-22T16:55:58</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>PageRelateEdit</Id>
+    <RentId>1</RentId>
+    <Title>页面关联信息编辑</Title>
+    <CssClass>easyui-layout</CssClass>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>Workflow</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-09-12T14:43:00</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>PageRelateList</Id>
+    <RentId>1</RentId>
+    <Title>页面关联信息列表</Title>
+    <CssClass>easyui-layout</CssClass>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>Workflow</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-09-12T14:43:05</LastUpdateTime>
   </PageEntity>
   <PageEntity>
     <Id>PermissionEdit</Id>
@@ -148,22 +213,23 @@ $("#"+param._input_text,window.parent.document).val(e.name);
     <LayoutId>Normal</LayoutId>
     <ParentId>X</ParentId>
     <Type>Page</Type>
-    <LastUpdateTime>2016-07-22T16:55:58.853</LastUpdateTime>
+    <LastUpdateTime>2016-07-22T16:55:58</LastUpdateTime>
   </PageEntity>
   <PageEntity>
     <Id>PermissionList</Id>
-    <RentId>0</RentId>
+    <RentId>1</RentId>
     <Title>权限信息列表</Title>
     <CssClass>easyui-layout</CssClass>
     <StartUpScript>$("#PermissionListTree").bind("nodeClick",function(e){
 var setting=foxOne.setting("PermissionListTable");
 setting.ParentId=e.id;
+setting[foxOne.pageIndex]=1;
 foxOne.refresh("PermissionListTable");
 });</StartUpScript>
     <LayoutId>RightLeft</LayoutId>
     <ParentId>X</ParentId>
     <Type>Page</Type>
-    <LastUpdateTime>2016-08-01T14:13:22.97</LastUpdateTime>
+    <LastUpdateTime>2017-10-21T09:20:36</LastUpdateTime>
   </PageEntity>
   <PageEntity>
     <Id>PermissionSelector</Id>
@@ -178,7 +244,7 @@ $("#"+param._input_text,window.parent.document).val(e.name);
     <LayoutId>Normal</LayoutId>
     <ParentId>Selector</ParentId>
     <Type>Page</Type>
-    <LastUpdateTime>2016-08-05T09:09:36.617</LastUpdateTime>
+    <LastUpdateTime>2016-08-05T09:09:36</LastUpdateTime>
   </PageEntity>
   <PageEntity>
     <Id>RoleEdit</Id>
@@ -188,7 +254,7 @@ $("#"+param._input_text,window.parent.document).val(e.name);
     <LayoutId>Normal</LayoutId>
     <ParentId>X</ParentId>
     <Type>Page</Type>
-    <LastUpdateTime>2016-07-22T16:55:59.937</LastUpdateTime>
+    <LastUpdateTime>2016-07-22T16:55:59</LastUpdateTime>
   </PageEntity>
   <PageEntity>
     <Id>RoleList</Id>
@@ -198,7 +264,7 @@ $("#"+param._input_text,window.parent.document).val(e.name);
     <LayoutId>Normal</LayoutId>
     <ParentId>X</ParentId>
     <Type>Page</Type>
-    <LastUpdateTime>2016-07-22T16:56:00.17</LastUpdateTime>
+    <LastUpdateTime>2016-07-22T16:56:00</LastUpdateTime>
   </PageEntity>
   <PageEntity>
     <Id>RoleTypeEdit</Id>
@@ -208,7 +274,7 @@ $("#"+param._input_text,window.parent.document).val(e.name);
     <LayoutId>Normal</LayoutId>
     <ParentId>X</ParentId>
     <Type>Page</Type>
-    <LastUpdateTime>2016-07-22T16:56:01.303</LastUpdateTime>
+    <LastUpdateTime>2016-07-22T16:56:01</LastUpdateTime>
   </PageEntity>
   <PageEntity>
     <Id>RoleTypeList</Id>
@@ -218,7 +284,7 @@ $("#"+param._input_text,window.parent.document).val(e.name);
     <LayoutId>Normal</LayoutId>
     <ParentId>X</ParentId>
     <Type>Page</Type>
-    <LastUpdateTime>2016-07-22T16:56:01.637</LastUpdateTime>
+    <LastUpdateTime>2016-07-22T16:56:01</LastUpdateTime>
   </PageEntity>
   <PageEntity>
     <Id>Selector</Id>
@@ -227,7 +293,7 @@ $("#"+param._input_text,window.parent.document).val(e.name);
     <LayoutId>Normal</LayoutId>
     <ParentId>Root</ParentId>
     <Type>Module</Type>
-    <LastUpdateTime>2016-08-03T15:35:40.273</LastUpdateTime>
+    <LastUpdateTime>2016-08-03T15:35:40</LastUpdateTime>
   </PageEntity>
   <PageEntity>
     <Id>UserEdit</Id>
@@ -237,22 +303,23 @@ $("#"+param._input_text,window.parent.document).val(e.name);
     <LayoutId>Normal</LayoutId>
     <ParentId>X</ParentId>
     <Type>Page</Type>
-    <LastUpdateTime>2016-07-22T16:56:02.773</LastUpdateTime>
+    <LastUpdateTime>2016-07-22T16:56:02</LastUpdateTime>
   </PageEntity>
   <PageEntity>
     <Id>UserList</Id>
-    <RentId>0</RentId>
+    <RentId>1</RentId>
     <Title>用户信息列表</Title>
     <CssClass>easyui-layout</CssClass>
     <StartUpScript>$("#UserListTree").bind("nodeClick",function(e){
 var setting=foxOne.setting("UserListTable");
 setting.DepartmentId=e.id;
+setting[foxOne.pageIndex]=1;
 foxOne.refresh("UserListTable");
 });</StartUpScript>
     <LayoutId>RightLeft</LayoutId>
     <ParentId>X</ParentId>
     <Type>Page</Type>
-    <LastUpdateTime>2016-08-03T18:14:52.723</LastUpdateTime>
+    <LastUpdateTime>2017-09-21T14:32:20</LastUpdateTime>
   </PageEntity>
   <PageEntity>
     <Id>UserRoleEdit</Id>
@@ -262,7 +329,7 @@ foxOne.refresh("UserListTable");
     <LayoutId>Normal</LayoutId>
     <ParentId>X</ParentId>
     <Type>Page</Type>
-    <LastUpdateTime>2016-07-22T16:56:04.017</LastUpdateTime>
+    <LastUpdateTime>2016-07-22T16:56:04</LastUpdateTime>
   </PageEntity>
   <PageEntity>
     <Id>UserRoleList</Id>
@@ -278,12 +345,12 @@ foxOne.refresh("UserRoleListTable");
     <LayoutId>Normal</LayoutId>
     <ParentId>X</ParentId>
     <Type>Page</Type>
-    <LastUpdateTime>2017-01-12T18:23:55.277</LastUpdateTime>
+    <LastUpdateTime>2017-01-12T18:23:55</LastUpdateTime>
   </PageEntity>
   <PageEntity>
     <Id>UserSelector</Id>
     <RentId>1</RentId>
-    <Title>人员选择器</Title>
+    <Title>人员选择器（分配角色用）</Title>
     <CssClass>easyui-layout</CssClass>
     <Style>        .user-item {
             border: 1px solid #CCC;
@@ -335,7 +402,27 @@ div.addClass("user-item-checked");
     <LayoutId>RightLeft</LayoutId>
     <ParentId>Selector</ParentId>
     <Type>Page</Type>
-    <LastUpdateTime>2017-01-12T18:25:06.393</LastUpdateTime>
+    <LastUpdateTime>2017-09-02T00:04:57</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>WorkItemList</Id>
+    <RentId>1</RentId>
+    <Title>待办事项列表</Title>
+    <CssClass>easyui-layout</CssClass>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>PC</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-09-15T09:55:41</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>WorkItemList_Copy</Id>
+    <RentId>1</RentId>
+    <Title>已办事项列表</Title>
+    <CssClass>easyui-layout</CssClass>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>PC</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-09-12T14:58:45</LastUpdateTime>
   </PageEntity>
   <PageEntity>
     <Id>X</Id>
@@ -344,7 +431,7 @@ div.addClass("user-item-checked");
     <LayoutId>Normal</LayoutId>
     <ParentId>Root</ParentId>
     <Type>Module</Type>
-    <LastUpdateTime>2016-08-03T14:42:33.513</LastUpdateTime>
+    <LastUpdateTime>2016-08-03T14:42:33</LastUpdateTime>
   </PageEntity>
   <PageEntity>
     <Id>Y</Id>
@@ -354,6 +441,234 @@ div.addClass("user-item-checked");
     <LayoutId />
     <ParentId>Root</ParentId>
     <Type>Module</Type>
-    <LastUpdateTime>2016-07-22T16:55:50.777</LastUpdateTime>
+    <LastUpdateTime>2016-07-22T16:55:50</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>Workflow</Id>
+    <RentId>0</RentId>
+    <Title>流程管理</Title>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>Root</ParentId>
+    <Type>Module</Type>
+    <LastUpdateTime>2017-09-12T10:46:50</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>InstanceList</Id>
+    <RentId>1</RentId>
+    <Title>流程实例管理</Title>
+    <CssClass>easyui-layout</CssClass>
+    <ScriptBlock>function deleteInstance(btn,dataLocator){
+if(!confirm("您确认要删除该实例吗？"))return;
+foxOne.dataService("/Workflow/Delete/"+dataLocator,{},function(res){
+if(res){
+foxOne.refresh("InstanceListTable");
+}
+},"post",true);
+}</ScriptBlock>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>Workflow</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-09-14T14:33:59</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>WorkflowForm</Id>
+    <RentId>0</RentId>
+    <Title>流程表单</Title>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>Root</ParentId>
+    <Type>Module</Type>
+    <LastUpdateTime>2017-09-12T14:43:50</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>PC</Id>
+    <RentId>1</RentId>
+    <Title>个人工作台</Title>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>Root</ParentId>
+    <Type>Module</Type>
+    <LastUpdateTime>2017-09-12T15:01:31</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>NewFlow</Id>
+    <RentId>1</RentId>
+    <Title>发起流程</Title>
+    <CssClass>easyui-layout</CssClass>
+    <Style>.flow-item{display:inline-block;border:1px dashed #666;padding:10px;margin-top:30px;margin-left:30px;cursor:pointer;}
+.flow-item:hover{background-color:#EEE;}
+.flow-name{margin-top:10px;}
+.flow-item p{text-align:center;font-size:13px;font-weight:bold;color:000;}</Style>
+    <StartUpScript>$(".flow-item").bind("click",function(){
+window.open("/Workflow/Index?ApplicationId="+$(this).data().id);
+});</StartUpScript>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>PC</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-09-12T17:41:04</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>form_leaveapprovalList</Id>
+    <RentId>1</RentId>
+    <Title>请假信息列表</Title>
+    <CssClass>easyui-layout</CssClass>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>WorkflowForm</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-09-13T18:03:46</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>form_leaveapprovalEdit</Id>
+    <RentId>1</RentId>
+    <Title>请假申请编辑</Title>
+    <CssClass>easyui-layout</CssClass>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>WorkflowForm</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-09-13T18:03:56</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>UserSelector_Copy</Id>
+    <RentId>1</RentId>
+    <Title>人员选择器</Title>
+    <CssClass>easyui-layout</CssClass>
+    <Style>        .user-item {
+            border: 1px solid #CCC;
+            background-color: #EEE;
+            padding: 10px;
+            margin-top: 10px;
+            margin-left: 10px;
+            width: 150px;
+            border-radius: 5px;
+            cursor: pointer;
+            float: left;
+        }
+
+            .user-item p {
+                border-bottom: 1px dashed #CCC;
+                font-weight: bold;
+                padding-bottom: 5px;
+            }
+
+        .user-item-checked {
+            background: white url(../../images/default/success.png) 140px 5px no-repeat;
+        }
+
+        .user-item-checked-lock {
+            background: #EEEFFF url(../../images/default/success.png) 140px 5px no-repeat;
+        }</Style>
+    <StartUpScript>$("#UserSelectorTree").bind("nodeClick",function(e){
+var setting=foxOne.setting("UserSelectorRepeater");
+setting.DepartmentId=e.id;
+setting.LoginId='';
+setting.Name='';
+foxOne.refresh("UserSelectorRepeater");
+});
+$("body").on("click",".user-item",function(e){
+var div=$(e.target).closest(".user-item");
+var d=$(this).data();
+var param=foxOne.getQueryString();
+$("#"+param._input_id,window.parent.document).val(d.id);
+$("#"+param._input_text,window.parent.document).val(d.name);
+});</StartUpScript>
+    <LayoutId>RightLeft</LayoutId>
+    <ParentId>Selector</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-09-21T14:57:59</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>IconSelector</Id>
+    <RentId>1</RentId>
+    <Title>图标选择器</Title>
+    <CssClass>easyui-layout</CssClass>
+    <Style>.icon-item{border:1px solid #CCC;padding:3px;margin:3px;
+cursor:pointer;
+}</Style>
+    <StartUpScript>$("body").on("click",".icon-item",function(e){
+var d=$(this).data();
+var param=foxOne.getQueryString();
+$("#"+param._input_id,window.parent.document).val(d.url);
+$("#"+param._input_text,window.parent.document).val(d.url);
+});</StartUpScript>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>Selector</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-09-16T15:43:03</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>WorkItemList_Copy_Copy</Id>
+    <RentId>1</RentId>
+    <Title>我的知会事项</Title>
+    <CssClass>easyui-layout</CssClass>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>PC</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-09-21T15:40:05</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>UserSelector_Copy_Copy</Id>
+    <RentId>1</RentId>
+    <Title>传阅人员选择器</Title>
+    <CssClass>easyui-layout</CssClass>
+    <Style>        .user-item {
+            border: 1px solid #CCC;
+            background-color: #EEE;
+            padding: 10px;
+            margin-top: 10px;
+            margin-left: 10px;
+            width: 150px;
+            border-radius: 5px;
+            cursor: pointer;
+            float: left;
+        }
+
+            .user-item p {
+                border-bottom: 1px dashed #CCC;
+                font-weight: bold;
+                padding-bottom: 5px;
+            }
+
+        .user-item-checked {
+            background: white url(../../images/default/success.png) 140px 5px no-repeat;
+        }
+
+        .user-item-checked-lock {
+            background: #EEEFFF url(../../images/default/success.png) 140px 5px no-repeat;
+        }</Style>
+    <StartUpScript>$("#UserSelectorTree").bind("nodeClick",function(e){
+var setting=foxOne.setting("UserSelectorRepeater");
+setting.DepartmentId=e.id;
+setting.LoginId='';
+setting.Name='';
+foxOne.refresh("UserSelectorRepeater");
+});
+$("body").on("click",".user-item",function(e){
+var div=$(e.target).closest(".user-item");
+var hasClass = div.hasClass("user-item-checked");
+if(hasClass){
+div.removeClass("user-item-checked");
+}
+else{
+div.addClass("user-item-checked");
+}
+});</StartUpScript>
+    <ScriptBlock>function onOk(){
+var ids=[];
+$(".user-item-checked").each(function(){
+var d=$(this).data();
+ids.push(d.id);
+});
+ if (window.top &amp;&amp; window.top.onDialogClose &amp;&amp; window.top.onDialogClose.length &gt; 0) {
+ window.top.onDialogClose.pop()(ids);
+}
+}
+
+function onCancel(){
+ if (window.top &amp;&amp; window.top.onDialogClose &amp;&amp; window.top.onDialogClose.length &gt; 0) {
+ window.top.onDialogClose.pop()([]);
+}
+}</ScriptBlock>
+    <LayoutId>RightLeft</LayoutId>
+    <ParentId>Selector</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-10-20T16:44:49</LastUpdateTime>
   </PageEntity>
 </ArrayOfPageEntity>

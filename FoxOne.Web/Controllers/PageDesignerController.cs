@@ -10,6 +10,10 @@ using FoxOne.Controls;
 using FoxOne.Core;
 using FoxOne.Data;
 using FoxOne.Data.Mapping;
+using System.IO;
+using System.Text;
+using System.Transactions;
+
 namespace FoxOne.Web.Controllers
 {
     public class PageDesignerController : BaseController
@@ -57,6 +61,22 @@ namespace FoxOne.Web.Controllers
             if (component != null)
             {
                 typeName = component.Type;
+                var tempCtrlType = TypeHelper.GetType(typeName);
+                if (tempCtrlType.IsSubclassOf(typeof(FormControlBase)))
+                {
+                    if (!component.JsonContent.IsNullOrEmpty())
+                    {
+                        JavaScriptSerializer serializer = new JavaScriptSerializer();
+                        serializer.RegisterConverters(new[] { new FoxOne.Business.ComponentConverter() });
+                        var instance = serializer.Deserialize(component.JsonContent, tempCtrlType) as FormControlBase;
+                        if (instance == null)
+                        {
+                            throw new FoxOneException("Ctrl_Not_Valid");
+                        }
+                        ViewData["Label"] = instance.Label;
+                        ViewData["Rank"] = instance.Rank;
+                    }
+                }
             }
             Type baseType = null;
             List<Type> types = null;
@@ -114,7 +134,7 @@ namespace FoxOne.Web.Controllers
             {
                 models[0].CssClass = ctrlSelectedClass;
             }
-            return View(models.OrderBy(o => o.ComponentName).ToList());
+            return View(models.OrderByDescending(o => o.ComponentTypeName).ToList());
         }
 
         public JsonResult Copy(string id)
@@ -123,12 +143,16 @@ namespace FoxOne.Web.Controllers
             var newPage = DBContext<PageEntity>.Instance.FirstOrDefault(o => o.Id.Equals(id, StringComparison.OrdinalIgnoreCase));
             newPage.Id += "_Copy";
             newPage.Title += "_副本";
-            DBContext<PageEntity>.Insert(newPage);
-            foreach (var item in page.Children)
+            using (TransactionScope tran = new TransactionScope())
             {
-                item.PageId = newPage.Id;
-                item.ParentId = newPage.Id;
-                ComponentHelper.RecSave(item);
+                DBContext<PageEntity>.Insert(newPage);
+                foreach (var item in page.Children)
+                {
+                    item.PageId = newPage.Id;
+                    item.ParentId = newPage.Id;
+                    ComponentHelper.RecSave(item);
+                }
+                tran.Complete();
             }
             return Json(true);
         }
@@ -149,18 +173,47 @@ namespace FoxOne.Web.Controllers
                 AutoHeight = true
             };
             table.KeyFieldName = "Id";
-            table.Columns.Add(new TableColumn() { FieldName = "Id" });
+            table.Columns.Add(new TableColumn() { FieldName = "Id", ShowLength = 20 });
             table.Columns.Add(new TableColumn() { FieldName = "Type" });
-            table.Columns.Add(new TableColumn() { FieldName = "Rank" });
+            //table.Columns.Add(new TableColumn() { FieldName = "Rank" });
             table.Columns.Add(new TableColumn() { FieldName = "TargetId" });
-            table.Columns.Add(new TableColumn() { FieldName = "LastUpdateTime" });
+            //table.Columns.Add(new TableColumn() { FieldName = "LastUpdateTime" });
             table.Buttons.Add(new TableButton() { CssClass = "btn btn-primary btn-sm", Id = "btnEdit", Name = "编辑", OnClick = "editCtrl('{0}','{1}')", DataFields = "PageId,Id" });
             table.Buttons.Add(new TableButton() { CssClass = "btn btn-danger btn-sm", Id = "btnDelete", Name = "删除", OnClick = "deleteCtrl('{0}','{1}')", DataFields = "PageId,Id" });
             var ds = new EntityDataSource() { EntityType = typeof(ComponentEntity) };
-            ds.DataFilter = new RequestParameterDataFilter() { ParameterRange = ParameterRange.QueryString };
+            var filter = new CompositeDataFilter() { };
+
+            filter.DataFilters = new List<IDataFilter>();
+            filter.DataFilters.Add(new StaticDataFilter() { ColumnName = "ParentId", Operator = typeof(EqualsOperation).FullName, Value = "$QueryString._PARENT_ID$" });
+            filter.DataFilters.Add(new StaticDataFilter() { ColumnName = "PageId", Operator = typeof(EqualsOperation).FullName, Value = "$QueryString._PAGE_ID" });
+            if(Request.QueryString.AllKeys.Contains("_TARGET_ID"))
+            {
+                filter.DataFilters.Add(new StaticDataFilter() { ColumnName = "TargetId", Operator = typeof(EqualsOperation).FullName, Value = "$QueryString._TARGET_ID" });
+            }
+            filter.OperatorType = OperatorType.And;
+            ds.DataFilter = filter;
+            ds.ColumnConverters = new List<IColumnConverter>();
+            ds.ColumnConverters.Add(new ControlNameConverter() { ColumnName = "Type", ConverterType = ColumnConverterType.Replace });
             table.DataSource = ds;
             ViewData["table"] = table;
             return View();
+        }
+
+        public class ControlNameConverter:ColumnConverterBase
+        {
+            public override object Converter(object value)
+            {
+                if(value!=null)
+                {
+                    string temp = value.ToString();
+                    if(temp.IsNotNullOrEmpty())
+                    {
+                        temp = temp.Substring(temp.LastIndexOf('.') + 1);
+                        return temp;
+                    }
+                }
+                return value;
+            }
         }
 
         public ActionResult PageEdit()
@@ -227,7 +280,7 @@ namespace FoxOne.Web.Controllers
 
         public JsonResult ClearTableCache()
         {
-            TableMapper.RefreshTableCache(Dao.Get());
+            TableMapper.RefreshTableCache();
             return Json(true);
         }
 
@@ -419,6 +472,19 @@ namespace FoxOne.Web.Controllers
             return View();
         }
 
+        public ContentResult ExportPage(string id)
+        {
+            var page = PageBuilder.BuildPageEntity(id);
+            System.Xml.Serialization.XmlSerializer serializer = new System.Xml.Serialization.XmlSerializer(typeof(PageEntity));
+            var fileStream = new MemoryStream();
+            using (var writer = new StringWriter())
+            {
+                serializer.Serialize(writer, page);
+                Response.AddHeader("Content-Disposition", string.Format("attachment;filename={0}", page.Title + ".xml"));
+                return Content(writer.ToString(), "text/xml");
+            }
+        }
+
         public ActionResult ComponentEditor()
         {
             var model = new FormModel();
@@ -427,6 +493,7 @@ namespace FoxOne.Web.Controllers
             string pageId = Request.QueryString[NamingCenter.PARAM_PAGE_ID];
             string parentId = Request.QueryString[NamingCenter.PARAM_PARENT_ID];
             string targetId = Request.QueryString[NamingCenter.PARAM_TARGET_ID];
+
             Type type = null;
             IControl instance = null;
             ComponentEntity component = null;
@@ -468,13 +535,17 @@ namespace FoxOne.Web.Controllers
             {
                 throw new FoxOneException("Parameter_Not_Found", NamingCenter.PARAM_TYPE_NAME + " Or " + NamingCenter.PARAM_CTRL_ID);
             }
-            type = TypeHelper.GetType(typeName);
+            if (type == null)
+            {
+                type = TypeHelper.GetType(typeName);
+            }
             if (parentId.IsNullOrEmpty())
             {
                 parentId = pageId;
             }
             model.EntityName = type.FullName;
             model.Form = ComponentHelper.GetFormComponent(type);
+            model.Form.AutoHeight = false;
             model.Form.PostUrl = HttpHelper.BuildUrl(ctrlEdit, Request);
 
             if (instance == null)
@@ -484,13 +555,26 @@ namespace FoxOne.Web.Controllers
                 if (ctrlId.IsNotNullOrEmpty())
                 {
                     instance.Id = ctrlId;
+                    var fbCtrl = instance as FormControlBase;
+                    if (fbCtrl != null)
+                    {
+                        fbCtrl.Rank = Request.QueryString["Rank"].ConvertTo<int>();
+                        fbCtrl.Label = Request.QueryString["Label"];
+                    }
                     model.Form.FormMode = FormMode.Edit;
                 }
                 else
                 {
-                    if (!pageId.IsNullOrEmpty())
+                    if (!parentId.IsNullOrEmpty())
                     {
-                        instance.Id = pageId + type.Name;
+                        instance.Id = parentId + type.Name;
+                    }
+                    else
+                    {
+                        if (!pageId.IsNullOrEmpty())
+                        {
+                            instance.Id = pageId + type.Name;
+                        }
                     }
                 }
             }

@@ -34,7 +34,7 @@
                 tip.find('.tipsy-inner')[opts.html ? 'html' : 'text'](title || opts.fallback);
 
                 var pos = $.extend({}, $(this).offset(), { width: this.offsetWidth, height: this.offsetHeight });
-                tip.get(0).className = 'tipsy'; 
+                tip.get(0).className = 'tipsy';
                 tip.remove().css({ top: 0, left: 0, visibility: 'hidden', display: 'block' }).appendTo(document.body);
                 var actualWidth = tip[0].offsetWidth, actualHeight = tip[0].offsetHeight;
                 var gravity = (typeof opts.gravity == 'function') ? opts.gravity.call(this) : opts.gravity;
@@ -145,7 +145,7 @@
                     "alertText": "电话号码输入不正确"
                 },
                 "mobile": {
-                    "regex": /^1[3|5|8]\d{9}$/,
+                    "regex": /^1[3|5|7|8]\d{9}$/,
                     "executor": "_customRegex",
                     "alertText": "手机号码输入不正确"
                 },
@@ -280,8 +280,7 @@
     $.validation = {
         loadValidation: function (caller) {
             var rules = new Array();
-            if (!$.validation.settings)
-            {
+            if (!$.validation.settings) {
                 $.validation.settings = {
                     allrules: $.validationConfig.allRules,
                     validationEventTriggers: "blur",
@@ -527,7 +526,7 @@
             });
             if (stopForm) {
                 $(caller).find("[errorInfo]").each(function () {
-                    errorInfo += $(this).attr("errorInfo") + "\n";
+                    errorInfo += "[" + $(this).attr("validatorFieldLabel") + "]" + $(this).attr("errorInfo") + "\n";
                 });
                 $(caller).find("[errorInfo]").first().focus();
             }

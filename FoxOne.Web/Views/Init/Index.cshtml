@@ -61,10 +61,20 @@
         <h1>数据维护</h1>
         <p><a class="btn btn-danger btn-big" onclick="clearTable()">清空表数据</a></p>
         <p><a class="btn btn-default btn-big" onclick="exportData()">导出表数据</a></p>
+        <p>
+            @Html.DropDownList("AllEntity")
+            
+        </p>
+        <p>
+            <a class="btn btn-default btn-big" onclick="createEntityTable()">生成实体表结构</a>
+        </p>
     </div>
     <script>
         function createTable() {
             r("/Init/CreateTable", "表创建成功！");
+        }
+        function createEntityTable() {
+            r("/Init/CreateTable/" + $("#AllEntity").val(), "实体【" + $("#AllEntity").val() + "】的表创建成功！");
         }
         function clearTable() {
             r("/Init/ClearTable", "表数据清空成功！");

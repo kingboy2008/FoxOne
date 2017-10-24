@@ -106,8 +106,9 @@ namespace FoxOne.Business
         {
             foreach (var key in Properties.Keys)
             {
+                if (Properties[key] == null || Properties[key].ToString().IsNullOrEmpty()) continue;
                 var item = ObjectHelper.GetObject<IDURPProperty>();
-                item.Id = this.GetType().FullName + key;
+                item.Id = Guid.NewGuid().ToString();
                 item.Name = key;
                 item.Value = Properties[key].ToString();
                 item.RentId = this.RentId;

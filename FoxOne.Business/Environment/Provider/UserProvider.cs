@@ -7,7 +7,7 @@ using System.Text;
 
 namespace FoxOne.Business.Environment
 {
-    public class UserProvider:IEnvironmentProvider
+    public class UserProvider : IEnvironmentProvider
     {
         public string Prefix
         {
@@ -22,6 +22,10 @@ namespace FoxOne.Business.Environment
             object value;
             var fastType = FastType.Get(Sec.User.GetType());
             var getter = fastType.GetGetter(name);
+            if (name == "RoleName")
+            {
+                return string.Join("|", Sec.User.Roles.Select(o => o.RoleType.Name));
+            }
             if (getter != null)
             {
                 return getter.GetValue(Sec.User);

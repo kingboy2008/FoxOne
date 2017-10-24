@@ -1,5 +1,5 @@
 ﻿using FoxOne.Core;
-
+using System.Linq; 
 namespace FoxOne.Business.Security
 {
     public sealed class Sec
@@ -15,6 +15,14 @@ namespace FoxOne.Business.Security
             get 
             {
                 return _provider ?? (_provider = new SecurityProvider());
+            }
+        }
+
+        public static bool IsSuperAdmin
+        {
+            get
+            {
+                return User.Roles.Count(o => o.RoleType.Name.Equals(SysConfig.SuperAdminRoleName)) > 0;
             }
         }
     }

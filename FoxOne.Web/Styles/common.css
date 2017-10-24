@@ -791,6 +791,13 @@ input {
     transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 }
 
+@media screen and (min-width:900px){
+    .form-horizontal textarea.form-control{width:640px;height:100px;}
+}
+@media screen and (min-width:950px){
+    .form-horizontal textarea.form-control{width:735px;height:100px;}
+}
+
 .help-block {
     display: block;
     margin-top: 5px;
@@ -887,46 +894,6 @@ input {
     background-repeat: repeat-x;
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#F2F2F2,GradientType=0);
 }
-
-.right-play {
-    width: 100%;
-    margin: 0 !important;
-    border-bottom: 1px solid #d4d4d4;
-}
-
-    .right-play > .btn {
-        display: inline-block;
-        border-top: none !important;
-        height: 28px;
-        border-bottom: none !important;
-        width: 33.33% !important;
-        border-radius: 0 !important;
-    }
-
-        .right-play > .btn:first-child {
-            border-left: none;
-        }
-
-        .right-play > .btn:last-child {
-            border-right: none;
-        }
-
-.r-play {
-    background: url(../images/btn-media-play.png) no-repeat center;
-}
-
-.r-pause {
-    background: url(../images/btn-media-pause.png) no-repeat center;
-}
-
-.r-next {
-    background: url(../images/btn-media-next.png) no-repeat center;
-}
-
-.r-pre {
-    background: url(../images/btn-media-pre.png) no-repeat center;
-}
-
 
 /*input后面跟按钮*/
 .input-group {
@@ -1575,10 +1542,10 @@ input[type=checkbox], input[type=radio] {
     cursor: not-allowed;
 }
 
-input[type=checkbox].disabled, input[type=checkbox][disabled], input[type=radio].disabled, input[type=radio][disabled] {
+ input[type=checkbox].disabled,input[type=checkbox][disabled], input[type=radio].disabled, input[type=radio][disabled], input[type=text][disabled],textarea[disabled],select[disabled] {
     cursor: not-allowed;
+    background-color:#EEE;
 }
-
 /*按钮点选形式*/
 .radio-button {
     display: inline-block;

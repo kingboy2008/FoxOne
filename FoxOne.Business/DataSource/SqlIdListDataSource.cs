@@ -24,7 +24,7 @@ namespace FoxOne.Business
 
         public override IEnumerable<IDictionary<string, object>> GetList(int pageIndex, int pageSize, out int recordCount)
         {
-            return Dao.Get().PageQueryDictionariesByPage(SqlId, pageIndex, pageSize, SortExpression, out recordCount, Parameter);
+            return Dao.Get().QueryDictionariesByPage(SqlId, pageIndex, pageSize, SortExpression, out recordCount, Parameter);
         }
 
         private IEnumerable<IDictionary<string, object>> _items;

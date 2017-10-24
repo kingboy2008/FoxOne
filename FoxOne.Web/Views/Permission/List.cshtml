@@ -60,6 +60,30 @@
             var listHeight = $(window).height() - $(".tab-box").outerHeight();
             $("[tabItem]").css("height", listHeight).css("overflow-y", "auto");
         }
+
+        function doAction(isAdd, item) {
+            var ids = [];
+            postData.Action = isAdd ? "Add" : "Remove";
+            $(item).find("input[type='checkbox'],input[type='radio']").each(function () {
+                ids.push(this.id);
+                this.checked = isAdd;
+            });
+            ids.push(item.id);
+            postData.Id = ids.join(',');
+            var div = $(item);
+            foxOne.dataService(RolePermission, postData, function (r) {
+                if (r) {
+                    if (isAdd) {
+                        div.addClass("repeater-item-checked");
+                    }
+                    else {
+                        div.removeClass("repeater-item-checked");
+                    }
+                    div.find("input[type='radio']").attr("disabled", !isAdd);
+                }
+            });
+        }
+
         $(function () {
             $(window).bind("resize", autoHeight);
             if (urlParameter.type == "role") {
@@ -124,46 +148,13 @@
                             e.stopPropagation();
                             return;
                         }
-                        if ($(this).hasClass("repeater-item-checked")) {
-                            var ids = [];
-                            ids.push(this.id);
-                            $(this).find(":checked").each(function () {
-                                ids.push(this.id);
-                                this.checked = false;
-                            });
-                            $(this).find("input[type='radio']").attr("disabled", true);
-                            postData.Id = ids.join(',');
-                            postData.Action = "Remove";
-                            var div = $(this);
-                            foxOne.dataService(RolePermission, postData, function (r) {
-                                if (r) {
-                                    div.removeClass("repeater-item-checked");
-                                }
-                            });
-                        }
-                        else {
-                            $(this).find("input[type='checkbox']").each(function () {
-                                postData.Id = this.id;
-                                postData.Action = "Add";
-                                this.checked = true;
-                                foxOne.dataService(RolePermission, postData);
-                            });
-                            $(this).find("input[type='radio']").attr("disabled", false);
-                            postData.Id = this.id;
-                            postData.Action = "Add";
-                            var div = $(this);
-                            foxOne.dataService(RolePermission, postData, function (r) {
-                                if (r) {
-                                    div.addClass("repeater-item-checked");
-                                }
-                            });
-                        }
+                        doAction(!$(this).hasClass("repeater-item-checked"), this);
                     });
                     $(".repeater-item").find("input[type='checkbox']").bind("click", function (e) {
                         postData.Id = this.id;
                         if (this.checked) {
                             postData.Action = "Add";
-                            foxOne.dataService(RolePermission, postData);
+                            foxOne.dataService(RolePermission, postData, function () { });
                             $("input[name='" + postData.Id + "']").attr("disabled", false);
                         }
                         else {
@@ -180,12 +171,12 @@
                         }
                     });
                     $(".repeater-item").find("input[type='radio']").bind("click", function (e) {
-                        //postData.Id = this.name;
-                        postData.Id = this.id;
-                        foxOne.dataService(removeRolePermission, postData, function () { }, "post", false);
-                        foxOne.dataService(addRolePermission, postData, function (res) {
+                        postData.Id = this.name;
+                        postData.RuleId = this.id;
+                        postData.Action = "Update";
+                        foxOne.dataService(RolePermission, postData, function (res) {
                             if (res) {
-                                delete postData.PermissionRuleId;
+                                delete postData.RuleId;
                             }
                         }, "post", false);
                         if ($(this).closest(".repeater-item").hasClass("repeater-item-checked")) {

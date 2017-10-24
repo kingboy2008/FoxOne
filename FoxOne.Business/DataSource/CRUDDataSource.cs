@@ -112,7 +112,7 @@ namespace FoxOne.Business
             {
                 SortExpression = Entity.DefaultSortExpression;
             }
-            return dao.PageQueryDictionariesByPage(Entity.SelectSQL, pageIndex, pageSize, SortExpression, out recordCount, Parameter);
+            return dao.QueryDictionariesByPage(Entity.SelectSQL, pageIndex, pageSize, SortExpression, out recordCount, Parameter);
         }
 
         private IEnumerable<IDictionary<string, object>> _items;

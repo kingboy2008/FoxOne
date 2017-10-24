@@ -17,7 +17,7 @@ namespace FoxOne.Controls
         public DatePicker()
             : base()
         {
-            ShowPreNextButton = true;
+            ShowPreNextButton = false;
             ChangeTiggerSearch = false;
         }
         public string DateTimeFormat { get; set; }
@@ -107,6 +107,7 @@ namespace FoxOne.Controls
             Attributes["value"] = Value;
         }
 
+        /*
         protected override string RenderAfter()
         {
             var result = string.Empty;
@@ -128,5 +129,6 @@ namespace FoxOne.Controls
             }
             return result;
         }
+        */
     }
 }

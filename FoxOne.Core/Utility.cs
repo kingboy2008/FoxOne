@@ -100,5 +100,45 @@ namespace FoxOne.Core
             }
             return true;
         }
+
+        /// <summary>
+        /// 获取客户端ip
+        /// </summary>
+        /// <returns></returns>
+        public static string GetWebClientIp()
+        {
+            string userIP = string.Empty;
+            var context = System.Web.HttpContext.Current;
+            if (context == null || context.Request == null || context.Request.ServerVariables == null)
+                return userIP;
+            try
+            {
+                userIP = System.Web.HttpContext.Current.Request.Headers["Cdn-Src-Ip"];
+                if (!string.IsNullOrEmpty(userIP))
+                {
+                    return userIP;
+                }
+                userIP = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+                if (!String.IsNullOrEmpty(userIP))
+                {
+                    return userIP;
+                }
+                if (System.Web.HttpContext.Current.Request.ServerVariables["HTTP_VIA"] != null)
+                {
+                    userIP = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+                    if (userIP.IsNullOrEmpty())
+                        userIP = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+                }
+                else
+                {
+                    userIP = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+                }
+                if (string.Compare(userIP, "unknown", true) == 0)
+                    return System.Web.HttpContext.Current.Request.UserHostAddress;
+                return userIP;
+            }
+            catch { }
+            return userIP;
+        }
     }
 }

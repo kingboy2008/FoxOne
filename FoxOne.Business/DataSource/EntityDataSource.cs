@@ -12,6 +12,8 @@ using System.ComponentModel;
 using System.Web;
 using System.Threading;
 using System.Web.Script.Serialization;
+using System.Collections;
+
 namespace FoxOne.Business
 {
     /// <summary>
@@ -63,7 +65,65 @@ namespace FoxOne.Business
             {
                 throw new FoxOneException("Parameter_Not_Found", "EntityType");
             }
-            return Dao.Get().Select(EntityType).ToDictionary();
+            if (EntityTypeFullName.IsNullOrEmpty())
+            {
+                EntityTypeFullName = EntityType.FullName;
+            }
+            IList<IDictionary<string, object>> result = null;
+            switch (EntityTypeFullName)
+            {
+                case "FoxOne.Business.User":
+                    result = DBContext<IUser>.Instance.ToDictionary();
+                    break;
+                case "FoxOne.Business.Department":
+                    result = DBContext<IDepartment>.Instance.ToDictionary();
+                    break;
+                case "FoxOne.Business.Role":
+                    result = DBContext<IRole>.Instance.ToDictionary();
+                    break;
+                case "FoxOne.Business.UserRole":
+                    result = DBContext<IUserRole>.Instance.ToDictionary();
+                    break;
+                case "FoxOne.Business.RoleTypePermission":
+                    result = DBContext<IRoleTypePermission>.Instance.ToDictionary();
+                    break;
+                case "FoxOne.Business.RolePermission":
+                    result = DBContext<IRolePermission>.Instance.ToDictionary();
+                    break;
+                case "FoxOne.Business.Permission":
+                    result = DBContext<IPermission>.Instance.ToDictionary();
+                    break;
+                case "FoxOne.Business.RoleType":
+                    result = DBContext<IRoleType>.Instance.ToDictionary(); 
+                    break;
+                case "FoxOne.Business.ComponentEntity":
+                    result = DBContext<ComponentEntity>.Instance.ToDictionary();
+                    break;
+                case "FoxOne.Business.PageLayoutFileEntity":
+                    result = DBContext<PageLayoutFileEntity>.Instance.ToDictionary();
+                    break;
+                case "FoxOne.Business.PageEntity":
+                    result = DBContext<PageEntity>.Instance.ToDictionary();
+                    break;
+                case "FoxOne.Business.CRUDEntity":
+                    result = DBContext<CRUDEntity>.Instance.ToDictionary();
+                    break;
+                case "FoxOne.Business.LayoutEntity":
+                    result = DBContext<LayoutEntity>.Instance.ToDictionary();
+                    break;
+                case "FoxOne.Business.DataDictionary":
+                    result = DBContext<DataDictionary>.Instance.ToDictionary();
+                    break;
+                case "FoxOne.Business.ExternalFileEntity":
+                    result = DBContext<ExternalFileEntity>.Instance.ToDictionary();
+                    break;
+                case "FoxOne.Business.AttachmentEntity":
+                    result = DBContext<AttachmentEntity>.Instance.ToDictionary();
+                    break;
+                default:
+                    throw new FoxOneException("Not Suppost!");
+            }
+            return result;
         }
 
         public IEnumerable<TreeNode> SelectItems()

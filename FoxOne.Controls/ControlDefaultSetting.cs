@@ -91,7 +91,7 @@ namespace FoxOne.Controls
             IFieldConverter result = null;
             if (field.Type.ToLower() == "bit")
             {
-                result = new EnumDataSource(typeof(YesOrNo));
+                result = new EnumDataSource() { EnumTypeFullName = typeof(YesOrNo).FullName };
             }
             if (field.Name.IndexOf("UserId") >= 0 || field.Name.IndexOf("Creator") >= 0)
             {

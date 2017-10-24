@@ -136,7 +136,7 @@
     <value>SqlId：'{0}' 不存在</value>
   </data>
   <data name="UserName" xml:space="preserve">
-    <value>用户名</value>
+    <value>账号</value>
   </data>
   <data name="User_Not_Found" xml:space="preserve">
     <value>用户：'{0}'  不存在</value>
@@ -182,5 +182,20 @@
   </data>
   <data name="Role_Alerady_Exist" xml:space="preserve">
     <value>该角色已存在！</value>
+  </data>
+  <data name="Phone_Not_Exist" xml:space="preserve">
+    <value>手机号不存在</value>
+  </data>
+  <data name="InValid_Phone_ValidCode" xml:space="preserve">
+    <value>无效的验证码</value>
+  </data>
+  <data name="Department_Name_Already_In_Use" xml:space="preserve">
+    <value>部门名称已存在</value>
+  </data>
+  <data name="LoginId_Or_MobilePhone_Alerady_Exist" xml:space="preserve">
+    <value>手机号已注册</value>
+  </data>
+  <data name="InValid_Operation" xml:space="preserve">
+    <value>非法操作</value>
   </data>
 </root>

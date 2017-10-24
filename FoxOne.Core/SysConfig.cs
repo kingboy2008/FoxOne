@@ -17,6 +17,9 @@ namespace FoxOne.Core
             CopyRightName = AppSettings["CopyRightName"];
             Assemblies = AppSettings["Assemblies"];
             SystemStatus = AppSettings["SystemStatus"];
+            SuperAdminRoleName = AppSettings["SuperAdminRoleName"];
+            DefaultUserRole = AppSettings["DefaultUserRole"];
+            DomainName = AppSettings["DomainName"];
         }
 
         public static string ExtFieldName = "_ExtField_";
@@ -40,6 +43,12 @@ namespace FoxOne.Core
         public static string IconBasePath { get { return "/images/icons/"; } }
 
         public static string ControlImageBasePath { get { return "/images/Controls/"; } }
+
+        public static string SuperAdminRoleName { get; private set; }
+
+        public static string DefaultUserRole { get; private set; }
+
+        public static string DomainName { get; private set; }
     }
 
     public class AppSettingPropery : Dictionary<string, string>

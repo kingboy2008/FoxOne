@@ -28,6 +28,10 @@ namespace FoxOne.Core
 
         string QQ { get; set; }
 
+        string Mail { get; set; }
+
+        string Identity { get; set; }
+
         DateTime Birthdate { get; set; }
 
         string Sex { get; set; }
