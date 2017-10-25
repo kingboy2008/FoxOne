@@ -177,7 +177,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="App_Browsers\IE10Fix.browser" />
     <Content Include="App_Browsers\IE11fix.browser" />
