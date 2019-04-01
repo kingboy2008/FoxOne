@@ -30,6 +30,12 @@ namespace FoxOne.Business
         Visible = 3,
 
         [Description("不可见")]
-        Invisible = 4
+        Invisible = 4,
+
+        [Description("必填")]
+        Required = 5,
+
+        [Description("不必填")]
+        InRequired = 6
     }
 }

@@ -396,6 +396,7 @@ namespace FoxOne.Controls
                 if (RenderOperationColumn)
                 {
                     var buttonTd = new TagBuilder("td");
+                    buttonTd.Attributes.Add("style", "text-align:left;");
                     foreach (var button in Buttons.Where(o => o.TableButtonType == TableButtonType.TableRow && o.Visiable == true).OrderBy(o=>o.Rank))
                     {
                         button.RowData = entity;

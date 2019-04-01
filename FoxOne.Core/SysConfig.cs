@@ -38,6 +38,19 @@ namespace FoxOne.Core
         public static string SystemStatus { get; private set; }
 
 
+        public const string PKLength = "38";
+
+        public static bool IsProductEnv
+        {
+            get
+            {
+                return SystemStatus.Equals("Run", StringComparison.OrdinalIgnoreCase);
+            }
+        }
+
+
+        public static string[] DayOfWeekCN = new string[] { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
+
         public static string Assemblies { get; private set; }
 
         public static string IconBasePath { get { return "/images/icons/"; } }

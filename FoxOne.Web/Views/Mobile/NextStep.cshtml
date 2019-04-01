@@ -1,0 +1,157 @@
+﻿@model List<FoxOne.Workflow.Business.NextStep>
+@{
+    ViewBag.Title = "NextStep";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv=Content-Type content="text/html;charset=utf-8">
+    <meta charset="gbk">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection" />
+    <meta content="yes" name="apple-touch-fullscreen" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link href="~/Mobile/css/style.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="~/Mobile/css/weui.css">
+    <title>准备发送</title>
+    <style>
+        .select_user {
+            background: white url(../../images/default/success.png) center right no-repeat;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content" style="margin-bottom:60px;">
+        <div>
+            <ul class="list list-part list-all">
+                @if (Model == null || Model.Count == 0)
+                {
+                    ///无可用迁移
+                    <li class="level-1" StepName="无可用迁移">
+                        <p class="level-1-p">
+                            <span>无可用迁移</span><!--步骤名-->
+                        </p>
+                    </li>
+                }
+                else if (Model != null && Model[0].StepName == "自动发送")
+                {
+                    Context.Response.Redirect("/Mobile/WorkflowSuccess");
+                }
+                else
+                {
+                    foreach (var step in Model.OrderBy(c => c.Rank))
+                    {
+                        <li class="level-1" StepName="@step.StepName" SingleSel="@step.OnlySingleSel.ToString().ToLower()" itemid="@step.ItemId">
+                            <p class="level-1-p">
+                                <span style="color:white;">@step.Label</span><!--步骤名-->
+
+                            </p>
+                            <ul class="list-part">
+                                <li class="level-2">
+                                    <ul class="list-part">
+                                        @foreach (var user in step.Users.OrderBy(c => c.Rank))
+                                        {
+                                            <li class="level-3-p" UserId="@user.ID" DeptId="@user.OrgId" GroupName="@step.StepName">
+                                                <img src="@user.Avatar"><p>@(user.Name + "-" + user.OrgName)</p><!--用户-->
+                                            </li>
+                                        }
+                                    </ul>
+                                </li>
+
+                            </ul>
+                        </li>
+                    }
+                }
+            </ul>
+        </div>
+    </div>
+    <div class="weui-cells opinion-list ">
+        <div class="weui-cell chose-opinion">
+            <button class="clickable weui-btn weui-btn_primary">发送</button>
+        </div>
+    </div>
+    <script src="~/Scripts/zepto.min.js"></script>
+    @*<script src="/Scripts/jquery-1.8.2.js"></script>*@
+    <script type="text/javascript" src="https://g.alicdn.com/dingding/open-develop/1.6.9/dingtalk.js"></script>
+    <script src="~/DDStatic/js/fastclick.js"></script>
+    <script src="~/DDStatic/js/index.js"></script>
+    <script>
+        $(function () {
+            if (window.parent.Util.getQuery("ItemId") != $($("li")[0]).attr("itemid"))
+            {
+                location = "/Mobile/NextStep?InstanceId=" + window.parent.Util.getQuery("InstanceId") + "&ItemId=" + (parseInt(window.parent.Util.getQuery("ItemId")) + 1).toString();
+            }
+        });
+        $(".level-3-p").bind("click", function () {
+            if ($(this).attr("selected") == null) {
+
+                //本步骤是单选则直接去除所有已选中
+                //本步骤是多选则去除其他步骤中的已选中，保留本步骤的已选中
+                if ($(this).closest("li.level-1").attr("SingleSel") === "true") {
+                    $("[selected]").removeAttr("selected").removeClass("select_user");
+                }
+                else
+                {
+                    var gn = $(this).attr("GroupName");
+                    $(".level-3-p").not("[GroupName='" + gn + "']").removeAttr("selected").removeClass("select_user");
+                }
+
+
+
+                $(this).addClass("select_user").attr("selected", "selected");
+            }
+            else {
+                $(this).removeClass("select_user").removeAttr("selected");
+            }
+        });
+        $(".clickable").bind("click", function () {
+
+            var datas = {
+                Command: 'run', IsSimulate: '0', InstanceId: window.parent.Util.getQuery("InstanceId"), ItemId: window.parent.Util.getQuery("ItemId"), OpinionContent:
+
+                    $(window.parent.document).find("#opinion").val(), OpinionArea: 0, UserChoice: []
+            };
+            $(".level-3-p[selected='selected']").each(function () {
+                var item = {
+                    Id: $(this).attr("UserId"), DepartmentId: $(this).attr("DeptId"), StepName: $(this).closest(".level-1").attr("StepName"), Name: $(this).closest(".level-1").find
+
+                        ("span").text()
+                };
+                datas.UserChoice.push(item);
+            });
+            if (datas.UserChoice.length > 0) {
+                $.ajax({
+                    url: '/Workflow/ExecCommand',
+                    type: "post",
+                    async: true,
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    data: JSON.stringify(datas),
+                    error: function (res) {
+                        alert("请求处理异常:" + res.responseText);
+                    },
+                    success: function (result) {
+                        if (result.Data == true) {
+                            location = "/Mobile/WorkflowSuccess";
+                        }
+                        else if (result.Data == "autoskip")//配合Web端修改
+                        {
+                            location = "/Mobile/NextStep?InstanceId=" + datas.InstanceId + "&ItemId=" + (parseInt(datas.ItemId) + 1).toString();
+                        }
+                    },
+                });
+            }
+            else {
+                alert("没有选择用户");
+            }
+        });
+    </script>
+</body>
+
+</html>

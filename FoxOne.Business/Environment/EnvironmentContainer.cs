@@ -21,7 +21,6 @@ namespace FoxOne.Business.Environment
             object value;
             for(int i=0;i<arr.Length;i++)
             {
-                //builder.Append(arr[i++]);
                 if (TryResolve(arr[i], out value))
                 {
                     builder.Append(value == null ? string.Empty : value.ToString());
@@ -38,18 +37,21 @@ namespace FoxOne.Business.Environment
             expression = expression.Trim('$');
             value = expression;
             if (expression.IsNullOrEmpty()) return false;
-            if (expression.IndexOf(".") < 0)
+            IEnvironmentProvider provider = null;
+            int dotIndex = expression.IndexOf(".");
+            if (dotIndex < 0)
             {
-                //默认给DefaultProvider
-                expression = "Default.{0}".FormatTo(expression);
+                provider = new DefaultProvider();
             }
-            string[] arrs = expression.Split(new char[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
-            string prefix = arrs[0];
-            string name = arrs[1];
-            IEnvironmentProvider provider = _providers.FirstOrDefault(o => o.Prefix.Split('|').Contains(prefix,StringComparer.OrdinalIgnoreCase));
+            else
+            {
+                string prefix = expression.Substring(0, dotIndex);
+                expression = expression.Substring(dotIndex + 1);
+                provider = _providers.FirstOrDefault(o => o.Prefix.Split('|').Contains(prefix, StringComparer.OrdinalIgnoreCase));
+            }
             if (provider != null)
             {
-                value = provider.Resolve(name);
+                value = provider.Resolve(expression);
                 if(value==null)
                 {
                     return false;

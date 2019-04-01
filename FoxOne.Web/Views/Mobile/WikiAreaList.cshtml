@@ -1,0 +1,144 @@
+﻿@model List<FoxOne._3VJ.WikiZone>
+@using FoxOne.Core;
+@{
+
+}
+<!doctype html>
+<html>
+<head>
+    <title>知识库</title>
+    <meta http-equiv=Content-Type content="text/html;charset=utf-8">
+    <meta charset="gbk">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="copyright" content="" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+
+    <link href="~/DDStatic/css/reset.css" rel="stylesheet" />
+    <link href="~/DDStatic/css/task.css" rel="stylesheet" />
+    <link href="~/Mobile/css/common.css" rel="stylesheet" type="text/css" />
+    <link href="~/Mobile/css/wiki.css" rel="stylesheet" />
+
+    <style>
+        .succ-container {
+            position: absolute;
+            /*top: 50%;
+            left: 50%;*/
+            width: 99%;
+            height: 70%;
+            /*margin-left: -300px;
+            margin-top: -250px;*/
+            border: 1px solid #CCC;
+            background-color: white;
+            text-align: center;
+            padding-top: 100px;
+            color: #449d44;
+            font-size: 13px;
+            border: 0px;
+        }
+    </style>
+
+   
+</head>
+
+<body>
+    <div class="panel panel_access">
+        <div class="panel__bd">
+            @if (!Model.IsNullOrEmpty())
+            {
+                foreach (var zone in Model)
+                {
+                    <a zoneId="@zone.Id" href="javascript:void(0);" class="media-box media-box_appmsg">
+                        <div class="media-box__hd">
+                            @if (zone.ZoneType == 1)
+                            {
+                                <img class="media-box__thumb" src="/images/personal.png" alt="">
+                            }
+                            else
+                            {
+                                <img class="media-box__thumb" src="/images/team.png" alt="">
+                            }
+                        </div>
+                        <div class="media-box__bd">
+                            <h4 class="media-box__title">@zone.Name</h4>
+                            <p class="media-box__desc">@zone.Description</p>
+                        </div>
+                        <span class="cell__ft"></span>
+                    </a>
+                }
+            }
+            else
+            {
+                <div class="succ-container">
+                    <img src="~/images/empty.png" />
+                    <br /><br />
+                    <p style="color:gray">
+                        列表无任何内容
+                    </p>
+                </div>
+            }
+            @*<a href="javascript:void(0);" class="media-box media-box_appmsg">
+                <div class="media-box__hd">
+                    <img class="media-box__thumb" src="images/personal.png" alt="">
+                </div>
+                <div class="media-box__bd">
+                    <h4 class="media-box__title">后台技术培训部</h4>
+                    <p class="media-box__desc">软件、培训课程</p>
+                </div>
+                <span class="cell__ft"></span>
+            </a>
+            <a href="javascript:void(0);" class="media-box media-box_appmsg">
+                <div class="media-box__hd">
+                    <img class="media-box__thumb" src="images/team.png" alt="">
+                </div>
+                <div class="media-box__bd">
+                    <h4 class="media-box__title">智造中心-项目实施部</h4>
+                    <p class="media-box__desc">项目实施培训</p>
+                </div>
+                <span class="cell__ft"></span>
+            </a>*@
+        </div>
+    </div>
+    <script src="~/Scripts/zepto.min.js"></script>
+    <script type="text/javascript" src="https://g.alicdn.com/dingding/open-develop/1.6.9/dingtalk.js"></script>
+    <script src="~/DDStatic/js/fastclick.js"></script>
+    <script src="~/DDStatic/js/index.js"></script>
+    <script>
+        function setRootSize() {
+            var deviceWidth = document.documentElement.clientWidth;
+            if (deviceWidth > 750) { deviceWidth = 750; }
+            document.documentElement.style.fontSize = deviceWidth / 7.5 + 'px';
+        }
+        setRootSize();
+        window.addEventListener('resize', function () {
+            setRootSize();
+        }, false);
+        $(function () {
+            setRootSize();
+            $("[zoneId]").bind("click", function () {
+                location = '/Mobile/WikiDir?zoneId=' + $(this).attr("zoneId");
+            });
+        });
+        dd.ready(function () {
+            dd.biz.navigation.setRight({
+                text: '@FoxOne.Business.Security.Sec.User.Name',
+                onSuccess: function (data) {
+                },
+                onFail: function (err) {
+                    logger.e(JSON.stringify(err));
+                }
+            });
+
+            Page.defaultBackEvent();
+        });
+        
+    </script>
+</body>
+</html>
+
+

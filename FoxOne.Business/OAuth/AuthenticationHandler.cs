@@ -1,4 +1,5 @@
 ﻿using FoxOne.Core;
+using FoxOne.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,18 +54,17 @@ namespace FoxOne.Business.OAuth
         /// <returns></returns>
         public virtual IUser GetUserInfo(AuthenticationTicket ticket)
         {
-            var userClaim = DBContext<UserClaim>.Instance.Where(o => o.OpenId.Equals(ticket.OpenId, StringComparison.OrdinalIgnoreCase) && o.Tag.Equals(ticket.Tag, StringComparison.OrdinalIgnoreCase));
-            if (userClaim.IsNullOrEmpty())
+            var userClaim = Dao.Get().Query<UserClaim>().FirstOrDefault(o => o.OpenId == ticket.OpenId && o.Tag == ticket.Tag);
+            if (userClaim == null)
             {
                 return null;
             }
             else
             {
-                var uc = userClaim.First();
-                uc.UnionId = ticket.UnionId;
-                uc.Token = ticket.AccessToken;
-                DBContext<UserClaim>.Update(uc);
-                return DBContext<IUser>.Instance.FirstOrDefault(o => o.Id.Equals(userClaim.FirstOrDefault().UserId, StringComparison.OrdinalIgnoreCase));
+                userClaim.UnionId = ticket.UnionId;
+                userClaim.Token = ticket.AccessToken;
+                Dao.Get().Update<UserClaim>(userClaim);
+                return DBContext<IUser>.Instance.FirstOrDefault(o => o.Id.Equals(userClaim.UserId, StringComparison.OrdinalIgnoreCase));
             }
         }
     }

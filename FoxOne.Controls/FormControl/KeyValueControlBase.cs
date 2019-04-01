@@ -58,6 +58,7 @@ namespace FoxOne.Controls
             {
                 throw new FoxOneException("Need_DataSource", Id);
             }
+            DataSource.FormData = FormData;
             var items = DataSource.SelectItems().ToList();
             if (items != null && AppendEmptyOption)
             {

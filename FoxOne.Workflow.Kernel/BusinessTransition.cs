@@ -82,7 +82,7 @@ namespace FoxOne.Workflow.Kernel
                 {
                     result = !result;
                 }
-                Logger.GetLogger("Workflow").Info("{0}:迁移：{1}，条件类型：{2}，是否取反：{3}，条件执行结果：{4}".FormatTo(context.FlowInstance.Id, Id, Condition.GetType().GetDisplayName(), NotOperation, result));
+                Logger.Info("Workflow:{0}:迁移：{1}，条件类型：{2}，是否取反：{3}，条件执行结果：{4}".FormatTo(context.FlowInstance.Id, Id, Condition.GetType().GetDisplayName(), NotOperation, result));
             }
             return result;
         }
@@ -98,7 +98,7 @@ namespace FoxOne.Workflow.Kernel
                 {
                     result = !result;
                 }
-                Logger.GetLogger("Workflow").Info("{0}:预求解-迁移：{1}，条件类型：{2}，是否取反：{3}，条件执行结果：{4}".FormatTo(context.FlowInstance.Id, Id, Condition.GetType().GetDisplayName(), NotOperation, result));
+                Logger.Info("Workflow:{0}:预求解-迁移：{1}，条件类型：{2}，是否取反：{3}，条件执行结果：{4}".FormatTo(context.FlowInstance.Id, Id, Condition.GetType().GetDisplayName(), NotOperation, result));
             }
             return result;
         }

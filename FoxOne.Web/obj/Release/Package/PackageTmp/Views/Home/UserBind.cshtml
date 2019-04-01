@@ -59,32 +59,9 @@
 <body>
     <div style="margin: 20px;">
 
-        <h2 class="content-title">绑定本地用户（仅首次登陆需要填写）</h2>
-        <form id="changePasswordForm" method="post" action="/Home/UserBind" enctype="multipart/form-data" class="form-horizontal">
-            <div class="form-group">
-                <label for="MobilePhone">手机号：</label>
-                <input class="form-control" id="MobilePhone" name="MobilePhone" placeholder="手机号">
-            </div>
-            <div class="form-group">
-                <label></label>
-                <input onclick="return formCheck();" type="submit" name="btnSubmit" class="btn btn-success" value="绑定" />
-            </div>
-            <div class="form-group error-box">
-                <label></label>
-                <span class="error-message">@ViewData["ErrorMessage"]</span>
-            </div>
-        </form>
+        <h2 class="content-title">用户绑定成功！</h2>
+
     </div>
     @System.Web.Optimization.Scripts.Render("~/script/common.js")
-    <script>
-        function formCheck() {
-            var mobilePhone = $("#MobilePhone").val();
-            if(mobilePhone==''){
-                alert("请填写手机号码");
-                return false;
-            }
-            return true;
-        }
-    </script>
 </body>
 </html>

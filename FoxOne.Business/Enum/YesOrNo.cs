@@ -9,10 +9,10 @@ namespace FoxOne.Business
     public enum YesOrNo
     {
         [Description("是")]
-        True,
+        True=1,
 
         [Description("否")]
-        False
+        False=0
     }
 
     public enum DefaultStatus

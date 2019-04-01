@@ -1,5 +1,14 @@
 <?xml version="1.0"?>
-<ArrayOfWorkflowDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<ArrayOfWorkflowDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <WorkflowDefinition>
+    <Id>1</Id>
+    <RentId>0</RentId>
+    <Name>变更申请流程</Name>
+    <Description />
+    <Status>Enabled</Status>
+    <Width>1000</Width>
+    <Height>800</Height>
+  </WorkflowDefinition>
   <WorkflowDefinition>
     <Id>2</Id>
     <RentId>0</RentId>
@@ -8,5 +17,41 @@
     <Status>Enabled</Status>
     <Width>1000</Width>
     <Height>600</Height>
+  </WorkflowDefinition>
+  <WorkflowDefinition>
+    <Id>3</Id>
+    <RentId>0</RentId>
+    <Name>费用报销流程</Name>
+    <Description />
+    <Status>Enabled</Status>
+    <Width>1000</Width>
+    <Height>800</Height>
+  </WorkflowDefinition>
+  <WorkflowDefinition>
+    <Id>4</Id>
+    <RentId>0</RentId>
+    <Name>用章申请流程</Name>
+    <Description />
+    <Status>Enabled</Status>
+    <Width>1000</Width>
+    <Height>600</Height>
+  </WorkflowDefinition>
+  <WorkflowDefinition>
+    <Id>5</Id>
+    <RentId>0</RentId>
+    <Name>用车申请流程</Name>
+    <Description />
+    <Status>Enabled</Status>
+    <Width>1000</Width>
+    <Height>600</Height>
+  </WorkflowDefinition>
+  <WorkflowDefinition>
+    <Id>6</Id>
+    <RentId>0</RentId>
+    <Name>采购申请流程</Name>
+    <Description />
+    <Status>Enabled</Status>
+    <Width>1000</Width>
+    <Height>800</Height>
   </WorkflowDefinition>
 </ArrayOfWorkflowDefinition>

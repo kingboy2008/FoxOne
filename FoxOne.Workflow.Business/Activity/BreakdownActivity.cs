@@ -40,7 +40,11 @@ namespace FoxOne.Workflow.Business
             workflowItem.LevelCode = preItem.LevelCode;
             workflowItem.PasserUserId = context.CurrentUser.Id;
             workflowItem.PasserUserName = context.CurrentUser.Name;
+            context.FlowInstance.WorkItemNewSeq = workflowItem.ItemSeq;
+            context.FlowInstance.WorkItemNewTask = workflowItem.ItemId;
+            context.FlowInstance.CurrentActivityName = Alias;
             context.FlowInstance.InsertWorkItem(workflowItem);
+            Owner.UpdateInstance(context.FlowInstance);
         }
     }
 }

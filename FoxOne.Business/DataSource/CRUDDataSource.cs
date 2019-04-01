@@ -39,7 +39,7 @@ namespace FoxOne.Business
             {
                 if (!data.Keys.Contains(KeyFieldName))
                 {
-                    data[KeyFieldName] = Guid.NewGuid().ToString();
+                    data[KeyFieldName] = Utility.GetGuid();
                 }
                 return dao.ExecuteNonQuery(Entity.InsertSQL, data);
             }
@@ -161,13 +161,18 @@ namespace FoxOne.Business
             }
         }
 
+        public IDictionary<string, object> FormData
+        {
+            get;set;
+        }
+
         public IEnumerable<TreeNode> SelectItems()
         {
             var returnValue = new List<TreeNode>();
             TreeNode node = null;
             foreach (var r in Items)
             {
-                node = new TreeNode() { Text = r[Entity.TitleField].ToString(), Value = r[Entity.ValueField].ToString() };
+                node = new TreeNode() { Text = GetTitle(r), Value = r[Entity.ValueField].ToString() };
                 if (Entity.ParentField.IsNotNullOrEmpty() && r.Keys.Contains(Entity.ParentField))
                 {
                     node.ParentId = r[Entity.ParentField].ToString();
@@ -175,6 +180,28 @@ namespace FoxOne.Business
                 returnValue.Add(node);
             }
             return returnValue;
+        }
+
+        private string GetTitle(IDictionary<string, object> r)
+        {
+            string result = string.Empty;
+            if (Entity.TitleField.IsNotNullOrEmpty())
+            {
+                if (Entity.TitleField.IndexOf(",") > 0)
+                {
+                    string[] temp = Entity.TitleField.Split(',');
+                    foreach (var item in temp)
+                    {
+                        result += "-" + r[item];
+                    }
+                    result = result.Substring(1);
+                }
+                else
+                {
+                    result = r[Entity.TitleField].ToString();
+                }
+            }
+            return result;
         }
     }
 }

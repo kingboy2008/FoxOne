@@ -1,6 +1,87 @@
 <?xml version="1.0"?>
 <ArrayOfCRUDEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <CRUDEntity>
+    <Id>wfform_changemanagement</Id>
+    <RentId>1</RentId>
+    <PKName>Id</PKName>
+    <ValueField>Id</ValueField>
+    <TableName>wf_form_changemanagement</TableName>
+    <InsertSQL>INSERT INTO wf_form_changemanagement 
+(`Id`,`Code`,`Reason`,`ChangeDescription`,`CreatorId`,`CreateTime`,`ChangePlan`,`RollbackPlan`,`BeginTime`,`EndTime`,`ResponsibilityUserId`,`RentId`,`RiskLevel`,`RiskAssessor`,`Title`,`CheckList`) 
+ VALUES 
+ (#Id#,#Code#,#Reason#,#ChangeDescription#,#CreatorId#,#CreateTime#,#ChangePlan#,#RollbackPlan#,#BeginTime#,#EndTime#,#ResponsibilityUserId#,#RentId#,#RiskLevel#,#RiskAssessor#,#Title#,#CheckList#)</InsertSQL>
+    <UpdateSQL>UPDATE wf_form_changemanagement SET `Id`=#Id#
+{?? ,`Code`=#Code# }
+{?? ,`Reason`=#Reason# }
+{?? ,`ChangeDescription`=#ChangeDescription# }
+{?? ,`CreatorId`=#CreatorId# }
+{?? ,`CreateTime`=#CreateTime# }
+{?? ,`ChangePlan`=#ChangePlan# }
+{?? ,`RollbackPlan`=#RollbackPlan# }
+{?? ,`BeginTime`=#BeginTime# }
+{?? ,`EndTime`=#EndTime# }
+{?? ,`ResponsibilityUserId`=#ResponsibilityUserId# }
+{?? ,`RentId`=#RentId# }
+{?? ,`RiskLevel`=#RiskLevel# }
+{?? ,`RiskAssessor`=#RiskAssessor# }
+{?? ,`Title`=#Title# }
+{?? ,`CheckList`=#CheckList# }
+ WHERE `Id`=#Id#</UpdateSQL>
+    <DeleteSQL>DELETE FROM wf_form_changemanagement WHERE Id IN ($Id$)</DeleteSQL>
+    <GetOneSQL>SELECT `Id`,
+`Code`,
+`Reason`,
+`ChangeDescription`,
+`CreatorId`,
+`CreateTime`,
+`ChangePlan`,
+`RollbackPlan`,
+`BeginTime`,
+`EndTime`,
+`ResponsibilityUserId`,
+`RentId`,
+`RiskLevel`,
+`RiskAssessor`,
+`Title`,
+`CheckList` 
+ FROM wf_form_changemanagement WHERE `Id`=#Id#</GetOneSQL>
+    <SelectSQL>SELECT `Id`,
+`Code`,
+`Reason`,
+`ChangeDescription`,
+`CreatorId`,
+`CreateTime`,
+`ChangePlan`,
+`RollbackPlan`,
+`BeginTime`,
+`EndTime`,
+`ResponsibilityUserId`,
+`RentId`,
+`RiskLevel`,
+`RiskAssessor`,
+`Title`,
+`CheckList` 
+ FROM wf_form_changemanagement WHERE 1=1 
+{? AND `Id` like '%$Id$%' } 
+{? AND `Code` like '%$Code$%' } 
+{? AND `Reason` like '%$Reason$%' } 
+{? AND `ChangeDescription` like '%$ChangeDescription$%' } 
+{? AND `CreatorId` like '%$CreatorId$%' } 
+{? AND DATE_FORMAT(`CreateTime`,'%Y-%m-%d') = #CreateTime# } 
+{? AND `ChangePlan` like '%$ChangePlan$%' } 
+{? AND `RollbackPlan` like '%$RollbackPlan$%' } 
+{? AND DATE_FORMAT(`BeginTime`,'%Y-%m-%d') = #BeginTime# } 
+{? AND DATE_FORMAT(`EndTime`,'%Y-%m-%d') = #EndTime# } 
+{? AND `ResponsibilityUserId` like '%$ResponsibilityUserId$%' } 
+{? AND `RentId`=#RentId# } 
+{? AND `RiskLevel` like '%$RiskLevel$%' } 
+{? AND `RiskAssessor` like '%$RiskAssessor$%' } 
+{? AND `Title` like '%$Title$%' } 
+{? AND `CheckList` like '%$CheckList$%' }</SelectSQL>
+    <DefaultSortExpression>CreateTime DESC</DefaultSortExpression>
+    <LastUpdateTime>2017-10-23T10:49:57</LastUpdateTime>
+  </CRUDEntity>
+  <CRUDEntity>
     <Id>wfform_leaveapproval</Id>
     <RentId>1</RentId>
     <PKName>Id</PKName>
@@ -56,5 +137,747 @@
 {? AND `LeaveDays`=#LeaveDays# }</SelectSQL>
     <DefaultSortExpression>CreateTime DESC</DefaultSortExpression>
     <LastUpdateTime>2017-10-23T14:07:00</LastUpdateTime>
+  </CRUDEntity>
+  <CRUDEntity>
+    <Id>wfform_reimbursementapply</Id>
+    <RentId>1</RentId>
+    <PKName>Id</PKName>
+    <TitleField />
+    <ValueField>Id</ValueField>
+    <ParentField />
+    <TableName>wf_form_reimbursementapply</TableName>
+    <InsertSQL>INSERT INTO wf_form_reimbursementapply 
+(`Id`,`Code`,`CreatorId`,`CreatorDeptId`,`TotalPrice`,`CreateTime`,`Description`,`RentId`) 
+ VALUES 
+ (#Id#,#Code#,#CreatorId#,#CreatorDeptId#,#TotalPrice#,#CreateTime#,#Description#,#RentId#)</InsertSQL>
+    <UpdateSQL>UPDATE wf_form_reimbursementapply SET `Id`=#Id#
+{?? ,`Code`=#Code# }
+{?? ,`CreatorId`=#CreatorId# }
+{?? ,`CreatorDeptId`=#CreatorDeptId# }
+{?? ,`TotalPrice`=#TotalPrice# }
+{?? ,`CreateTime`=#CreateTime# }
+{?? ,`Description`=#Description# }
+{?? ,`RentId`=#RentId# }
+ WHERE `Id`=#Id#</UpdateSQL>
+    <DeleteSQL>DELETE FROM wf_form_reimbursementapply WHERE Id IN ($Id$)</DeleteSQL>
+    <GetOneSQL>SELECT `Id`,
+`Code`,
+`CreatorId`,
+`CreatorDeptId`,
+`TotalPrice`,
+`CreateTime`,
+`Description`,
+`RentId` 
+ FROM wf_form_reimbursementapply WHERE `Id`=#Id#</GetOneSQL>
+    <SelectSQL>SELECT `Id`,
+`Code`,
+`CreatorId`,
+`CreatorDeptId`,
+`TotalPrice`,
+`CreateTime`,
+`Description`,
+`RentId` 
+ FROM wf_form_reimbursementapply WHERE 1=1 
+{? AND `Id` like '%$Id$%' } 
+{? AND `Code` like '%$Code$%' } 
+{? AND `CreatorId` like '%$CreatorId$%' } 
+{? AND `CreatorDeptId` like '%$CreatorDeptId$%' } 
+{? AND `TotalPrice`=#TotalPrice# } 
+{? AND DATE_FORMAT(`CreateTime`,'%Y-%m-%d') = #CreateTime# } 
+{? AND `Description` like '%$Description$%' } 
+{? AND `RentId`=#RentId# }</SelectSQL>
+    <DefaultSortExpression>Id</DefaultSortExpression>
+    <LastUpdateTime>2017-09-15T08:58:55</LastUpdateTime>
+  </CRUDEntity>
+  <CRUDEntity>
+    <Id>wfform_reimbursementapplydetail</Id>
+    <RentId>1</RentId>
+    <PKName>Id</PKName>
+    <ValueField>Id</ValueField>
+    <TableName>wf_form_reimbursementapplydetail</TableName>
+    <InsertSQL>INSERT INTO wf_form_reimbursementapplydetail 
+(`Id`,`ReimbursementApplyId`,`ItemName`,`ItemPrice`,`ItemDescription`,`RentId`) 
+ VALUES 
+ (#Id#,#ReimbursementApplyId#,#ItemName#,#ItemPrice#,#ItemDescription#,#RentId#)</InsertSQL>
+    <UpdateSQL>UPDATE wf_form_reimbursementapplydetail SET `Id`=#Id#
+{?? ,`ReimbursementApplyId`=#ReimbursementApplyId# }
+{?? ,`ItemName`=#ItemName# }
+{?? ,`ItemPrice`=#ItemPrice# }
+{?? ,`ItemDescription`=#ItemDescription# }
+{?? ,`RentId`=#RentId# }
+ WHERE `Id`=#Id#</UpdateSQL>
+    <DeleteSQL>DELETE FROM wf_form_reimbursementapplydetail WHERE Id IN ($Id$)</DeleteSQL>
+    <GetOneSQL>SELECT `Id`,
+`ReimbursementApplyId`,
+`ItemName`,
+`ItemPrice`,
+`ItemDescription`,
+`RentId` 
+ FROM wf_form_reimbursementapplydetail WHERE `Id`=#Id#</GetOneSQL>
+    <SelectSQL>SELECT `Id`,
+`ReimbursementApplyId`,
+`ItemName`,
+`ItemPrice`,
+`ItemDescription`,
+`RentId` 
+ FROM wf_form_reimbursementapplydetail WHERE `ReimbursementApplyId` = #ReimbursementApplyId#
+{? AND `ItemName` like '%$ItemName$%' } 
+{? AND `ItemPrice`=#ItemPrice# } 
+{? AND `ItemDescription` like '%$ItemDescription$%' } </SelectSQL>
+    <DefaultSortExpression>Id</DefaultSortExpression>
+    <LastUpdateTime>2017-09-15T09:32:17</LastUpdateTime>
+  </CRUDEntity>
+  <CRUDEntity>
+    <Id>mrmeetingroombook</Id>
+    <RentId>1</RentId>
+    <PKName>Id</PKName>
+    <ValueField>Id</ValueField>
+    <TableName>mr_meetingroombook</TableName>
+    <InsertSQL>INSERT INTO mr_meetingroombook 
+(`Id`,`BookUserId`,`MeetingRoomId`,`BeginTime`,`EndTime`,`Title`,`Description`,`CreateTime`) 
+ VALUES 
+ (#Id#,#BookUserId#,#MeetingRoomId#,#BeginTime#,#EndTime#,#Title#,#Description#,#CreateTime#)</InsertSQL>
+    <UpdateSQL>UPDATE mr_meetingroombook SET `Id`=#Id#
+{?? ,`BookUserId`=#BookUserId# }
+{?? ,`MeetingRoomId`=#MeetingRoomId# }
+{?? ,`BeginTime`=#BeginTime# }
+{?? ,`EndTime`=#EndTime# }
+{?? ,`Title`=#Title# }
+{?? ,`Description`=#Description# }
+{?? ,`CreateTime`=#CreateTime# }
+ WHERE `Id`=#Id#</UpdateSQL>
+    <DeleteSQL>DELETE FROM mr_meetingroombook WHERE Id IN ($Id$)</DeleteSQL>
+    <GetOneSQL>SELECT `Id`,
+`BookUserId`,
+`MeetingRoomId`,
+`BeginTime`,
+`EndTime`,
+`Title`,
+`Description`,
+`CreateTime` 
+ FROM mr_meetingroombook WHERE `Id`=#Id#</GetOneSQL>
+    <SelectSQL>SELECT `Id`,
+`BookUserId`,
+`MeetingRoomId`,
+`BeginTime`,
+`EndTime`,
+`Title`,
+`Description`,
+`CreateTime` 
+ FROM mr_meetingroombook WHERE `BookUserId`=#Env:User.Id#
+{? AND `MeetingRoomId` like '%$MeetingRoomId$%' } 
+{? AND DATE_FORMAT(`BeginTime`,'%Y-%m-%d') = #BeginTime# } 
+{? AND DATE_FORMAT(`EndTime`,'%Y-%m-%d') = #EndTime# } 
+{? AND `Title` like '%$Title$%' } 
+{? AND `Description` like '%$Description$%' } 
+{? AND DATE_FORMAT(`CreateTime`,'%Y-%m-%d') = #CreateTime# }</SelectSQL>
+    <DefaultSortExpression>CreateTime DESC</DefaultSortExpression>
+    <LastUpdateTime>2017-10-23T14:04:52</LastUpdateTime>
+  </CRUDEntity>
+  <CRUDEntity>
+    <Id>syslog</Id>
+    <RentId>1</RentId>
+    <PKName>Id</PKName>
+    <ValueField>Id</ValueField>
+    <TableName>sys_log</TableName>
+    <InsertSQL>INSERT INTO sys_log 
+(`Date`,`Thread`,`Logger`,`Message`) 
+ VALUES 
+ (#Date#,#Thread#,#Logger#,#Message#)</InsertSQL>
+    <UpdateSQL>UPDATE sys_log SET `Id`=#Id#
+{?? ,`Date`=#Date# }
+{?? ,`Thread`=#Thread# }
+{?? ,`Logger`=#Logger# }
+{?? ,`Message`=#Message# }
+ WHERE `Id`=#Id#</UpdateSQL>
+    <DeleteSQL>DELETE FROM sys_log WHERE Id IN ($Id$)</DeleteSQL>
+    <GetOneSQL>SELECT `Id`,
+`Date`,
+`Thread`,
+`Logger`,
+`Message` 
+ FROM sys_log WHERE `Id`=#Id#</GetOneSQL>
+    <SelectSQL>SELECT `Id`,
+`Date`,
+`Thread`,
+`Logger`,
+`Message` 
+ FROM sys_log WHERE  `Message` like '$Message$%' 
+{? AND DATE_FORMAT(`Date`,'%Y-%m-%d') = #Date# } 
+{? AND `Thread` like '%$Thread$%' } 
+{? AND `Logger` like '%$Logger$%' } 
+{? AND `Message` like '%$Message$%' }</SelectSQL>
+    <DefaultSortExpression>Date DESC</DefaultSortExpression>
+    <LastUpdateTime>2017-10-24T08:35:18</LastUpdateTime>
+  </CRUDEntity>
+  <CRUDEntity>
+    <Id>appattachment</Id>
+    <RentId>1</RentId>
+    <PKName>Id</PKName>
+    <TitleField />
+    <ValueField>Id</ValueField>
+    <ParentField />
+    <TableName>app_attachment</TableName>
+    <InsertSQL>INSERT INTO app_attachment 
+(`Id`,`FileName`,`CreatorId`,`RelateId`,`CreateTime`,`FileType`,`FileIcon`,`FileSize`,`FilePath`,`RentId`) 
+ VALUES 
+ (#Id#,#FileName#,#CreatorId#,#RelateId#,#CreateTime#,#FileType#,#FileIcon#,#FileSize#,#FilePath#,#RentId#)</InsertSQL>
+    <UpdateSQL>UPDATE app_attachment SET `Id`=#Id#
+{?? ,`FileName`=#FileName# }
+{?? ,`CreatorId`=#CreatorId# }
+{?? ,`RelateId`=#RelateId# }
+{?? ,`CreateTime`=#CreateTime# }
+{?? ,`FileType`=#FileType# }
+{?? ,`FileIcon`=#FileIcon# }
+{?? ,`FileSize`=#FileSize# }
+{?? ,`FilePath`=#FilePath# }
+{?? ,`RentId`=#RentId# }
+ WHERE `Id`=#Id#</UpdateSQL>
+    <DeleteSQL>DELETE FROM app_attachment WHERE Id IN ($Id$)</DeleteSQL>
+    <GetOneSQL>SELECT `Id`,
+`FileName`,
+`CreatorId`,
+`RelateId`,
+`CreateTime`,
+`FileType`,
+`FileIcon`,
+`FileSize`,
+`FilePath`,
+`RentId` 
+ FROM app_attachment WHERE `Id`=#Id#</GetOneSQL>
+    <SelectSQL>SELECT `Id`,
+`FileName`,
+`CreatorId`,
+`RelateId`,
+`CreateTime`,
+`FileType`,
+`FileIcon`,
+`FileSize`,
+`FilePath`,
+`RentId` 
+ FROM app_attachment WHERE 1=1 
+{? AND `Id` like '%$Id$%' } 
+{? AND `FileName` like '%$FileName$%' } 
+{? AND `CreatorId` like '%$CreatorId$%' } 
+{? AND `RelateId` like '%$RelateId$%' } 
+{? AND DATE_FORMAT(`CreateTime`,'%Y-%m-%d') = #CreateTime# } 
+{? AND `FileType` like '%$FileType$%' } 
+{? AND `FileIcon` like '%$FileIcon$%' } 
+{? AND `FileSize`=#FileSize# } 
+{? AND `FilePath` like '%$FilePath$%' } 
+{? AND `RentId`=#RentId# }</SelectSQL>
+    <DefaultSortExpression>Id</DefaultSortExpression>
+    <LastUpdateTime>2017-09-21T20:06:09</LastUpdateTime>
+  </CRUDEntity>
+  <CRUDEntity>
+    <Id>sysuserclaim</Id>
+    <RentId>1</RentId>
+    <PKName>Id</PKName>
+    <ValueField>Id</ValueField>
+    <TableName>sys_userclaim</TableName>
+    <InsertSQL>INSERT INTO sys_userclaim 
+(`Id`,`UserId`,`LoginId`,`Tag`,`OpenId`,`UnionId`,`Token`,`RefreshKey`,`RentId`) 
+ VALUES 
+ (#Id#,#UserId#,#LoginId#,#Tag#,#OpenId#,#UnionId#,#Token#,#RefreshKey#,#RentId#)</InsertSQL>
+    <UpdateSQL>UPDATE sys_userclaim SET `Id`=#Id#
+{?? ,`UserId`=#UserId# }
+{?? ,`LoginId`=#LoginId# }
+{?? ,`Tag`=#Tag# }
+{?? ,`OpenId`=#OpenId# }
+{?? ,`UnionId`=#UnionId# }
+{?? ,`Token`=#Token# }
+{?? ,`RefreshKey`=#RefreshKey# }
+{?? ,`RentId`=#RentId# }
+ WHERE `Id`=#Id#</UpdateSQL>
+    <DeleteSQL>DELETE FROM sys_userclaim WHERE Id IN ($Id$)</DeleteSQL>
+    <GetOneSQL>SELECT `Id`,
+`UserId`,
+`LoginId`,
+`Tag`,
+`OpenId`,
+`UnionId`,
+`Token`,
+`RefreshKey`,
+`RentId` 
+ FROM sys_userclaim WHERE `Id`=#Id#</GetOneSQL>
+    <SelectSQL>SELECT `Id`,
+`UserId`,
+`LoginId`,
+`Tag`,
+`OpenId`,
+`UnionId`,
+`Token`,
+`RefreshKey`,
+`RentId` 
+ FROM sys_userclaim WHERE 1=1 
+{? AND `Id` like '%$Id$%' } 
+{? AND `UserId` like '%$UserId$%' } 
+{? AND `LoginId` like '%$LoginId$%' } 
+{? AND `Tag` like '%$Tag$%' } 
+{? AND `OpenId` like '%$OpenId$%' } 
+{? AND `UnionId` like '%$UnionId$%' } 
+{? AND `Token` like '%$Token$%' } 
+{? AND `RefreshKey` like '%$RefreshKey$%' } 
+{? AND `RentId`=#RentId# }</SelectSQL>
+    <DefaultSortExpression>Id</DefaultSortExpression>
+    <LastUpdateTime>2017-09-27T17:45:11</LastUpdateTime>
+  </CRUDEntity>
+  <CRUDEntity>
+    <Id>wfform_vehicalapply</Id>
+    <RentId>1</RentId>
+    <PKName>Id</PKName>
+    <ValueField>Id</ValueField>
+    <TableName>wf_form_vehicalapply</TableName>
+    <InsertSQL>INSERT INTO wf_form_vehicalapply 
+(`Id`,`CreatorId`,`CreatorDeptId`,`CreateTime`,`UseBeginTime`,`UseEndTime`,`Reason`,`FromToAddress`,`CarLicense`,`NeedDriver`,`DriverId`,`DriverPhone`,`Passager`,`BeginMile`,`EndMile`,`PassagerCount`) 
+ VALUES 
+ (#Id#,#CreatorId#,#CreatorDeptId#,#CreateTime#,#UseBeginTime#,#UseEndTime#,#Reason#,#FromToAddress#,#CarLicense#,#NeedDriver#,#DriverId#,#DriverPhone#,#Passager#,#BeginMile#,#EndMile#,#PassagerCount#)</InsertSQL>
+    <UpdateSQL>UPDATE wf_form_vehicalapply SET `Id`=#Id#
+{?? ,`CreatorId`=#CreatorId# }
+{?? ,`CreatorDeptId`=#CreatorDeptId# }
+{?? ,`CreateTime`=#CreateTime# }
+{?? ,`UseBeginTime`=#UseBeginTime# }
+{?? ,`UseEndTime`=#UseEndTime# }
+{?? ,`Reason`=#Reason# }
+{?? ,`FromToAddress`=#FromToAddress# }
+{?? ,`CarLicense`=#CarLicense# }
+{?? ,`NeedDriver`=#NeedDriver# }
+{?? ,`DriverId`=#DriverId# }
+{?? ,`DriverPhone`=#DriverPhone# }
+{?? ,`Passager`=#Passager# }
+{?? ,`BeginMile`=#BeginMile# }
+{?? ,`EndMile`=#EndMile# }
+{?? ,`PassagerCount`=#PassagerCount# }
+ WHERE `Id`=#Id#</UpdateSQL>
+    <DeleteSQL>DELETE FROM wf_form_vehicalapply WHERE Id IN ($Id$)</DeleteSQL>
+    <GetOneSQL>SELECT `Id`,
+`CreatorId`,
+`CreatorDeptId`,
+`CreateTime`,
+`UseBeginTime`,
+`UseEndTime`,
+`Reason`,
+`FromToAddress`,
+`CarLicense`,
+`NeedDriver`,
+`DriverId`,
+`DriverPhone`,
+`Passager`,
+`BeginMile`,
+`EndMile`,
+`PassagerCount` 
+ FROM wf_form_vehicalapply WHERE `Id`=#Id#</GetOneSQL>
+    <SelectSQL>SELECT `Id`,
+`CreatorId`,
+`CreatorDeptId`,
+`CreateTime`,
+`UseBeginTime`,
+`UseEndTime`,
+`Reason`,
+`FromToAddress`,
+`CarLicense`,
+`NeedDriver`,
+`DriverId`,
+`DriverPhone`,
+`Passager`,
+`BeginMile`,
+`EndMile`,
+`PassagerCount` 
+ FROM wf_form_vehicalapply WHERE 1=1 
+{? AND `Id` like '%$Id$%' } 
+{? AND `CreatorId` like '%$CreatorId$%' } 
+{? AND `CreatorDeptId` like '%$CreatorDeptId$%' } 
+{? AND DATE_FORMAT(`CreateTime`,'%Y-%m-%d') = #CreateTime# } 
+{? AND DATE_FORMAT(`UseBeginTime`,'%Y-%m-%d') = #UseBeginTime# } 
+{? AND DATE_FORMAT(`UseEndTime`,'%Y-%m-%d') = #UseEndTime# } 
+{? AND `Reason` like '%$Reason$%' } 
+{? AND `FromToAddress` like '%$FromToAddress$%' } 
+{? AND `CarLicense` like '%$CarLicense$%' } 
+{? AND `NeedDriver`=#NeedDriver# } 
+{? AND `DriverId` like '%$DriverId$%' } 
+{? AND `DriverPhone` like '%$DriverPhone$%' } 
+{? AND `Passager` like '%$Passager$%' } 
+{? AND `BeginMile`=#BeginMile# } 
+{? AND `EndMile`=#EndMile# } 
+{? AND `PassagerCount`=#PassagerCount# }</SelectSQL>
+    <DefaultSortExpression>CreateTime DESC</DefaultSortExpression>
+    <LastUpdateTime>2017-10-23T14:07:37</LastUpdateTime>
+  </CRUDEntity>
+  <CRUDEntity>
+    <Id>wfform_stampapply</Id>
+    <RentId>1</RentId>
+    <PKName>Id</PKName>
+    <ValueField>Id</ValueField>
+    <TableName>wf_form_stampapply</TableName>
+    <InsertSQL>INSERT INTO wf_form_stampapply 
+(`Id`,`CreatorId`,`CreatorDeptId`,`CreateTime`,`Reason`,`Count`,`Title`,`Type`) 
+ VALUES 
+ (#Id#,#CreatorId#,#CreatorDeptId#,#CreateTime#,#Reason#,#Count#,#Title#,#Type#)</InsertSQL>
+    <UpdateSQL>UPDATE wf_form_stampapply SET `Id`=#Id#
+{?? ,`CreatorId`=#CreatorId# }
+{?? ,`CreatorDeptId`=#CreatorDeptId# }
+{?? ,`CreateTime`=#CreateTime# }
+{?? ,`Reason`=#Reason# }
+{?? ,`Count`=#Count# }
+{?? ,`Title`=#Title# }
+{?? ,`Type`=#Type# }
+ WHERE `Id`=#Id#</UpdateSQL>
+    <DeleteSQL>DELETE FROM wf_form_stampapply WHERE Id IN ($Id$)</DeleteSQL>
+    <GetOneSQL>SELECT `Id`,
+`CreatorId`,
+`CreatorDeptId`,
+`CreateTime`,
+`Reason`,
+`Count`,
+`Title`,
+`Type` 
+ FROM wf_form_stampapply WHERE `Id`=#Id#</GetOneSQL>
+    <SelectSQL>SELECT `Id`,
+`CreatorId`,
+`CreatorDeptId`,
+`CreateTime`,
+`Reason`,
+`Count`,
+`Title`,
+`Type` 
+ FROM wf_form_stampapply WHERE 1=1 
+{? AND `Id` like '%$Id$%' } 
+{? AND `CreatorId` like '%$CreatorId$%' } 
+{? AND `CreatorDeptId` like '%$CreatorDeptId$%' } 
+{? AND DATE_FORMAT(`CreateTime`,'%Y-%m-%d') = #CreateTime# } 
+{? AND `Reason` like '%$Reason$%' } 
+{? AND `Count`=#Count# } 
+{? AND `Title` like '%$Title$%' } 
+{? AND `Type` like '%$Type$%' }</SelectSQL>
+    <DefaultSortExpression>CreateTime DESC</DefaultSortExpression>
+    <LastUpdateTime>2017-10-23T14:07:24</LastUpdateTime>
+  </CRUDEntity>
+  <CRUDEntity>
+    <Id>epexpress</Id>
+    <RentId>1</RentId>
+    <PKName>Id</PKName>
+    <ValueField>Id</ValueField>
+    <TableName>ep_express</TableName>
+    <InsertSQL>INSERT INTO ep_express 
+(`Id`,`CreatorId`,`CreatorDeptId`,`CreateTime`,`Price`,`Number`,`ToCompany`,`ToUser`,`ToAddress`,`Description`,`ExpressType`,`File`) 
+ VALUES 
+ (#Id#,#CreatorId#,#CreatorDeptId#,#CreateTime#,#Price#,#Number#,#ToCompany#,#ToUser#,#ToAddress#,#Description#,#ExpressType#,0)</InsertSQL>
+    <UpdateSQL>UPDATE ep_express SET `Id`=#Id#
+{?? ,`CreatorId`=#CreatorId# }
+{?? ,`CreatorDeptId`=#CreatorDeptId# }
+{?? ,`CreateTime`=#CreateTime# }
+{?? ,`Price`=#Price# }
+{?? ,`Number`=#Number# }
+{?? ,`ToCompany`=#ToCompany# }
+{?? ,`ToUser`=#ToUser# }
+{?? ,`ToAddress`=#ToAddress# }
+{?? ,`Description`=#Description# }
+{?? ,`ExpressType`=#ExpressType# }
+{?? ,`File`=CAST(#File# AS SIGNED) }
+ WHERE `Id`=#Id#</UpdateSQL>
+    <DeleteSQL>DELETE FROM ep_express WHERE Id IN ($Id$)</DeleteSQL>
+    <GetOneSQL>SELECT `Id`,
+`CreatorId`,
+`CreatorDeptId`,
+`CreateTime`,
+`Price`,
+`Number`,
+`ToCompany`,
+`ToUser`,
+`ToAddress`,
+`Description`,
+`ExpressType`,
+`File` 
+ FROM ep_express WHERE `Id`=#Id#</GetOneSQL>
+    <SelectSQL>SELECT `Id`,
+`CreatorId`,
+`CreatorDeptId`,
+`CreateTime`,
+`Price`,
+`Number`,
+`ToCompany`,
+`ToUser`,
+`ToAddress`,
+`Description`,
+`ExpressType`,
+`File` 
+ FROM ep_express WHERE 1=1 
+{? AND `Id` like '%$Id$%' } 
+{? AND `CreatorId` like '%$CreatorId$%' } 
+{? AND `CreatorDeptId` like '%$CreatorDeptId$%' } 
+{? AND DATE_FORMAT(`CreateTime`,'%Y-%m-%d') = #CreateTime# } 
+{? AND `Price`=#Price# } 
+{? AND `Number` like '%$Number$%' } 
+{? AND `ToCompany` like '%$ToCompany$%' } 
+{? AND `ToUser` like '%$ToUser$%' } 
+{? AND `ToAddress` like '%$ToAddress$%' } 
+{? AND `Description` like '%$Description$%' } 
+{? AND `ExpressType` like '%$ExpressType$%' } 
+{? AND `File`=#File# }
+@security{EXPRESS_LIST}</SelectSQL>
+    <DefaultSortExpression>CreateTime DESC</DefaultSortExpression>
+    <LastUpdateTime>2017-10-23T10:43:21</LastUpdateTime>
+  </CRUDEntity>
+  <CRUDEntity>
+    <Id>rnreleasenote</Id>
+    <RentId>1</RentId>
+    <PKName>Id</PKName>
+    <ValueField>Id</ValueField>
+    <TableName>rn_releasenote</TableName>
+    <InsertSQL>INSERT INTO rn_releasenote 
+(`Id`,`PublishSystem`,`PublishStartTime`,`PublishEndTime`,`Status`,`DevUserId`,`DevUserMobile`,`CorpUserId`,`ReleaseNote`,`Description`,`CreatorId`,`CreateTime`) 
+ VALUES 
+ (#Id#,#PublishSystem#,#PublishStartTime#,#PublishEndTime#,#Status#,#DevUserId#,#DevUserMobile#,#CorpUserId#,#ReleaseNote#,#Description#,#Env:User.Id#,#Env:Now#)</InsertSQL>
+    <UpdateSQL>UPDATE rn_releasenote SET `Id`=#Id#
+{?? ,`PublishSystem`=#PublishSystem# }
+{?? ,`PublishStartTime`=#PublishStartTime# }
+{?? ,`PublishEndTime`=#PublishEndTime# }
+{?? ,`Status`=#Status# }
+{?? ,`DevUserId`=#DevUserId# }
+{?? ,`DevUserMobile`=#DevUserMobile# }
+{?? ,`CorpUserId`=#CorpUserId# }
+{?? ,`ReleaseNote`=#ReleaseNote# }
+{?? ,`Description`=#Description# }
+ WHERE `Id`=#Id#</UpdateSQL>
+    <DeleteSQL>DELETE FROM rn_releasenote WHERE Id IN ($Id$)</DeleteSQL>
+    <GetOneSQL>SELECT `Id`,
+`PublishSystem`,
+`PublishStartTime`,
+`PublishEndTime`,
+`Status`,
+`DevUserId`,
+`DevUserMobile`,
+`CorpUserId`,
+`ReleaseNote`,
+`Description`,
+`CreatorId`,
+`CreateTime` 
+ FROM rn_releasenote WHERE `Id`=#Id#</GetOneSQL>
+    <SelectSQL>SELECT `Id`,
+`PublishSystem`,
+`PublishStartTime`,
+`PublishEndTime`,
+`Status`,
+`DevUserId`,
+`DevUserMobile`,
+`CorpUserId`,
+`ReleaseNote`,
+`Description`,
+`CreatorId`,
+`CreateTime` 
+ FROM rn_releasenote WHERE 1=1 
+{? AND `Id` like '%$Id$%' } 
+{? AND `PublishSystem` like '%$PublishSystem$%' } 
+{? AND DATE_FORMAT(`PublishStartTime`,'%Y-%m-%d') = #PublishStartTime# } 
+{? AND DATE_FORMAT(`PublishEndTime`,'%Y-%m-%d') = #PublishEndTime# } 
+{? AND `Status` like '%$Status$%' } 
+{? AND `DevUserId` like '%$DevUserId$%' } 
+{? AND `DevUserMobile` like '%$DevUserMobile$%' } 
+{? AND `CorpUserId` like '%$CorpUserId$%' } 
+{? AND `ReleaseNote` like '%$ReleaseNote$%' } 
+{? AND `Description` like '%$Description$%' } 
+{? AND `CreatorId` like '%$CreatorId$%' } 
+{? AND DATE_FORMAT(`CreateTime`,'%Y-%m-%d') = #CreateTime# }</SelectSQL>
+    <DefaultSortExpression>CreateTime DESC</DefaultSortExpression>
+    <LastUpdateTime>2017-10-23T14:11:46</LastUpdateTime>
+  </CRUDEntity>
+  <CRUDEntity>
+    <Id>Project</Id>
+    <RentId>1</RentId>
+    <PKName>Id</PKName>
+    <ValueField>Id</ValueField>
+    <TableName>pmo_project</TableName>
+    <InsertSQL>INSERT INTO pmo_project 
+(`ProjectName`,`SystemModuleIds`,`ClientID`,`ClientName`,`ClientLevel`,`UseLevel`,`IsAuthendicate`,`IsDesignTrain`,`IsProductTrain`,`ContractIds`,`ContractSignTime`,`DeliverTime`,`Stage`,`Saler`,`Executor`,`Trainer`,`DeliverLetter`,`HomePage`,`LogoPath`,`OpenBrand`,`SystemAdmin`,`EnterpriseAdmin`,`CreatorId`,`ModifierId`,`CreateTime`,`LastUpdateTime`,`Id`) 
+ VALUES 
+ (#ProjectName#,#SystemModuleIds#,#ClientID#,#ClientName#,#ClientLevel#,#UseLevel#,#IsAuthendicate#,#IsDesignTrain#,#IsProductTrain#,#ContractIds#,#ContractSignTime#,#DeliverTime#,#Stage#,#Saler#,#Executor#,#Trainer#,#DeliverLetter#,#HomePage#,#LogoPath#,#OpenBrand#,#SystemAdmin#,#EnterpriseAdmin#,#CreatorId#,#ModifierId#,#CreateTime#,#LastUpdateTime#,#Id#)</InsertSQL>
+    <UpdateSQL>UPDATE pmo_project SET `Id`=#Id#
+{?? ,`ProjectName`=#ProjectName# }
+{?? ,`SystemModuleIds`=#SystemModuleIds# }
+{?? ,`ClientID`=#ClientID# }
+{?? ,`ClientName`=#ClientName# }
+{?? ,`ClientLevel`=#ClientLevel# }
+{?? ,`UseLevel`=#UseLevel# }
+{?? ,`IsAuthendicate`=#IsAuthendicate# }
+{?? ,`IsDesignTrain`=#IsDesignTrain# }
+{?? ,`IsProductTrain`=#IsProductTrain# }
+{?? ,`ContractIds`=#ContractIds# }
+{?? ,`ContractSignTime`=#ContractSignTime# }
+{?? ,`DeliverTime`=#DeliverTime# }
+{?? ,`Stage`=#Stage# }
+{?? ,`Saler`=#Saler# }
+{?? ,`Executor`=#Executor# }
+{?? ,`Trainer`=#Trainer# }
+{?? ,`DeliverLetter`=#DeliverLetter# }
+{?? ,`HomePage`=#HomePage# }
+{?? ,`LogoPath`=#LogoPath# }
+{?? ,`OpenBrand`=#OpenBrand# }
+{?? ,`SystemAdmin`=#SystemAdmin# }
+{?? ,`EnterpriseAdmin`=#EnterpriseAdmin# }
+{?? ,`CreatorId`=#CreatorId# }
+{?? ,`ModifierId`=#ModifierId# }
+{?? ,`CreateTime`=#CreateTime# }
+{?? ,`LastUpdateTime`=#LastUpdateTime# }
+ WHERE `Id`=#Id#</UpdateSQL>
+    <DeleteSQL>DELETE FROM pmo_project WHERE Id IN ($Id$)</DeleteSQL>
+    <GetOneSQL>SELECT `ProjectName`,
+`SystemModuleIds`,
+`ClientID`,
+`ClientName`,
+`ClientLevel`,
+`UseLevel`,
+`IsAuthendicate`,
+`IsDesignTrain`,
+`IsProductTrain`,
+`ContractIds`,
+`ContractSignTime`,
+`DeliverTime`,
+`Stage`,
+`Saler`,
+`Executor`,
+`Trainer`,
+`DeliverLetter`,
+`HomePage`,
+`LogoPath`,
+`OpenBrand`,
+`SystemAdmin`,
+`EnterpriseAdmin`,
+`CreatorId`,
+`ModifierId`,
+`CreateTime`,
+`LastUpdateTime`,
+`Id` 
+ FROM pmo_project WHERE `Id`=#Id#</GetOneSQL>
+    <SelectSQL>SELECT `ProjectName`,
+`SystemModuleIds`,
+`ClientID`,
+`ClientName`,
+`ClientLevel`,
+`UseLevel`,
+`IsAuthendicate`,
+`IsDesignTrain`,
+`IsProductTrain`,
+`ContractIds`,
+`ContractSignTime`,
+`DeliverTime`,
+`Stage`,
+`Saler`,
+`Executor`,
+`Trainer`,
+`DeliverLetter`,
+`HomePage`,
+`LogoPath`,
+`OpenBrand`,
+`SystemAdmin`,
+`EnterpriseAdmin`,
+`CreatorId`,
+`ModifierId`,
+`CreateTime`,
+`LastUpdateTime`,
+`Id` 
+ FROM pmo_project WHERE 1=1 
+{? AND `ProjectName` like '%$ProjectName$%' } 
+{? AND `SystemModuleIds` like '%$SystemModuleIds$%' } 
+{? AND `ClientID` like '%$ClientID$%' } 
+{? AND `ClientName` like '%$ClientName$%' } 
+{? AND `ClientLevel` like '%$ClientLevel$%' } 
+{? AND `UseLevel` like '%$UseLevel$%' } 
+{? AND `IsAuthendicate`=#IsAuthendicate# } 
+{? AND `IsDesignTrain`=#IsDesignTrain# } 
+{? AND `IsProductTrain`=#IsProductTrain# } 
+{? AND `ContractIds` like '%$ContractIds$%' } 
+{? AND DATE_FORMAT(`ContractSignTime`,'%Y-%m-%d') = #ContractSignTime# } 
+{? AND DATE_FORMAT(`DeliverTime`,'%Y-%m-%d') = #DeliverTime# } 
+{? AND `Stage` like '%$Stage$%' } 
+{? AND `Saler` like '%$Saler$%' } 
+{? AND `Executor` like '%$Executor$%' } 
+{? AND `Trainer` like '%$Trainer$%' } 
+{? AND `DeliverLetter` like '%$DeliverLetter$%' } 
+{? AND `HomePage` like '%$HomePage$%' } 
+{? AND `LogoPath` like '%$LogoPath$%' } 
+{? AND `OpenBrand`=#OpenBrand# } 
+{? AND `SystemAdmin` like '%$SystemAdmin$%' } 
+{? AND `EnterpriseAdmin` like '%$EnterpriseAdmin$%' } 
+{? AND `CreatorId` like '%$CreatorId$%' } 
+{? AND `ModifierId` like '%$ModifierId$%' } 
+{? AND DATE_FORMAT(`CreateTime`,'%Y-%m-%d') = #CreateTime# } 
+{? AND DATE_FORMAT(`LastUpdateTime`,'%Y-%m-%d') = #LastUpdateTime# } 
+{? AND `Id` like '%$Id$%' }</SelectSQL>
+    <DefaultSortExpression>Id</DefaultSortExpression>
+    <LastUpdateTime>2017-10-31T09:04:26</LastUpdateTime>
+  </CRUDEntity>
+  <CRUDEntity>
+    <Id>Train</Id>
+    <RentId>1</RentId>
+    <PKName>Id</PKName>
+    <TitleField>Month</TitleField>
+    <ValueField>Id</ValueField>
+    <TableName>pmo_train</TableName>
+    <InsertSQL>INSERT INTO pmo_train 
+(`Month`,`TrainTimes`,`BeginTime`,`EndTime`,`ClassRoom`,`UserCountLimit`,`JoinUserCount`,`RemainUserCount`,`IsAvailable`,`CreatorId`,`ModifierId`,`CreateTime`,`LastUpdateTime`,`Id`) 
+ VALUES 
+ (#Month#,#TrainTimes#,#BeginTime#,#EndTime#,#ClassRoom#,#UserCountLimit#,#JoinUserCount#,#RemainUserCount#,#IsAvailable#,#CreatorId#,#ModifierId#,#CreateTime#,#LastUpdateTime#,#Id#)</InsertSQL>
+    <UpdateSQL>UPDATE pmo_train SET `Id`=#Id#
+{?? ,`Month`=#Month# }
+{?? ,`TrainTimes`=#TrainTimes# }
+{?? ,`BeginTime`=#BeginTime# }
+{?? ,`EndTime`=#EndTime# }
+{?? ,`ClassRoom`=#ClassRoom# }
+{?? ,`UserCountLimit`=#UserCountLimit# }
+{?? ,`JoinUserCount`=#JoinUserCount# }
+{?? ,`RemainUserCount`=#RemainUserCount# }
+{?? ,`IsAvailable`=#IsAvailable# }
+{?? ,`CreatorId`=#CreatorId# }
+{?? ,`ModifierId`=#ModifierId# }
+{?? ,`CreateTime`=#CreateTime# }
+{?? ,`LastUpdateTime`=#LastUpdateTime# }
+ WHERE `Id`=#Id#</UpdateSQL>
+    <DeleteSQL>DELETE FROM pmo_train WHERE Id IN ($Id$)</DeleteSQL>
+    <GetOneSQL>SELECT `Month`,
+`TrainTimes`,
+`BeginTime`,
+`EndTime`,
+`ClassRoom`,
+`UserCountLimit`,
+`JoinUserCount`,
+`RemainUserCount`,
+`IsAvailable`,
+`CreatorId`,
+`ModifierId`,
+`CreateTime`,
+`LastUpdateTime`,
+`Id` 
+ FROM pmo_train WHERE `Id`=#Id#</GetOneSQL>
+    <SelectSQL>SELECT `Month`,
+`TrainTimes`,
+`BeginTime`,
+`EndTime`,
+`ClassRoom`,
+`UserCountLimit`,
+`JoinUserCount`,
+`RemainUserCount`,
+`IsAvailable`,
+`CreatorId`,
+`ModifierId`,
+`CreateTime`,
+`LastUpdateTime`,
+`Id` 
+ FROM pmo_train WHERE 1=1 
+{? AND `Month` like '%$Month$%' } 
+{? AND `TrainTimes`=#TrainTimes# } 
+{? AND DATE_FORMAT(`BeginTime`,'%Y-%m-%d') = #BeginTime# } 
+{? AND DATE_FORMAT(`EndTime`,'%Y-%m-%d') = #EndTime# } 
+{? AND `ClassRoom` like '%$ClassRoom$%' } 
+{? AND `UserCountLimit`=#UserCountLimit# } 
+{? AND `JoinUserCount`=#JoinUserCount# } 
+{? AND `RemainUserCount`=#RemainUserCount# } 
+{? AND `IsAvailable`=#IsAvailable# } 
+{? AND `CreatorId` like '%$CreatorId$%' } 
+{? AND `ModifierId` like '%$ModifierId$%' } 
+{? AND DATE_FORMAT(`CreateTime`,'%Y-%m-%d') = #CreateTime# } 
+{? AND DATE_FORMAT(`LastUpdateTime`,'%Y-%m-%d') = #LastUpdateTime# } 
+{? AND `Id` like '%$Id$%' }</SelectSQL>
+    <DefaultSortExpression>Id</DefaultSortExpression>
+    <LastUpdateTime>2017-10-30T13:14:21</LastUpdateTime>
   </CRUDEntity>
 </ArrayOfCRUDEntity>

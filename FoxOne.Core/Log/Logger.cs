@@ -19,7 +19,7 @@ namespace FoxOne.Core
     {
         private const string CONFIG_FILE_NAME = "log4net.config";
         private const string CONFIG_SECTION_NAME = "log4net";
-        private static ILog _ilog = LogManager.GetLogger(typeof(Logger));
+
         static Logger()
         {
             Configure();
@@ -41,39 +41,34 @@ namespace FoxOne.Core
             }
         }
 
-        public static ILog GetLogger(string name)
-        {
-            return LogManager.GetLogger(name);
-        }
-
         public static void Info(string message)
         {
-            _ilog.Info(message);
+            //Swj.Infrastructure.Tools.Logging.LogHelper.Info(message);
+            LogManager.GetLogger(typeof(Logger)).Info(message);
         }
 
         public static void Debug(string message)
         {
-            _ilog.Debug(message);
+            //Swj.Infrastructure.Tools.Logging.LogHelper.Debug(message);
+            LogManager.GetLogger(typeof(Logger)).Debug(message);
         }
 
         public static void Debug(string format,params object[] args)
         {
-            _ilog.Debug(format.FormatTo(args));
+            Debug(format.FormatTo(args));
         }
 
         public static void Info(string format,params object[] args)
         {
-            _ilog.Info(format.FormatTo(args));
+            Info(format.FormatTo(args));
         }
 
         public static void Error(string message, Exception ex)
         {
-            _ilog.Error(message, ex);
+            //Swj.Infrastructure.Tools.Logging.LogHelper.Error(message, ex);
+            LogManager.GetLogger(typeof(Logger)).Error(message, ex);
+            
         }
 
-        public static ILog GetCurrentClassLogger()
-        {
-            return _ilog;
-        }
     }
 }

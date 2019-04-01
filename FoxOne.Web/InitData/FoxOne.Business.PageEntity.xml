@@ -506,6 +506,26 @@ window.open("/Workflow/Index?ApplicationId="+$(this).data().id);
     <LastUpdateTime>2017-09-12T17:41:04</LastUpdateTime>
   </PageEntity>
   <PageEntity>
+    <Id>form_changemanagementList</Id>
+    <RentId>1</RentId>
+    <Title>变更管理列表</Title>
+    <CssClass>easyui-layout</CssClass>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>WorkflowForm</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-09-13T12:52:04</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>form_changemanagementEdit</Id>
+    <RentId>1</RentId>
+    <Title>变更管理编辑</Title>
+    <CssClass>easyui-layout</CssClass>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>WorkflowForm</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-09-13T12:52:09</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
     <Id>form_leaveapprovalList</Id>
     <RentId>1</RentId>
     <Title>请假信息列表</Title>
@@ -575,6 +595,106 @@ $("#"+param._input_text,window.parent.document).val(d.name);
     <LastUpdateTime>2017-09-21T14:57:59</LastUpdateTime>
   </PageEntity>
   <PageEntity>
+    <Id>form_reimbursementapplyList</Id>
+    <RentId>1</RentId>
+    <Title>费用报销单列表</Title>
+    <CssClass>easyui-layout</CssClass>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>WorkflowForm</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-09-27T17:17:59</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>form_reimbursementapplyEdit</Id>
+    <RentId>1</RentId>
+    <Title>费用报销单编辑</Title>
+    <CssClass>easyui-layout</CssClass>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>WorkflowForm</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-09-15T08:59:25</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>form_reimbursementapplydetailList</Id>
+    <RentId>1</RentId>
+    <Title>费用报销单明细列表</Title>
+    <CssClass>easyui-layout</CssClass>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>WorkflowForm</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-09-15T08:59:14</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>form_reimbursementapplydetailEdit</Id>
+    <RentId>1</RentId>
+    <Title>费用报销单明细编辑</Title>
+    <CssClass>easyui-layout</CssClass>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>WorkflowForm</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-09-15T08:59:21</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>meetingroombookList</Id>
+    <RentId>1</RentId>
+    <Title>会议室管理列表</Title>
+    <CssClass>easyui-layout</CssClass>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>PC</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-09-15T16:24:21</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>meetingroombookEdit</Id>
+    <RentId>1</RentId>
+    <Title>会议室管理编辑</Title>
+    <CssClass>easyui-layout</CssClass>
+    <StartUpScript>$("[disabled]").css("background-color", "#EEE");</StartUpScript>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>PC</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-10-11T12:06:44</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>MeetingRoomBookPreview</Id>
+    <RentId>1</RentId>
+    <Title>会议室预订情况一览</Title>
+    <CssClass>easyui-layout</CssClass>
+    <Style>.nobook-item{ 
+cursor:pointer;
+           width:140px;
+            font-family: 'Microsoft YaHei';
+            color: #fff;
+            text-shadow: 1px 1px 3px rgba(0,0,0,.5);
+            text-align: center;
+    background-color: #f0ad4e;
+    border-color: #eea236;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.15),0 1px 1px rgba(0,0,0,.075);padding:5px;margin:auto;margin-top:10px;}
+.book-item{            
+            border: 1px solid #097798;
+            background-color: #0C9FCD;
+            *background-color: #0C9FCD;}</Style>
+    <StartUpScript>$(document).on("click",".nobook-item",function(e){
+var d = $(this).data();
+$.modal({title:'新增会议室预订',overlayClose:true,url:foxOne.buildUrl('/Page/meetingroombookEdit',d),width:900,height:550,onClose:function(){
+foxOne.refresh("MeetingRoomBookPreviewTable");
+}});
+});</StartUpScript>
+    <ScriptBlock>function nextWeek(days)
+{
+var curr=$("#BaseTime").val();
+var newDate=foxOne.changeDate(curr,days);
+$("#BaseTime").val(newDate);
+var setting=foxOne.setting("MeetingRoomBookPreviewTable");
+setting.BaseTime=newDate;
+foxOne.refresh("MeetingRoomBookPreviewTable");
+}</ScriptBlock>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>PC</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-10-10T19:34:06</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
     <Id>IconSelector</Id>
     <RentId>1</RentId>
     <Title>图标选择器</Title>
@@ -594,6 +714,29 @@ $("#"+param._input_text,window.parent.document).val(d.url);
     <LastUpdateTime>2017-09-16T15:43:03</LastUpdateTime>
   </PageEntity>
   <PageEntity>
+    <Id>UserProfile</Id>
+    <RentId>1</RentId>
+    <Title>个人信息修改</Title>
+    <CssClass>easyui-layout</CssClass>
+    <StartUpScript>$("form").bind("form.afterSubmit",function(e){
+foxOne.alert("修改成功！");
+});</StartUpScript>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>PC</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-09-20T15:10:49</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>logList</Id>
+    <RentId>1</RentId>
+    <Title>日志信息</Title>
+    <CssClass>easyui-layout</CssClass>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>X</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-10-14T15:00:49</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
     <Id>WorkItemList_Copy_Copy</Id>
     <RentId>1</RentId>
     <Title>我的知会事项</Title>
@@ -602,6 +745,80 @@ $("#"+param._input_text,window.parent.document).val(d.url);
     <ParentId>PC</ParentId>
     <Type>Page</Type>
     <LastUpdateTime>2017-09-21T15:40:05</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>attachmentList</Id>
+    <RentId>1</RentId>
+    <Title>附件信息列表</Title>
+    <CssClass>easyui-layout</CssClass>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>X</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-09-27T10:49:49</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>userclaimListyg</Id>
+    <RentId>1</RentId>
+    <Title>用户外部登录信息列表</Title>
+    <CssClass>easyui-layout</CssClass>
+    <ScriptBlock>function execSQL(id){
+alert(id);
+foxOne.dataService("get:sys_log.select",{},function(res){});
+}</ScriptBlock>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>X</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-09-27T17:42:13</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>userclaimEdit</Id>
+    <RentId>1</RentId>
+    <Title>用户外部登录信息编辑</Title>
+    <CssClass>easyui-layout</CssClass>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>X</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-09-27T17:28:31</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>form_vehicalapplyList</Id>
+    <RentId>1</RentId>
+    <Title>用车申请信息列表</Title>
+    <CssClass>easyui-layout</CssClass>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>WorkflowForm</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-09-28T11:27:17</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>form_vehicalapplyEdit</Id>
+    <RentId>1</RentId>
+    <Title>用车申请信息编辑</Title>
+    <CssClass>easyui-layout</CssClass>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>WorkflowForm</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-09-28T11:27:23</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>form_stampapplyList</Id>
+    <RentId>1</RentId>
+    <Title>用章申请列表</Title>
+    <CssClass>easyui-layout</CssClass>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>WorkflowForm</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-10-27T10:31:09</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>form_stampapplyEdit</Id>
+    <RentId>1</RentId>
+    <Title>用章申请编辑</Title>
+    <CssClass>easyui-layout</CssClass>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>WorkflowForm</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-10-27T10:31:00</LastUpdateTime>
   </PageEntity>
   <PageEntity>
     <Id>UserSelector_Copy_Copy</Id>
@@ -670,5 +887,246 @@ function onCancel(){
     <ParentId>Selector</ParentId>
     <Type>Page</Type>
     <LastUpdateTime>2017-10-20T16:44:49</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>expressList</Id>
+    <RentId>1</RentId>
+    <Title>快递信息管理列表</Title>
+    <CssClass>easyui-layout</CssClass>
+    <ScriptBlock>function doFile(id){
+if(confirm("归档后将不允许修改，你确认归档吗？")){
+foxOne.dataService("exec:crud.epexpress.update",{Id:id,File:1},function(res){
+if(res){
+foxOne.refresh("expressListTable");
+}
+},"post",true);
+}
+}</ScriptBlock>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>PC</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-10-23T10:44:54</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>expressEdit</Id>
+    <RentId>1</RentId>
+    <Title>快递信息管理编辑</Title>
+    <CssClass>easyui-layout</CssClass>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>PC</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-10-20T17:35:00</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>releasenoteList</Id>
+    <RentId>1</RentId>
+    <Title>系统发布信息</Title>
+    <CssClass>easyui-layout</CssClass>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>PC</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-10-23T10:39:02</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>releasenoteEdit</Id>
+    <RentId>1</RentId>
+    <Title>系统发布信息登记</Title>
+    <CssClass>easyui-layout</CssClass>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>PC</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-10-23T10:38:57</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>ProjectList</Id>
+    <RentId>1</RentId>
+    <Title>项目信息列表</Title>
+    <CssClass>easyui-layout</CssClass>
+    <ScriptBlock>function goTo(projectId,page,title,key){
+key=key || "ProjectId";
+$.modal({url:'/Page/'+page+'?'+key+'='+projectId,overlayClose:true,onClose:function(res){
+foxOne.refresh("ProjectListTable");
+},title:title,width:900,height:500});
+}</ScriptBlock>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>ProjectManagement</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-10-27T17:17:22</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>ProjectEdit</Id>
+    <RentId>1</RentId>
+    <Title>项目信息编辑</Title>
+    <CssClass>easyui-layout</CssClass>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>ProjectManagement</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-10-27T10:30:49</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>ProjectManagement</Id>
+    <RentId>0</RentId>
+    <Title>项目管理</Title>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>Root</ParentId>
+    <Type>Module</Type>
+    <LastUpdateTime>2017-10-27T10:30:38</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>ProjectCheckRecordList</Id>
+    <RentId>1</RentId>
+    <Title>项目验收信息列表</Title>
+    <CssClass>easyui-layout</CssClass>
+    <ScriptBlock>function goTo(id,page,title,key){
+key=key || "_FORM_KEY";
+$.modal({url:'/Page/'+page+'?'+key+'='+id,overlayClose:true,onClose:function(res){
+foxOne.refresh("ProjectListTable");
+},title:title,width:900,height:500});
+}</ScriptBlock>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>ProjectManagement</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-10-30T16:09:13</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>ProjectCheckRecordEdit</Id>
+    <RentId>1</RentId>
+    <Title>项目验收信息编辑</Title>
+    <CssClass>easyui-layout</CssClass>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>ProjectManagement</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-10-27T10:39:20</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>ProjectCommunicationRecordList</Id>
+    <RentId>1</RentId>
+    <Title>项目沟通信息列表</Title>
+    <CssClass>easyui-layout</CssClass>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>ProjectManagement</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-10-27T10:39:24</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>ProjectCommunicationRecordEdit</Id>
+    <RentId>1</RentId>
+    <Title>项目沟通信息编辑</Title>
+    <CssClass>easyui-layout</CssClass>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>ProjectManagement</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-10-27T10:39:28</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>ProjectStageChangeRecord</Id>
+    <RentId>1</RentId>
+    <Title>项目状态变更记录</Title>
+    <CssClass>easyui-layout</CssClass>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>ProjectManagement</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-10-30T15:36:42</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>ProjectTrainList</Id>
+    <RentId>1</RentId>
+    <Title>项目培训信息列表</Title>
+    <CssClass>easyui-layout</CssClass>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>ProjectManagement</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-10-27T10:39:50</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>ProjectTrainEdit</Id>
+    <RentId>1</RentId>
+    <Title>项目培训信息编辑</Title>
+    <CssClass>easyui-layout</CssClass>
+    <Style>.form-horizontal  input.short {width:150px;}</Style>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>ProjectManagement</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-10-30T14:23:03</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>TrainList</Id>
+    <RentId>1</RentId>
+    <Title>培训信息列表</Title>
+    <CssClass>easyui-layout</CssClass>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>ProjectManagement</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-10-27T10:39:58</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>TrainEdit</Id>
+    <RentId>1</RentId>
+    <Title>培训信息编辑</Title>
+    <CssClass>easyui-layout</CssClass>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>ProjectManagement</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-10-27T10:40:02</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>ProjectDeliver</Id>
+    <RentId>1</RentId>
+    <Title>项目交付</Title>
+    <CssClass>easyui-layout</CssClass>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>ProjectManagement</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-10-31T14:30:17</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>ProjectAssignRecordEdit</Id>
+    <RentId>1</RentId>
+    <Title>项目分配信息编辑</Title>
+    <CssClass>easyui-layout</CssClass>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>ProjectManagement</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-10-31T09:28:21</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>ProjectOpen</Id>
+    <RentId>1</RentId>
+    <Title>项目开通系统</Title>
+    <CssClass>easyui-layout</CssClass>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>ProjectManagement</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-10-31T14:37:13</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>ProjectEdit_Copy</Id>
+    <RentId>1</RentId>
+    <Title>项目启动</Title>
+    <CssClass>easyui-layout</CssClass>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>ProjectManagement</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-10-27T16:49:43</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>ProjectPropertyChangeRecordList</Id>
+    <RentId>1</RentId>
+    <Title>项目人员变更记录</Title>
+    <CssClass>easyui-layout</CssClass>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>ProjectManagement</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-10-30T15:39:13</LastUpdateTime>
+  </PageEntity>
+  <PageEntity>
+    <Id>ProjectCheckRecordApply</Id>
+    <RentId>1</RentId>
+    <Title>项目验收审核页</Title>
+    <CssClass>easyui-layout</CssClass>
+    <LayoutId>Normal</LayoutId>
+    <ParentId>ProjectManagement</ParentId>
+    <Type>Page</Type>
+    <LastUpdateTime>2017-10-30T16:07:20</LastUpdateTime>
   </PageEntity>
 </ArrayOfPageEntity>

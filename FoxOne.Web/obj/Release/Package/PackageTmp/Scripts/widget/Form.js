@@ -1,4 +1,5 @@
 ﻿/// <reference path="../jquery-1.8.2.js" />
+/// <reference path="../jquery.form.js" />
 /// <reference path="../common.js" />
 (function (window, $) {
     var foxOne = window.foxOne;
@@ -9,6 +10,7 @@
             if (validateInfo.isError) {
                 var ee = $.Event("form.validateError", validateInfo);
                 $(_this).trigger(ee);
+                foxOne.alert(ee.errorInfo);
                 return false;
             }
         }
@@ -19,24 +21,44 @@
         param[foxOne.ctrlId] = widget.attr("id");
         param[foxOne.pageId] = widget.attr("pageId");
         var url = foxOne.buildUrl(form.attr('action'), param);
-        var formData = form.serialize();
-        foxOne.dataService(url, formData, function (res) {
-            try {
-                var afterSubmit = $.Event("form.afterSubmit", { d: res });
-                form.trigger(afterSubmit);
-                if (window.top && window.top.onDialogClose && window.top.onDialogClose.length > 0) {
-                    window.top.onDialogClose.pop()(res);
+        form.ajaxSubmit({
+            type: 'post',
+            url: url,
+            success: function (response) {
+                if (response.Result) {
+                    if (response.NoAuthority) {
+                        foxOne.alert(response.ErrorMessage);
+                    }
+                    else {
+                        if (response.LoginTimeOut) {
+                            foxOne.alert("登录超时，请重新登录");
+                        }
+                        else {
+                            var res = response.Data;
+                            try {
+                                var afterSubmit = $.Event("form.afterSubmit", { d: res });
+                                form.trigger(afterSubmit);
+                                if (window.top && window.top.onDialogClose && window.top.onDialogClose.length > 0) {
+                                    window.top.onDialogClose.pop()(res);
+                                }
+                            } catch (e) {
+                                foxOne.alert(e);
+                            }
+                        }
+                    }
                 }
-            } catch (e) {
-                foxOne.alert(e);
+                else {
+                    foxOne.alert(response.ErrorMessage);
+                }
+            },
+            error: function (xhr, text, error) {
+                foxOne.alert(xhr.responseText);
             }
         });
         return false;
     });
-    $("[description]").each(function () {
-        var desc = $(this).attr("description");
-        if (desc != '') {
-            $(this).append("<img alt='' title='" + desc + "' src=\"../../images/default/icon-tip.png\" />");
-        }
+
+    $("[defaultForm]").find("input[type='text'],select,textarea").each(function () {
+        $(this).attr("original-value", $(this).val());
     });
 })(window, jQuery);

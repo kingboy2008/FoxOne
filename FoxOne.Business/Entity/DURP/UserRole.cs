@@ -40,7 +40,7 @@ namespace FoxOne.Business
             {
                 effectCount = DBContext<UserRole>.Insert(new UserRole()
                  {
-                     Id = Guid.NewGuid().ToString(),
+                     Id = Utility.GetGuid(),
                      RentId = 1,
                      RoleId = roleId,
                      Status = DefaultStatus.Enabled.ToString(),

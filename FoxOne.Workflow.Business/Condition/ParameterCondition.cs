@@ -40,11 +40,39 @@ namespace FoxOne.Workflow.Business
             set;
         }
 
+        [DisplayName("需要选择")]
+        public bool NeedChoice { get; set; }
+
+        [DisplayName("选择结果")]
+        public string Choice
+        {
+            get;
+            set;
+        }
+
         public override bool Resolve(IWorkflowContext context)
+        {
+            if(NeedChoice)
+            {
+                var choice = new ChoiceCondition() { Choice = Choice };
+                if(!choice.Resolve(context))
+                {
+                    return false;
+                }
+            }
+            return ResolveInner(context);
+        }
+
+        public override bool PreResolve(IWorkflowContext context)
+        {
+            return ResolveInner(context);
+        }
+
+        private bool ResolveInner(IWorkflowContext context)
         {
             if (string.IsNullOrEmpty(ParameterName))
             {
-                throw new ArgumentNullException("ParameterName"); 
+                throw new ArgumentNullException("ParameterName");
             }
             bool result = false;
             object obj1 = null;
@@ -72,7 +100,7 @@ namespace FoxOne.Workflow.Business
             {
                 result = op.Operate(obj1, ParameterValue);
             }
-            Log("{6}:参数名【{0}】解析为：{1},参数值【{2}】解析为：{3}，运算符：{4}，结果:{5}".FormatTo(ParameterName, obj1, ParameterValue, obj2, op.GetType().GetDisplayName(), result,context.FlowInstance.Id));
+            Log("{6}:参数名【{0}】解析为：{1},参数值【{2}】解析为：{3}，运算符：{4}，结果:{5}".FormatTo(ParameterName, obj1, ParameterValue, obj2, op.GetType().GetDisplayName(), result, context.FlowInstance.Id));
             return result;
         }
     }

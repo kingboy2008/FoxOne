@@ -13,6 +13,7 @@ using System.Web;
 using System.Threading;
 using System.Web.Script.Serialization;
 using System.Collections;
+using FoxOne.Business.Security;
 
 namespace FoxOne.Business
 {
@@ -73,10 +74,10 @@ namespace FoxOne.Business
             switch (EntityTypeFullName)
             {
                 case "FoxOne.Business.User":
-                    result = DBContext<IUser>.Instance.ToDictionary();
+                    result = DBContext<IUser>.Instance.OrderBy(o => o.Rank).ToDictionary();
                     break;
                 case "FoxOne.Business.Department":
-                    result = DBContext<IDepartment>.Instance.ToDictionary();
+                    result = DBContext<IDepartment>.Instance.OrderBy(o => o.Rank).ToDictionary();
                     break;
                 case "FoxOne.Business.Role":
                     result = DBContext<IRole>.Instance.ToDictionary();
@@ -91,13 +92,13 @@ namespace FoxOne.Business
                     result = DBContext<IRolePermission>.Instance.ToDictionary();
                     break;
                 case "FoxOne.Business.Permission":
-                    result = DBContext<IPermission>.Instance.ToDictionary();
+                    result = DBContext<IPermission>.Instance.OrderBy(o => o.Rank).ToDictionary();
                     break;
                 case "FoxOne.Business.RoleType":
                     result = DBContext<IRoleType>.Instance.ToDictionary(); 
                     break;
                 case "FoxOne.Business.ComponentEntity":
-                    result = DBContext<ComponentEntity>.Instance.ToDictionary();
+                    result = DBContext<ComponentEntity>.Instance.OrderBy(o => o.Rank).ToDictionary();
                     break;
                 case "FoxOne.Business.PageLayoutFileEntity":
                     result = DBContext<PageLayoutFileEntity>.Instance.ToDictionary();
@@ -112,13 +113,16 @@ namespace FoxOne.Business
                     result = DBContext<LayoutEntity>.Instance.ToDictionary();
                     break;
                 case "FoxOne.Business.DataDictionary":
-                    result = DBContext<DataDictionary>.Instance.ToDictionary();
+                    result = DBContext<DataDictionary>.Instance.OrderBy(o => o.Rank).ToDictionary();
                     break;
                 case "FoxOne.Business.ExternalFileEntity":
                     result = DBContext<ExternalFileEntity>.Instance.ToDictionary();
                     break;
                 case "FoxOne.Business.AttachmentEntity":
                     result = DBContext<AttachmentEntity>.Instance.ToDictionary();
+                    break;
+                case "FoxOne.Business.PageRelateEntity":
+                    result = DBContext<PageRelateEntity>.Instance.OrderBy(o=>o.TabRank).ToDictionary();
                     break;
                 default:
                     throw new FoxOneException("Not Suppost!");
@@ -185,12 +189,21 @@ namespace FoxOne.Business
             }
         }
 
-        public int Insert(IDictionary<string, object> data)
+        public IDictionary<string, object> FormData
+        {
+            get;set;
+        }
+
+        public virtual int Insert(IDictionary<string, object> data)
         {
             var item = data.ToEntity(EntityType);
             var result = (bool)InvokeMethod("Insert", item);
             if (result)
             {
+                if (NeedCheck(EntityType))
+                {
+                    CheckCheangeProperty(null, item);
+                }
                 return 1;
             }
             return 0;
@@ -211,9 +224,13 @@ namespace FoxOne.Business
             }
         }
 
-        public int Update(string key, IDictionary<string, object> data)
+        public virtual int Update(string key, IDictionary<string, object> data)
         {
             var item = data.ToEntity(EntityType);
+            if (NeedCheck(EntityType))
+            {
+                CheckCheangeProperty(InvokeMethod("Get", key), item);
+            }
             if (item is IEntity)
             {
                 (item as IEntity).Id = key;
@@ -239,6 +256,72 @@ namespace FoxOne.Business
                 return 1;
             }
             return 0;
+        }
+
+        private bool NeedCheck(Type objType)
+        {
+            var ft = FastType.Get(objType);
+            foreach (var getter in ft.Getters)
+            {
+                var attr = getter.Info.GetCustomAttribute<TracePropertyChangeAttribute>(true);
+
+                if (attr != null)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private void CheckCheangeProperty(object orgObj, object newObj)
+        {
+            var ft = FastType.Get(EntityType);
+            foreach (var getter in ft.Getters)
+            {
+                var attr = getter.Info.GetCustomAttribute<TracePropertyChangeAttribute>(true);
+
+                if (attr != null)
+                {
+                    var oldVal = orgObj == null ?null: getter.GetValue(orgObj);
+                    var newVal = getter.GetValue(newObj);
+                    var oldStr = oldVal == null ? string.Empty : oldVal.ToString();
+                    var newStr = newVal == null ? string.Empty : newVal.ToString();
+                    if (oldStr != newStr)
+                    {
+                        ObjectHelper.GetObject<IService<PropertyChangeRecord>>().Insert(new PropertyChangeRecord()
+                        {
+                            Id = Utility.GetGuid(),
+                            CreateTime = DateTime.Now,
+                            CreatorId = Sec.User.Id,
+                            NewValue = newStr,
+                            OriginalValue = oldStr,
+                            TypeName = EntityType.FullName,
+                            PropertyCNName = getter.Info.GetDisplayName(),
+                            PropertyName = getter.Name,
+                             PKValue=orgObj==null? GetPK(newObj):GetPK(orgObj),
+                        });
+                    }
+                }
+            }
+        }
+
+        private string GetPK(object obj)
+        {
+            var ft = FastType.Get(EntityType);
+            foreach (var getter in ft.Getters)
+            {
+                var attr = getter.Info.GetCustomAttribute<PrimaryKeyAttribute>(true);
+
+                if (attr != null)
+                {
+                    return getter.GetValue(obj).ToString();
+                }
+            }
+            if (obj is DURPBase)
+            {
+                return (obj as DURPBase).Id;
+            }
+            return string.Empty;
         }
     }
 }

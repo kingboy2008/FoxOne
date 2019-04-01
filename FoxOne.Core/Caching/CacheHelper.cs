@@ -69,6 +69,31 @@ namespace FoxOne.Core
             return GetFromCache<T>(key, fun, DateTime.Now.AddHours(1), Cache.NoSlidingExpiration);
         }
 
+        public static T GetFromCache<T>(string key, Func<T> fun, DateTime absoluteExpiration) where T : class
+        {
+            T returnValue = GetValue(key) as T;
+            if (returnValue == null)
+            {
+                lock (lockKey)
+                {
+                    returnValue = GetValue(key) as T;
+                    if (returnValue == null)
+                    {
+                        returnValue = fun();
+                        if (returnValue != null && !string.IsNullOrEmpty(returnValue.ToString()))
+                        {
+                            cache.SetValue(key, returnValue, absoluteExpiration, Cache.NoSlidingExpiration);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                //Logger.Debug("cache hit with key:{0}", key);
+            }
+            return returnValue;
+        }
+
         public static T GetFromCache<T>(string key, Func<T> fun, DateTime absoluteExpiration, TimeSpan slidingExpiration) where T : class
         {
             T returnValue = GetValue(key) as T;

@@ -72,7 +72,8 @@ namespace FoxOne.Workflow.Business
                     }
                 }
             }
-            Log("{0}:用户选择：{1}，期待选择结果：{2}，结果：{3}".FormatTo(context.FlowInstance.Id, string.Join(",", context.UserChoice.Select(o => o.Choice)), Choice, result));
+            string expect = context.UserChoice.IsNullOrEmpty() ? string.Empty : string.Join(",", context.UserChoice.Select(o => o.Choice));
+            Log("{0}:用户选择：{1}，期待选择结果：{2}，结果：{3}".FormatTo(context.FlowInstance.Id, expect, Choice, result));
             return result;
         }
     }

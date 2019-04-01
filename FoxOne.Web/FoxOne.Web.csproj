@@ -13,7 +13,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FoxOne.Web</RootNamespace>
     <AssemblyName>FoxOne.Web</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -22,6 +22,7 @@
     <IISExpressUseClassicPipelineMode />
     <TargetFrameworkProfile />
     <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -33,6 +34,7 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
     <DocumentationFile>bin\FoxOne.Web.XML</DocumentationFile>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -44,11 +46,79 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Lib\log4net.dll</HintPath>
+    <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Hosting.Abstractions, Version=1.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Hosting.Abstractions.1.1.0\lib\net451\Microsoft.AspNetCore.Hosting.Abstractions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Hosting.Server.Abstractions, Version=1.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Hosting.Server.Abstractions.1.1.0\lib\net451\Microsoft.AspNetCore.Hosting.Server.Abstractions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Abstractions, Version=1.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.Abstractions.1.1.0\lib\net451\Microsoft.AspNetCore.Http.Abstractions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Features, Version=1.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.Features.1.1.0\lib\net451\Microsoft.AspNetCore.Http.Features.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Extensions.Configuration, Version=1.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.1.1.0\lib\netstandard1.1\Microsoft.Extensions.Configuration.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Abstractions, Version=1.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.Abstractions.1.1.0\lib\netstandard1.0\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Binder, Version=1.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.Binder.1.1.0\lib\netstandard1.1\Microsoft.Extensions.Configuration.Binder.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.FileExtensions, Version=1.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.FileExtensions.1.1.0\lib\net451\Microsoft.Extensions.Configuration.FileExtensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Json, Version=1.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.Json.1.1.0\lib\net451\Microsoft.Extensions.Configuration.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=1.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.1.1.0\lib\netstandard1.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.FileProviders.Abstractions, Version=1.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.FileProviders.Abstractions.1.1.0\lib\netstandard1.0\Microsoft.Extensions.FileProviders.Abstractions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.FileProviders.Physical, Version=1.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.FileProviders.Physical.1.1.0\lib\net451\Microsoft.Extensions.FileProviders.Physical.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.FileSystemGlobbing, Version=1.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.FileSystemGlobbing.1.1.0\lib\net45\Microsoft.Extensions.FileSystemGlobbing.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=1.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.1.1.0\lib\netstandard1.1\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Options, Version=1.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Options.1.1.0\lib\netstandard1.0\Microsoft.Extensions.Options.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Options.ConfigurationExtensions, Version=1.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Options.ConfigurationExtensions.1.1.0\lib\netstandard1.1\Microsoft.Extensions.Options.ConfigurationExtensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=1.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Primitives.1.1.0\lib\netstandard1.0\Microsoft.Extensions.Primitives.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Practices.Unity, Version=2.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\Microsoft.Practices.Unity.dll</HintPath>
@@ -61,26 +131,62 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\Microsoft.Practices.Unity.Interception.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NPOI, Version=1.2.4.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+    <Reference Include="NPOI, Version=2.0.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="Steeltoe.Discovery.Client, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Steeltoe.Discovery.Client.1.1.0\lib\net452\Steeltoe.Discovery.Client.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Steeltoe.Discovery.Eureka.Client, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Steeltoe.Discovery.Eureka.Client.1.1.0\lib\net452\Steeltoe.Discovery.Eureka.Client.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SuppliersHelper">
+      <HintPath>..\Lib\SuppliersHelper.dll</HintPath>
     </Reference>
     <Reference Include="Swashbuckle.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cd1bb07a5ac7c7bc, processorArchitecture=MSIL">
       <HintPath>..\packages\Swashbuckle.Core.5.6.0\lib\net40\Swashbuckle.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.Primitives, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Primitives.4.3.0\lib\net45\System.ComponentModel.Primitives.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.TypeConverter, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.TypeConverter.4.3.0\lib\net45\System.ComponentModel.TypeConverter.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Net.Http, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Net.Http, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.3.0\lib\netstandard1.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Text.Encodings.Web, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.4.3.0\lib\netstandard1.0\System.Text.Encodings.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -89,9 +195,15 @@
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="System.Web.Http.SelfHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>C:\Program Files (x86)\Microsoft ASP.NET\ASP.NET MVC 4\Assemblies\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.SelfHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>C:\Program Files (x86)\Microsoft ASP.NET\ASP.NET MVC 4\Assemblies\System.Web.Http.SelfHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>C:\Program Files (x86)\Microsoft ASP.NET\ASP.NET MVC 4\Assemblies\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.30506.0\lib\net40\System.Web.Mvc.dll</HintPath>
@@ -101,6 +213,9 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -146,24 +261,35 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\api\ApiControllerBase.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\DiscoveryClientManager.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\HtmlLang.cs" />
+    <Compile Include="App_Start\MailUserService.cs" />
     <Compile Include="App_Start\PageGenerator.cs" />
     <Compile Include="App_Start\RegisterCenter.cs" />
     <Compile Include="App_Start\RLangProvider.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
-    <Compile Include="Controllers\api\UCController.cs" />
+    <Compile Include="Controllers\api\DepartmentController.cs" />
+    <Compile Include="Controllers\api\PermissionController.cs" />
+    <Compile Include="Controllers\api\ApiEntity.cs" />
+    <Compile Include="Controllers\api\UserController.cs" />
+    <Compile Include="Controllers\api\WorkflowController.cs" />
     <Compile Include="Controllers\AttachmentController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\DDController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\EntityController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InitController.cs" />
+    <Compile Include="Controllers\KPIController.cs" />
+    <Compile Include="Controllers\MobileController.cs" />
     <Compile Include="Controllers\PageController.cs" />
     <Compile Include="Controllers\PageDesignerController.cs" />
     <Compile Include="Controllers\PermissionController.cs" />
     <Compile Include="Controllers\api\CRUDController.cs" />
+    <Compile Include="Controllers\SSOController.cs" />
     <Compile Include="Controllers\WorkflowController.cs" />
     <Compile Include="Controllers\WorkflowDesignerController.cs" />
     <Compile Include="FoxOneTips.Designer.cs">
@@ -174,9 +300,37 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AttachmentInfoVO.cs" />
+    <Compile Include="Models\BatchRunDataSource.cs" />
+    <Compile Include="Models\WorkflowAttachmentFilter.cs" />
+    <Compile Include="Models\WorkflowButtonType.cs" />
+    <Compile Include="Models\WorkflowDetailButton.cs" />
+    <Compile Include="Models\WorkflowDetailVO.cs" />
+    <Compile Include="Models\WorkflowRunParameter.cs" />
+    <Compile Include="Models\WorkflowUnreadFilter.cs" />
+    <Compile Include="Models\WorkItemVO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="App_Start\ServerConfig.cs" />
+    <Compile Include="Service References\MailAPI\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DDStatic\add.html" />
+    <Content Include="DDStatic\css\reset.css" />
+    <Content Include="DDStatic\css\task.css" />
+    <Content Include="DDStatic\detail.html" />
+    <Content Include="DDStatic\index.html" />
+    <Content Include="DDStatic\js\add.js" />
+    <Content Include="DDStatic\js\detail.js" />
+    <Content Include="DDStatic\js\dingtalk.js" />
+    <Content Include="DDStatic\js\fastclick.js" />
+    <Content Include="DDStatic\js\index-temp.js" />
+    <Content Include="DDStatic\js\index.js" />
+    <Content Include="DDStatic\js\test.js" />
+    <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="App_Browsers\IE10Fix.browser" />
     <Content Include="App_Browsers\IE11fix.browser" />
@@ -186,7 +340,10 @@
     <Content Include="images\403.png" />
     <Content Include="images\404-bg.jpg" />
     <Content Include="images\404.png" />
+    <Content Include="images\activity.png" />
+    <Content Include="images\attachment.png" />
     <Content Include="images\cat.png" />
+    <Content Include="images\check.png" />
     <Content Include="images\co.png" />
     <Content Include="images\connector.png" />
     <Content Include="images\Controls\FoxOne.Controls.AreaRangeSeries.png" />
@@ -336,13 +493,33 @@
     <Content Include="images\default\toggle-rt.gif" />
     <Content Include="images\default\warn.png" />
     <Content Include="images\down-arrow.png" />
+    <Content Include="images\end.png" />
     <Content Include="images\F.png" />
+    <Content Include="images\FileIcon\bat.png" />
+    <Content Include="images\FileIcon\doc.png" />
+    <Content Include="images\FileIcon\docx.png" />
+    <Content Include="images\FileIcon\file.png" />
+    <Content Include="images\FileIcon\jpeg.png" />
+    <Content Include="images\FileIcon\jpg.png" />
+    <Content Include="images\FileIcon\json.png" />
+    <Content Include="images\FileIcon\pdf.png" />
+    <Content Include="images\FileIcon\png.png" />
+    <Content Include="images\FileIcon\rar.png" />
+    <Content Include="images\FileIcon\sql.png" />
+    <Content Include="images\FileIcon\txt.png" />
+    <Content Include="images\FileIcon\xls.png" />
+    <Content Include="images\FileIcon\xlsx.png" />
+    <Content Include="images\FileIcon\xml.png" />
+    <Content Include="images\FileIcon\zip.png" />
+    <Content Include="images\flow.png" />
+    <Content Include="images\form.png" />
     <Content Include="images\FoxOne.Workflow.Business.DispenseDeptActivity.png" />
     <Content Include="images\FoxOne.Workflow.Business.EndActivity.png" />
     <Content Include="images\FoxOne.Workflow.Business.ParallelEndActivity.png" />
     <Content Include="images\FoxOne.Workflow.Business.ParallelStartActivity.png" />
     <Content Include="images\FoxOne.Workflow.Business.ResponseActivity.png" />
     <Content Include="images\FoxOne.Workflow.Business.SubflowActivity.png" />
+    <Content Include="images\FoxOne.Workflow.Business.WebServiceActivity.png" />
     <Content Include="images\icon1.png" />
     <Content Include="images\icon2.png" />
     <Content Include="images\icons\application.gif" />
@@ -423,6 +600,7 @@
     <Content Include="images\logo.png" />
     <Content Include="images\M.png" />
     <Content Include="images\new-flow.png" />
+    <Content Include="images\nextstep.png" />
     <Content Include="images\no2.png" />
     <Content Include="images\o3.png" />
     <Content Include="images\qq.png" />
@@ -436,10 +614,33 @@
     <Content Include="images\sort_desc_disabled.png" />
     <Content Include="images\top-bottom-bg.png" />
     <Content Include="images\user.png" />
+    <Content Include="images\white.jpg" />
+    <Content Include="images\word.png" />
     <Content Include="images\ztree\line_conn.gif" />
     <Content Include="images\ztree\loading.gif" />
     <Content Include="images\ztree\zTreeStandard.gif" />
     <Content Include="images\ztree\zTreeStandard.png" />
+    <Content Include="Mobile\approval-opinion.html" />
+    <Content Include="Mobile\backlog.html" />
+    <Content Include="Mobile\car-apply.html" />
+    <Content Include="Mobile\contacts.html" />
+    <Content Include="Mobile\css\style.css" />
+    <Content Include="Mobile\css\weui.css" />
+    <Content Include="Mobile\ectype-notice.html" />
+    <Content Include="Mobile\finished-items.html" />
+    <Content Include="Mobile\font\iconfont.svg" />
+    <Content Include="Mobile\img\M.png" />
+    <Content Include="Mobile\img\notice.jpg" />
+    <Content Include="Mobile\img\peri.png" />
+    <Content Include="Mobile\index.html" />
+    <Content Include="Mobile\leave-apply.html" />
+    <Content Include="Mobile\leave-approval.html" />
+    <Content Include="Mobile\notice-content.html" />
+    <Content Include="Mobile\notice-inform.html" />
+    <Content Include="Mobile\reserve-room.html" />
+    <Content Include="Mobile\room-reservations.html" />
+    <Content Include="Mobile\travel- approval.html" />
+    <Content Include="Mobile\travel-apply.html" />
     <Content Include="Scripts\AffairDetail.js" />
     <Content Include="Scripts\common.js" />
     <Content Include="Scripts\datepicker\calendar.js" />
@@ -506,6 +707,7 @@
     <Content Include="Scripts\Lang-zh-cn.js" />
     <Content Include="Scripts\layout\jquery.easyui.js" />
     <Content Include="Scripts\modal.js" />
+    <Content Include="Scripts\Project\test.js" />
     <Content Include="Scripts\selector.js" />
     <Content Include="Scripts\uploadify\cancel.png" />
     <Content Include="Scripts\uploadify\jquery.uploadify.js" />
@@ -529,7 +731,13 @@
     <Content Include="App_Config\MSMConfig.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="App_Config\SqlCommands\Security.config" />
+    <Content Include="App_Config\SqlCommands\Security.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Config\appsettings.json" />
+    <Content Include="Mobile\font\iconfont.eot" />
+    <Content Include="Mobile\font\iconfont.ttf" />
+    <Content Include="Mobile\font\iconfont.woff" />
     <None Include="Properties\PublishProfiles\FoxOne.pubxml" />
     <None Include="Scripts\workflowdesign\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\workflowdesign\jquery-1.8.2.js" />
@@ -538,6 +746,7 @@
     <Content Include="Scripts\workflowdesign\jquery-ui-1.8.24.min.js" />
     <Content Include="Scripts\workflowdesign\jsPlumb-2.1.0.js" />
     <Content Include="Scripts\workflowdesign\modernizr-2.6.2.js" />
+    <Content Include="Scripts\WorkflowUserSelectNew.js" />
     <Content Include="Scripts\WorkflowUserSelect.js" />
     <Content Include="Scripts\xheditor\xheditor-1.1.14-zh-cn.min.js" />
     <Content Include="Scripts\xheditor\xheditor-1.2.2.min.js" />
@@ -814,6 +1023,15 @@
     <Content Include="Scripts\xheditor\xheditor_skin\vista\ui.css" />
     <Content Include="Scripts\zepto.min.js" />
     <Content Include="Scripts\zTree\jquery.ztree.all-3.5.js" />
+    <None Include="Service References\MailAPI\configuration91.svcinfo" />
+    <None Include="Service References\MailAPI\configuration.svcinfo" />
+    <Content Include="Service References\MailAPI\FoxOne.Web.MailAPI.ReturnInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\MailAPI\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Styles\common.css" />
     <Content Include="Styles\default.css" />
     <Content Include="Styles\easyui.css" />
@@ -821,6 +1039,8 @@
     <Content Include="Styles\icon.css" />
     <Content Include="Styles\reset.css" />
     <Content Include="Styles\vote.css" />
+    <Content Include="Styles\workflow.css" />
+    <Content Include="Styles\workflowold.css" />
     <Content Include="Styles\zTreeStyle.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -851,6 +1071,28 @@
     <Content Include="Views\WorkflowDesigner\FlowImage.cshtml" />
     <Content Include="Views\Home\UserBind.cshtml" />
     <Content Include="Views\Attachment\Index.cshtml" />
+    <Content Include="Views\DD\Index.cshtml" />
+    <Content Include="Views\DD\Detail.cshtml" />
+    <Content Include="Views\DD\Add.cshtml" />
+    <Content Include="Views\DD\List.cshtml" />
+    <None Include="Service References\MailAPI\API.wsdl" />
+    <Content Include="Views\Init\Publish.cshtml" />
+    <Content Include="Views\DD\ArticleDetail.cshtml" />
+    <Content Include="Views\Attachment\AttendanceData.cshtml" />
+    <Content Include="Views\Workflow\NewIndex.cshtml" />
+    <Content Include="Views\Workflow\FlowSuccess.cshtml" />
+    <Content Include="Views\KPI\Index.cshtml" />
+    <Content Include="Views\Workflow\Batch.cshtml" />
+    <Content Include="Views\Mobile\Index.cshtml" />
+    <Content Include="Views\Mobile\StartWorkflow.cshtml" />
+    <Content Include="Views\Mobile\WorkflowIndex.cshtml" />
+    <Content Include="Views\Mobile\ToDoList.cshtml" />
+    <Content Include="Views\Mobile\DoneList.cshtml" />
+    <Content Include="Views\Mobile\ReadList.cshtml" />
+    <Content Include="Views\Mobile\NoticeDetail.cshtml" />
+    <Content Include="Views\Mobile\NoticeList.cshtml" />
+    <Content Include="Views\Mobile\MeetingRoomBook.cshtml" />
+    <Content Include="Views\Mobile\MeetingRoomBookPerView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Config\Unity\" />
@@ -859,6 +1101,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FoxOne.3VJ\FoxOne.3VJ.csproj">
+      <Project>{82e19ab1-fb6f-46b4-b627-9c3cafa5bc6e}</Project>
+      <Name>FoxOne.3VJ</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FoxOne.Business\FoxOne.Business.csproj">
       <Project>{da8a9090-8e89-4400-9426-dc59527e8933}</Project>
       <Name>FoxOne.Business</Name>
@@ -874,6 +1120,10 @@
     <ProjectReference Include="..\FoxOne.Data\FoxOne.Data.csproj">
       <Project>{660c02d0-1c07-465d-ab57-da1abc84b1d7}</Project>
       <Name>FoxOne.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FoxOne.FoxHunter\FoxOne.FoxHunter.csproj">
+      <Project>{601f92d1-4fc4-44ce-b96c-bd5f4a67b7ce}</Project>
+      <Name>FoxOne.FoxHunter</Name>
     </ProjectReference>
     <ProjectReference Include="..\FoxOne.Workflow.Business\FoxOne.Workflow.Business.csproj">
       <Project>{d7bb5255-0f42-4c7e-92e9-be15475b65ca}</Project>
@@ -893,6 +1143,7 @@
     <EmbeddedResource Include="FoxOneTips.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>FoxOneTips.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -904,7 +1155,12 @@
     <Content Include="Views\Home\Error.cshtml" />
     <Content Include="Views\_LayoutPage.cshtml" />
     <Content Include="Views\Default\Index.cshtml" />
-    <Content Include="Views\Workflow\Detail.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\MailAPI\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

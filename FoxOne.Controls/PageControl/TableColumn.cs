@@ -151,9 +151,8 @@ namespace FoxOne.Controls
             return th.ToString();
         }
 
-        public override string Render()
+        protected virtual string GetInnerHtml(TagBuilder td)
         {
-            var td = new TagBuilder("td");
             var returnValue = GetValue();
             string innerHtml = string.Empty;
             if (returnValue != null)
@@ -177,16 +176,19 @@ namespace FoxOne.Controls
                 td.Attributes.Add("title", innerHtml);
                 innerHtml = innerHtml.Substring(ShowLength, "..");
             }
-            td.InnerHtml = HtmlEncode ? HttpUtility.HtmlEncode(innerHtml) : innerHtml;
+            return HtmlEncode ? HttpUtility.HtmlEncode(innerHtml) : innerHtml;
+        }
+
+        public override string Render()
+        {
+            var td = new TagBuilder("td");
+
+            td.InnerHtml = GetInnerHtml(td);
             if (TextAlign != CellTextAlign.Center)
             {
-                td.Attributes.Add("align", TextAlign.ToString().ToLower());
+                td.Attributes.Add("style", "text-align:" + TextAlign.ToString().ToLower() + ";");
             }
-            if (!ColumnWidth.IsNullOrEmpty())
-            {
-                td.Attributes.Add("width", ColumnWidth);
-            }
-            if(Editable)
+            if (Editable)
             {
                 td.Attributes.Add("editCtrlId", FieldName);
             }

@@ -23,7 +23,10 @@ namespace FoxOne.Controls
         internal override void AddAttributes()
         {
             base.AddAttributes();
-            Attributes["TextEditor"] = "TextEditor";
+            if (Enable)
+            {
+                Attributes["TextEditor"] = "TextEditor";
+            }
         }
     }
 }

@@ -79,6 +79,10 @@ namespace FoxOne.Workflow.Business
                     }
                     i++;
                 }
+                context.FlowInstance.WorkItemNewSeq = newestItem.ItemSeq + j - 1;
+                context.FlowInstance.WorkItemNewTask = newestItem.ItemId + i - 1;
+                context.FlowInstance.CurrentActivityName = Alias;
+                Owner.UpdateInstance(context.FlowInstance);
             }
         }
     }

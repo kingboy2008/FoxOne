@@ -126,10 +126,10 @@ namespace FoxOne.Web
 
         private void AddFunction(string title, string pageId, string url)
         {
-            string permissionId = Guid.NewGuid().ToString();
+            string permissionId = Utility.GetGuid();
             DBContext<IPermission>.Insert(new Permission() { Id = permissionId, Name = title, ParentId = ParentId, Code = pageId, Url = url, Rank = 1, RentId = RentId, Type = PermissionType.Page, Status = "Enabled", LastUpdateTime = DateTime.Now });
             string defaultRoleId = DBContext<Role>.Instance.FirstOrDefault(o => o.RoleType.Name.Equals("系统管理员")).Id;
-            DBContext<IRolePermission>.Insert(new RolePermission() { Id = Guid.NewGuid().ToString(), RoleId = defaultRoleId, PermissionId = permissionId, RentId = RentId });
+            DBContext<IRolePermission>.Insert(new RolePermission() { Id =Utility.GetGuid(), RoleId = defaultRoleId, PermissionId = permissionId, RentId = RentId });
         }
 
 

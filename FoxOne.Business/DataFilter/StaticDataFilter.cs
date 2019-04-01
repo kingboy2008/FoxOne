@@ -5,21 +5,27 @@ using System.Text;
 using FoxOne.Core;
 using FoxOne.Business.Environment;
 using System.ComponentModel;
+using FoxOne.Business.Security;
+
 namespace FoxOne.Business
 {
     [DisplayName("变量过滤器")]
-    public class StaticDataFilter:DataFilterBase
+    public class StaticDataFilter : DataFilterBase
     {
+        [DisplayName("权限规则")]
+        [Description("仅当作为【数据权限过滤器】的子过滤器时有效")]
+        public string PermissionCode { get; set; }
+
         public string ColumnName { get; set; }
 
         [DisplayName("运算符")]
-        [FormField(ControlType= ControlType.DropDownList)]
+        [FormField(ControlType = ControlType.DropDownList)]
         [TypeDataSource(typeof(ColumnOperator))]
         public string Operator { get; set; }
 
         public override bool Filter(IDictionary<string, object> data)
         {
-            if(ColumnName.IsNullOrEmpty())
+            if (ColumnName.IsNullOrEmpty())
             {
                 throw new FoxOneException("ColumnName_Is_Empty");
             }
@@ -39,11 +45,11 @@ namespace FoxOne.Business
                     var columnOperator = AllColumnOperator.OperatorMapping[Operator];
                     var obj1 = data[ColumnName];
                     object obj2;
-                    if(Value.IsNotNullOrEmpty() && Env.TryResolve(Value,out obj2))
+                    if (Value.IsNotNullOrEmpty() && Env.TryResolve(Value, out obj2))
                     {
                         if (AppendType == FilterAppendType.NotNullOrEmpty)
                         {
-                            if (obj2==null || obj2.ToString().IsNullOrEmpty()) return true;
+                            if (obj2 == null || obj2.ToString().IsNullOrEmpty()) return true;
                         }
                         result = columnOperator.Operate(obj1, obj2);
                     }

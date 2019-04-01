@@ -14,9 +14,15 @@ using FoxOne.Workflow.DataAccess;
 using System.ComponentModel;
 namespace FoxOne.Workflow.Business
 {
+    /// <summary>
+    /// 审批步骤
+    /// </summary>
     [DisplayName("审批步骤")]
     public class ResponseActivity : BaseActivity, IEditForm
     {
+        /// <summary>
+        /// 知会参与者
+        /// </summary>
         [DefaultValue(typeof(UserSelectActor)), DisplayName("知会参与者")]
         public IActor NotifyActor
         {
@@ -24,10 +30,27 @@ namespace FoxOne.Workflow.Business
             set;
         }
 
+        /// <summary>
+        /// 允许自由转送
+        /// </summary>
         [DisplayName("允许自由转送")]
         public bool IsFreeApproval { get; set; }
 
+        /// <summary>
+        /// 转送部门名称
+        /// </summary>
+        [DisplayName("转送部门名称")]
+        public string FreeApprovalDeptName { get; set; }
 
+        /// <summary>
+        /// 转送角色名称
+        /// </summary>
+        [DisplayName("转送角色名称")]
+        public string FreeApprovalRoleName { get; set; }
+
+        /// <summary>
+        /// 允许多选
+        /// </summary>
         [DisplayName("允许多选")]
         public virtual bool IsMultipleSelect
         {
@@ -35,45 +58,66 @@ namespace FoxOne.Workflow.Business
             set;
         }
 
+        /// <summary>
+        /// 多选标记
+        /// </summary>
         [DisplayName("多选标记")]
         public virtual string MultipleSelectTag
         {
             get;
             set;
         }
-
+        /// <summary>
+        /// 过期规则
+        /// </summary>
         [DisplayName("过期规则"), DefaultValue(ExpireRule.ByWorkDay)]
         public virtual ExpireRule ExpireRule
         {
             get;
             set;
         }
-
+        /// <summary>
+        /// 过期天数
+        /// </summary>
         [DisplayName("过期天数")]
         public virtual int Interval { get; set; }
-
+        /// <summary>
+        /// 审批方式
+        /// </summary>
         [DisplayName("审批方式")]
         public ResponseRuleType ResponseRuleType
         {
             get;
             set;
         }
-
+        /// <summary>
+        /// 能否编辑表单
+        /// </summary>
         [DisplayName("能否编辑表单")]
         public virtual bool CanEditForm
         {
             get;
             set;
         }
-
-         [DisplayName("是否为开始节点")]
+        /// <summary>
+        /// 是否为开始节点
+        /// </summary>
+        [DisplayName("是否为开始节点")]
         public virtual bool IsRoot { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public bool ShowUserSelect(IWorkflowContext context)
         {
             return CanExitInner(context, false);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public override bool CanExit(IWorkflowContext context)
         {
 
@@ -122,7 +166,10 @@ namespace FoxOne.Workflow.Business
             }
             return returnValue;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public virtual DateTime GetExpiredTime()
         {
             if (this.Interval <= 0)
@@ -141,7 +188,10 @@ namespace FoxOne.Workflow.Business
             }
             return returnValue;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
         public override void Enter(IWorkflowContext context)
         {
             var users = Actor.Resolve(context).OrderBy(o => o.Rank);
@@ -207,6 +257,10 @@ namespace FoxOne.Workflow.Business
                 context.FlowInstance.InsertWorkItem(workflowItem);
                 i++;
             }
+            context.FlowInstance.WorkItemNewSeq = lastItem.ItemSeq + 1;
+            context.FlowInstance.WorkItemNewTask = lastItem.ItemId + i - 1;
+            context.FlowInstance.CurrentActivityName = Alias;
+            Owner.UpdateInstance(context.FlowInstance);
             SendOtherToRead(context);
         }
 
@@ -241,7 +295,10 @@ namespace FoxOne.Workflow.Business
                 }
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
         public override void Execute(IWorkflowContext context)
         {
             context.CurrentTask.Status = WorkItemStatus.Finished;
@@ -257,7 +314,10 @@ namespace FoxOne.Workflow.Business
             context.CurrentTask.FinishTime = DateTime.Now;
             context.FlowInstance.UpdateWorkItem(context.CurrentTask);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
         public override void Exit(IWorkflowContext context)
         {
             if (ResponseRuleType == ResponseRuleType.OneResponse)
@@ -284,16 +344,26 @@ namespace FoxOne.Workflow.Business
             }
         }
     }
-
+    /// <summary>
+    /// 
+    /// </summary>
     public enum ExpireRule
     {
+        /// <summary>
+        /// 
+        /// </summary>
         [Description("工作日")]
         ByWorkDay,
-
+        /// <summary>
+        /// 
+        /// </summary>
         [Description("自然日")]
         ByNaturalDay
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public enum ResponseRuleType
     {
         /// <summary>

@@ -5,6 +5,7 @@ using System.Text;
 
 namespace FoxOne.Business
 {
+    
     public class TableFieldAttribute:Attribute
     {
         public TableFieldAttribute()

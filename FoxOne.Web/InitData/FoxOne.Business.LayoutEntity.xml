@@ -17,4 +17,28 @@
     <Style />
     <LastUpdateTime>2016-08-04T09:22:21</LastUpdateTime>
   </LayoutEntity>
+  <LayoutEntity>
+    <Id>RightMiddleLeft</Id>
+    <RentId>1</RentId>
+    <Title>左中右</Title>
+    <Html>&lt;div class="treeform-left" data-options="region:'west',split:true" title="树型菜单" style="width: 220px;" layout="Left"&gt;$Left$&lt;/div&gt;
+&lt;div data-options="region:'center'" style="overflow-y:hidden;" class="main-container" layout="Center"&gt;$Center$&lt;/div&gt;
+&lt;div data-options="region:'east'" style="width:200px;" layout="Left"&gt;$Right$&lt;/div&gt;</Html>
+    <StartUpScript />
+    <Style />
+    <LastUpdateTime>2017-09-14T09:57:04</LastUpdateTime>
+  </LayoutEntity>
+  <LayoutEntity>
+    <Id>Left-Up-Down</Id>
+    <RentId>1</RentId>
+    <Title>左-右（上下）布局</Title>
+    <Html>&lt;div class="treeform-left" data-options="region:'west',split:true" title="树型菜单" style="width: 220px;" layout="Left"&gt;$Left$&lt;/div&gt;&lt;div data-options="region:'center'" style="overflow-y:hidden;" class="main-container"&gt;
+&lt;div class="treeform-left" data-options="region:'north',split:true" title="树型菜单" style="height: 400px;" layout="RightUp"&gt;$RightUp$&lt;/div&gt;&lt;div data-options="region:'south'" style="overflow-y:hidden;" layout="RightDown"&gt;
+$RightDown$
+&lt;/div&gt;
+&lt;/div&gt;</Html>
+    <StartUpScript />
+    <Style />
+    <LastUpdateTime>2017-10-14T15:00:29</LastUpdateTime>
+  </LayoutEntity>
 </ArrayOfLayoutEntity>

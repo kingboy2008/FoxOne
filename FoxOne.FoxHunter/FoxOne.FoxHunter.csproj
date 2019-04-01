@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{601F92D1-4FC4-44CE-B96C-BD5F4A67B7CE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FoxOne.FoxHunter</RootNamespace>
+    <AssemblyName>FoxOne.FoxHunter</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataSource\ProjectDataSource.cs" />
+    <Compile Include="DataSource\ProjectParaCalcualtorDataSource.cs" />
+    <Compile Include="DataSource\ProjectViewDataSrouce.cs" />
+    <Compile Include="DataSource\WorktimeDatasource.cs" />
+    <Compile Include="DataSource\WorkTimeOverviewDataSource.cs" />
+    <Compile Include="Entity\ProjectEntity.cs" />
+    <Compile Include="Entity\ProjectParameterEntity.cs" />
+    <Compile Include="Entity\WorkTimeEntity.cs" />
+    <Compile Include="Enums\WorktimeStatus.cs" />
+    <Compile Include="ProjectParaCalculator\CalculatorBase.cs" />
+    <Compile Include="ProjectParaCalculator\ProjectParamCalcualtor.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FoxOne.Business\FoxOne.Business.csproj">
+      <Project>{da8a9090-8e89-4400-9426-dc59527e8933}</Project>
+      <Name>FoxOne.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FoxOne.Controls\FoxOne.Controls.csproj">
+      <Project>{668d86b6-de7f-4ebe-9478-2f5ffec68e5f}</Project>
+      <Name>FoxOne.Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FoxOne.Core\FoxOne.Core.csproj">
+      <Project>{b6e846a3-af47-4ad5-bb01-f2a2d44540f2}</Project>
+      <Name>FoxOne.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FoxOne.Data\FoxOne.Data.csproj">
+      <Project>{660c02d0-1c07-465d-ab57-da1abc84b1d7}</Project>
+      <Name>FoxOne.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controller\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

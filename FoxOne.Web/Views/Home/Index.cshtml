@@ -9,6 +9,8 @@
     <title>@FoxOne.Core.SysConfig.SystemTitle</title>
     @System.Web.Optimization.Styles.Render("~/style/common.css")
     @System.Web.Optimization.Scripts.Render("~/script/common.js")
+
+    
 </head>
 <body style="overflow: hidden">
     <div class="container">
@@ -20,29 +22,36 @@
             </p>
             <div class="info">
                 <ul class="ul-1">
-                    <li class="user">
-                        <a class="info-btn dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);">
-                            @FoxOne.Business.Security.Sec.User.Name
-                            <em></em>
+                    <li>
+                        <a class="info-btn" href="javascript:goToReadList()" title="知会事项">
+                            <span style="color:white;font-weight:bold;">知会事项</span>
+                            <span style="color:red;font-weight:bold;">（@ViewData["ReadList"]）</span>
                         </a>
-                        <div class="ul-2 dropdown-menu" role="menu">
-                            <span>
-                                <img src="~/images/default/icon-point.png" border="0" />
-                            </span>
-                            <a href="javascript:void(0);">个人信息 </a>
-                            <a href="javascript:void(0);">更改密码</a>
-                        </div>
                     </li>
                     <li>
-                        <a href="javascript:changePassword();" onclick="changePassword()" title="邮件">
+                        <a class="info-btn" href="javascript:goToDoList()" title="待办事项">
+                            <span style="color:white;font-weight:bold;">待办事项</span>
+                            <span style="color:red;font-weight:bold;">（@ViewData["ToDoList"]）</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="info-btn" href="/Home/GoToMail" target="_blank" title="邮件">
                             <img src="~/images/default/icon-email.png" border="0" width="13" height="14" />
+                            <span style="color:white;font-weight:bold;">@FoxOne.Business.Security.Sec.User.Mail</span>
+                            <span style="color:red;font-weight:bold;">（@ViewData["UnReadMail"]）</span>
                         </a>
                     </li>
-                    <li>
+                    <li class="user">
+                        <a class="info-btn" href="javascript:goToProfile()">
+                            <img src="@FoxOne.Business.Security.Sec.User.Avatar" style="height:25px;" />
+                            @FoxOne.Business.Security.Sec.User.Name
+                        </a>
+                    </li>
+                    @*<li>
                         <a href="javascript:void(0);" title="帮助">
                             <img src="~/images/default/icon-question.png" border="0" width="13" height="14" />
                         </a>
-                    </li>
+                    </li>*@
                     <li>
                         <a href="/Home/LogOut" title="退出">
                             <img src="~/images/default/icon-out.png" border="0" width="13" height="14" />
@@ -93,6 +102,22 @@
                 onClick: this.onClick
             }
         };
+
+        function goToProfile()
+        {
+            $("#spanTitle").html("个人信息修改");
+            $("#mainFrame").attr("src", "/Page/UserProfile?_FORM_key=@FoxOne.Business.Security.Sec.User.Id");
+        }
+
+        function goToDoList() {
+            $("#spanTitle").html("我的待办事项");
+            $("#mainFrame").attr("src", "/Page/WorkItemList");
+        }
+
+        function goToReadList() {
+            $("#spanTitle").html("知会我的事项");
+            $("#mainFrame").attr("src", "/Page/WorkItemList_Copy_Copy");
+        }
 
         function removeMainBlock() {
             //$("#main-block-div").remove();

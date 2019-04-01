@@ -14,7 +14,7 @@
         pageIndex: "_PAGE_INDEX",
         pageSize: "_PAGE_SIZE",
         sortExpression: "_SORT_EXPRESSION",
-        defaultDeleteUrl:"/Entity/Delete",
+        defaultDeleteUrl: "/Entity/Delete",
         contextPath: document.location.protocol + "//" + document.location.host,
         constructor: foxOne,
         /*
@@ -29,12 +29,15 @@
                                    如果是执行/{Controller}/{Action}，则根据action返回值而定。
         async:true为异步,false为同步
         */
-        dataService: function (url, data, callback, method, async) {
+        dataService: function (url, data, callback, method, async, contentType) {
             if (async === undefined) {
                 async = true;
             }
             if (method === undefined) {
                 method = "post";
+            }
+            if (contentType === undefined) {
+                contentType = "application/x-www-form-urlencoded";
             }
             var prefixSet = [];
             var that = this;
@@ -52,6 +55,7 @@
             $.ajax({
                 type: method,
                 url: url,
+                contentType: contentType,
                 async: async,
                 data: data,
                 dataType: "json",

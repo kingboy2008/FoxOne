@@ -17,7 +17,7 @@ namespace FoxOne.Controls
     {
         public TextValueTextBox()
         {
-            DialogWidth = 700;
+            DialogWidth = 800;
             DialogHeight = 400;
         }
 
@@ -39,57 +39,63 @@ namespace FoxOne.Controls
 
         public int DialogHeight { get; set; }
 
+        private string GetDisplayText()
+        {
+            var texts = new List<string>();
+            if (!Value.IsNullOrEmpty() && !SelectType.IsNullOrEmpty())
+            {
+                var page = PageBuilder.BuildPage(SelectType);
+                if (page != null && page.Controls.Count > 0)
+                {
+                    IFieldConverter listDs = null;
+                    page.Controls.ForEach((o) =>
+                    {
+                        if (o is IListDataSourceControl)
+                        {
+                            listDs = (o as IListDataSourceControl).DataSource as IFieldConverter;
+                            return;
+                        }
+                        else if (o is ICascadeDataSourceControl)
+                        {
+                            listDs = (o as ICascadeDataSourceControl).DataSource as IFieldConverter;
+                            return;
+                        }
+                    });
+                    if (listDs != null)
+                    {
+                        if (IsMulitle)
+                        {
+                            foreach (var v in Value.Split(','))
+                            {
+                                texts.Add(listDs.Converter(Id, v, null).ToString());
+                            }
+                        }
+                        else
+                        {
+                            texts.Add(listDs.Converter(Id, Value, null).ToString());
+                        }
+                    }
+                }
+            }
+            string text = Value;
+            if (texts.Count > 0)
+            {
+                text = string.Join(",", texts.ToArray());
+            }
+            return text;
+        }
+
         public override string Render()
         {
             if (Visiable)
             {
                 AddAttributes();
-                var texts = new List<string>();
                 if (TextID.IsNullOrEmpty())
                 {
                     TextID = "{0}_Text".FormatTo(Id);
                 }
-                if(!Value.IsNullOrEmpty() && !SelectType.IsNullOrEmpty())
-                {
-                    var page = PageBuilder.BuildPage(SelectType);
-                    if (page != null && page.Controls.Count > 0)
-                    {
-                        IFieldConverter listDs = null;
-                        page.Controls.ForEach((o) =>
-                        {
-                            if (o is IListDataSourceControl)
-                            {
-                                listDs = (o as IListDataSourceControl).DataSource as IFieldConverter;
-                                return;
-                            }
-                            else if (o is ICascadeDataSourceControl)
-                            {
-                                listDs = (o as ICascadeDataSourceControl).DataSource as IFieldConverter;
-                                return;
-                            }
-                        });
-                        if(listDs!=null)
-                        {
-                            if(IsMulitle)
-                            {
-                                foreach(var v in Value.Split(','))
-                                {
-                                    texts.Add(listDs.Converter(Id, v, null).ToString());
-                                }
-                            }
-                            else
-                            {
-                                texts.Add(listDs.Converter(Id, Value, null).ToString());
-                            }
-                        }
-                    }
-                }
-                string text = Value;
-                if(texts.Count>0)
-                {
-                    text = string.Join(",", texts.ToArray());
-                }
-                var textBox = new TextBox() { Id = TextID, Name = TextID, Value = text };
+
+                var textBox = new TextBox() { Id = TextID, Name = TextID, Value = GetDisplayText() };
                 if (!Attributes.IsNullOrEmpty())
                 {
                     foreach (var attr in Attributes)
@@ -97,6 +103,7 @@ namespace FoxOne.Controls
                         textBox.Attributes[attr.Key] = attr.Value;
                     }
                 }
+                textBox.Attributes["readonly"] = "readonly";
                 textBox.Attributes["data-selector"] = SelectType;
                 textBox.Attributes["data-showtype"] = ShowType.ToString();
                 textBox.Attributes["data-multiple"] = IsMulitle.ToString().ToLower();
@@ -109,6 +116,20 @@ namespace FoxOne.Controls
                 return ContainerTemplate.FormatTo(Id, Label, result, Description);
             }
             return string.Empty;
+        }
+
+        public override string MobileValue
+        {
+            get
+            {
+                return GetDisplayText();
+            }
+        }
+
+        public override string RenderMobile()
+        {
+            //return base.RenderMobile();
+            return $"<div class=\"weui-cell {MobileControlName}\"><div class=\"weui-cell__hd\"><label class=\"weui-label\">{Label}：</label></div><div class=\"weui-cell__bd\"><input id='{Id}' name='{Name}'  type='hidden' value='{Value}' /><input id='{Id}_Text' name='{Name}_Text'  type='text'  readonly='readonly' value='{MobileValue}' /></div></div>";
         }
     }
 

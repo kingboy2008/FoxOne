@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using FoxOne.Data.Provider;
-
+using System.Text;
+using FoxOne.Core;
 namespace FoxOne.Data.Sql
 {
     /// <summary>
@@ -13,13 +14,13 @@ namespace FoxOne.Data.Sql
 
         protected SqlCommand()
         {
-            
+
         }
 
         public SqlCommand(string commandText, IDictionary<string, object> parameters)
         {
             _commandText = commandText;
-            _parameters  = parameters;
+            _parameters = parameters;
         }
 
         /// <summary>
@@ -38,6 +39,20 @@ namespace FoxOne.Data.Sql
         {
             get { return _parameters; }
             protected set { _parameters = value; }
+        }
+
+        public override string ToString()
+        {
+            var command = this;
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(command.CommandText);
+
+            foreach (var parameter in command.Parameters)
+            {
+                object value = parameter.Value;
+                sb.AppendLine("  #Parameter : '{0}' = '{1}'  Type:'{2}'".FormatTo(parameter.Key, value, value == null ? "null" : value.GetType().ToString()));
+            }
+            return sb.ToString();
         }
     }
 }

@@ -1,0 +1,204 @@
+﻿@model FoxOne.Web.WorkflowDetailVO
+@{
+    Layout = null;
+}
+@using FoxOne.Controls
+@using FoxOne.Business.Security
+@using FoxOne.Core
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv=Content-Type content="text/html;charset=utf-8">
+    <meta charset="gbk">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection" />
+    <meta content="yes" name="apple-touch-fullscreen" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link href="~/DDStatic/css/reset.css" rel="stylesheet" />
+    <link href="~/DDStatic/css/task.css" rel="stylesheet" />
+    <link href="~/Mobile/css/weui.css" rel="stylesheet" />
+    <link href="~/Mobile/css/style.css" rel="stylesheet" />
+    <title>流程审批</title>
+    <style>
+        .weui-cell__bd input {
+            border: 0px;
+            outline: 0px;
+        }
+    </style>
+</head>
+<body>
+    <div class="check-content">
+        <div class="content-head">
+            <p class="apply-title">@Model.Title</p>
+            <p class="apply-number">NO.@Model.InstanceId</p>
+        </div>
+        <div class="apply-info">
+            @Html.CustomMobileControl(Model.Form)
+        </div>
+
+        @*关联页面*@
+        @if (!Model.RelatePage.IsNullOrEmpty())
+            {
+            <style>
+                    @foreach (var p in Model.RelatePage)
+                    {
+                        @p.Style
+                    }
+            </style>
+            foreach (var rp in Model.RelatePage)
+            {
+                <div class="area">
+                    <h2><img src="~/images/form.png" style="height:24px;width:18px;margin-right:6px;" />@rp.Title</h2>
+                    @foreach (var c in rp.Children.OrderBy(o => o.Rank))
+                    {
+                        @Html.CustomControl(c)
+                    }
+                </div>
+            }
+
+
+        }
+
+        <form>
+            @if (Model.ShowAttachment && !Model.Attachment.IsNullOrEmpty())
+            {
+            <div class="weui-cells">
+                <div class="weui-cell add-file-group">
+                    @foreach (var attachment in Model.Attachment)
+                    {
+                        <div class="show-add-file">
+                            <img class="show-file-pic" src="/images/FileIcon/@attachment.Icon">
+                            @if (attachment.FileName.Length <= 5)
+                            {
+                                <p class="add-file-name">@attachment.FileName</p>
+                            }
+                            else
+                            {
+                                <p class="add-file-name">@(attachment.FileName.Substring(0, 5) + "...")</p>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+            }
+            @*<div class="weui-cells opinion-list ">
+                <div class="weui-cell chose-opinion">
+                    <a href="javascript:;" class="clickable">传阅</a>
+                </div>
+            </div>*@
+        </form>
+
+        <div class="flow-chart">
+            @foreach (var item in Model.WorkItem)
+            {
+                <div class="flow-chart-part">
+                    <img class="head-portrait" src="@item.Avatar">
+                    <div class="flow-part-content">
+                        <div class="part-content-main">
+                            <div>
+                                <p class="flow-part-title"><span>@item.ActivityName - </span><span>@item.Creator</span></p>
+                                <p class="flow-part-time">@item.ShowTime</p>
+                            </div>
+                            <p class="flow-chart-middle font-color-green">@item.StatusText</p>
+                        </div>
+                        <p class="extra-info">@item.Opinion</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <script src="~/Scripts/zepto.min.js"></script>
+    <script type="text/javascript" src="https://g.alicdn.com/dingding/open-develop/1.6.9/dingtalk.js"></script>
+    <script src="~/DDStatic/js/fastclick.js"></script>
+    <script src="~/DDStatic/js/index.js"></script>
+
+    @if (!Model.RelatePage.IsNullOrEmpty())
+    {
+        <script>
+                    @foreach(var p in Model.RelatePage)
+                    {
+                         @Html.Raw( p.ScriptBlock)
+                    }
+        </script>
+    }
+
+    <script>
+
+        var logger = {i: function (info) {},e: function (err) {dd.device.notification.alert({message:err,title:'异常提示',buttonName:'关闭'})}};
+
+
+
+        dd.ready(function() {
+
+
+            //绑定每个任务的点击事件，事件采用代理的方式
+            $(document).on('click', '.clickable', function () {
+                var _this = $(this);
+                _this.addClass('active');
+                setTimeout(function () {
+                    _this.removeClass('active');
+                }, 100);
+            });
+
+            dd.biz.navigation.setRight({
+                text: '@Sec.User.Name',
+                onSuccess: function (data) {
+                },
+                onFail: function (err) {
+                    logger.e(JSON.stringify(err));
+                }
+            });
+        });
+
+        $("#pushback").bind("click", function () {
+            RunCommand('/Workflow/BatchRun', { id: '@Model.Form.Key', action: "pushback" });
+        });
+
+        dd.error(function(err) {
+            logger.e('dd error: ' + JSON.stringify(err));
+        });
+
+        function RunCommand(url,data) {
+            $.ajax({
+                url: url,
+                data: data,
+                type: 'POST',
+                dataType: "json",
+                success: function (data, status, xhr) {
+                    if (data) {
+                        dd.device.notification.alert({
+                            message: "操作成功",
+                            title: "提示",
+                            buttonName: "确认",
+                            onSuccess: function () {
+                                window.location.reload();
+                            },
+                            onFail: function (err) { }
+                        });
+                    }
+                    else
+                    {
+                        dd.device.notification.alert({
+                            message: "操作失败",
+                            title: "提示",
+                            buttonName: "确认",
+                            onSuccess: function () {
+                                window.location.reload();
+                            },
+                            onFail: function (err) { }
+                        });
+                    }
+                },
+                error: function (xhr, errorType, error) {
+                    logger.e(errorType + "," + error);
+                }
+
+            });
+        }
+    </script>
+</body>
+</html>

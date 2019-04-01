@@ -136,36 +136,6 @@
     <Type>Page</Type>
   </Permission>
   <Permission>
-    <Id>7f729936-863e-49a2-97fa-1b006dc8afcb</Id>
-    <RentId>0</RentId>
-    <Name>批量删除</Name>
-    <Code>DEPARTMENT_LIST_BATCH_DELETE</Code>
-    <Rank>3</Rank>
-    <Status>Enabled</Status>
-    <LastUpdateTime>2016-08-05T15:19:36</LastUpdateTime>
-    <Url>btnBatchDelete</Url>
-    <ParentId>eba8e84f-4c48-451c-b7d6-72c33134cc54</ParentId>
-    <Behaviour />
-    <Icon />
-    <Description />
-    <Type>Control</Type>
-  </Permission>
-  <Permission>
-    <Id>7f8f9a24-6948-47e4-a3ee-553089975b7a</Id>
-    <RentId>0</RentId>
-    <Name>查看名称</Name>
-    <Code>DEPARTMENT_LIST_NAME</Code>
-    <Rank>5</Rank>
-    <Status>Enabled</Status>
-    <LastUpdateTime>2016-08-05T15:19:55</LastUpdateTime>
-    <Url>columnName</Url>
-    <ParentId>eba8e84f-4c48-451c-b7d6-72c33134cc54</ParentId>
-    <Behaviour />
-    <Icon />
-    <Description />
-    <Type>Control</Type>
-  </Permission>
-  <Permission>
     <Id>92cb564f-eae4-4b1b-b8ef-b528a8fc186c</Id>
     <RentId>1</RentId>
     <Name>增删改查列表</Name>
@@ -383,6 +353,92 @@
     <Type>Page</Type>
   </Permission>
   <Permission>
+    <Id>0cc0e977-ec5b-4df7-a027-f400bb789e34</Id>
+    <RentId>1</RentId>
+    <Name>会议室预订情况一览</Name>
+    <Code>MeetingRoomBookPreview</Code>
+    <Rank>10</Rank>
+    <Status>Enabled</Status>
+    <LastUpdateTime>2017-09-16T15:13:13</LastUpdateTime>
+    <Url>/Page/MeetingRoomBookPreview</Url>
+    <ParentId>bcc73ac1-3f9b-4bbe-8e28-95f6d8311857</ParentId>
+    <Behaviour />
+    <Icon>../images/icons/icon_table.gif</Icon>
+    <Description />
+    <Type>Page</Type>
+  </Permission>
+  <Permission>
+    <Id>bbdc23e7-8787-40b5-a3e0-b11002f74739</Id>
+    <RentId>1</RentId>
+    <Name>我的会议室预订</Name>
+    <Code>meetingroombookList</Code>
+    <Rank>11</Rank>
+    <Status>Enabled</Status>
+    <LastUpdateTime>2017-09-16T15:14:15</LastUpdateTime>
+    <Url>/Page/meetingroombookList</Url>
+    <ParentId>bcc73ac1-3f9b-4bbe-8e28-95f6d8311857</ParentId>
+    <Behaviour />
+    <Icon>../images/icons/icon_page.gif</Icon>
+    <Description />
+    <Type>Page</Type>
+  </Permission>
+  <Permission>
+    <Id>ce876403-3172-4433-9ac2-651d21df6167</Id>
+    <RentId>1</RentId>
+    <Name>新增</Name>
+    <Code>USER_LIST_INSERT</Code>
+    <Rank>1</Rank>
+    <Status>Enabled</Status>
+    <LastUpdateTime>2017-10-25T11:18:06</LastUpdateTime>
+    <Url>btnInsert</Url>
+    <ParentId>71ac43ea-4f4d-4278-972b-64dcdea5d982</ParentId>
+    <Description />
+    <Type>Control</Type>
+  </Permission>
+  <Permission>
+    <Id>3bc258d6-3479-4b2a-b1ae-113254eb0e60</Id>
+    <RentId>1</RentId>
+    <Name>新增</Name>
+    <Code>DEPARTMENT_LIST_INSERT</Code>
+    <Rank>4</Rank>
+    <Status>Enabled</Status>
+    <LastUpdateTime>2017-10-25T11:15:35</LastUpdateTime>
+    <Url>btnInsert</Url>
+    <ParentId>eba8e84f-4c48-451c-b7d6-72c33134cc54</ParentId>
+    <Description />
+    <Type>Control</Type>
+  </Permission>
+  <Permission>
+    <Id>0cfc63a2-c7be-4be9-9058-cf6a7bc1ebcf</Id>
+    <RentId>1</RentId>
+    <Name>个人信息修改</Name>
+    <Code>UserProfile</Code>
+    <Rank>100</Rank>
+    <Status>Enabled</Status>
+    <LastUpdateTime>2017-09-20T14:39:57</LastUpdateTime>
+    <Url>/Page/UserProfile?_FORM_KEY=$User.Id$</Url>
+    <ParentId>bcc73ac1-3f9b-4bbe-8e28-95f6d8311857</ParentId>
+    <Behaviour />
+    <Icon>../images/icons/user.gif</Icon>
+    <Description />
+    <Type>Page</Type>
+  </Permission>
+  <Permission>
+    <Id>10ac092b-866c-484b-9b29-fb6598292f98</Id>
+    <RentId>1</RentId>
+    <Name>变更管理列表</Name>
+    <Code>form_changemanagementList</Code>
+    <Rank>20</Rank>
+    <Status>Enabled</Status>
+    <LastUpdateTime>2017-09-21T11:50:21</LastUpdateTime>
+    <Url>/Page/form_changemanagementList</Url>
+    <ParentId>bcc73ac1-3f9b-4bbe-8e28-95f6d8311857</ParentId>
+    <Behaviour />
+    <Icon>../images/icons/root.gif</Icon>
+    <Description />
+    <Type>Page</Type>
+  </Permission>
+  <Permission>
     <Id>4710237e-9f79-46e9-b332-836d4b0f3fde</Id>
     <RentId>1</RentId>
     <Name>我的知会事项</Name>
@@ -409,5 +465,122 @@
     <ParentId />
     <Description />
     <Type>System</Type>
+  </Permission>
+  <Permission>
+    <Id>7a916c20-f763-48d9-9084-f924440f32a7</Id>
+    <RentId>1</RentId>
+    <Name>寄快递</Name>
+    <Code>expressList</Code>
+    <Rank>500</Rank>
+    <Status>Enabled</Status>
+    <LastUpdateTime>2017-10-20T17:59:51</LastUpdateTime>
+    <Url>/Page/expressList</Url>
+    <ParentId>bcc73ac1-3f9b-4bbe-8e28-95f6d8311857</ParentId>
+    <Description />
+    <Type>Page</Type>
+  </Permission>
+  <Permission>
+    <Id>5f088cdf-62ee-4b3a-b44a-483a1989976a</Id>
+    <RentId>1</RentId>
+    <Name>查看数据</Name>
+    <Code>EXPRESS_LIST</Code>
+    <Rank>1</Rank>
+    <Status>Enabled</Status>
+    <LastUpdateTime>2017-10-21T08:55:19</LastUpdateTime>
+    <Url />
+    <ParentId>7a916c20-f763-48d9-9084-f924440f32a7</ParentId>
+    <Description />
+    <Type>Control</Type>
+  </Permission>
+  <Permission>
+    <Id>77e1f5a1-60ed-4b4e-892f-88376003dae0</Id>
+    <RentId>1</RentId>
+    <Name>查看全部数据</Name>
+    <Code>EXPRESS_VIEW_ALL</Code>
+    <Rank>1</Rank>
+    <Status>Enabled</Status>
+    <LastUpdateTime>2017-10-21T08:55:55</LastUpdateTime>
+    <Url>and 1=1</Url>
+    <ParentId>5f088cdf-62ee-4b3a-b44a-483a1989976a</ParentId>
+    <Description />
+    <Type>Rule</Type>
+  </Permission>
+  <Permission>
+    <Id>9829fcd6-1279-4458-8074-2c0ac831a9a6</Id>
+    <RentId>1</RentId>
+    <Name>查看本人数据</Name>
+    <Code>EXPRESS_VIEW_SELF</Code>
+    <Rank>2</Rank>
+    <Status>Enabled</Status>
+    <LastUpdateTime>2017-10-21T08:56:43</LastUpdateTime>
+    <Url>and CreatorId=#Env:User.Id#</Url>
+    <ParentId>5f088cdf-62ee-4b3a-b44a-483a1989976a</ParentId>
+    <Description />
+    <Type>Rule</Type>
+  </Permission>
+  <Permission>
+    <Id>65ad5b61-65fe-4d13-b443-6cd9812babf5</Id>
+    <RentId>1</RentId>
+    <Name>特斯拉</Name>
+    <Code>Tesla</Code>
+    <Rank>2</Rank>
+    <Status>Enabled</Status>
+    <LastUpdateTime>2017-10-21T09:17:29</LastUpdateTime>
+    <Url />
+    <ParentId />
+    <Description />
+    <Type>System</Type>
+  </Permission>
+  <Permission>
+    <Id>b4c3f57f-4a04-4d88-97e1-5a644eead738</Id>
+    <RentId>1</RentId>
+    <Name>归档</Name>
+    <Code>EXPRESS_FILE</Code>
+    <Rank>3</Rank>
+    <Status>Enabled</Status>
+    <LastUpdateTime>2017-10-23T09:32:50</LastUpdateTime>
+    <Url>btnFile</Url>
+    <ParentId>7a916c20-f763-48d9-9084-f924440f32a7</ParentId>
+    <Description />
+    <Type>Control</Type>
+  </Permission>
+  <Permission>
+    <Id>1cb4b510-1e2f-444f-9c07-2b57546ea762</Id>
+    <RentId>1</RentId>
+    <Name>系统发布信息</Name>
+    <Code>releasenoteList</Code>
+    <Rank>300</Rank>
+    <Status>Enabled</Status>
+    <LastUpdateTime>2017-10-23T10:27:14</LastUpdateTime>
+    <Url>/Page/releasenoteList</Url>
+    <ParentId>bcc73ac1-3f9b-4bbe-8e28-95f6d8311857</ParentId>
+    <Description />
+    <Type>Page</Type>
+  </Permission>
+  <Permission>
+    <Id>8906a58a-a74c-45a6-b283-82577dae66dc</Id>
+    <RentId>1</RentId>
+    <Name>编辑</Name>
+    <Code>USER_LIST_EDIT</Code>
+    <Rank>2</Rank>
+    <Status>Enabled</Status>
+    <LastUpdateTime>2017-10-25T11:18:27</LastUpdateTime>
+    <Url>btnEdit</Url>
+    <ParentId>71ac43ea-4f4d-4278-972b-64dcdea5d982</ParentId>
+    <Description />
+    <Type>Control</Type>
+  </Permission>
+  <Permission>
+    <Id>dd7ea3f1-66f2-4b1a-9702-55d6c1425f80</Id>
+    <RentId>1</RentId>
+    <Name>删除</Name>
+    <Code>USER_LIST_DELETE</Code>
+    <Rank>3</Rank>
+    <Status>Enabled</Status>
+    <LastUpdateTime>2017-10-25T11:18:50</LastUpdateTime>
+    <Url>btnDelete</Url>
+    <ParentId>71ac43ea-4f4d-4278-972b-64dcdea5d982</ParentId>
+    <Description />
+    <Type>Control</Type>
   </Permission>
 </ArrayOfPermission>

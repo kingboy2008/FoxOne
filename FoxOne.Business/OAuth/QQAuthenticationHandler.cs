@@ -1,19 +1,13 @@
 ﻿using FoxOne.Core;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
 
 namespace FoxOne.Business.OAuth
 {
     public class QQAuthenticationHandler : AuthenticationHandler
     {
-
-        private readonly HttpClient _httpClient;
+       
         public QQAuthenticationHandler(AuthenticationOptions options) : base(options)
         {
-            this._httpClient = new HttpClient();
         }
         public override string GetAuthorizationUrl(AuthenticationScope scope)
         {
@@ -36,7 +30,7 @@ namespace FoxOne.Business.OAuth
                      Uri.EscapeDataString(_options.AppId),
                      Uri.EscapeDataString(_options.AppSecret),
                      Uri.EscapeDataString(ticket.Code), Uri.EscapeDataString(string.Concat(_options.Host, _options.Callback)));
-            string tokenResponse = _httpClient.GetStringAsync(url).Result.ToString();
+            string tokenResponse = HttpHelper.Get(url);
             Logger.Info("请求url：{0}，返回值：{1}", url, tokenResponse);
             if (tokenResponse.IndexOf('&') > 0)
             {
@@ -62,28 +56,13 @@ namespace FoxOne.Business.OAuth
             string tokenEndpoint = string.Concat(_options.AuthorizeUrl, "/oauth2.0/me?access_token={0}");
             var url = string.Format(
                      tokenEndpoint, ticket.AccessToken);
-            string tokenResponse = _httpClient.GetStringAsync(url).Result.ToString();
+            string tokenResponse = HttpHelper.Get(url);
             Logger.Info("请求url：{0}，返回值：{1}", url, tokenResponse);
             string strJson = tokenResponse.Replace("callback(", "").Replace(");", "");
             var payload = JSONHelper.Deserialize(strJson, typeof(Callback)) as Callback;
             ticket.OpenId = payload.openid;
             return ticket;
         }
-
-        /*
-        public override IUser GetUserInfo(AuthenticationTicket ticket)
-        {
-            string tokenEndpoint = string.Concat(_options.AuthorizeUrl, "/user/get_user_info?access_token={0}&oauth_consumer_key={1}&openid={2}");
-            var url = string.Format(
-                     tokenEndpoint, ticket.AccessToken, _options.AppId, ticket.OpenId);
-            string tokenResponse = _httpClient.GetStringAsync(url).Result.ToString();
-            Qzone qzone = JSONHelper.Deserialize(tokenResponse,typeof(Qzone)) as Qzone;
-            return new User
-            {
-                Id = ticket.OpenId,
-                Name = qzone.nickname
-            };
-        }*/
 
         /// <summary>
         /// 根据access_token获得对应用户身份的openid

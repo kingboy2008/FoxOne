@@ -1,19 +1,13 @@
 ﻿using FoxOne.Core;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
 
 namespace FoxOne.Business.OAuth
 {
     public class DingDingAuthenticationHandler : AuthenticationHandler
     {
-        private readonly HttpClient _httpClient;
         public DingDingAuthenticationHandler(AuthenticationOptions options) : base(options)
         {
-            this._httpClient = new HttpClient();
+
         }
 
         public override string GetAuthorizationUrl(AuthenticationScope scope)
@@ -27,7 +21,7 @@ namespace FoxOne.Business.OAuth
                      tokenEndpoint,
                      Uri.EscapeDataString(_options.AppId),
                      Uri.EscapeDataString(_options.AppSecret));
-            string tokenResponse = _httpClient.GetStringAsync(url).Result.ToString();
+            string tokenResponse = HttpHelper.Get(url);
             Logger.Info("请求url：{0}，返回值：{1}", url, tokenResponse);
             var payload = JSONHelper.Deserialize(tokenResponse, typeof(Callback)) as Callback;
             ticket.AccessToken = payload.access_token;
@@ -38,11 +32,7 @@ namespace FoxOne.Business.OAuth
             string tokenEndpoint = string.Concat(_options.AuthorizeUrl, "/sns/get_persistent_code?access_token={0}");
             var url = string.Format(
                      tokenEndpoint, ticket.AccessToken);
-            HttpContent content = new StringContent("{{\"tmp_auth_code\": \"{0}\"}}".FormatTo(ticket.Code))
-            {
-                Headers = { ContentType = new MediaTypeHeaderValue("application/json") }
-            };
-            string tokenResponse = _httpClient.PostAsync(url, content).Result.Content.ReadAsStringAsync().Result;
+            string tokenResponse = HttpHelper.Post(url, "{{\"tmp_auth_code\": \"{0}\"}}".FormatTo(ticket.Code));
             Logger.Info("请求url：{0}，返回值：{1}", url, tokenResponse);
             var payload = JSONHelper.Deserialize(tokenResponse, typeof(Callback)) as Callback;
             ticket.OpenId = payload.openid;

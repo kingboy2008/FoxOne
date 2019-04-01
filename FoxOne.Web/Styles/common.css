@@ -791,11 +791,11 @@ input {
     transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 }
 
-@media screen and (min-width:900px){
-    .form-horizontal textarea.form-control{width:640px;height:100px;}
+@media screen and (min-width:500px){
+    .form-horizontal textarea.form-control{width:300px;height:100px;}
 }
-@media screen and (min-width:950px){
-    .form-horizontal textarea.form-control{width:735px;height:100px;}
+@media screen and (min-width:900px){
+    .form-horizontal textarea.form-control{width:700px;height:100px;}
 }
 
 .help-block {
@@ -855,10 +855,6 @@ input {
     margin-top: 0;
     margin-bottom: 0;
     vertical-align: middle;
-}
-
-.form-horizontal input[type="file"] {
-    margin-left: 20px;
 }
 
 .form-inline .form-group-block {

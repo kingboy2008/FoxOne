@@ -1,0 +1,560 @@
+﻿@model FoxOne.Web.Controllers.WikiZoneContentViewModel
+@{
+    Layout = null;
+}
+@using FoxOne.Core
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>@Model.PathList.Last()["Name"]</title>
+    <meta http-equiv=Content-Type content="text/html;charset=utf-8">
+    <meta charset="gbk">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="copyright" content="" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+
+    <link href="~/DDStatic/css/reset.css" rel="stylesheet" />
+    <link href="~/DDStatic/css/task.css" rel="stylesheet" />
+    <link href="~/Mobile/css/common.css" rel="stylesheet" type="text/css" />
+    <link href="~/Mobile/css/wiki.css" rel="stylesheet" />
+    <style>
+        init-hide {
+            display:none;
+        }
+    </style>
+</head>
+<body>
+    <div class="search_top">
+        <div class="search">
+            <input class="sub fl" type="submit" value="">
+            <input id="keyword" class="text fl" type="text" placeholder="请输入关键词">
+        </div>
+        <a href="javascript:search()" class="search-btn" >搜索</a>
+    </div>
+    <div class="breadcrumb">
+        <ul>
+            @*<li>
+                <a href="">
+                    本地
+                    <i class="breadcrumb__arrow"></i>
+                </a>
+
+            </li>
+            <li>
+                <a href="">文件夹<i class="breadcrumb__arrow"></i></a>
+            </li>
+            <li>
+                <a><cite>正文</cite><i class="breadcrumb__arrow"></i></a>
+            </li>*@
+            @foreach (var path in Model.PathList)
+            {
+                <li pathId="@path["Id"]">
+                    <a><cite>@path["Name"]</cite><i class="breadcrumb__arrow"></i></a>
+                </li>
+            }
+        </ul>
+    </div>
+
+    <div class="panel panel_access par-dir">
+        <div class="panel__bd" parId="@Model.CurrentDir["Id"]"  delp="@Model.CurrentDir["btnDelete"]" addp="@Model.CurrentDir["btnEdit"]" upp="@Model.CurrentDir["btnEdit"]" >
+            @*<a href="javascript:void(0);" class="media-box media-box_appmsg">
+                <div class="media-box__hd">
+                    <img class="media-box__thumb" src="images/storage.png" alt="">
+                </div>
+                <div class="media-box__bd">
+                    <h4 class="media-box__title">后台技术培训部</h4>
+                </div>
+                <span class="cell__ft"></span>
+            </a>
+            <a href="javascript:void(0);" class="media-box media-box_appmsg">
+                <div class="media-box__hd">
+                    <img class="media-box__thumb" src="images/folder.png" alt="">
+                </div>
+                <div class="media-box__bd">
+                    <h4 class="media-box__title">后台技术培训部</h4>
+                </div>
+                <span class="cell__ft"></span>
+            </a>
+            <a href="javascript:void(0);" class="media-box media-box_appmsg">
+                <div class="media-box__hd">
+                    <img class="media-box__thumb" src="images/text.png" alt="">
+                </div>
+                <div class="media-box__bd">
+                    <h4 class="media-box__title">智造中心-项目实施部</h4>
+                </div>
+                <span class="cell__ft"></span>
+            </a>*@
+            @if (!Model.DirList.IsNullOrEmpty())
+            {
+                foreach (var dir in Model.DirList)
+                {
+                    <a href="javascript:void(0);" item-type="dir" dirId="@dir["Id"]" class="media-box media-box_appmsg dir-item" delp="@dir["btnDelete"]" addp="@Model.CurrentDir["btnEdit"]" upp="@Model.CurrentDir["btnEdit"]">
+                        <div class="media-box__hd">
+                            <img class="media-box__thumb" src="/images/folder.png" alt="">
+                        </div>
+                        <div class="media-box__bd">
+                            <h4 class="media-box__title">@dir["Title"]</h4>
+                        </div>
+                        <span class="cell__ft"></span>
+                    </a>
+                }
+            }
+            @if (!Model.DocList.IsNullOrEmpty())
+            {
+                foreach (var doc in Model.DocList)
+                {
+                <a href="javascript:void(0);" item-type="doc" docId="@doc["Id"]" class="media-box media-box_appmsg dir-item" delp="@doc["btnDelete"]" downp="@doc["btnAttachDownload"]" prep="@doc["AttachRepeater"]" sharep="@doc["btnEdit"]">
+                    <div class="media-box__hd" >
+                        <img class="media-box__thumb" src="/images/text.png" alt="">
+                    </div>
+                    <div class="media-box__bd">
+                        <h4 class="media-box__title">@doc["Title"]</h4>
+                    </div>
+                    <span class="cell__ft"></span>
+                </a>
+                }
+            }
+        </div>
+    </div>
+    <div class="operation">
+        <ul class="operation__nav">
+            <li class="operation__item" onclick="refresh()">
+                <span><img src="/images/reload.png"></span>
+                刷新
+            </li>
+            <li class="operation__item init-hide" prel="addp"  onclick="create()">
+                <span><img src="/images/new.png"></span>
+                新建
+            </li>
+            <li class="operation__item init-hide" prel="upp"  onclick="upload()">
+                <span><img src="/images/upload.png"></span>
+                上传
+            </li>
+            <li class="operation__item init-hide" prel="delp"  onclick="deleteCurrent()">
+                <span><img src="/images/delete.png"></span>
+                删除
+            </li>
+            <li class="operation__item init-hide" prel="sharep"  onclick="share()">
+                <span><img src="/images/share.png"></span>
+                分享
+            </li>
+            <li class="operation__item init-hide" prel="downp" onclick="download()">
+                <span ><img src="/images/download.png"></span>
+                下载
+            </li>
+            <li class="operation__item"  onclick="goInto()">
+                <span><img src="/images/open.png"></span>
+                打开
+            </li>
+        </ul>
+    </div>
+
+
+    <form id="uploadForm" style="display:none" name="uploadForm" action="/Wiki/ImportAndCreate" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" id="file" class="uploader__input" />
+    </form>
+    <!-- 弹出层 -->
+    <div class="dialog-mask"></div>
+    <div id="newDir" class="dialog dialog__new" style="display: none">
+        <div class="dialog__content">
+            <p class="dialog__title">新建文件夹</p>
+            <form>
+                <input id="dirName" type="text" class="dialog__ipt mb20" name="name" placeholder="文件夹名称">
+                <input id="rank" type="text" class="dialog__ipt mb20" name="number" placeholder="文件夹序号">
+            </form>
+            <div class="btn__box">
+                <a href="javascript:viod(0)" onclick="$('.dialog-mask').hide();$('#newDir').hide();">取消</a>
+                <a href="javascript:createDirRequest()" class="ml20">保存</a>
+            </div>
+        </div>
+    </div>  
+    <div id="shareDoc" class="dialog dialog__new" style="display: none">
+        <div class="dialog__content">
+            <p class="dialog__title">分享文章</p>
+            <form>
+                <input id="pw1" type="password" class="dialog__ipt mb20" name="name" placeholder="分享密码">
+                <input id="pw2" type="password" class="dialog__ipt mb20" name="number" placeholder="确认密码">
+            </form>
+            <div class="btn__box">
+                <a href="javascript:viod(0)" onclick="$('.dialog-mask').hide();$('#shareDoc').hide();">取消</a>
+                <a href="javascript:shareRequest()" class="ml20">分享</a>
+            </div>
+        </div>
+    </div>  
+
+    <script src="~/Scripts/zepto.min.js"></script>
+    <script type="text/javascript" src="https://g.alicdn.com/dingding/open-develop/1.6.9/dingtalk.js"></script>
+    <script src="~/DDStatic/js/fastclick.js"></script>
+    <script src="~/DDStatic/js/index.js"></script>
+    <script>
+
+        ///操作区域是：父级、文件夹、文件各自都有权限attr
+        /// 操作按钮的显示与否，取决当前触发元素所带的权限有那些，通过prel与attr来关联
+
+        //基础路径长度
+        var baseLength = 2;
+        var currEle;
+        var selType = $(".breadcrumb ul li").length > baseLength ? 'parent-dir' : 'zone';
+
+        function setRootSize() {
+            var deviceWidth = document.documentElement.clientWidth;
+            if (deviceWidth > 750) { deviceWidth = 750; }
+            document.documentElement.style.fontSize = deviceWidth / 7.5 + 'px';
+            var h = $(window).height() - $(".search_top").height() - $(".breadcrumb").height() - $(".operation").height();
+
+            $(".panel").css("overflow-y", "scroll").height(h);
+        }
+        setRootSize();
+        window.addEventListener('resize', function () {
+            setRootSize();
+        }, false);
+        $(function () {
+            setRootSize();
+
+            $("#file").bind("change", uploadRequest);
+            $(".panel__bd").attr("upp", selType == "zone" ? "0" : "1");//设置上传权限
+            setRootSize();
+            $("[dirId]").bind("click", function () {
+                location = "/Mobile/WikiDir?zoneId=@Model.ZoneId&dirId=" + $(this).attr("dirId");
+            });
+            $("[docId]").bind("click", function () {
+                location = "/Mobile/DocContent?docId=" + $(this).attr("docId");
+            });
+            $("[pathId]").bind("click", function () {
+                if ($(this).attr("pathId") == "Area") {
+                    location = "/Mobile/WikiAreaList";
+                }
+                else {
+                    location = "/Mobile/WikiDir?zoneId=@Model.ZoneId&dirId=" + $(this).attr("pathId");
+                }
+            });
+            refreshOptArea($(".par-dir").children("div"));
+            $(".par-dir").bind("click", function (e) {
+                currEle = $(this).children("div");
+                selType = $(".breadcrumb ul li").length > baseLength ?'parent-dir':'zone';
+                refreshOptArea($(this).children("div"));
+                e.stopPropagation();
+            });
+            $(".dir-item img").bind("click", function (e) {
+                currEle = $(this).closest("a");
+                selType = $(this).closest("a").attr("item-type");
+                refreshOptArea($(this).closest("a"));
+                e.stopPropagation();
+            });
+        });
+        dd.ready(function () {
+
+
+
+            dd.biz.navigation.setRight({
+                text: '@FoxOne.Business.Security.Sec.User.Name',
+                onSuccess: function (data) {
+                },
+                onFail: function (err) {
+                    logger.e(JSON.stringify(err));
+                }
+            });
+
+            //Page.defaultBackEvent();
+        });
+
+        function refreshOptArea(j) {
+            $("[prel]").hide();
+            $("[prel]").each(function () {
+                var attr = $(this).attr("prel");
+                if (j.attr(attr) == "1")
+                {
+                    $(this).show();
+                }
+
+            });
+        }
+
+
+        function search() {
+            var kw = $("#keyword").val();
+            if (kw.length == 0) {
+                alert("请输入关键字");
+                return;
+            }
+            if (selType == 'zone') {
+                window.location = "/Mobile/WikiDir?zoneId=@Model.ZoneId&keyword=" + kw;
+            }
+            if (selType == 'parent-dir')
+            {
+                window.location = "/Mobile/WikiDir?zoneId=@Model.ZoneId&dirId=@Model.CurrentDir["Id"]&keyword=" + kw;
+            }
+        }
+
+        function create() {
+            $('.dialog-mask').show();
+            $('#newDir').show();
+        }
+
+        function refresh() {
+            window.location.reload();
+        }
+
+        function goInto() {
+            if (selType == 'zone') {
+                window.location = "/Mobile/WikiDir?zoneId=@Model.ZoneId";
+            }
+            else if (selType == 'doc') {
+                window.location = "/Mobile/DocContent?docId=" + currEle.attr("docId");
+            }
+            else if (selType == 'dir') {
+                window.location = "/Mobile/WikiDir?zoneId=@Model.ZoneId&dirId=" + currEle.attr("dirId");
+            }
+            else if (selType == 'parent-dir')
+            {
+                window.location = "/Mobile/WikiDir?zoneId=@Model.ZoneId&dirId=@Model.CurrentDir["Id"]" ;
+            }
+
+
+        }
+
+        function upload() {
+            $("#file")[0].click();
+        }
+
+        function uploadRequest() {
+            var form = $(this).closest("form");
+            var a = {};
+            a.file = this.files[0];
+            a.relateId = "@Model.CurrentDir["Id"]";
+            var formData = new FormData();
+            formData.append("ParentId", a.relateId);
+            formData.append("file", a.file);
+            formData.append("ZoneId",'@Model.ZoneId');
+
+            var oReq = new XMLHttpRequest();
+            oReq.open("POST", form.attr("action"), true);
+            oReq.onload = function (oEvent) {
+                if (oReq.status == 200) {
+                    try {
+                        var j = JSON.parse(oReq.responseText);
+                        if (j && j.Data == true) {
+                            alert('附件上传成功');
+                            location.reload();
+                        }
+                        else
+                        {
+                            throw {};
+                        }
+                    }
+                    catch(ex)
+                    {
+                        alert("上传失败");
+                    }
+                } else {
+                    alert(oReq, status);
+                }
+            };
+            oReq.send(formData);
+        }
+
+        function deleteCurrent() {
+            var delId = "";
+            var delName = "";
+            var pageId = "directoryEdit";
+            var ctrlId = "documentEditForm";
+            if (selType == 'zone') {
+                alert('移动端不支持空间删除');
+                return;
+                delId = '@Model.ZoneId';
+                delName = '@Model.CurrentDir["Title"]';
+
+                pageId = "zoneEdit";
+                ctrlId = "zoneEditForm";
+            }
+            else if (selType == 'doc') {
+                delId = currEle.attr("docId");
+                delName = currEle.find("h4").text();
+
+                pageId = "documentEdit";
+                ctrlId = "documentEditForm";
+            }
+            else if (selType == 'dir') {
+                delId = currEle.attr("dirId");
+                delName = currEle.find("h4").text();
+            }
+            else if (selType == 'parent-dir')
+            {
+                delId='@Model.CurrentDir["Id"]';
+                delName = '@Model.CurrentDir["Title"]';
+            }
+            if (confirm("删除后无法恢复，你确定要删除 " + delName))
+            {
+                //alert('删除完毕');
+                //判断是否 zone 或者 parent-dir 决定是跳转还是刷新
+
+                var data = {
+                    _FORM_KEY: delId,
+
+                    //_FORM_VIEW_MODE: 'Insert',
+                    _PAGE_ID: pageId,
+                    _CTRL_ID: ctrlId,
+
+                };
+                $.ajax({
+                    url: '/Entity/Delete',
+                    data: data,
+                    type: 'POST',
+                    dataType: "json",
+                    success: function (data, status, xhr) {
+                        if (data) {
+                            var err = data.Result ? "删除成功" : data.ErrorMessage;
+                            dd.device.notification.alert({
+                                message: err,
+                                title: "提示",
+                                buttonName: "确认",
+                                onSuccess: function () {
+                                    if (selType == "parent-dir") {
+                                        var dirId = $(".breadcrumb ul li").eq(-2).attr("pathId");
+                                        window.location = '/Mobile/WikiDir?zoneId=@Model.ZoneId&dirId=' + dirId;
+                                    }
+                                    else
+                                    {
+                                        window.reload();
+                                    }
+                                },
+                                onFail: function (err) { }
+                            });
+                        }
+                    },
+                    error: function (xhr, errorType, error) {
+                        logger.e(errorType + "," + error);
+                        alert("操作出错");
+                    }
+                });
+            }
+        }
+
+        function share() {
+
+            $('.dialog-mask').show();
+            $('#shareDoc').show();
+        }
+
+        function shareRequest() {
+            var pw1 = $("#pw1").val();
+            var pw2 = $("#pw2").val();
+            if (pw1.length == 0 || pw2.length == 0)
+            {
+                alert(" 请输入完整信息");
+                return;
+            }
+            if (pw2 != pw1)
+            {
+                alert("密码不一致");
+            }
+            var shareId = '@FoxOne.Core.Utility.GetGuid().Substring(0,18)@DateTime.Now.ToString("yyyyMMddHHmmss")';//32- 14;
+            var data = {
+                DocId: currEle.attr("docId"),
+                ShareUser: '@FoxOne.Business.Security.Sec.User.Id',
+                ValidateCode: pw1,
+                StartTime: '@DateTime.Now.Date.ToString("yyyy-MM-dd")',
+                EndTime: '@DateTime.Now.Date.AddMonths(1).ToString("yyyy-MM-dd")',
+                Status: 'Enabled',
+                Id: shareId,
+
+                _FORM_VIEW_MODE: 'Insert',
+                _PAGE_ID: 'shareEdit',
+                _CTRL_ID:'shareEditForm',
+            };
+
+            $.ajax({
+                url: '/Entity/Edit',
+                data: data,
+                type: 'POST',
+                dataType: "json",
+                success: function (data, status, xhr) {
+                    if (data) {
+                        dd.setClipboard({
+                            text:"http://oa.3weijia.com/Wiki/ShareDocument?shareCode="+ shareId,
+                        });
+                        var err = data.Result ? "分享成功,地址已拷贝入粘贴板" : data.ErrorMessage;
+                        dd.device.notification.alert({
+                            message: err,
+                            title: "提示",
+                            buttonName: "确认",
+                            onSuccess: function () { window.reload(); },
+                            onFail: function (err) { }
+                        });
+                    }
+                },
+                error: function (xhr, errorType, error) {
+                    logger.e(errorType + "," + error);
+                    alert("操作出错");
+                }
+            });
+        }
+
+        function createDirRequest() {
+            var dirName = $("#dirName").val();
+            var rank = $("#rank").val();
+
+            if (dirName.length == 0)
+            {
+                alert("请输入文件夹名称");
+                return;
+            }
+            if (rank.length == 0)
+            {
+                rank = 0;
+            }
+            var data = {
+                _FORM_VIEW_MODE: 'Insert',
+                _PAGE_ID: 'directoryEdit',
+                _CTRL_ID: 'documentEditForm',
+
+                Title: dirName,
+                State: '1',
+                ParentId: selType == 'zone' ? "" : currEle.attr("dirId"),
+                Rank: rank,
+                ZoneId: '@Model.ZoneId',
+                CreatorId: '@FoxOne.Business.Security.Sec.User.Id',
+                CreateTime: '@DateTime.Now.Date.ToString("yyyy-MM-dd")',
+                LastUpdator: '@FoxOne.Business.Security.Sec.User.Id',
+                LastUpdateTime:'@DateTime.Now.Date.ToString("yyyy-MM-dd")',
+            };
+
+            $.ajax({
+                url: '/Entity/Edit',
+                data: data,
+                type: 'POST',
+                dataType: "json",
+                success: function (data, status, xhr) {
+                    if (data) {
+
+                        var err = data.Result ? "新建成功" : data.ErrorMessage;
+                        dd.device.notification.alert({
+                            message: err,
+                            title: "提示",
+                            buttonName: "确认",
+                            onSuccess: function () { window.reload(); },
+                            onFail: function (err) { }
+                        });
+                    }
+                },
+                error: function (xhr, errorType, error) {
+                    logger.e(errorType + "," + error);
+                    alert("操作出错");
+                }
+            });
+        }
+
+        function download() {
+            window.open("/Wiki/BatchDownload?docId=" + currEle.attr("dirId"));
+        }
+    </script>
+</body>
+</html>

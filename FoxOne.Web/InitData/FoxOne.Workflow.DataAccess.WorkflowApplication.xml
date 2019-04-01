@@ -1,5 +1,21 @@
 <?xml version="1.0"?>
-<ArrayOfWorkflowApplication xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<ArrayOfWorkflowApplication xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <WorkflowApplication>
+    <Id>1</Id>
+    <RentId>1</RentId>
+    <Name>变更申请流程</Name>
+    <WorkflowId>1</WorkflowId>
+    <Type>XZ</Type>
+    <FormType>form_changemanagementEdit</FormType>
+    <InstanceTitleTemplate>$Form.Title$</InstanceTitleTemplate>
+    <Icon />
+    <DocUrl />
+    <Description />
+    <DepartmentType />
+    <RoleType />
+    <NeedAttachement>true</NeedAttachement>
+    <Status>Enabled</Status>
+  </WorkflowApplication>
   <WorkflowApplication>
     <Id>2</Id>
     <RentId>1</RentId>
@@ -14,6 +30,38 @@
     <DepartmentType />
     <RoleType />
     <NeedAttachement>true</NeedAttachement>
-    <Status>Enabled</Status>
+    <Status>Disabled</Status>
+  </WorkflowApplication>
+  <WorkflowApplication>
+    <Id>3</Id>
+    <RentId>1</RentId>
+    <Name>费用报销流程</Name>
+    <WorkflowId>3</WorkflowId>
+    <Type>XZ</Type>
+    <FormType>form_reimbursementapplyEdit</FormType>
+    <InstanceTitleTemplate>$User.Name$的费用报销单申请</InstanceTitleTemplate>
+    <Icon />
+    <DocUrl />
+    <Description />
+    <DepartmentType />
+    <RoleType />
+    <NeedAttachement>true</NeedAttachement>
+    <Status>Disabled</Status>
+  </WorkflowApplication>
+  <WorkflowApplication>
+    <Id>4</Id>
+    <RentId>1</RentId>
+    <Name>用车申请流程</Name>
+    <WorkflowId>5</WorkflowId>
+    <Type>XZ</Type>
+    <FormType>form_vehicalapplyEdit</FormType>
+    <InstanceTitleTemplate>$User.Name$的用车申请</InstanceTitleTemplate>
+    <Icon />
+    <DocUrl />
+    <Description />
+    <DepartmentType />
+    <RoleType />
+    <NeedAttachement>true</NeedAttachement>
+    <Status>Disabled</Status>
   </WorkflowApplication>
 </ArrayOfWorkflowApplication>

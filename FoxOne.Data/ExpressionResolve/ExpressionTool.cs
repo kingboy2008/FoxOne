@@ -354,6 +354,8 @@ namespace FoxOne.Data
                 case ExpressionType.Multiply:
                 case ExpressionType.MultiplyChecked:
                     return "*";
+                case ExpressionType.Convert:
+                    return string.Empty;
                 default:
                     throw new FoxOneException("Not Suppost ExpressionType:".FormatTo(expressiontype.ToString()));
             }

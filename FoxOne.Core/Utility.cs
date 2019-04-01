@@ -140,5 +140,10 @@ namespace FoxOne.Core
             catch { }
             return userIP;
         }
+
+        public static string GetGuid()
+        {
+            return Guid.NewGuid().ToString().Replace("-", "");
+        }
     }
 }

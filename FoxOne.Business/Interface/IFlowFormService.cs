@@ -10,5 +10,7 @@ namespace FoxOne.Business
         bool CanRunFlow();
 
         IDictionary<string, object> SetParameter();
+
+        void OnFlowFinish(string instanceId, string dataLocator, bool agree, string denyOption);
     }
 }

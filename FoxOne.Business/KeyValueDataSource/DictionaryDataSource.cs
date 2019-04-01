@@ -22,14 +22,17 @@ namespace FoxOne.Business
         public override IEnumerable<TreeNode> SelectItems()
         {
             var returnValue = new List<TreeNode>();
-            var dic = DBContext<DataDictionary>.Instance.FirstOrDefault(o => o.Code.Equals(DictionaryCode, StringComparison.OrdinalIgnoreCase));
+            var dic = DBContext<DataDictionary>.Instance.FirstOrDefault(o => o.Code.Equals(DictionaryCode, StringComparison.OrdinalIgnoreCase)&& o.Status==DefaultStatus.Enabled.ToString());
             if (dic != null)
             {
                 if (!dic.Items.IsNullOrEmpty())
                 {
                     foreach (var d in dic.Items)
                     {
-                        returnValue.Add(new TreeNode() { Text = d.Name, Value = d.Code });
+                        if (d.Status == DefaultStatus.Enabled.ToString())
+                        {
+                            returnValue.Add(new TreeNode() { Text = d.Name, Value = d.Code });
+                        }
                     }
                 }
                 return returnValue;

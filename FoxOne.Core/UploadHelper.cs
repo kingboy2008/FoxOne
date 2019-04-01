@@ -36,7 +36,7 @@ namespace FoxOne.Core
             }
             if (BaseDirectory.IsNullOrEmpty())
             {
-                BaseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+                BaseDirectory =AppDomain.CurrentDomain.BaseDirectory; /*SysConfig.AppSettings["FileSystem"];*/
             }
 
             if (!BaseDirectory.EndsWith("\\"))

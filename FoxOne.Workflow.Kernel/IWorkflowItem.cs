@@ -6,17 +6,14 @@
  * *******************************************************/
 using FoxOne.Core;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
 
 namespace FoxOne.Workflow.Kernel
 {
     /// <summary>
     /// 流程工作项接口
     /// </summary>
-    public interface IWorkflowItem:IEntity
+    public interface IWorkflowItem : IEntity
     {
         /// <summary>
         /// 流程实例号
@@ -154,78 +151,87 @@ namespace FoxOne.Workflow.Kernel
         string StatusText { get; }
     }
 
+    /// <summary>
+    /// 工作项状态
+    /// </summary>
     public enum WorkItemStatus
     {
         /// <summary>
         /// 送达
         /// </summary>
         [Description("送达")]
-        Sent=0,
+        Sent = 0,
 
         /// <summary>
         /// 接收
         /// </summary>
-        [Description("已读")]
-        Received=1,
+        [Description("接收")]
+        Received = 1,
 
         /// <summary>
         /// 已阅
         /// </summary>
         [Description("已读")]
-        Readed=2,
+        Readed = 2,
 
         /// <summary>
         /// 完成
         /// </summary>
         [Description("完成")]
-        Finished=3,
+        Finished = 3,
 
         /// <summary>
         /// 自动完成
         /// </summary>
         [Description("自动完成")]
-        AutoFinished,
+        AutoFinished = 4,
 
         /// <summary>
         /// 暂停
         /// </summary>
         [Description("暂停")]
-        Pause,
+        Pause = 5,
 
         /// <summary>
-        /// 警告
+        /// 终止审批
         /// </summary>
-        [Description("警告")]
-        Alert,
+        [Description("终止审批")]
+        ForceEnd = 6,
 
         /// <summary>
-        /// 过期
+        /// 退回拟稿人
         /// </summary>
-        [Description("过期")]
-        Expire,
+        [Description("退回拟稿人")]
+        BackToRoot = 7,
 
         /// <summary>
         /// 撤回
         /// </summary>
         [Description("撤回")]
-        RollBack,
+        RollBack = 8,
 
         /// <summary>
         /// 被撤回
         /// </summary>
         [Description("被撤回")]
-        BeRollBack,
+        BeRollBack = 9,
+
+        /// <summary>
+        /// 退回上一步
+        /// </summary>
+        [Description("退回上一步")]
+        Pushback = 10,
 
         /// <summary>
         /// 转签
         /// </summary>
         [Description("转签")]
-        Assigned,
+        Assigned = 11,
 
         /// <summary>
         /// 被跳转
         /// </summary>
         [Description("被跳转")]
-        BeSwitched
+        BeSwitched = 12
     }
 }

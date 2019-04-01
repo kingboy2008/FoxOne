@@ -5,6 +5,10 @@ namespace FoxOne.Business.Security
     public sealed class Sec
     {
         private static ISecurityProvider _provider;
+
+        /// <summary>
+        /// 当前登录用户
+        /// </summary>
         public static IUser User
         {
             get { return Provider.GetCurrentUser(); }
@@ -18,6 +22,9 @@ namespace FoxOne.Business.Security
             }
         }
 
+        /// <summary>
+        /// 当前登录用户是否为超级管理员
+        /// </summary>
         public static bool IsSuperAdmin
         {
             get

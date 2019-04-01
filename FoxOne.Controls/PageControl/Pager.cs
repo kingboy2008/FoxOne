@@ -43,13 +43,13 @@ namespace FoxOne.Controls
         public int CurrentPageIndex { get; set; }
 
         /// <summary>
-        /// 翻页组件
+        /// 预定义每页显示记录
         /// </summary>
         [DisplayName("预定义每页显示记录")]
         public string PrePageSize { get; set; }
 
         /// <summary>
-        /// 翻页组件
+        /// 显示页码链接数
         /// </summary>
         [DisplayName("显示页码链接数")]
         public int DisplayIndexCount { get; set; }
@@ -80,37 +80,39 @@ namespace FoxOne.Controls
 
         public override string RenderContent()
         {
+            if (PageCount == 1) return "共{0}条记录".FormatTo(RecordCount);
             int displayCount = Math.Min(PageCount, DisplayIndexCount);
             string pagerItemTemplate = TemplateGenerator.GetPagerItemTemplate();
             string pagerSizeTemplate = TemplateGenerator.GetPagerSizeTemplate();
             StringBuilder result = new StringBuilder();
-
-            result.AppendFormat(pagerItemTemplate, 1, "", "首页");
-            result.AppendFormat(pagerItemTemplate, "Pre", "", "上一页");
-
-            int startIndex = 1, endIndex = displayCount;
-            int centerValue = (int)Math.Ceiling((double)displayCount / 2);
-            if (CurrentPageIndex > centerValue && PageCount > displayCount)
+            if (CurrentPageIndex > 1)
             {
-                centerValue = centerValue - 1;
-                if ((CurrentPageIndex + centerValue) < PageCount)
-                {
-                    startIndex = CurrentPageIndex - centerValue;
-                }
-                else
-                {
-                    startIndex = PageCount - centerValue * 2;
-                }
-                endIndex = Math.Min(PageCount, startIndex + displayCount) - 1;
+                result.AppendFormat(pagerItemTemplate, 1, "", "首页");
+                result.AppendFormat(pagerItemTemplate, "Pre", "", "上一页");
             }
-
+            int startIndex = CurrentPageIndex, endIndex = displayCount;
+            if(startIndex+DisplayIndexCount>PageCount)
+            {
+                endIndex = PageCount;
+                startIndex = PageCount - DisplayIndexCount + 1;
+            }
+            else
+            {
+                endIndex = startIndex + DisplayIndexCount - 1;
+            }
+            if(startIndex<=0)
+            {
+                startIndex = 1;
+            }
             for (int i = startIndex; i <= endIndex; i++)
             {
                 result.AppendFormat(pagerItemTemplate, i, i == CurrentPageIndex ? "class=\"active\"" : "", i);
             }
-            result.AppendFormat(pagerItemTemplate, "Next", "", "下一页");
-            result.AppendFormat(pagerItemTemplate, PageCount, "", "末页");
-
+            if (CurrentPageIndex < PageCount)
+            {
+                result.AppendFormat(pagerItemTemplate, "Next", "", "下一页");
+                result.AppendFormat(pagerItemTemplate, PageCount, "", "末页");
+            }
             string pageSizeSet = string.Empty;
             PrePageSize.Split(',').ForEach((a) =>
             {
@@ -121,7 +123,7 @@ namespace FoxOne.Controls
                 }
                 pageSizeSet += pagerSizeTemplate.FormatTo(a, active, a);
             });
-            return TemplateGenerator.GetPagerTemplate().FormatTo(result.ToString(), pageSizeSet);
+            return TemplateGenerator.GetPagerTemplate().FormatTo(result.ToString(), pageSizeSet, RecordCount);
         }
 
         [DisplayName("目标组件ID")]

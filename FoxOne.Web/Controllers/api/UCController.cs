@@ -6,9 +6,13 @@ using System.Web;
 using System.Web.Http;
 using FoxOne.Core;
 using FoxOne.Business.Security;
+using FoxOne.Business.DDSDK;
+using FoxOne.Business.DDSDK.Entity;
+using System.Runtime.Serialization;
 
 namespace FoxOne.Web.Controllers
 {
+
     /// <summary>
     /// 组织架构服务接口
     /// </summary>
@@ -21,7 +25,38 @@ namespace FoxOne.Web.Controllers
         /// <returns></returns>
         public IEnumerable<UCUser> GetAllUser()
         {
-            return DBContext<IUser>.Instance.Where(o => true).Select(o => new UCUser() { UserId = o.Code, Name = o.Name, Mobile = o.MobilePhone, Role = o.Roles.Select(r => new UCRole() { RoleId = r.Id, Name = r.RoleType.Name }), DepartmentId = o.Department.Code.ConvertTo<int>() });
+            return DBContext<IUser>.Instance.Where(o => true).Select(o => ConvertToUCUser(o));
+        }
+
+        private UCUser ConvertToUCUser(IUser o)
+        {
+            return new UCUser()
+            {
+                LoginId = o.LoginId,
+                Mail = o.Mail,
+                UserId = o.Id,
+                Name = o.Name,
+                Mobile = o.MobilePhone,
+                Role = o.Roles.Select(r => new UCRole() { DepartmentId = r.DepartmentId, RoleId = r.RoleType.Code, Name = r.RoleType.Name }).ToList(),
+                DepartmentLevelCode = o.Department.WBS,
+                DepartmentName = o.Department.Name,
+                DepartmentId = o.DepartmentId,
+                DDId = o.Code,
+                DepartmentDDId = o.Department.Code.ConvertTo<int>()
+            };
+        }
+
+        private UCDepartment ConvertToUCDepartment(IDepartment o)
+        {
+            return new UCDepartment()
+            {
+                DepartmentId = o.Id,
+                DepartmentDDId = o.Code.ConvertTo<int>(),
+                LevelCode = o.WBS,
+                Name = o.Name,
+                ParentId = o.ParentId,
+                ParentDDId = o.Parent.Code.ConvertTo<int>()
+            };
         }
 
         /// <summary>
@@ -35,19 +70,12 @@ namespace FoxOne.Web.Controllers
             {
                 throw new ArgumentNullException("id");
             }
-            var user = DBContext<IUser>.Instance.FirstOrDefault(o => o.Code.Equals(id, StringComparison.OrdinalIgnoreCase));
+            var user = DBContext<IUser>.Instance.FirstOrDefault(o => o.Id.Equals(id, StringComparison.OrdinalIgnoreCase) || o.Code.Equals(id, StringComparison.OrdinalIgnoreCase));
             if (user == null)
             {
                 throw new FoxOneException("User_Not_Found");
             }
-            return new UCUser()
-            {
-                UserId = user.Code,
-                DepartmentId = user.Department.Code.ConvertTo<int>(),
-                Mobile = user.MobilePhone,
-                Name = user.Name,
-                Role = user.Roles.Select(r => new UCRole() { RoleId = r.Id, Name = r.RoleType.Name })
-            };
+            return ConvertToUCUser(user);
         }
 
         /// <summary>
@@ -55,14 +83,14 @@ namespace FoxOne.Web.Controllers
         /// </summary>
         /// <param name="id">部门ID</param>
         /// <returns></returns>
-        public IEnumerable<UCUser> GetUserByDepartmentId(int id)
+        public IEnumerable<UCUser> GetUserByDepartmentId(string id)
         {
-            var department = DBContext<IDepartment>.Instance.FirstOrDefault(o => o.Code.Equals(id.ToString(), StringComparison.OrdinalIgnoreCase));
+            var department = DBContext<IDepartment>.Instance.FirstOrDefault(o => o.Id.Equals(id, StringComparison.OrdinalIgnoreCase) || o.Code.Equals(id, StringComparison.OrdinalIgnoreCase));
             if (department == null)
             {
                 throw new FoxOneException("Department_Not_Found");
             }
-            return department.Member.Select(o => new UCUser() { UserId = o.Code, Name = o.Name, Mobile = o.MobilePhone, Role = o.Roles.Select(r => new UCRole() { RoleId = r.Id, Name = r.RoleType.Name }), DepartmentId = o.Department.Code.ConvertTo<int>() });
+            return department.Member.Select(o => ConvertToUCUser(o));
         }
 
         /// <summary>
@@ -71,7 +99,7 @@ namespace FoxOne.Web.Controllers
         /// <returns></returns>
         public IEnumerable<UCDepartment> GetAllDepartment()
         {
-            return DBContext<IDepartment>.Instance.Where(o => o.ParentId.IsNotNullOrEmpty()).Select(o => new UCDepartment() { DepartmentId = o.Code.ConvertTo<int>(), Name = o.Name, LevelCode = o.WBS, ParentId = o.Parent.Code.ConvertTo<int>() });
+            return DBContext<IDepartment>.Instance.Where(o => o.ParentId.IsNotNullOrEmpty()).Select(o => ConvertToUCDepartment(o));
         }
 
         /// <summary>
@@ -79,10 +107,10 @@ namespace FoxOne.Web.Controllers
         /// </summary>
         /// <param name="id">部门ID</param>
         /// <returns></returns>
-        public UCDepartment GetDepartment(int id)
+        public UCDepartment GetDepartment(string id)
         {
-            var o = DBContext<IDepartment>.Instance.FirstOrDefault(d => d.Code.Equals(id.ToString(), StringComparison.OrdinalIgnoreCase));
-            return new UCDepartment() { DepartmentId = o.Code.ConvertTo<int>(), LevelCode = o.WBS, Name = o.Name, ParentId = o.Parent.Code.ConvertTo<int>() };
+            var o = DBContext<IDepartment>.Instance.FirstOrDefault(d => d.Id.Equals(id, StringComparison.OrdinalIgnoreCase) || d.Code.Equals(id, StringComparison.OrdinalIgnoreCase));
+            return ConvertToUCDepartment(o);
         }
 
         /// <summary>
@@ -132,6 +160,27 @@ namespace FoxOne.Web.Controllers
             }
             return result;
         }
+
+        /// <summary>
+        /// 根据authCode获取当前用户信息
+        /// </summary>
+        /// <param name="id">authCode</param>
+        /// <returns></returns>
+        public UCUser GetCurrentUser(string id)
+        {
+            var ddUser = DDHelper.GetUserInfo(id);
+            return GetUser(ddUser);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public SignPackage FetchSignPackage(string id)
+        {
+            return DDHelper.FetchSignPackage(id);
+        }
     }
 
     /// <summary>
@@ -139,44 +188,143 @@ namespace FoxOne.Web.Controllers
     /// </summary>
     public class UCUser
     {
+        /// <summary>
+        /// 用户ID
+        /// </summary>
         public string UserId { get; set; }
 
+        /// <summary>
+        /// 登陆账号
+        /// </summary>
+        public string LoginId { get; set; }
+
+        /// <summary>
+        /// 用户在钉钉中的ID
+        /// </summary>
+        public string DDId { get; set; }
+
+        /// <summary>
+        /// 用户姓名
+        /// </summary>
         public string Name { get; set; }
 
+        /// <summary>
+        /// 用户手机号（唯一）
+        /// </summary>
         public string Mobile { get; set; }
 
-        public int DepartmentId { get; set; }
+        /// <summary>
+        /// 邮箱
+        /// </summary>
+        public string Mail { get; set; }
 
-        public IEnumerable<UCRole> Role { get; set; }
+        /// <summary>
+        /// 用户所属部门ID
+        /// </summary>
+        public string DepartmentId { get; set; }
+
+        /// <summary>
+        /// 用户所属部门在钉钉中的ID
+        /// </summary>
+        public int DepartmentDDId { get; set; }
+
+        /// <summary>
+        /// 用户所属部门名称
+        /// </summary>
+        public string DepartmentName { get; set; }
+
+        /// <summary>
+        /// 用户所属部门层级编码
+        /// </summary>
+        public string DepartmentLevelCode { get; set; }
+
+        /// <summary>
+        /// 用户角色
+        /// </summary>
+        public IList<UCRole> Role { get; set; }
 
     }
 
+    /// <summary>
+    /// 角色信息
+    /// </summary>
     public class UCRole
     {
+        /// <summary>
+        /// 角色ID
+        /// </summary>
         public string RoleId { get; set; }
 
+        /// <summary>
+        /// 角色名称
+        /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// 角色所属部门
+        /// </summary>
+        public string DepartmentId { get; set; }
     }
 
+    /// <summary>
+    /// 部门信息
+    /// </summary>
     public class UCDepartment
     {
-        public int DepartmentId { get; set; }
+        /// <summary>
+        /// 部门ID
+        /// </summary>
+        public string DepartmentId { get; set; }
 
+        /// <summary>
+        /// 部门在钉钉中的ID
+        /// </summary>
+        public int DepartmentDDId { get; set; }
+
+        /// <summary>
+        /// 部门名称
+        /// </summary>
         public string Name { get; set; }
 
+        /// <summary>
+        /// 部门层级编码
+        /// </summary>
         public string LevelCode { get; set; }
 
-        public int ParentId { get; set; }
+        /// <summary>
+        /// 父级部门ID
+        /// </summary>
+        public string ParentId { get; set; }
+
+        /// <summary>
+        /// 父级部门在钉钉中的ID
+        /// </summary>
+        public int ParentDDId { get; set; }
     }
 
+    /// <summary>
+    /// 权限信息
+    /// </summary>
     public class UCPermission
     {
+        /// <summary>
+        /// 权限ID
+        /// </summary>
         public string Id { get; set; }
 
+        /// <summary>
+        /// 权限名称
+        /// </summary>
         public string Name { get; set; }
 
+        /// <summary>
+        /// 页面URL
+        /// </summary>
         public string Url { get; set; }
 
+        /// <summary>
+        /// 拥有权限的控件ID
+        /// </summary>
         public string ControlIds { get; set; }
     }
 }

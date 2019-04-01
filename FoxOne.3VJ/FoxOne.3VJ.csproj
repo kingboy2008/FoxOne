@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{82E19AB1-FB6F-46B4-B627-9C3CAFA5BC6E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FoxOne._3VJ</RootNamespace>
+    <AssemblyName>FoxOne.3VJ</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\FoxOne.3VJ.XML</DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>..\Lib\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>C:\Program Files (x86)\Microsoft ASP.NET\ASP.NET MVC 4\Assemblies\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\WorkflowConfig.cs" />
+    <Compile Include="Controller\AuthendicationController.cs" />
+    <Compile Include="Controller\DingDingController.cs" />
+    <Compile Include="DataSource\AttendanceListDataSource.cs" />
+    <Compile Include="DataSource\AttendanceSummaryDataSource.cs" />
+    <Compile Include="DataSource\ChangeManagementDataSource.cs" />
+    <Compile Include="DataSource\SRBWebApiDataSource.cs" />
+    <Compile Include="DataSource\TotalDataSource.cs" />
+    <Compile Include="DataSource\TeslaWebApiDataSource.cs" />
+    <Compile Include="DataSource\LeaveApplyOptionDataSource.cs" />
+    <Compile Include="DataSource\MeetingRoomBookPreview.cs" />
+    <Compile Include="DataSource\NoticeDataSource.cs" />
+    <Compile Include="DataSource\SSOSystemDataSource.cs" />
+    <Compile Include="DataSource\UserDepartmentHistoryDataSource.cs" />
+    <Compile Include="DataSource\VehicleBookPreview.cs" />
+    <Compile Include="Entity\MeetingRoomBookEntity.cs" />
+    <Compile Include="Entity\OTApplyEntity.cs" />
+    <Compile Include="Entity\RosterEntity.cs" />
+    <Compile Include="Entity\SSOSystem.cs" />
+    <Compile Include="Entity\WFFormReimbursementApplyEntity.cs" />
+    <Compile Include="Entity\WFormChangeManagementEntity.cs" />
+    <Compile Include="Entity\WFormLeaveApprovalEntity.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FoxOne.Business\FoxOne.Business.csproj">
+      <Project>{da8a9090-8e89-4400-9426-dc59527e8933}</Project>
+      <Name>FoxOne.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FoxOne.Controls\FoxOne.Controls.csproj">
+      <Project>{668d86b6-de7f-4ebe-9478-2f5ffec68e5f}</Project>
+      <Name>FoxOne.Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FoxOne.Core\FoxOne.Core.csproj">
+      <Project>{b6e846a3-af47-4ad5-bb01-f2a2d44540f2}</Project>
+      <Name>FoxOne.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FoxOne.Data\FoxOne.Data.csproj">
+      <Project>{660c02d0-1c07-465d-ab57-da1abc84b1d7}</Project>
+      <Name>FoxOne.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FoxOne.Workflow.Business\FoxOne.Workflow.Business.csproj">
+      <Project>{d7bb5255-0f42-4c7e-92e9-be15475b65ca}</Project>
+      <Name>FoxOne.Workflow.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FoxOne.Workflow.DataAccess\FoxOne.Workflow.DataAccess.csproj">
+      <Project>{02f2d50d-e591-423c-9957-9dec6aa05fd6}</Project>
+      <Name>FoxOne.Workflow.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FoxOne.Workflow.Kernel\FoxOne.Workflow.Kernel.csproj">
+      <Project>{26a7e9d1-7fc9-4f88-9433-cecaa553fa18}</Project>
+      <Name>FoxOne.Workflow.Kernel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

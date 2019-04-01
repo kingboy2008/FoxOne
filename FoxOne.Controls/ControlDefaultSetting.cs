@@ -44,20 +44,57 @@ namespace FoxOne.Controls
         public static FormControlBase GetFormControl(Column field)
         {
             FormControlBase result = null;
-            switch (field.Type.ToLower())
+            var settings = TypeHelper.GetAllImplInstance<IFieldDefaultSetting>();
+            if(!settings.IsNullOrEmpty())
             {
-                case "datetime":
-                    result = new DatePicker();
-                    break;
-                case "bit":
-                    result = new DropDownList()
+                foreach (var item in settings)
+                {
+                    result = item.GetFormControl(field);
+                    if(result!=null)
                     {
-                        DataSource = GetDataSource(field) as IKeyValueDataSource
-                    };
-                    break;
-                default:
-                    result = new TextBox();
-                    break;
+                        break;
+                    }
+                }
+            }
+            if (result == null)
+            {
+                switch (field.Type.ToLower())
+                {
+                    case "datetime":
+                        result = new DatePicker();
+                        break;
+                    case "bit":
+                        result = new DropDownList()
+                        {
+                            DataSource = GetDataSource(field) as IKeyValueDataSource
+                        };
+                        break;
+                    case "text":
+                        result = new TextArea();
+                        break;
+                    default:
+                        if (field.Name.IndexOf("UserId") >= 0 || field.Name.IndexOf("Creator") >= 0)
+                        {
+                            result = new TextValueTextBox() { SelectType = "UserSelector_Copy", DialogWidth = 800 };
+                        }
+                        else if (field.Name.IndexOf("DeptId") >= 0)
+                        {
+                            result = new TextValueTextBox() { SelectType = "DepartmentSelector", DialogWidth = 200, DialogHeight = 200 };
+                        }
+                        else if (field.Name.IndexOf("Description") >= 0)
+                        {
+                            result = new TextArea();
+                        }
+                        else
+                        {
+                            result = new TextBox();
+                        }
+                        break;
+                }
+            }
+            if (field.Length.IsNotNullOrEmpty())
+            {
+                result.Validator = $"length[0,{field.Length}]";
             }
             result.Id = field.Name;
             result.Name = field.Name;
@@ -95,11 +132,11 @@ namespace FoxOne.Controls
             }
             if (field.Name.IndexOf("UserId") >= 0 || field.Name.IndexOf("Creator") >= 0)
             {
-                result = new EntityDataSource() { EntityType=typeof(User) };
+                result = new EntityDataSource() { EntityType = typeof(User) };
             }
-            if (field.Name.IndexOf("DepartmentId") >= 0)
+            if (field.Name.IndexOf("DepartmentId") >= 0 || field.Name.IndexOf("DeptId") >= 0)
             {
-                result = new EntityDataSource() {EntityType=typeof(Department) };
+                result = new EntityDataSource() { EntityType = typeof(Department) };
             }
             return result;
         }

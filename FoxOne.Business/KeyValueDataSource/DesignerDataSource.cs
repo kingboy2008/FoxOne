@@ -140,4 +140,14 @@ namespace FoxOne.Business
             return result;
         }
     }
+
+    [DisplayName("组织层级编号数据源")]
+    public class DepartmentLevelCodeDataSource : KeyValueDataSourceBase, ICascadeDataSource
+    {
+        public override IEnumerable<TreeNode> SelectItems()
+        {
+            var depts = DBContext<IDepartment>.Instance.Where(o => o.Status.Equals(DefaultStatus.Enabled.ToString(), StringComparison.OrdinalIgnoreCase));
+            return depts.Select(o => new TreeNode() { Value = o.WBS, Text = o.Name, ParentId = o.Parent == null ? string.Empty : o.Parent.WBS, Open = o.Parent == null });
+        }
+    }
 }

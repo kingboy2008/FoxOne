@@ -2,7 +2,7 @@
 /// <reference path="../common.js" />
 (function (window, $) {
     var foxOne = window.foxOne;
-    $(window.document).on("click", "div[widget='Toolbar']", function (e) {
+    $(window.document).on("click", "div[widget='Toolbar'],div[widget='Search']", function (e) {
         var input = $(e.target);
         if (!input.is("input")) return;
         var _this = $(this).data();
@@ -15,6 +15,7 @@
             var editUrl = data.editurl;
             var deleteUrl = data.deleteurl || foxOne.defaultDeleteUrl;
             var param = foxOne.getQueryString();
+            var pageId = table.attr("pageId");
             param[foxOne.formViewMode] = 'Insert';
             var insertUrl = foxOne.buildUrl(data.inserturl, param, true);
             switch (id) {
@@ -23,6 +24,10 @@
                         url: insertUrl,
                         onClose: function (res) {
                             if (res != 'false') {
+                                var eRefresh = $.Event('onBeforeRefresh');
+                                table.trigger(eRefresh);
+                                if (eRefresh && eRefresh.Data && eRefresh.Data.isCancel)
+                                    return;
                                 foxOne.refresh(tableId);
                             }
                         },
@@ -35,8 +40,8 @@
                 case "btnBatchDelete":
                     var ids = [];
                     var keyValue = {};
-                    keyValue[foxOne.ctrlId] = table.attr("id");
-                    keyValue[foxOne.pageId] = table.attr("pageId");
+                    keyValue[foxOne.ctrlId] = tableId;
+                    keyValue[foxOne.pageId] = pageId;
                     table.find(":checked").not("[checkAll]").each(function () {
                         var tr = $(this).closest("tr").data();
                         var id = tr.key
@@ -59,6 +64,13 @@
                             foxOne.refresh(tableId);
                         }
                     });
+                    break;
+                case "btnExportExcel":
+                    var setting = foxOne.setting(tableId);
+                    setting[foxOne.ctrlId] = tableId;
+                    setting[foxOne.pageId] = pageId;
+                    var url = foxOne.buildUrl("/Entity/ExportToExcel", setting);
+                    window.open(url);
                     break;
             }
         }

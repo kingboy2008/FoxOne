@@ -1,0 +1,1738 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://coremail.cn/apiws" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="API" targetNamespace="http://coremail.cn/apiws" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema elementFormDefault="unqualified" targetNamespace="http://coremail.cn/apiws" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="addDomain25" type="tns:addDomain25" />
+      <xs:element name="addDomain25Response" type="tns:addDomain25Response" />
+      <xs:element name="addDomainAlias" type="tns:addDomainAlias" />
+      <xs:element name="addDomainAliasResponse" type="tns:addDomainAliasResponse" />
+      <xs:element name="addOrg" type="tns:addOrg" />
+      <xs:element name="addOrgCos" type="tns:addOrgCos" />
+      <xs:element name="addOrgCosResponse" type="tns:addOrgCosResponse" />
+      <xs:element name="addOrgDomain" type="tns:addOrgDomain" />
+      <xs:element name="addOrgDomainResponse" type="tns:addOrgDomainResponse" />
+      <xs:element name="addOrgResponse" type="tns:addOrgResponse" />
+      <xs:element name="addSmtpAlias" type="tns:addSmtpAlias" />
+      <xs:element name="addSmtpAliasResponse" type="tns:addSmtpAliasResponse" />
+      <xs:element name="addUnit" type="tns:addUnit" />
+      <xs:element name="addUnitResponse" type="tns:addUnitResponse" />
+      <xs:element name="alterOrg" type="tns:alterOrg" />
+      <xs:element name="alterOrgCos" type="tns:alterOrgCos" />
+      <xs:element name="alterOrgCosResponse" type="tns:alterOrgCosResponse" />
+      <xs:element name="alterOrgResponse" type="tns:alterOrgResponse" />
+      <xs:element name="authenticate" type="tns:authenticate" />
+      <xs:element name="authenticateResponse" type="tns:authenticateResponse" />
+      <xs:element name="changeAttrs" type="tns:changeAttrs" />
+      <xs:element name="changeAttrsResponse" type="tns:changeAttrsResponse" />
+      <xs:element name="createObj" type="tns:createObj" />
+      <xs:element name="createObjResponse" type="tns:createObjResponse" />
+      <xs:element name="createUser" type="tns:createUser" />
+      <xs:element name="createUserResponse" type="tns:createUserResponse" />
+      <xs:element name="delDomain25" type="tns:delDomain25" />
+      <xs:element name="delDomain25Response" type="tns:delDomain25Response" />
+      <xs:element name="delDomainAlias" type="tns:delDomainAlias" />
+      <xs:element name="delDomainAliasResponse" type="tns:delDomainAliasResponse" />
+      <xs:element name="delOrgCos" type="tns:delOrgCos" />
+      <xs:element name="delOrgCosResponse" type="tns:delOrgCosResponse" />
+      <xs:element name="delOrgDomain" type="tns:delOrgDomain" />
+      <xs:element name="delOrgDomainResponse" type="tns:delOrgDomainResponse" />
+      <xs:element name="delSmtpAlias" type="tns:delSmtpAlias" />
+      <xs:element name="delSmtpAliasResponse" type="tns:delSmtpAliasResponse" />
+      <xs:element name="delUnit" type="tns:delUnit" />
+      <xs:element name="delUnitResponse" type="tns:delUnitResponse" />
+      <xs:element name="deleteObj" type="tns:deleteObj" />
+      <xs:element name="deleteObjResponse" type="tns:deleteObjResponse" />
+      <xs:element name="deleteUser" type="tns:deleteUser" />
+      <xs:element name="deleteUserResponse" type="tns:deleteUserResponse" />
+      <xs:element name="domainExist" type="tns:domainExist" />
+      <xs:element name="domainExistResponse" type="tns:domainExistResponse" />
+      <xs:element name="getAdminType" type="tns:getAdminType" />
+      <xs:element name="getAdminTypeResponse" type="tns:getAdminTypeResponse" />
+      <xs:element name="getAttrs" type="tns:getAttrs" />
+      <xs:element name="getAttrsResponse" type="tns:getAttrsResponse" />
+      <xs:element name="getDomainAlias" type="tns:getDomainAlias" />
+      <xs:element name="getDomainAliasResponse" type="tns:getDomainAliasResponse" />
+      <xs:element name="getDomainList" type="tns:getDomainList" />
+      <xs:element name="getDomainListResponse" type="tns:getDomainListResponse" />
+      <xs:element name="getNewMailInfos" type="tns:getNewMailInfos" />
+      <xs:element name="getNewMailInfosResponse" type="tns:getNewMailInfosResponse" />
+      <xs:element name="getObjAttrs" type="tns:getObjAttrs" />
+      <xs:element name="getObjAttrsResponse" type="tns:getObjAttrsResponse" />
+      <xs:element name="getOrgCosUser" type="tns:getOrgCosUser" />
+      <xs:element name="getOrgCosUserMax" type="tns:getOrgCosUserMax" />
+      <xs:element name="getOrgCosUserMaxResponse" type="tns:getOrgCosUserMaxResponse" />
+      <xs:element name="getOrgCosUserResponse" type="tns:getOrgCosUserResponse" />
+      <xs:element name="getOrgInfo" type="tns:getOrgInfo" />
+      <xs:element name="getOrgInfoResponse" type="tns:getOrgInfoResponse" />
+      <xs:element name="getOrgList" type="tns:getOrgList" />
+      <xs:element name="getOrgListByDomain" type="tns:getOrgListByDomain" />
+      <xs:element name="getOrgListByDomainResponse" type="tns:getOrgListByDomainResponse" />
+      <xs:element name="getOrgListResponse" type="tns:getOrgListResponse" />
+      <xs:element name="getSessionVar" type="tns:getSessionVar" />
+      <xs:element name="getSessionVarResponse" type="tns:getSessionVarResponse" />
+      <xs:element name="getSesssionVar" type="tns:getSesssionVar" />
+      <xs:element name="getSesssionVarResponse" type="tns:getSesssionVarResponse" />
+      <xs:element name="getSmtpAlias" type="tns:getSmtpAlias" />
+      <xs:element name="getSmtpAliasResponse" type="tns:getSmtpAliasResponse" />
+      <xs:element name="getUnitAttrs" type="tns:getUnitAttrs" />
+      <xs:element name="getUnitAttrsResponse" type="tns:getUnitAttrsResponse" />
+      <xs:element name="getVersionInfo" type="tns:getVersionInfo" />
+      <xs:element name="getVersionInfoResponse" type="tns:getVersionInfoResponse" />
+      <xs:element name="listMailInfos" type="tns:listMailInfos" />
+      <xs:element name="listMailInfosResponse" type="tns:listMailInfosResponse" />
+      <xs:element name="moveUser" type="tns:moveUser" />
+      <xs:element name="moveUserResponse" type="tns:moveUserResponse" />
+      <xs:element name="renameUser" type="tns:renameUser" />
+      <xs:element name="renameUserResponse" type="tns:renameUserResponse" />
+      <xs:element name="sesRefresh" type="tns:sesRefresh" />
+      <xs:element name="sesRefreshResponse" type="tns:sesRefreshResponse" />
+      <xs:element name="sesTimeOut" type="tns:sesTimeOut" />
+      <xs:element name="sesTimeOutResponse" type="tns:sesTimeOutResponse" />
+      <xs:element name="setAdminType" type="tns:setAdminType" />
+      <xs:element name="setAdminTypeResponse" type="tns:setAdminTypeResponse" />
+      <xs:element name="setObjAttrs" type="tns:setObjAttrs" />
+      <xs:element name="setObjAttrsResponse" type="tns:setObjAttrsResponse" />
+      <xs:element name="setSessionVar" type="tns:setSessionVar" />
+      <xs:element name="setSessionVarResponse" type="tns:setSessionVarResponse" />
+      <xs:element name="setUnitAttrs" type="tns:setUnitAttrs" />
+      <xs:element name="setUnitAttrsResponse" type="tns:setUnitAttrsResponse" />
+      <xs:element name="smtpTransport" type="tns:smtpTransport" />
+      <xs:element name="smtpTransportResponse" type="tns:smtpTransportResponse" />
+      <xs:element name="submit" type="tns:submit" />
+      <xs:element name="submitJSON" type="tns:submitJSON" />
+      <xs:element name="submitJSONResponse" type="tns:submitJSONResponse" />
+      <xs:element name="submitResponse" type="tns:submitResponse" />
+      <xs:element name="userExist" type="tns:userExist" />
+      <xs:element name="userExistResponse" type="tns:userExistResponse" />
+      <xs:element name="userLogin" type="tns:userLogin" />
+      <xs:element name="userLoginEx" type="tns:userLoginEx" />
+      <xs:element name="userLoginExResponse" type="tns:userLoginExResponse" />
+      <xs:element name="userLoginResponse" type="tns:userLoginResponse" />
+      <xs:element name="userLogout" type="tns:userLogout" />
+      <xs:element name="userLogoutResponse" type="tns:userLogoutResponse" />
+      <xs:complexType name="addDomain25">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="domain_name" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="addDomain25Response">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReturnInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ReturnInfo">
+        <xs:sequence>
+          <xs:element name="code" type="xs:int" />
+          <xs:element minOccurs="0" name="message" type="xs:string" />
+          <xs:element minOccurs="0" name="result" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="alterOrgCos">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="org_id" type="xs:string" />
+          <xs:element name="cos_id" type="xs:int" />
+          <xs:element name="num_of_classes" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="alterOrgCosResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReturnInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="createObj">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="attrs" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="createObjResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReturnInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="userLogin">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="user_at_domain" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="userLoginResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReturnInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="moveUser">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="user_at_domain" type="xs:string" />
+          <xs:element minOccurs="0" name="attrs" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="moveUserResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReturnInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="createUser">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="provider_id" type="xs:string" />
+          <xs:element minOccurs="0" name="org_id" type="xs:string" />
+          <xs:element minOccurs="0" name="user_id" type="xs:string" />
+          <xs:element minOccurs="0" name="attrs" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="createUserResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReturnInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="addSmtpAlias">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="user_at_domain" type="xs:string" />
+          <xs:element minOccurs="0" name="alias_user_at_domain" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="addSmtpAliasResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReturnInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getDomainList">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="getDomainListResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReturnInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="changeAttrs">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="user_at_domain" type="xs:string" />
+          <xs:element minOccurs="0" name="attrs" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="changeAttrsResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReturnInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="setObjAttrs">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="obj_uid" type="xs:string" />
+          <xs:element minOccurs="0" name="attrs" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="setObjAttrsResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReturnInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getSessionVar">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ses_id" type="xs:string" />
+          <xs:element minOccurs="0" name="ses_key" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getSessionVarResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReturnInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="setAdminType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="user_at_domain" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="setAdminTypeResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReturnInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="delDomain25">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="domain_name" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="delDomain25Response">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReturnInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getUnitAttrs">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="org_id" type="xs:string" />
+          <xs:element minOccurs="0" name="org_unit_id" type="xs:string" />
+          <xs:element minOccurs="0" name="attrs" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getUnitAttrsResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReturnInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getDomainAlias">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="domain_name" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getDomainAliasResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReturnInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="deleteObj">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="obj_uid" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="deleteObjResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReturnInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getSesssionVar">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ses_id" type="xs:string" />
+          <xs:element minOccurs="0" name="ses_key" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getSesssionVarResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReturnInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="delDomainAlias">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="domain_name" type="xs:string" />
+          <xs:element minOccurs="0" name="domain_name_alias" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="delDomainAliasResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReturnInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="domainExist">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="domain_name" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="domainExistResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReturnInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="userLoginEx">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="user_at_domain" type="xs:string" />
+          <xs:element minOccurs="0" name="attrs" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="userLoginExResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReturnInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="alterOrg">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="org_id" type="xs:string" />
+          <xs:element minOccurs="0" name="attrs" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="alterOrgResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReturnInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getAttrs">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="user_at_domain" type="xs:string" />
+          <xs:element minOccurs="0" name="attrs" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getAttrsResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReturnInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getOrgListByDomain">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="domain_name" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getOrgListByDomainResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReturnInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="submit">
+        <xs:sequence>
+          <xs:element name="cmd" type="xs:int" />
+          <xs:element minOccurs="0" name="params" type="xs:string" />
+          <xs:element minOccurs="0" name="attrs" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="submitResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReturnInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="authenticate">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="user_at_domain" type="xs:string" />
+          <xs:element minOccurs="0" name="password" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="authenticateResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReturnInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="setSessionVar">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ses_id" type="xs:string" />
+          <xs:element minOccurs="0" name="ses_key" type="xs:string" />
+          <xs:element minOccurs="0" name="ses_var" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="setSessionVarResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReturnInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="renameUser">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="user_at_domain" type="xs:string" />
+          <xs:element minOccurs="0" name="new_user_id" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="renameUserResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReturnInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="addUnit">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="org_id" type="xs:string" />
+          <xs:element minOccurs="0" name="org_unit_id" type="xs:string" />
+          <xs:element minOccurs="0" name="attrs" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="addUnitResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReturnInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="delUnit">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="org_id" type="xs:string" />
+          <xs:element minOccurs="0" name="org_unit_id" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="delUnitResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReturnInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getAdminType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="user_at_domain" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getAdminTypeResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReturnInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="setUnitAttrs">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="org_id" type="xs:string" />
+          <xs:element minOccurs="0" name="org_unit_id" type="xs:string" />
+          <xs:element minOccurs="0" name="attrs" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="setUnitAttrsResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReturnInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getOrgCosUser">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="org_id" type="xs:string" />
+          <xs:element name="cos_id" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getOrgCosUserResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReturnInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="addOrg">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="org_id" type="xs:string" />
+          <xs:element minOccurs="0" name="attrs" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="addOrgResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReturnInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="sesRefresh">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ses_id" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="sesRefreshResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReturnInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="submitJSON">
+        <xs:sequence>
+          <xs:element name="cmd" type="xs:int" />
+          <xs:element minOccurs="0" name="params" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="submitJSONResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReturnInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="userExist">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="user_at_domain" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="userExistResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReturnInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getNewMailInfos">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="user_at_domain" type="xs:string" />
+          <xs:element minOccurs="0" name="options" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getNewMailInfosResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReturnInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="deleteUser">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="user_at_domain" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="deleteUserResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReturnInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getSmtpAlias">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="user_at_domain" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getSmtpAliasResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReturnInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getOrgCosUserMax">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="org_id" type="xs:string" />
+          <xs:element name="cos_id" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getOrgCosUserMaxResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReturnInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="delSmtpAlias">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="user_at_domain" type="xs:string" />
+          <xs:element minOccurs="0" name="alias_user_at_domain" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="delSmtpAliasResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReturnInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="sesTimeOut">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ses_id" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="sesTimeOutResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReturnInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getObjAttrs">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="obj_uid" type="xs:string" />
+          <xs:element minOccurs="0" name="attrs" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getObjAttrsResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReturnInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="delOrgCos">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="org_id" type="xs:string" />
+          <xs:element name="cos_id" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="delOrgCosResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReturnInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getOrgList">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="getOrgListResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReturnInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getVersionInfo">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="getVersionInfoResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="addOrgDomain">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="org_id" type="xs:string" />
+          <xs:element minOccurs="0" name="domain_name" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="addOrgDomainResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReturnInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="addOrgCos">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="org_id" type="xs:string" />
+          <xs:element name="cos_id" type="xs:int" />
+          <xs:element name="num_of_classes" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="addOrgCosResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReturnInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="listMailInfos">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="user_at_domain" type="xs:string" />
+          <xs:element minOccurs="0" name="options" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="listMailInfosResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReturnInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="userLogout">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ses_id" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="userLogoutResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReturnInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="addDomainAlias">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="domain_name" type="xs:string" />
+          <xs:element minOccurs="0" name="domain_name_alias" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="addDomainAliasResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReturnInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="smtpTransport">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="mail_from" type="xs:string" />
+          <xs:element minOccurs="0" name="rcpt_to" type="xs:string" />
+          <xs:element minOccurs="0" name="data" type="xs:string" />
+          <xs:element minOccurs="0" name="options" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="smtpTransportResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReturnInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="delOrgDomain">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="org_id" type="xs:string" />
+          <xs:element minOccurs="0" name="domain_name" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="delOrgDomainResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReturnInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getOrgInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="org_id" type="xs:string" />
+          <xs:element minOccurs="0" name="attrs" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getOrgInfoResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:ReturnInfo" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="userLogin">
+    <wsdl:part name="parameters" element="tns:userLogin" />
+  </wsdl:message>
+  <wsdl:message name="getSmtpAliasResponse">
+    <wsdl:part name="parameters" element="tns:getSmtpAliasResponse" />
+  </wsdl:message>
+  <wsdl:message name="deleteUserResponse">
+    <wsdl:part name="parameters" element="tns:deleteUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="moveUserResponse">
+    <wsdl:part name="parameters" element="tns:moveUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="createUser">
+    <wsdl:part name="parameters" element="tns:createUser" />
+  </wsdl:message>
+  <wsdl:message name="addSmtpAlias">
+    <wsdl:part name="parameters" element="tns:addSmtpAlias" />
+  </wsdl:message>
+  <wsdl:message name="getNewMailInfosResponse">
+    <wsdl:part name="parameters" element="tns:getNewMailInfosResponse" />
+  </wsdl:message>
+  <wsdl:message name="getAttrsResponse">
+    <wsdl:part name="parameters" element="tns:getAttrsResponse" />
+  </wsdl:message>
+  <wsdl:message name="delDomain25Response">
+    <wsdl:part name="parameters" element="tns:delDomain25Response" />
+  </wsdl:message>
+  <wsdl:message name="getDomainList">
+    <wsdl:part name="parameters" element="tns:getDomainList" />
+  </wsdl:message>
+  <wsdl:message name="changeAttrs">
+    <wsdl:part name="parameters" element="tns:changeAttrs" />
+  </wsdl:message>
+  <wsdl:message name="setObjAttrs">
+    <wsdl:part name="parameters" element="tns:setObjAttrs" />
+  </wsdl:message>
+  <wsdl:message name="delDomain25">
+    <wsdl:part name="parameters" element="tns:delDomain25" />
+  </wsdl:message>
+  <wsdl:message name="getUnitAttrs">
+    <wsdl:part name="parameters" element="tns:getUnitAttrs" />
+  </wsdl:message>
+  <wsdl:message name="changeAttrsResponse">
+    <wsdl:part name="parameters" element="tns:changeAttrsResponse" />
+  </wsdl:message>
+  <wsdl:message name="domainExistResponse">
+    <wsdl:part name="parameters" element="tns:domainExistResponse" />
+  </wsdl:message>
+  <wsdl:message name="domainExist">
+    <wsdl:part name="parameters" element="tns:domainExist" />
+  </wsdl:message>
+  <wsdl:message name="sesRefreshResponse">
+    <wsdl:part name="parameters" element="tns:sesRefreshResponse" />
+  </wsdl:message>
+  <wsdl:message name="getDomainListResponse">
+    <wsdl:part name="parameters" element="tns:getDomainListResponse" />
+  </wsdl:message>
+  <wsdl:message name="getOrgListByDomain">
+    <wsdl:part name="parameters" element="tns:getOrgListByDomain" />
+  </wsdl:message>
+  <wsdl:message name="getOrgCosUserMaxResponse">
+    <wsdl:part name="parameters" element="tns:getOrgCosUserMaxResponse" />
+  </wsdl:message>
+  <wsdl:message name="getUnitAttrsResponse">
+    <wsdl:part name="parameters" element="tns:getUnitAttrsResponse" />
+  </wsdl:message>
+  <wsdl:message name="authenticate">
+    <wsdl:part name="parameters" element="tns:authenticate" />
+  </wsdl:message>
+  <wsdl:message name="renameUser">
+    <wsdl:part name="parameters" element="tns:renameUser" />
+  </wsdl:message>
+  <wsdl:message name="addUnit">
+    <wsdl:part name="parameters" element="tns:addUnit" />
+  </wsdl:message>
+  <wsdl:message name="delUnit">
+    <wsdl:part name="parameters" element="tns:delUnit" />
+  </wsdl:message>
+  <wsdl:message name="getOrgCosUser">
+    <wsdl:part name="parameters" element="tns:getOrgCosUser" />
+  </wsdl:message>
+  <wsdl:message name="addOrgCosResponse">
+    <wsdl:part name="parameters" element="tns:addOrgCosResponse" />
+  </wsdl:message>
+  <wsdl:message name="sesRefresh">
+    <wsdl:part name="parameters" element="tns:sesRefresh" />
+  </wsdl:message>
+  <wsdl:message name="submitJSON">
+    <wsdl:part name="parameters" element="tns:submitJSON" />
+  </wsdl:message>
+  <wsdl:message name="userExistResponse">
+    <wsdl:part name="parameters" element="tns:userExistResponse" />
+  </wsdl:message>
+  <wsdl:message name="userExist">
+    <wsdl:part name="parameters" element="tns:userExist" />
+  </wsdl:message>
+  <wsdl:message name="addDomain25Response">
+    <wsdl:part name="parameters" element="tns:addDomain25Response" />
+  </wsdl:message>
+  <wsdl:message name="userLogoutResponse">
+    <wsdl:part name="parameters" element="tns:userLogoutResponse" />
+  </wsdl:message>
+  <wsdl:message name="userLoginResponse">
+    <wsdl:part name="parameters" element="tns:userLoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="submitJSONResponse">
+    <wsdl:part name="parameters" element="tns:submitJSONResponse" />
+  </wsdl:message>
+  <wsdl:message name="deleteUser">
+    <wsdl:part name="parameters" element="tns:deleteUser" />
+  </wsdl:message>
+  <wsdl:message name="renameUserResponse">
+    <wsdl:part name="parameters" element="tns:renameUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="delSmtpAlias">
+    <wsdl:part name="parameters" element="tns:delSmtpAlias" />
+  </wsdl:message>
+  <wsdl:message name="delDomainAliasResponse">
+    <wsdl:part name="parameters" element="tns:delDomainAliasResponse" />
+  </wsdl:message>
+  <wsdl:message name="getObjAttrs">
+    <wsdl:part name="parameters" element="tns:getObjAttrs" />
+  </wsdl:message>
+  <wsdl:message name="addOrgDomainResponse">
+    <wsdl:part name="parameters" element="tns:addOrgDomainResponse" />
+  </wsdl:message>
+  <wsdl:message name="delOrgCos">
+    <wsdl:part name="parameters" element="tns:delOrgCos" />
+  </wsdl:message>
+  <wsdl:message name="addOrgCos">
+    <wsdl:part name="parameters" element="tns:addOrgCos" />
+  </wsdl:message>
+  <wsdl:message name="listMailInfos">
+    <wsdl:part name="parameters" element="tns:listMailInfos" />
+  </wsdl:message>
+  <wsdl:message name="getDomainAliasResponse">
+    <wsdl:part name="parameters" element="tns:getDomainAliasResponse" />
+  </wsdl:message>
+  <wsdl:message name="addOrgResponse">
+    <wsdl:part name="parameters" element="tns:addOrgResponse" />
+  </wsdl:message>
+  <wsdl:message name="smtpTransportResponse">
+    <wsdl:part name="parameters" element="tns:smtpTransportResponse" />
+  </wsdl:message>
+  <wsdl:message name="addDomainAlias">
+    <wsdl:part name="parameters" element="tns:addDomainAlias" />
+  </wsdl:message>
+  <wsdl:message name="smtpTransport">
+    <wsdl:part name="parameters" element="tns:smtpTransport" />
+  </wsdl:message>
+  <wsdl:message name="delOrgDomain">
+    <wsdl:part name="parameters" element="tns:delOrgDomain" />
+  </wsdl:message>
+  <wsdl:message name="listMailInfosResponse">
+    <wsdl:part name="parameters" element="tns:listMailInfosResponse" />
+  </wsdl:message>
+  <wsdl:message name="addDomain25">
+    <wsdl:part name="parameters" element="tns:addDomain25" />
+  </wsdl:message>
+  <wsdl:message name="delSmtpAliasResponse">
+    <wsdl:part name="parameters" element="tns:delSmtpAliasResponse" />
+  </wsdl:message>
+  <wsdl:message name="delOrgCosResponse">
+    <wsdl:part name="parameters" element="tns:delOrgCosResponse" />
+  </wsdl:message>
+  <wsdl:message name="alterOrgCos">
+    <wsdl:part name="parameters" element="tns:alterOrgCos" />
+  </wsdl:message>
+  <wsdl:message name="createObj">
+    <wsdl:part name="parameters" element="tns:createObj" />
+  </wsdl:message>
+  <wsdl:message name="createObjResponse">
+    <wsdl:part name="parameters" element="tns:createObjResponse" />
+  </wsdl:message>
+  <wsdl:message name="addSmtpAliasResponse">
+    <wsdl:part name="parameters" element="tns:addSmtpAliasResponse" />
+  </wsdl:message>
+  <wsdl:message name="moveUser">
+    <wsdl:part name="parameters" element="tns:moveUser" />
+  </wsdl:message>
+  <wsdl:message name="getOrgCosUserResponse">
+    <wsdl:part name="parameters" element="tns:getOrgCosUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="createUserResponse">
+    <wsdl:part name="parameters" element="tns:createUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="submitResponse">
+    <wsdl:part name="parameters" element="tns:submitResponse" />
+  </wsdl:message>
+  <wsdl:message name="delUnitResponse">
+    <wsdl:part name="parameters" element="tns:delUnitResponse" />
+  </wsdl:message>
+  <wsdl:message name="setSessionVarResponse">
+    <wsdl:part name="parameters" element="tns:setSessionVarResponse" />
+  </wsdl:message>
+  <wsdl:message name="userLoginExResponse">
+    <wsdl:part name="parameters" element="tns:userLoginExResponse" />
+  </wsdl:message>
+  <wsdl:message name="getSessionVar">
+    <wsdl:part name="parameters" element="tns:getSessionVar" />
+  </wsdl:message>
+  <wsdl:message name="setAdminType">
+    <wsdl:part name="parameters" element="tns:setAdminType" />
+  </wsdl:message>
+  <wsdl:message name="getDomainAlias">
+    <wsdl:part name="parameters" element="tns:getDomainAlias" />
+  </wsdl:message>
+  <wsdl:message name="deleteObj">
+    <wsdl:part name="parameters" element="tns:deleteObj" />
+  </wsdl:message>
+  <wsdl:message name="getOrgListResponse">
+    <wsdl:part name="parameters" element="tns:getOrgListResponse" />
+  </wsdl:message>
+  <wsdl:message name="getSesssionVar">
+    <wsdl:part name="parameters" element="tns:getSesssionVar" />
+  </wsdl:message>
+  <wsdl:message name="delDomainAlias">
+    <wsdl:part name="parameters" element="tns:delDomainAlias" />
+  </wsdl:message>
+  <wsdl:message name="addDomainAliasResponse">
+    <wsdl:part name="parameters" element="tns:addDomainAliasResponse" />
+  </wsdl:message>
+  <wsdl:message name="getSessionVarResponse">
+    <wsdl:part name="parameters" element="tns:getSessionVarResponse" />
+  </wsdl:message>
+  <wsdl:message name="userLoginEx">
+    <wsdl:part name="parameters" element="tns:userLoginEx" />
+  </wsdl:message>
+  <wsdl:message name="alterOrg">
+    <wsdl:part name="parameters" element="tns:alterOrg" />
+  </wsdl:message>
+  <wsdl:message name="getAttrs">
+    <wsdl:part name="parameters" element="tns:getAttrs" />
+  </wsdl:message>
+  <wsdl:message name="submit">
+    <wsdl:part name="parameters" element="tns:submit" />
+  </wsdl:message>
+  <wsdl:message name="setSessionVar">
+    <wsdl:part name="parameters" element="tns:setSessionVar" />
+  </wsdl:message>
+  <wsdl:message name="addUnitResponse">
+    <wsdl:part name="parameters" element="tns:addUnitResponse" />
+  </wsdl:message>
+  <wsdl:message name="alterOrgResponse">
+    <wsdl:part name="parameters" element="tns:alterOrgResponse" />
+  </wsdl:message>
+  <wsdl:message name="getAdminType">
+    <wsdl:part name="parameters" element="tns:getAdminType" />
+  </wsdl:message>
+  <wsdl:message name="setUnitAttrs">
+    <wsdl:part name="parameters" element="tns:setUnitAttrs" />
+  </wsdl:message>
+  <wsdl:message name="addOrg">
+    <wsdl:part name="parameters" element="tns:addOrg" />
+  </wsdl:message>
+  <wsdl:message name="getOrgInfoResponse">
+    <wsdl:part name="parameters" element="tns:getOrgInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="getNewMailInfos">
+    <wsdl:part name="parameters" element="tns:getNewMailInfos" />
+  </wsdl:message>
+  <wsdl:message name="authenticateResponse">
+    <wsdl:part name="parameters" element="tns:authenticateResponse" />
+  </wsdl:message>
+  <wsdl:message name="getSmtpAlias">
+    <wsdl:part name="parameters" element="tns:getSmtpAlias" />
+  </wsdl:message>
+  <wsdl:message name="sesTimeOutResponse">
+    <wsdl:part name="parameters" element="tns:sesTimeOutResponse" />
+  </wsdl:message>
+  <wsdl:message name="setAdminTypeResponse">
+    <wsdl:part name="parameters" element="tns:setAdminTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="getOrgCosUserMax">
+    <wsdl:part name="parameters" element="tns:getOrgCosUserMax" />
+  </wsdl:message>
+  <wsdl:message name="sesTimeOut">
+    <wsdl:part name="parameters" element="tns:sesTimeOut" />
+  </wsdl:message>
+  <wsdl:message name="deleteObjResponse">
+    <wsdl:part name="parameters" element="tns:deleteObjResponse" />
+  </wsdl:message>
+  <wsdl:message name="getSesssionVarResponse">
+    <wsdl:part name="parameters" element="tns:getSesssionVarResponse" />
+  </wsdl:message>
+  <wsdl:message name="getObjAttrsResponse">
+    <wsdl:part name="parameters" element="tns:getObjAttrsResponse" />
+  </wsdl:message>
+  <wsdl:message name="getOrgList">
+    <wsdl:part name="parameters" element="tns:getOrgList" />
+  </wsdl:message>
+  <wsdl:message name="getVersionInfo">
+    <wsdl:part name="parameters" element="tns:getVersionInfo" />
+  </wsdl:message>
+  <wsdl:message name="addOrgDomain">
+    <wsdl:part name="parameters" element="tns:addOrgDomain" />
+  </wsdl:message>
+  <wsdl:message name="setObjAttrsResponse">
+    <wsdl:part name="parameters" element="tns:setObjAttrsResponse" />
+  </wsdl:message>
+  <wsdl:message name="getOrgListByDomainResponse">
+    <wsdl:part name="parameters" element="tns:getOrgListByDomainResponse" />
+  </wsdl:message>
+  <wsdl:message name="delOrgDomainResponse">
+    <wsdl:part name="parameters" element="tns:delOrgDomainResponse" />
+  </wsdl:message>
+  <wsdl:message name="setUnitAttrsResponse">
+    <wsdl:part name="parameters" element="tns:setUnitAttrsResponse" />
+  </wsdl:message>
+  <wsdl:message name="userLogout">
+    <wsdl:part name="parameters" element="tns:userLogout" />
+  </wsdl:message>
+  <wsdl:message name="getVersionInfoResponse">
+    <wsdl:part name="parameters" element="tns:getVersionInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="getAdminTypeResponse">
+    <wsdl:part name="parameters" element="tns:getAdminTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="alterOrgCosResponse">
+    <wsdl:part name="parameters" element="tns:alterOrgCosResponse" />
+  </wsdl:message>
+  <wsdl:message name="getOrgInfo">
+    <wsdl:part name="parameters" element="tns:getOrgInfo" />
+  </wsdl:message>
+  <wsdl:portType name="API">
+    <wsdl:operation name="addDomain25">
+      <wsdl:input name="addDomain25" message="tns:addDomain25" />
+      <wsdl:output name="addDomain25Response" message="tns:addDomain25Response" />
+    </wsdl:operation>
+    <wsdl:operation name="alterOrgCos">
+      <wsdl:input name="alterOrgCos" message="tns:alterOrgCos" />
+      <wsdl:output name="alterOrgCosResponse" message="tns:alterOrgCosResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="createObj">
+      <wsdl:input name="createObj" message="tns:createObj" />
+      <wsdl:output name="createObjResponse" message="tns:createObjResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="userLogin">
+      <wsdl:input name="userLogin" message="tns:userLogin" />
+      <wsdl:output name="userLoginResponse" message="tns:userLoginResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="moveUser">
+      <wsdl:input name="moveUser" message="tns:moveUser" />
+      <wsdl:output name="moveUserResponse" message="tns:moveUserResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="createUser">
+      <wsdl:input name="createUser" message="tns:createUser" />
+      <wsdl:output name="createUserResponse" message="tns:createUserResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="addSmtpAlias">
+      <wsdl:input name="addSmtpAlias" message="tns:addSmtpAlias" />
+      <wsdl:output name="addSmtpAliasResponse" message="tns:addSmtpAliasResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getDomainList">
+      <wsdl:input name="getDomainList" message="tns:getDomainList" />
+      <wsdl:output name="getDomainListResponse" message="tns:getDomainListResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="changeAttrs">
+      <wsdl:input name="changeAttrs" message="tns:changeAttrs" />
+      <wsdl:output name="changeAttrsResponse" message="tns:changeAttrsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="setObjAttrs">
+      <wsdl:input name="setObjAttrs" message="tns:setObjAttrs" />
+      <wsdl:output name="setObjAttrsResponse" message="tns:setObjAttrsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getSessionVar">
+      <wsdl:input name="getSessionVar" message="tns:getSessionVar" />
+      <wsdl:output name="getSessionVarResponse" message="tns:getSessionVarResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="setAdminType">
+      <wsdl:input name="setAdminType" message="tns:setAdminType" />
+      <wsdl:output name="setAdminTypeResponse" message="tns:setAdminTypeResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="delDomain25">
+      <wsdl:input name="delDomain25" message="tns:delDomain25" />
+      <wsdl:output name="delDomain25Response" message="tns:delDomain25Response" />
+    </wsdl:operation>
+    <wsdl:operation name="getUnitAttrs">
+      <wsdl:input name="getUnitAttrs" message="tns:getUnitAttrs" />
+      <wsdl:output name="getUnitAttrsResponse" message="tns:getUnitAttrsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getDomainAlias">
+      <wsdl:input name="getDomainAlias" message="tns:getDomainAlias" />
+      <wsdl:output name="getDomainAliasResponse" message="tns:getDomainAliasResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteObj">
+      <wsdl:input name="deleteObj" message="tns:deleteObj" />
+      <wsdl:output name="deleteObjResponse" message="tns:deleteObjResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getSesssionVar">
+      <wsdl:input name="getSesssionVar" message="tns:getSesssionVar" />
+      <wsdl:output name="getSesssionVarResponse" message="tns:getSesssionVarResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="delDomainAlias">
+      <wsdl:input name="delDomainAlias" message="tns:delDomainAlias" />
+      <wsdl:output name="delDomainAliasResponse" message="tns:delDomainAliasResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="domainExist">
+      <wsdl:input name="domainExist" message="tns:domainExist" />
+      <wsdl:output name="domainExistResponse" message="tns:domainExistResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="userLoginEx">
+      <wsdl:input name="userLoginEx" message="tns:userLoginEx" />
+      <wsdl:output name="userLoginExResponse" message="tns:userLoginExResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="alterOrg">
+      <wsdl:input name="alterOrg" message="tns:alterOrg" />
+      <wsdl:output name="alterOrgResponse" message="tns:alterOrgResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getAttrs">
+      <wsdl:input name="getAttrs" message="tns:getAttrs" />
+      <wsdl:output name="getAttrsResponse" message="tns:getAttrsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getOrgListByDomain">
+      <wsdl:input name="getOrgListByDomain" message="tns:getOrgListByDomain" />
+      <wsdl:output name="getOrgListByDomainResponse" message="tns:getOrgListByDomainResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="submit">
+      <wsdl:input name="submit" message="tns:submit" />
+      <wsdl:output name="submitResponse" message="tns:submitResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="authenticate">
+      <wsdl:input name="authenticate" message="tns:authenticate" />
+      <wsdl:output name="authenticateResponse" message="tns:authenticateResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="setSessionVar">
+      <wsdl:input name="setSessionVar" message="tns:setSessionVar" />
+      <wsdl:output name="setSessionVarResponse" message="tns:setSessionVarResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="renameUser">
+      <wsdl:input name="renameUser" message="tns:renameUser" />
+      <wsdl:output name="renameUserResponse" message="tns:renameUserResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="addUnit">
+      <wsdl:input name="addUnit" message="tns:addUnit" />
+      <wsdl:output name="addUnitResponse" message="tns:addUnitResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="delUnit">
+      <wsdl:input name="delUnit" message="tns:delUnit" />
+      <wsdl:output name="delUnitResponse" message="tns:delUnitResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getAdminType">
+      <wsdl:input name="getAdminType" message="tns:getAdminType" />
+      <wsdl:output name="getAdminTypeResponse" message="tns:getAdminTypeResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="setUnitAttrs">
+      <wsdl:input name="setUnitAttrs" message="tns:setUnitAttrs" />
+      <wsdl:output name="setUnitAttrsResponse" message="tns:setUnitAttrsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getOrgCosUser">
+      <wsdl:input name="getOrgCosUser" message="tns:getOrgCosUser" />
+      <wsdl:output name="getOrgCosUserResponse" message="tns:getOrgCosUserResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="addOrg">
+      <wsdl:input name="addOrg" message="tns:addOrg" />
+      <wsdl:output name="addOrgResponse" message="tns:addOrgResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="sesRefresh">
+      <wsdl:input name="sesRefresh" message="tns:sesRefresh" />
+      <wsdl:output name="sesRefreshResponse" message="tns:sesRefreshResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="submitJSON">
+      <wsdl:input name="submitJSON" message="tns:submitJSON" />
+      <wsdl:output name="submitJSONResponse" message="tns:submitJSONResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="userExist">
+      <wsdl:input name="userExist" message="tns:userExist" />
+      <wsdl:output name="userExistResponse" message="tns:userExistResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getNewMailInfos">
+      <wsdl:input name="getNewMailInfos" message="tns:getNewMailInfos" />
+      <wsdl:output name="getNewMailInfosResponse" message="tns:getNewMailInfosResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteUser">
+      <wsdl:input name="deleteUser" message="tns:deleteUser" />
+      <wsdl:output name="deleteUserResponse" message="tns:deleteUserResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getSmtpAlias">
+      <wsdl:input name="getSmtpAlias" message="tns:getSmtpAlias" />
+      <wsdl:output name="getSmtpAliasResponse" message="tns:getSmtpAliasResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getOrgCosUserMax">
+      <wsdl:input name="getOrgCosUserMax" message="tns:getOrgCosUserMax" />
+      <wsdl:output name="getOrgCosUserMaxResponse" message="tns:getOrgCosUserMaxResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="delSmtpAlias">
+      <wsdl:input name="delSmtpAlias" message="tns:delSmtpAlias" />
+      <wsdl:output name="delSmtpAliasResponse" message="tns:delSmtpAliasResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="sesTimeOut">
+      <wsdl:input name="sesTimeOut" message="tns:sesTimeOut" />
+      <wsdl:output name="sesTimeOutResponse" message="tns:sesTimeOutResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getObjAttrs">
+      <wsdl:input name="getObjAttrs" message="tns:getObjAttrs" />
+      <wsdl:output name="getObjAttrsResponse" message="tns:getObjAttrsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="delOrgCos">
+      <wsdl:input name="delOrgCos" message="tns:delOrgCos" />
+      <wsdl:output name="delOrgCosResponse" message="tns:delOrgCosResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getOrgList">
+      <wsdl:input name="getOrgList" message="tns:getOrgList" />
+      <wsdl:output name="getOrgListResponse" message="tns:getOrgListResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getVersionInfo">
+      <wsdl:input name="getVersionInfo" message="tns:getVersionInfo" />
+      <wsdl:output name="getVersionInfoResponse" message="tns:getVersionInfoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="addOrgDomain">
+      <wsdl:input name="addOrgDomain" message="tns:addOrgDomain" />
+      <wsdl:output name="addOrgDomainResponse" message="tns:addOrgDomainResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="addOrgCos">
+      <wsdl:input name="addOrgCos" message="tns:addOrgCos" />
+      <wsdl:output name="addOrgCosResponse" message="tns:addOrgCosResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="listMailInfos">
+      <wsdl:input name="listMailInfos" message="tns:listMailInfos" />
+      <wsdl:output name="listMailInfosResponse" message="tns:listMailInfosResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="userLogout">
+      <wsdl:input name="userLogout" message="tns:userLogout" />
+      <wsdl:output name="userLogoutResponse" message="tns:userLogoutResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="addDomainAlias">
+      <wsdl:input name="addDomainAlias" message="tns:addDomainAlias" />
+      <wsdl:output name="addDomainAliasResponse" message="tns:addDomainAliasResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="smtpTransport">
+      <wsdl:input name="smtpTransport" message="tns:smtpTransport" />
+      <wsdl:output name="smtpTransportResponse" message="tns:smtpTransportResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="delOrgDomain">
+      <wsdl:input name="delOrgDomain" message="tns:delOrgDomain" />
+      <wsdl:output name="delOrgDomainResponse" message="tns:delOrgDomainResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getOrgInfo">
+      <wsdl:input name="getOrgInfo" message="tns:getOrgInfo" />
+      <wsdl:output name="getOrgInfoResponse" message="tns:getOrgInfoResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="APISoapBinding" type="tns:API">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="addDomain25">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="addDomain25">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="addDomain25Response">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createObj">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="createObj">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="createObjResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="alterOrgCos">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="alterOrgCos">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="alterOrgCosResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="userLogin">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="userLogin">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="userLoginResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="moveUser">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="moveUser">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="moveUserResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createUser">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="createUser">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="createUserResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addSmtpAlias">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="addSmtpAlias">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="addSmtpAliasResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDomainList">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="getDomainList">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getDomainListResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setObjAttrs">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="setObjAttrs">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="setObjAttrsResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="changeAttrs">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="changeAttrs">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="changeAttrsResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSessionVar">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="getSessionVar">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getSessionVarResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setAdminType">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="setAdminType">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="setAdminTypeResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="delDomain25">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="delDomain25">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="delDomain25Response">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUnitAttrs">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="getUnitAttrs">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getUnitAttrsResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDomainAlias">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="getDomainAlias">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getDomainAliasResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteObj">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="deleteObj">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="deleteObjResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSesssionVar">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="getSesssionVar">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getSesssionVarResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="delDomainAlias">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="delDomainAlias">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="delDomainAliasResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="domainExist">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="domainExist">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="domainExistResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="userLoginEx">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="userLoginEx">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="userLoginExResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="alterOrg">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="alterOrg">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="alterOrgResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAttrs">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="getAttrs">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getAttrsResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getOrgListByDomain">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="getOrgListByDomain">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getOrgListByDomainResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="submit">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="submit">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="submitResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="authenticate">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="authenticate">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="authenticateResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setSessionVar">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="setSessionVar">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="setSessionVarResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="renameUser">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="renameUser">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="renameUserResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addUnit">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="addUnit">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="addUnitResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="delUnit">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="delUnit">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="delUnitResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAdminType">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="getAdminType">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getAdminTypeResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setUnitAttrs">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="setUnitAttrs">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="setUnitAttrsResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getOrgCosUser">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="getOrgCosUser">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getOrgCosUserResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addOrg">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="addOrg">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="addOrgResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sesRefresh">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="sesRefresh">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="sesRefreshResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="submitJSON">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="submitJSON">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="submitJSONResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="userExist">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="userExist">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="userExistResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getNewMailInfos">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="getNewMailInfos">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getNewMailInfosResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteUser">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="deleteUser">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="deleteUserResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSmtpAlias">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="getSmtpAlias">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getSmtpAliasResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getOrgCosUserMax">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="getOrgCosUserMax">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getOrgCosUserMaxResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="delSmtpAlias">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="delSmtpAlias">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="delSmtpAliasResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sesTimeOut">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="sesTimeOut">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="sesTimeOutResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getObjAttrs">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="getObjAttrs">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getObjAttrsResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="delOrgCos">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="delOrgCos">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="delOrgCosResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getOrgList">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="getOrgList">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getOrgListResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getVersionInfo">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="getVersionInfo">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getVersionInfoResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addOrgDomain">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="addOrgDomain">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="addOrgDomainResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addOrgCos">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="addOrgCos">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="addOrgCosResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listMailInfos">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="listMailInfos">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="listMailInfosResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="userLogout">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="userLogout">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="userLogoutResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addDomainAlias">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="addDomainAlias">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="addDomainAliasResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="smtpTransport">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="smtpTransport">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="smtpTransportResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="delOrgDomain">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="delOrgDomain">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="delOrgDomainResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getOrgInfo">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="getOrgInfo">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getOrgInfoResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="API">
+    <wsdl:port name="APIPort" binding="tns:APISoapBinding">
+      <soap:address location="http://mail.3vjia.com:9900/apiws/services/API" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

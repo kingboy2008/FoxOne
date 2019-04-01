@@ -1,0 +1,766 @@
+﻿/*通用样式*/
+*{
+	margin:0;
+	padding: 0;
+}
+body{
+	font-family: "微软雅黑";
+	/*padding:44px 0px 0px 0px;*/
+	color: rgb(52,52,52);
+}
+a{
+	text-decoration: none;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+@font-face{
+	font-family: 'iconfont';
+	src: url('../font/iconfont.eot');
+	src: url('../font/iconfont.eot?iefix') format('embedded-opentype'),
+	url('../font/iconfont.woff') format('woff'),
+	url('../font/iconfont.ttf') format('truetype'),
+	url('../font/iconfont.svg#iconfont') format('svg');
+}
+.iconfont{
+	font-family: "iconfont" !important;
+	font-size: 30px;
+	font-style: normal;
+	-webkit-font-smoothing: antialiased;
+	-webkit-text-stroke-width: 0.2px;
+}
+/*所有页面标题栏的样式*/
+.page_hd{
+	width: 100%;
+	height: 44px;
+	line-height: 44px;
+	background-color: rgb(64,159,255);
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 999;
+	color: #fff;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	text-align: center;
+}
+.back{
+	position: absolute;
+	display: inline-block;
+	line-height: 44px;
+	left: 10px;
+	color: #fff;
+	
+}
+.back_i{
+	font-size: 18px;
+}
+.title{
+	font-size: 18px;
+	line-height: 44px;
+	text-align: center;
+	float: right;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+
+/*------------------------------------------------*/
+
+/*首页的样式*/
+.name{
+	float: right;
+	font-size: 16px;
+	margin-right: 24px;
+	color: #fff;
+}
+.page_bd{
+	border-bottom: 1px solid #ECECEC;
+}
+.page_bd:last-child{
+	border-bottom: 0;
+}
+.contents{
+	position: relative;
+	overflow: hidden;
+}
+.contents_icon{
+	position: relative;
+    float: left;
+    padding: 20px 10px;
+    width: 25%;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+}
+.bd_h3{
+	font-size: 16px;
+	padding-top: 10px;
+	padding-left: 15px;
+	color: rgb(52,52,52);
+}
+.content_icon{
+	position: relative;
+	width: 50px;
+    height: 50px;
+    margin: 0 auto;
+   	text-align: center;
+   	line-height: 50px;
+   	border-radius: 8px;
+    color: #fff;
+}
+/*首页图标的四种背景颜色*/
+.bg_blue{
+	background-color: rgb(77,169,235);
+}
+.bg_red{
+	background-color: rgb(242,86,67);
+}
+.bg_green{
+	background-color: rgb(21,188,131);
+}
+.bg_orange{
+	background-color: rgb(247,181,94);
+}
+/*图标右上角的小红点的样式*/
+.sign{
+	position: absolute;
+	display: inline-block;
+	margin-left: -2px;
+	margin-top: -6px;
+	font-size: 14px;
+	width: 20px;
+	height: 20px;
+	line-height: 20px;
+	text-align: center;
+	background-color: red;
+	border-radius: 50%;
+	color: #fff;
+}
+/*图标下方文字样式*/
+.content_label{
+	display: block;
+    color: #000;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-align: center;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+/*------------------------------------------------*/
+
+/*待办事项页和已办事项页的样式*/
+.message{
+	padding: 10px 15px;
+	border-bottom: 1px solid #ECECEC;
+	position: relative;
+}
+.photo{
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+	border-radius: 25px;
+	background: url(../img/peri.png) no-repeat;
+	vertical-align: top;
+	margin-right: 5px;
+}
+.photo_note{
+	display: inline-block;
+}
+.message_hd{
+	margin-bottom: 8px;
+	height: 14px;
+	line-height: 14px;
+}
+.header{
+	font-size: 14px;
+}
+.date{
+	font-size: 12px;
+	color: rgb(147,147,147);
+	position: absolute;
+	right: 15px;
+	top: 10px;
+}
+.message_bd{
+	font-size: 12px;
+	line-height: 20px;
+	color: rgb(147,147,147);
+}
+/*印章的样式*/
+.approve_icon{
+	position: absolute;
+	text-align: center;
+	float: right;
+	bottom: 0;
+	right: 14px;
+	width: 70px;
+	height: 70px;
+}
+.approve_icon .iconfont{
+	line-height: 1.1;
+}
+.approve_text{
+	position: absolute;
+	font-size: 12px;
+	top: 42%;
+	left: 14%;
+	-webkit-transform: rotate(-30deg);
+	        transform: rotate(-30deg);
+}
+/*印章的三种颜色*/
+.pass{
+	font-size: 70px;
+	color: #2ae343;
+}
+.pass_text{
+	color: #2ae343;
+}
+.underway{
+	font-size: 70px;
+	color: #1296db;
+}
+.underway_text{
+	color: #1296db;
+	top: 42%;
+	left: 22%;
+}
+.fail{
+	font-size: 70px;
+	color: #d81e06;
+}
+.fail_text{
+	color: #d81e06;
+}
+
+/*------------------------------------------------*/
+
+/*会议室预订情况一览页的样式*/
+/*日期选择栏的样式*/
+.dateline{
+	height: 30px;
+	line-height: 30px;
+	background-color: rgb(64,159,255);
+	text-align: center;
+	font-size: 16px;
+}
+.prev{
+	position: absolute;
+	display: inline-block;
+	left: 10px;
+	color: #fff;
+}
+.prev_arrow{
+	font-size: 16px;
+	margin-right: 5px;
+}
+.datebox{
+	width: 150px;
+	height: 20px;
+	border: none;
+	border-radius: 5px;
+	font-size: 16px;
+	background-color: rgb(64,159,255);
+	text-align: center;
+	color: #fff;
+	outline: none;
+}
+.next{
+	position: absolute;
+	display: inline-block;
+	right: 10px;
+	color: #fff;	
+}
+.next_arrow{
+	font-size: 16px;
+	margin-left: 5px;
+}
+/*每条会议预订信息的样式*/
+.reservation_info{
+	border-bottom: 1px solid #ECECEC;
+	padding: 10px 20px;
+}
+.info_title{
+	font-size: 16px;
+	margin-bottom: 15px;
+}
+.meeting{
+	font-size: 14px;
+	width: 100%;
+	border-radius: 5px;
+	text-align: center;
+	color: #fff;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+.reserved{
+	background-color: rgb(92,184,92);
+	margin-bottom: 5px;
+}
+.unreserved{
+	background-color: rgb(240,173,78);
+}
+
+/*------------------------------------------------*/
+
+/*新增会议室预订*/
+.bg_gray{
+	background-color: rgb(245,245,245);
+}
+.meeting_form{
+	margin-top: 10px;
+	border-top: 1px solid #ECECEC;
+}
+.meeting_info{
+	background-color: #fff;
+	border-bottom: 1px solid #ECECEC;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	    align-items: center;
+	position: relative;
+	padding: 10px 15px;
+}
+.label_div{
+	display: inline-block;
+	margin-right: -40px;
+	width: 150px;
+}
+.meeting_label{
+	font-size: 14px;
+	color: rgb(147,147,147);
+}
+.input_div{
+	display: inline-block;
+	-webkit-box-flex: 1;
+	-ms-flex: 1;
+	    flex: 1;
+}
+.meeting_input{
+	width: 100%;
+	font-size: 14px;
+	border: 0;
+	outline: 0;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+.textField{
+	resize: none;
+}
+.reserve_div{
+	width: 100%;
+	height: 60px;
+	margin-top: 10px;
+	padding-top: 10px;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+	background: #fff;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.reserve_btn{
+	width: 100%;
+	height: 40px;
+	background-color: rgb(26,173,25);
+	border: none;
+	outline: none;
+	color: #fff;
+	font-size: 14px;
+	border-radius: 5px;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	display: block;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+/*------------------------------------------------*/
+
+/* 修改weui库的 */
+.weui-cells{
+	font-size: 14px;	
+}
+.weui-uploader__input-box{
+	flex: none;
+	margin-bottom: 0px;
+}
+.weui-uploader__input-box{
+	height: 50px;
+	width: 50px;
+}
+.weui-label{
+	width: 130px;
+	color: #a8a8a8;
+}
+.weui-cell:before{
+	left: 0;
+}
+.weui-cells{
+	margin-top: 7px;
+}
+.weui-media-box_appmsg .weui-media-box__hd{
+	position: relative;
+	margin-right: 1.3em;
+	width: 90px;
+}
+.weui-media-box_appmsg{
+	align-items: flex-start;
+}
+.weui-media-box__desc{
+	line-height: 30px;
+}
+/*------------------------------------------------*/
+
+/* 主容器部分 */
+.check-content{
+	margin-bottom: 42px;
+}
+.gray-page{
+	background-color: #eeeeee;
+}
+
+/*------------------------------------------------*/
+
+/* 申请部分 */
+.provide-border{
+	border-left: 1px solid #eeeeee;
+	border-right: 1px solid #eeeeee;
+}
+.weui-cell.chose-opinion{
+	padding:0px;
+}
+.flow-chart {
+	margin-top: 8px;
+    margin-bottom: 5px;
+    background-color: white;
+}
+
+.flow-chart-part {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    border-bottom: 1px solid #eeeeee;
+        padding: 8px 20px;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    background-color: white;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+}
+.flow-part-title{
+    font-size: 14px;
+}
+.flow-part-time{
+    font-size: 14px;
+    color: #a8a8a8;
+}
+.flow-chart-middle{
+	    font-size: 16px;
+    line-height: 45px;
+}
+.content-head{
+	padding:10px 15px;
+	background-color: white;
+}
+.apply-title{
+	font-size: 16px;
+	font-weight: bold;
+}
+.apply-number{
+	color: #a8a8a8;
+	font-size: 14px;
+}
+.remark {
+    width: 100%;
+    resize: none;
+    height: 40px;
+    margin-top: 5px;
+    outline: none;
+    border: none;
+}
+.weui-cell.chose-button{
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	    -ms-flex-direction: column;
+	        flex-direction: column;
+	background-color: #ffffff;
+}
+.self-save-button{
+	background-color: #677f8c;
+}
+.self-save-button:not(.weui-btn_disabled):visited{
+  color:#000000;
+}
+.self-save-button:not(.weui-btn_disabled):active{
+  color:rgba(255, 255, 255, 0.6);
+  background-color: #506774;
+}
+.font-color-orange{
+	color:#c78322;
+}
+.font-color-green{
+	color:#64d775;
+}
+.font-color-red{
+	color:#c72929;
+}
+.weui-cells.opinion-list{
+	position: fixed;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}
+.head-portrait{
+	height: 35px;
+    width: 35px;
+    margin-right: 30px;
+}
+.flow-part-content{
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+}
+.part-content-main{
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+}
+.extra-info{
+	color: #a8a8a8;
+	font-size: 14px;
+}
+.show-add-file{
+	float: left;
+    padding-left: 20px;
+}
+.show-file-pic{
+	height: 44px;
+    width: 44px;
+    vertical-align: middle;
+}
+.add-file-name{
+    color: #b0b0c5;
+}
+/* contacts/联系人页面部分 */
+ ul,
+    li {
+        list-style: none;
+    }
+	.list-all li{
+		line-height: 55px;
+	}
+    .list {
+        background-color: #ffffff;
+    }
+
+    .level-1 + li {
+        border-top: 5px solid #eeeeee;  
+        -webkit-box-sizing: border-box;  
+                box-sizing: border-box;
+    }
+
+    .level-1-p {
+    	padding-left: 10px;
+        font-size: 18px;
+        font-weight: bold;
+            color: rgba(55, 29, 20, 0.61);
+        background-color:rgba(53, 133, 213, 0.59);
+    }
+
+    .level-2-p {
+		background-color: rgba(99, 146, 193, 0.15);
+    	padding-left: 10px;
+        font-size: 16px;
+    }
+
+    .level-3-p {
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-box-orient: horizontal;
+		-webkit-box-direction: normal;
+		    -ms-flex-direction: row;
+		        flex-direction: row;
+		-webkit-box-align: center;
+		    -ms-flex-align: center;
+		        align-items: center;
+        font-size: 14px;
+        padding-left: 10px;
+    }
+
+    .turn-arow {
+    	color: white;
+        font-size: 18px;
+        float: right;
+        -webkit-transform: rotate(180deg);
+                transform: rotate(180deg);
+        padding-left: 13px;
+    }
+
+    .level-2 + li {
+        border-top: 2px solid #CCCCCC;
+    }
+
+
+    .level-3-p p {
+    	-webkit-box-flex: 1;
+    	    -ms-flex: 1;
+    	        flex: 1;
+        border-top: 1px solid #CCCCCC;
+    }
+
+    .list-part{
+    	position: relative;
+    }
+    .list-part:before {
+    content: " ";
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    height: 1px;
+    border-top: 1px solid #CCCCCC;
+    color: #e5e5e5;
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    z-index: 2;
+}
+.list-part:after {
+    content: " ";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 1px;
+    border-bottom: 1px solid #CCCCCC;
+    color: #e5e5e5;
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    z-index: 2;
+}
+.list-part.list-all:before{
+	border: none;
+}
+.list-all.list-part:after{
+	border: none;
+}
+.list-all img{
+	height: 35px;
+	width: 35px;
+	vertical-align: middle;
+	margin-right: 20px;
+}
+
+.approval-opinion{
+	margin-bottom: 22px;
+}
+.approval-opinion.weui-cells{
+	margin-top: 0px;
+}
+.approval-opinion .remark{
+	height: 133px;
+}
+.opinion-speedy{
+	text-align: left;
+	padding-bottom: 10px;
+	    color: #a8a8a8;
+	 padding-left: 10px
+}
+.opinion-speedy a{
+	padding: 0 6px;
+}
+.chose-opinion{
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	    -ms-flex-direction: row;
+	        flex-direction: row;
+}
+.chose-opinion a{
+	text-align: center;
+	-webkit-box-flex: 1;
+	    -ms-flex: 1;
+	        flex: 1;
+	padding: 10px 0px;
+}
+.chose-opinion a:link {color:black;}
+/*公告页面*/
+.panel-red-point{
+    height: 14px;
+    width: 14px;
+    background-color: #c46262;
+    border-radius: 10px;
+    position: absolute;
+    right: -7px;
+    top: -7px;
+}
+.notice-time{
+	padding-left: 13px;
+}
+.notice-content{
+	padding: 12px 7px 7px 7px;
+}
+.notice-minor-content{
+	color: #a8a8a8;
+	line-height: 25px;
+	margin-top: 8px;
+}
+.notice-main-content{
+	line-height: 28px;
+	margin-top: 10px;
+}
+.notice-item-title{
+	font-size: 16px;
+	font-weight: bold;
+}
+/*通知页面的副本*/
+.notice-envelope{
+	align-self: center;
+    padding-left: 10px;
+    color: #f7b55e;
+    font-size: 21px;
+}
+
+/*审阅完成页面*/
+.finish-detail-pass{
+	top: 44px;
+    position: absolute;
+    right: 0;
+    z-index: 111;
+}
+.detail-pass-icon{
+	line-height: 132px;
+    font-size: 148px;
+    color: #2ae343;
+}
+.detail-pass-text{
+	position: absolute;
+    font-size: 20px;
+    top: 37%;
+    left: 22%;
+    -webkit-transform: rotate(-30deg);
+    transform: rotate(-30deg);
+    color: #2ae343;
+}
+.chose-opinion a.finish-detail-button:link{
+	color: #64d775;
+}
+

@@ -18,6 +18,7 @@ namespace FoxOne.Business
             set;
         }
 
+        [Column(Length = "200")]
         public string Value
         {
             get;

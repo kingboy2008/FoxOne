@@ -2,6 +2,7 @@
 using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.Http;
+using FoxOne.Business;
 
 namespace FoxOne.Web
 {
@@ -18,16 +19,21 @@ namespace FoxOne.Web
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             RegisterCenter.RegisterType();
             RegisterCenter.RegisterEntityEvent();
+
+            DiscoveryClientManager.InitializeAndStart();
+        }
+
+        protected async void Application_End()
+        {
+            DiscoveryClientManager.Shutdown();
         }
 
         public static void WebApiRegister(HttpConfiguration config)
         {
-            config.Routes.MapHttpRoute(name: "uc", routeTemplate: "api/UC/{action}/{id}/{systemId}", defaults: new {
-                controller = "UC",
-                id = RouteParameter.Optional,
-                systemId = RouteParameter.Optional
-            });
-            config.Routes.MapHttpRoute(name: "crud", routeTemplate: "api/{id}", defaults: new { controller = "CRUD", id = RouteParameter.Optional });
+            config.Filters.Add(new ApiResultAttribute());
+            config.Filters.Add(new ApiErrorHandleAttribute());
+            config.Filters.Add(new Controllers.RequestHeaderLogFilterAttribute());
+            config.Routes.MapHttpRoute(name: "User", routeTemplate: "api/{controller}/{action}");
         }
 
         public static void RegisterRoutes(RouteCollection routes)

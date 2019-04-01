@@ -40,6 +40,11 @@ namespace FoxOne.Controls
         [DisplayName("分隔区域html模板")]
         public string SeperatorTemplate { get; set; }
 
+        [FormField(ControlType = ControlType.TextArea)]
+        [DisplayName("分组html标签")]
+        [Description("{0}是Title，{1}是Content")]
+        public string GroupHtml { get; set; }
+
         public string GroupBy { get; set; }
 
         [DisplayName("实体类型")]
@@ -66,14 +71,18 @@ namespace FoxOne.Controls
                 }
             }
             Pager.RecordCount = recordCount;
-            var content = new List<string>();
-            entities.ForEach((entity) =>
+            if (GroupBy.IsNotNullOrEmpty() && entities.FirstOrDefault().ContainsKey(GroupBy))
             {
-                StringTemplate query = new StringTemplate(ItemTemplate);
-                query.SetAttribute(entity);
-                content.Add(query.ToString());
-            });
-            result.AppendLine(string.Join(SeperatorTemplate, content.ToArray()));
+                var gpEntities = entities.GroupBy(o => o[GroupBy].ToString());
+                foreach (var item in gpEntities)
+                {
+                    result.AppendLine(GroupHtml.FormatTo(item.Key, GetContent(item)));
+                }
+            }
+            else
+            {
+                result.AppendLine(GetContent(entities));
+            }
             if (AllowPaging)
             {
                 if (PagerPosition == PagerPosition.Bottom || PagerPosition == PagerPosition.Both)
@@ -81,7 +90,7 @@ namespace FoxOne.Controls
                     result.AppendLine(Pager.Render());
                 }
             }
-            if (SubContainerTag!= SubContainerTag.none)
+            if (SubContainerTag != SubContainerTag.none)
             {
                 var subContainer = new TagBuilder(SubContainerTag.ToString());
                 if (!SubContainerCssClass.IsNullOrEmpty())
@@ -93,7 +102,21 @@ namespace FoxOne.Controls
             }
             return result.ToString();
         }
+
+        private string GetContent(IEnumerable<IDictionary<string, object>> entities)
+        {
+            var content = new List<string>();
+            entities.ForEach((entity) =>
+            {
+                StringTemplate query = new StringTemplate(ItemTemplate);
+                query.SetAttribute(entity);
+                content.Add(query.ToString());
+            });
+            return string.Join(SeperatorTemplate, content.ToArray());
+        }
     }
+
+
 
     public enum SubContainerTag
     {

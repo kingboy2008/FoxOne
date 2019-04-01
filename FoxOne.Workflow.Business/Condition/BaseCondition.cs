@@ -27,7 +27,7 @@ namespace FoxOne.Workflow.Business
 
         protected void Log(string message)
         {
-            Logger.GetLogger("Workflow").Info(message);
+            Logger.Info(message);
         }
     }
 }

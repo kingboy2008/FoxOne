@@ -23,7 +23,22 @@ namespace FoxOne.Controls
                 }
                 return MvcHtmlString.Create(component.Render());
             }
-            return MvcHtmlString.Create("");
+            return MvcHtmlString.Empty;
+        }
+
+        public static MvcHtmlString CustomMobileControl(this HtmlHelper html, Form component)
+        {
+            if (component != null)
+            {
+                var behaviour = Sec.Provider.GetUISecurityBehaviours(HttpContext.Current.Request.FilePath, HttpContext.Current.Request.Url.Query);
+
+                if (component is IAuthorityComponent)
+                {
+                    (component as IAuthorityComponent).Authority(behaviour);
+                }
+                return MvcHtmlString.Create(component.RenderMobile());
+            }
+            return MvcHtmlString.Empty;
         }
 
         public static MvcHtmlString CustomControl(this HtmlHelper html, string pageName, string componentId)
@@ -42,7 +57,7 @@ namespace FoxOne.Controls
                     return MvcHtmlString.Create(component.Render());
                 }
             }
-            return MvcHtmlString.Create("");
+            return MvcHtmlString.Empty;
         }
     }
 }

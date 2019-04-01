@@ -43,6 +43,10 @@ namespace FoxOne.Workflow.Business
                 foreach (var component in components)
                 {
                     var type = TypeHelper.GetType(component.Type);
+                    if(type==null)
+                    {
+                        throw new Exception("没有找到名为{0}的类型".FormatTo(component.Type));
+                    }
                     if (!component.JsonContent.IsNullOrEmpty())
                     {
                         var instance = serializer.Deserialize(component.JsonContent, type);
@@ -72,7 +76,8 @@ namespace FoxOne.Workflow.Business
                                 }
                                 if (acti1.IsFreeApproval)
                                 {
-                                    var vActi = new BreakdownActivity() { ResponseRuleType = ResponseRuleType.AllResponse, NeedChoice = false, Id = acti1.Name + "_BreakDown",Name = acti1.Name + "_BreakDown", Alias = acti1.Alias + "-分发", Actor = new UserSelectActor() { InnerActor = new ChildDepartmentActor() {DeptName="IT研发中心", IfGetAllChildren = true, IfReturnSelf = true, RoleName = SysConfig.DefaultUserRole } } };
+                                    acti1.FreeApprovalRoleName = acti1.FreeApprovalRoleName.IsNullOrEmpty() ? SysConfig.DefaultUserRole : acti1.FreeApprovalRoleName;
+                                    var vActi = new BreakdownActivity() { ResponseRuleType = ResponseRuleType.AllResponse, NeedChoice = false, Id = acti1.Name + "_BreakDown",Name = acti1.Name + "_BreakDown", Alias = acti1.Alias + "-分发", Actor = new UserSelectActor() { InnerActor = new ChildDepartmentActor() {DeptName=acti1.FreeApprovalDeptName, IfGetAllChildren = true, IfReturnSelf = true, RoleName = acti1.FreeApprovalRoleName } } };
                                     var vTran = new BusinessTransition() { Id = acti1.Name + "_To_" + vActi.Name, Label = "自由分发", Condition = new ChoiceCondition() { Choice = vActi.Name } };
                                     vTran.To = vActi;
                                     vTran.From = acti1;

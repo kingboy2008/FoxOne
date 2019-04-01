@@ -42,7 +42,7 @@
     });
     $(window.document).ready(function () {
         $("div[widget='Tab']").each(function () {
-            var index = parseInt($(this).attr("initindex")) || 0;
+            var index = parseInt($(this).find("div.tab-box").attr("initindex")) || 0;
             var e = $.Event("click");
             $(this).find(".tab-item").eq(index).trigger(e);
         });

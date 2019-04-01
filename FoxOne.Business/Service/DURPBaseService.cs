@@ -36,7 +36,7 @@ namespace FoxOne.Business
                 var i = item as IEntity;
                 if (i.Id.IsNullOrEmpty())
                 {
-                    i.Id = Guid.NewGuid().ToString();
+                    i.Id = Utility.GetGuid();
                     i.RentId = 1;
                 }
             }

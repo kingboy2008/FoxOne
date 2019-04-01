@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using FoxOne.Core;
 using System.Web.Mvc;
+using FoxOne.Business.Environment;
+
 namespace FoxOne.Controls
 {
     public class IFrame : PageControlBase
@@ -24,7 +26,7 @@ namespace FoxOne.Controls
         public override string RenderContent()
         {
             var result = new TagBuilder("iframe");
-            result.Attributes["src"] = Src;
+            result.Attributes["src"] = Src.IsNullOrEmpty() ? string.Empty : Env.Parse(Src);
             result.Attributes["width"] = Width;
             result.Attributes["height"] = Height;
             result.Attributes["frameborder"] = "0";

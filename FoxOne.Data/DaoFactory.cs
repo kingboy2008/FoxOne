@@ -5,13 +5,12 @@ using FoxOne.Data.Mapping;
 using FoxOne.Data.Sql;
 using FoxOne.Core;
 using System.Collections.Concurrent;
+using FoxOne.Data.Provider;
 
 namespace FoxOne.Data
 {
     public sealed class DaoFactory
     {
-
-
         private static ISqlSource _sqlSource;
         private static IDictionary<string, Dao> _daos;
         private static IList<IDaoProvider> _providers;
@@ -22,7 +21,7 @@ namespace FoxOne.Data
         {
             _actionExecutors = TypeHelper.GetAllImplInstance<ISqlActionExecutor>();
             _parameters = ObjectHelper.GetAllObjects<ISqlParameters>();
-            _providers = TypeHelper.GetAllImplInstance<IDaoProvider>();
+            _providers = new List<IDaoProvider>() { new MySqlProvider(), new OracleProvider(), new SqlServerProvider() };
             _daos = new ConcurrentDictionary<string, Dao>();
             _sqlSource = new SqlSource().LoadSqls();
         }

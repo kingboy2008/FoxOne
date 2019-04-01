@@ -8,15 +8,13 @@ using FoxOne.Core;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
 
 namespace FoxOne.Workflow.Kernel
 {
     /// <summary>
     /// 流程实例接口
     /// </summary>
-    public interface IWorkflowInstance:IEntity
+    public interface IWorkflowInstance : IEntity
     {
         /// <summary>
         /// 流程实例名称
@@ -111,7 +109,7 @@ namespace FoxOne.Workflow.Kernel
         /// <summary>
         /// 所有参数集合
         /// </summary>
-        IDictionary<string,object> Parameters { get; }
+        IDictionary<string, object> Parameters { get; }
 
         /// <summary>
         /// 获取并行信息LevelCode
@@ -134,39 +132,88 @@ namespace FoxOne.Workflow.Kernel
         /// <returns></returns>
         int GetMaxReadTaskID();
 
+        /// <summary>
+        /// 插入新的工作项
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
         int InsertWorkItem(IWorkflowItem entity);
 
+        /// <summary>
+        /// 更新工作项
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
         int UpdateWorkItem(IWorkflowItem entity);
 
+        /// <summary>
+        /// 批量更新工作项
+        /// </summary>
+        /// <param name="entities"></param>
+        /// <returns></returns>
         int UpdateWorkItem(IList<IWorkflowItem> entities);
 
+        /// <summary>
+        /// 删除所有工作项
+        /// </summary>
+        /// <returns></returns>
         int DeleteWorkItem();
 
+        /// <summary>
+        /// 退回到指定的工作项
+        /// </summary>
+        /// <param name="taskId"></param>
+        /// <returns></returns>
         bool BackToTask(int taskId);
 
-        bool SetParameter(string key,string value);
+        /// <summary>
+        /// 设置流程流转参数
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        bool SetParameter(string key, string value);
 
+        /// <summary>
+        /// 删除所有流程流转参数
+        /// </summary>
+        /// <returns></returns>
         int DeleteParameter();
     }
 
+    /// <summary>
+    /// 流程实例状态
+    /// </summary>
     public enum FlowStatus
     {
         /// <summary>
         /// 拟稿
         /// </summary>
         [Description("拟稿")]
-        Begin,
+        Begin = 0,
 
         /// <summary>
-        /// 运行中
+        /// 审批中
         /// </summary>
-        [Description("运行中")]
-        Running,
+        [Description("审批中")]
+        Running = 1,
 
         /// <summary>
-        /// 完成
+        /// 审批通过
         /// </summary>
-        [Description("结束")]
-        Finished
+        [Description("审批通过")]
+        Finished = 2,
+
+        /// <summary>
+        /// 审批不通过
+        /// </summary>
+        [Description("审批不通过")]
+        Terminated = 3,
+
+        /// <summary>
+        /// 暂停
+        /// </summary>
+        [Description("暂停")]
+        Pause = 4
     }
 }

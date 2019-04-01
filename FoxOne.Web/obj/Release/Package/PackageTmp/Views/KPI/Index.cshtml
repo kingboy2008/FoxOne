@@ -1,0 +1,283 @@
+﻿@model FoxOne.Web.Controllers.KpiViewModel
+@{Layout = null;
+    //var KpiEntity = ViewData["KpiEntity"] as FoxOne.Web.Controllers.KPIEntity;
+    //var kpiDetails = ViewData["kpiDetails"] as IEnumerable<FoxOne.Web.Controllers.KPIDetailEntity>;
+    bool isZJ = FoxOne.Business.Security.Sec.User.Roles.Any(c => c.RoleType.Name == "总监");
+    }
+@using FoxOne.Business
+@using FoxOne.Controls
+@using FoxOne.Core
+@using System.Linq
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@Model.CreatorName KPI评分</title>
+    @System.Web.Optimization.Styles.Render("~/style/common.css")
+    <link href="~/Styles/workflowold.css?ver=17_12_21" rel="stylesheet" />
+    <style>
+        html,body{overflow:hidden;}
+    </style>
+</head>
+<body>
+
+    <div class="left" id="wfToolbar">
+        @if (Model.Optionable)
+        {
+            <button id="btnSave" class="btn btn-primary btn-big">
+                <em class="icon-save"></em>
+                保存
+            </button>
+
+            if (Model.KPIEntity.Status > FoxOne.Web.Controllers.KpiStatus.Init)
+            {
+                    <button id="btnSubmit" class="btn btn-success btn-big">
+                        <em class="icon-send"></em>审核
+                    </button>
+            }
+            else
+            {
+                    <button id="btnSubmit" class="btn btn-success btn-big">
+                        <em class="icon-send"></em>提交
+                    </button>
+            }
+        }
+        else if (isZJ)
+        {
+            <button id="btnSave" class="btn btn-primary btn-big">
+                <em class="icon-save"></em>
+                保存
+            </button>
+        }
+    </div>
+
+    <div class="right main-container">
+        <h1>
+            <img src="~/images/word.png" style="width:30px;padding:5px;" />
+            @Model.CreatorName  KPI评分(@Model.KPIEntity.Status.GetDescription())
+        </h1>
+        <div class="main-content">
+            <form class="form form-horizontal" defaultForm="defaultForm">
+                <input type="hidden" id="KpiId" name="KpiId" value="@Model.KPIEntity.Id" />
+                <input type="hidden" id="KpiStatus" name="KpiStatus" value="@Model.KPIEntity.Status"/>
+                <input type="hidden" id="CreatorId" name="CreatorId" value="@Model.KPIEntity.CreatorId"/>
+                <input type="hidden" id="IsNew" name="IsNew" value="@Model.IsNew.ToString()"/>
+                <div class="area">
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <label for="KPIMonth">KPI考核月份：</label>
+                            <input class="form-control" id="KPIMonth" name="KPIMonth" onclick="WdatePicker({dateFmt:'yyyy-MM'})" value='@Model.KPIEntity.KPIMonth.ToString("yyyy-MM")' />
+                        </div>
+                        <div class="form-group" description="">
+                            <label for="Saler">审核者：</label>
+                            <input class="form-control" id="Approvaler" name="Approvaler" type="hidden" value="@Model.KPIEntity.Approvaler" />
+                            <input class="form-control" data-dialogheight="400" data-dialogwidth="800" data-multiple="false" data-selector="UserSelector_Copy" data-showtype="SlideDown" data-target="Approvaler" id="Approvaler_Text" name="Approvaler_Text" type="text" value="@Model.ApprovorName" />
+                        </div>
+                    </div>
+
+                    @foreach (var di in Model.DetailList)
+                    {
+                        <h2><img src="~/images/form.png" style="height:24px;width:18px;margin-right:6px;" />@di.Title</h2>
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <label for="@di.Key-Target-Self">自评目标：</label>
+                                <textarea class="form-control" id="@di.Key-Target-Self" name="@di.Key-Target-Self" validator="length[0,1500]" validatorfieldlabel="@di.Title 自评目标">@di.DetailValues[di.Key+ "-Target-Self"]</textarea>
+                            </div>
+                        </div>
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <label for="@di.Key-Score-Self">自评得分：</label>
+                                <select class="form-control" id="@di.Key-Score-Self" name="@di.Key-Score-Self" selval="@di.DetailValues[di.Key+"-Score-Self"]">
+                                    <option value="3.25" >3.25</option>
+                                    <option value="3.5">3.5</option>
+                                    <option value="3.75">3.75</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <label for="@di.Key-Case-Self">自评案例：</label>
+                                <textarea class="form-control" id="@di.Key-Case-Self" name="@di.Key-Case-Self" validator="length[0,1500]" validatorfieldlabel="@di.Title 自评案例">@di.DetailValues[di.Key+ "-Case-Self"]</textarea>
+                            </div>
+                        </div>
+                        if (Model.KPIEntity.Status == FoxOne.Web.Controllers.KpiStatus.Approve ||
+                            (Model.KPIEntity.Status == FoxOne.Web.Controllers.KpiStatus.Submit && FoxOne.Business.Security.Sec.User.Id.Equals(Model.KPIEntity.Approvaler))||
+                            isZJ)
+                        {
+
+                            <div class="form-inline">
+                            <div class="form-group">
+                                <label for="@di.Key-Score-Approve">主管评得分：</label>
+                                <select class="form-control" id="@di.Key-Score-Approve" name="@di.Key-Score-Approve" selval="@di.DetailValues[di.Key + "-Score-Approve"]">
+                                    <option value="3.25">3.25</option>
+                                    <option value="3.5">3.5</option>
+                                    <option value="3.75">3.75</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <label for="@di.Key-Case-Approve">主管评案例：</label>
+                                <textarea class="form-control" id="@di.Key-Case-Approve" name="@di.Key-Case-Approve" validator="length[0,1500]" validatorfieldlabel="@di.Title 主管评案例">@di.DetailValues[di.Key + "-Case-Approve"]</textarea>
+                            </div>
+                        </div>
+                        }
+                        else
+                        {
+                            if (di.DetailValues.ContainsKey(di.Key + "-Score-Approve"))
+                            {
+                            <input type="hidden" id="@di.Key-Score-Approve" name="@di.Key-Score-Approve" value="@di.DetailValues[di.Key + "-Score-Approve"]" />
+                            }
+                            if (di.DetailValues.ContainsKey(di.Key + "-Case-Approve"))
+                            {
+                            <input  type="hidden" id="@di.Key-Case-Approve" name="@di.Key-Case-Approve" value="@di.DetailValues[di.Key + "-Case-Approve"]"/>
+                            }
+                        }
+                    }
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="areaTemplate" style="display:none;">
+        <h2><img src="~/images/form.png" style="height:24px;width:18px;margin-right:6px;" />{Title}</h2>
+        <div class="form-inline">
+            <div class="form-group">
+                <label for="{Target}">目标：</label>
+                <textarea class="form-control" id="{Target}" name="{Target}"></textarea>
+            </div>
+        </div>
+        <div class="form-inline">
+            <div class="form-group">
+                <label for="{Score}">得分：</label>
+                <select class="form-control" id="{Score}" name="{Score}">
+                    <option value="3.25">3.25</option>
+                    <option value="3.5" selected="selected">3.5</option>
+                    <option value="3.75">3.75</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-inline">
+            <div class="form-group">
+                <label for="{Case}">案例：</label>
+                <textarea class="form-control" id="{Case}" name="{Case}"></textarea>
+            </div>
+        </div>
+    </div>
+    <script src="~/Scripts/jquery-1.8.2.js"></script>
+    <script src="~/Scripts/jquery.form.js"></script>
+    <script src="~/Scripts/common.js"></script>
+    <script src="~/Scripts/Validator/jquery.validation.js"></script>
+    @System.Web.Optimization.Scripts.Render("~/script/widget.js")
+    <script src="~/Scripts/datepicker/WdatePicker.js"></script>
+    <script type="text/javascript">
+        function autoSize() {
+            var height = Math.min($(document).height(), $(window).height());
+            $(".right").css("height", height)
+            $(".main-content").css("height", height - $(".right>h1").outerHeight());
+        }
+
+        function validate(form) {
+            var validateInfo = $.validation.validate(form);
+            if (validateInfo.isError) {
+                var ee = $.Event("form.validateError", validateInfo);
+                $(form).trigger(ee);
+                foxOne.alert(ee.errorInfo);
+                return false;
+            }
+            return true;
+        }
+
+        $(function () {
+
+
+            $("select").each(function () {
+                var selval = $(this).attr("selval");
+                if (selval != "") {
+                    $(this).val(selval);
+                }
+                else
+                {
+                    $(this).val('3.5');
+                }
+            });
+            var isZJ =@isZJ.ToString().ToLower();
+            if (!@Model.SelfEditable.ToString().ToLower()&&!isZJ)
+            {
+                $("[name$='-Self']").css("display", "none").each(function () {
+                    $(this).parent().append(" <span class='form-control' style='width:700px'>" + $(this).val().replace(/\n/g, "<br/>") + "</span> ");
+                });
+                $("#Approvaler_Text").attr("disabled", "disabled");
+            }
+            if (!@Model.ApproveEditable.ToString().ToLower()&&!isZJ)
+            {
+                $("[name$='-Approve']").css("display", "none").each(function () {
+                    $(this).parent().append(" <span class='form-control' style='width:700px'>" + $(this).val().replace(/\n/g, "<br/>") + "</span> ");
+                });
+            }
+
+            autoSize();
+            $(window).resize(autoSize);
+
+            $("#btnSave").bind("click", function () {
+                var form = $("form");
+                if (!validate(form)) return;
+                form.ajaxSubmit({
+                    type: 'post',
+                    url: '/KPI/Save',
+                    success: function (response) {
+                        if (response.Result) {
+                            if (response.NoAuthority) {
+                                foxOne.alert(response.ErrorMessage);
+                            }
+                            else {
+                                if (response.LoginTimeOut) {
+                                    foxOne.alert("登录超时，请重新登录");
+                                }
+                                else {
+                                    var res = response.Data;
+                                    if (res.Result) {
+                                        //foxOne.alert("保存成功");
+                                        window.location = '/KPI/Index?_FORM_KEY=' + res.KpiId;
+                                    }
+                                }
+                            }
+                        }
+                        else {
+                            foxOne.alert(response.ErrorMessage);
+                        }
+                    },
+                    error: function (xhr, text, error) {
+                        foxOne.alert(xhr.responseText);
+                    }
+                });
+            });
+
+            $("#btnSubmit").bind("click", function () {
+
+                if (!validate($("form"))) return;
+                var kpiId = $("#KpiId").val();
+                if (!kpiId || kpiId == "")
+                {
+                    alert('请先保存再提交审核');
+                    return;
+                }
+                if (!confirm("提交审核后不能修改，是否继续？"))
+                {
+                    return;
+                }
+                foxOne.dataService("/KPI/ExecuteApprove", $("form").serialize(), function (result) {
+                    if (result)
+                    {
+                        window.location.reload();
+                    }
+                });
+                
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,7 +1,7 @@
 using System.Web.Http;
-using WebActivatorEx;
 using FoxOne.Web;
 using Swashbuckle.Application;
+using System.Web;
 using System;
 
 [assembly: PreApplicationStartMethod(typeof(SwaggerConfig), "Register")]
@@ -13,6 +13,21 @@ namespace FoxOne.Web
         private static string GetXmlCommentsPath()
         {
             return System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bin","FoxOne.Web.XML");
+        }
+
+        private static string GetXmlCommentsPath1()
+        {
+            return System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bin", "FoxOne.PMO.XML");
+        }
+
+        private static string GetXmlCommentsPath2()
+        {
+            return System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bin", "FoxOne.3VJ.XML");
+        }
+
+        private static string GetXmlCommentsPath3()
+        {
+            return System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bin", "FoxOne.Workflow.Business.XML");
         }
 
         public static void Register()
@@ -108,7 +123,9 @@ namespace FoxOne.Web
                         // more Xml comment files.
                         //
                         c.IncludeXmlComments(GetXmlCommentsPath());
-
+                        c.IncludeXmlComments(GetXmlCommentsPath1());
+                        c.IncludeXmlComments(GetXmlCommentsPath2());
+                        c.IncludeXmlComments(GetXmlCommentsPath3());
                         // Swashbuckle makes a best attempt at generating Swagger compliant JSON schemas for the various types
                         // exposed in your API. However, there may be occasions when more control of the output is needed.
                         // This is supported through the "MapType" and "SchemaFilter" options:

@@ -76,4 +76,28 @@ namespace FoxOne.Business
             set;
         }
     }
+
+    [DisplayName("部门角色转换器")]
+    public class DepartmentConverter : ColumnConverterBase
+    {
+        public override object Converter(object value)
+        {
+            StringBuilder sb = new StringBuilder();
+            var dept = DBContext<IDepartment>.Get(value.ToString());
+            var roles = dept.Roles;
+            sb.Append($"<p class=\"dept-role-add\" deptname=\"{dept.Name}\" deptid=\"{value}\">新增角色</p>");
+            if (!roles.IsNullOrEmpty())
+            {
+                foreach (var role in roles)
+                {
+                    sb.Append($"<p class=\"dept-role\">{role.RoleType.Name}：{(role.Members.IsNullOrEmpty() ? string.Empty : string.Join("，", role.Members.Select(o =>$"<span roleid=\"{role.Id}\" userid=\"{o.Id}\" class=\"role-user\">{o.Name}</span>")))}<a deptname=\"{dept.Name}\" rolename=\"{role.RoleType.Name}\" roleid=\"{role.Id}\">新增角色人员</a></p>");
+                }
+            }
+            if(!dept.Member.IsNullOrEmpty())
+            {
+                sb.Append($"<p class=\"dept-role\">部门成员：{string.Join("，", dept.Member.Select(o => $"<span  roleid=\"\" userid=\"\" class=\"role-user\">{o.Name}</span>"))}</p>");
+            }
+            return sb.ToString();
+        }
+    }
 }

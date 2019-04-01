@@ -1,0 +1,194 @@
+﻿@model  IList<FoxOne.Workflow.Business.ToDoList>
+@{
+    Layout = null;
+}
+@using FoxOne.Business.Security
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv=Content-Type content="text/html;charset=utf-8">
+    <meta charset="gbk">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection" />
+    <meta content="yes" name="apple-touch-fullscreen" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>待办事项</title>
+    <link href="~/Mobile/css/style.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="~/Mobile/css/weui.css">
+    <style>
+        .succ-container {
+            position: absolute;
+            /*top: 50%;
+            left: 50%;*/
+            width: 99%;
+            height: 70%;
+            /*margin-left: -300px;
+            margin-top: -250px;*/
+            border: 1px solid #CCC;
+            background-color: white;
+            text-align: center;
+            padding-top: 100px;
+            color: #449d44;
+            font-size: 13px;
+            border: 0px;
+        }
+    </style>
+</head>
+<body>
+    @*<div class="page_hd">
+        <a href="javascript:;" class="back"><i class="iconfont back_i">&#xe76e;</i></a>
+        <span class="title">待办事项</span>
+    </div>*@
+    @if (Model != null && Model.Count > 0)
+    {
+        <input id="txtKey" type="text" placeholder="关键字Or标题..." style="width: 80%;margin-left: 15px;line-height: 24px;font-size:14px" />
+        <input type="button" class="clickable weui-btn weui-btn_primary" style="display:inline; width:30px; margin-left: 5px;margin-top: 10px;padding-left:4px;padding-right:4px;font-size:12px;" id="btnSearch" value="搜索" />
+    }
+    @foreach (var item in Model)
+    {
+        <div class="message" instanceId="@item.InstanceId" currItemId="@item.ItemId">
+            <div class="photo" style="background:no-repeat;">
+                <img style="height:40px;width:40px;" src="@item.Avatar" />
+            </div>
+            <div class="photo_note">
+                <p class="message_hd">
+                    <span class="header">@item.InstanceName</span>
+                    <span class="date">@item.ReceiveTime.Value.ToString("MM月dd日HH:mm")</span>
+                </p>
+                <p class="message_bd">流程名称：@item.ApplicationName</p>
+                <p class="message_bd">发送人：@item.PasserUserName</p>
+            </div>
+        </div>
+    }
+    @if (Model == null || Model.Count == 0)
+    {
+        <div class="succ-container">
+            <img src="~/images/empty.png" />
+            <br /><br />
+            <p style="color:gray">
+                列表无任何内容
+            </p>
+        </div>
+    }
+    else
+    {
+        <button class="clickable weui-btn weui-btn_primary" style="margin-left:10%; margin-top:20px; width:80%;background-color:#0C9FCD" id="btnLoadmore">加载更多</button>
+    }
+    <script src="~/Scripts/zepto.min.js"></script>
+    <script type="text/javascript" src="https://g.alicdn.com/dingding/open-develop/1.6.9/dingtalk.js"></script>
+    <script src="~/DDStatic/js/fastclick.js"></script>
+    <script src="~/DDStatic/js/index.js"></script>
+    <script>
+        var logger = { i: function (info) { }, e: function (err) { dd.device.notification.alert({ message: err, title: '异常提示', buttonName: '关闭' }) } };
+
+        var pageIndex = 1;
+        var keyword = "";
+
+        var rowTemplate = "<div class='message' instanceId='' currItemId=''>"+
+            "<div class='photo' style='background:no-repeat;'>"+
+                "<img style='height:40px;width:40px;' src='' />"+
+            "</div>"+
+            "<div class='photo_note'>"+
+                "<p class='message_hd'>"+
+                    "<span class='header'></span>"+
+                    "<span class='date'></span>"+
+                "</p>"+
+                "<p class='message_bd flow_name'>流程名称：</p>"+
+                "<p class='message_bd sender'>发送人：</p></div></div>";
+
+        dd.ready(function () {
+
+            dd.biz.navigation.setRight({
+                text: '@Sec.User.Name',
+                onSuccess: function (data) {
+                },
+                onFail: function (err) {
+                    logger.e(JSON.stringify(err));
+                }
+            });
+            $("body").on("click",".message", function () {
+                Page.go2URL(Util.getTargetUrl("ToDoList", "WorkflowIndex?InstanceId=" + $(this).attr("instanceId") + "&ItemId=" + $(this).attr("currItemId")));
+            });
+        });
+
+        Date.prototype.Format = function (fmt) { //author: meizz 
+            var o = {
+                "M+": this.getMonth() + 1, //月份 
+                "d+": this.getDate(), //日 
+                "h+": this.getHours(), //小时 
+                "m+": this.getMinutes(), //分 
+                "s+": this.getSeconds(), //秒 
+                "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
+                "S": this.getMilliseconds() //毫秒 
+            };
+            if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+            for (var k in o)
+                if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            return fmt;
+        }
+
+        function ChangeDateFormat(val) {
+            if (val != null) {
+                var date = new Date(parseInt(val.replace("/Date(", "").replace(")/", ""), 10));
+                return date;
+            }
+            return new Date();
+        }
+
+        $("#btnLoadmore").bind("click", function () {
+            $(this).attr("disabled", "disabled");
+            var btn = $(this);
+            $.ajax({
+                url: "/Mobile/WorkflowData?pageIndex=" + pageIndex + "&type=ToDo&key=" + keyword,
+                type: 'POST',
+                dataType: 'json',
+                success: function (res) {
+                    pageIndex += 1;
+                    var datas = res.Data;
+                    if (datas.length == 0) {
+                        btn.hide();
+                        alert("已无更多内容");
+                    }
+                    else {
+                        for (var i = 0; i < datas.length; i++) {
+                            var newRow = $(rowTemplate);
+                            newRow.attr("instanceId", datas[i].InstanceId).attr("currItemId", datas[i].ItemId);
+                            newRow.find("img").attr("src", datas[i].Avatar);
+                            newRow.find(".header").text(datas[i].InstanceName);
+                            newRow.find(".date").text(ChangeDateFormat(datas[i].ReceiveTime).Format("MM月dd日hh:mm"));
+                            newRow.find(".flow_name").text("流程名称：" + datas[i].ApplicationName);
+                            if (datas[i].PasserUserName != null) {
+                                newRow.find(".sender").text("发送人：" + datas[i].PasserUserName);
+                            }
+
+                            newRow.insertBefore(btn);
+                        }
+                    }
+
+                    btn.removeAttr("disabled");
+                },
+                error: function () {
+
+                    btn.removeAttr("disabled");
+                },
+            });
+
+        });
+
+        $("#btnSearch").bind("click", function () {
+            pageIndex = 0;
+            keyword = $("#txtKey").val();
+            $("div.message").remove();
+            $("#btnLoadmore").trigger($.Event("click"));
+            $("#btnLoadmore").show();
+        });
+
+        dd.error(function (err) {
+            logger.e('dd error: ' + JSON.stringify(err));
+        });
+    </script>
+</body>
+</html>

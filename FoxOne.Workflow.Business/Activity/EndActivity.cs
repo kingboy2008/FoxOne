@@ -43,10 +43,18 @@ namespace FoxOne.Workflow.Business
             workitem.PasserUserId = context.CurrentUser.Id;
             workitem.PasserUserName = context.CurrentUser.Name;
             context.FlowInstance.InsertWorkItem(workitem);
-            context.FlowInstance.FlowTag = FlowStatus.Finished;
+            if (Name == WorkflowHelper.FORCE_END_LABEL)
+            {
+                context.FlowInstance.FlowTag = FlowStatus.Terminated;
+            }
+            else
+            {
+                context.FlowInstance.FlowTag = FlowStatus.Finished;
+            }
             context.FlowInstance.EndTime = DateTime.Now;
             context.FlowInstance.WorkItemNewSeq = workitem.ItemSeq;
             context.FlowInstance.WorkItemNewTask = workitem.ItemId;
+            context.FlowInstance.CurrentActivityName = Alias;
             Owner.UpdateInstance(context.FlowInstance);
             context.FlowInstance.DeleteParameter();
             SendOtherToRead(context);

@@ -14,7 +14,8 @@
         startUrl: '/Workflow/Start',
         saveUrl: '/Workflow/Save',
         execUrl: '/Workflow/ExecCommand',
-        userSelectDivHtml: "<div class='user-select'><table cellspacing='10' cellpadding='5' class='user-select-table' width='100%'><tr><td colspan='2' class='user-select-td-bg'>选择后续步骤以及相关处理人员</td></tr><tr><td>可选步骤：<div class='step-list' id='stepListDiv'></div></td><td class='tree-list-td'><div id='treeViewDiv' style='height: 450px;overflow-y:auto;'></div></td></tr><tr><td colspan='2' class='user-select-td-bg tar'><input type='button' id='btnRunFlow' class='btn btn-success btn-sm' value=' 发 送 ' />&nbsp;<input type='button' id='btnCancelRun' class='btn btn-danger btn-sm' value=' 取 消 ' /></td></tr></table></div>",
+        successUrl: '/Workflow/FlowSuccess',
+        userSelectDivHtml: "<div class='user-select'><table cellspacing='10' cellpadding='5' class='user-select-table' width='100%'><tr><td colspan='2' class='user-select-td-bg'>选择后续步骤以及相关处理人员</td></tr><tr><td>可选步骤：<div class='step-list' id='stepListDiv'></div></td><td class='tree-list-td'><div id='treeViewDiv' style='height: 300px;overflow-y:auto;'></div></td></tr><tr><td colspan='2' class='user-select-td-bg tar'><input type='button' id='btnRunFlow' class='btn btn-success btn-sm' value=' 发 送 ' />&nbsp;<input type='button' id='btnCancelRun' class='btn btn-danger btn-sm' value=' 取 消 ' /></td></tr></table></div>",
         setting: {
             view: {
                 showLine: true,
@@ -40,6 +41,15 @@
         getNewUserChoice: function () {
             return { StepName: '', Id: '', Name: '', DepartmentId: '' };
         },
+        success: function () {
+            var that = this;
+            if (that.runParameter.IsSimulate == '1') {
+                window.location.href = "/Workflow/AutoRun/" + that.runParameter.InstanceId;
+            }
+            else {
+                window.location.href = that.successUrl + "?InstanceId=" + that.runParameter.InstanceId + "&ItemId=" + that.runParameter.ItemId;
+            }
+        },
         getNextStep: function () {
             var that = this;
             if ($(".user-select").length == 0) {
@@ -47,7 +57,9 @@
                 $("#btnRunFlow").bind("click", function () {
                     that.run.call(foxOne.workflow);
                 });
-                $("#btnCancelRun").bind("click", $.closeModal);
+                $("#btnCancelRun").bind("click", function () {
+                    window.location.reload();
+                });
             }
             foxOne.dataService(that.getNextStepUrl, that.runParameter, function (nextStep) {
                 var canPostback = false;
@@ -56,23 +68,17 @@
                     return;
                 }
                 if (nextStep != null && nextStep[0].StepName == "自动发送") {
-                    foxOne.alert("发送成功");
-                    if (that.runParameter.IsSimulate == '1') {
-                        window.location.href = "/Workflow/AutoRun/" + that.runParameter.InstanceId;
-                    }
-                    else {
-                        window.close();
-                    }
+                    that.success();
                 }
                 else {
-                    $("#stepListDiv").html("");
+                    $("#" + that._STEP_LIST_DIV).html("");
                     $.each(nextStep, function (index, i) {
                         var input = that.hasSameMultipleTag(i, nextStep) ?
                             "<input type='checkbox' />" :
                             "<input type='radio' />";
                         $(input).attr("id", "step" + index)
                             .attr("name", "step")
-                            .data({ index: index, stepName: i.StepName, needUser: i.NeedUser, tag: i.MultipleSelectTag })
+                            .data({ index: index, stepName: i.StepName, needUser: i.NeedUser, tag: i.MultipleSelectTag, label: i.Label })
                             .css("margin-left", "10px")
                             .css("margin-top", "10px")
                             .bind("click", function (e) {
@@ -95,17 +101,24 @@
                         that.setting.check = { enable: true, chkStyle: i.OnlySingleSel ? "radio" : "checkbox" };
                         $.fn.zTree.init($("#" + that._TREE_CTRL_TEMP + index), that.setting, that.convertToTreeData(i));
                     });
-                    $("div[id*='userList']").hide();
+                    setTimeout(function () {
+                        var inps = $("#" + that._STEP_LIST_DIV).find("input");
+                        if (inps.length > 0) {
+                            inps.eq(0).attr("checked", true).click();
+                        }
+                    }, 100);
+
+                    $("div[id*='" + that._TREE_LIST_DIV + "']").hide();
                     $.modalInner($(".user-select"), true, function () { }, 700, 500, window, false);
                 }
             }, "post", true);
         },
         exec: function (command) {
-            this.runParameter.Command = command;
-            foxOne.dataService(this.execUrl, this.runParameter, function (data) {
+            var that = this;
+            that.runParameter.Command = command;
+            foxOne.dataService(that.execUrl, that.runParameter, function (data) {
                 if (data == true) {
-                    foxOne.alert("操作成功");
-                    window.close();
+                    that.success();
                 }
             }, "post", true);
         },
@@ -115,17 +128,11 @@
                 that.getUserChoice();
                 that.runParameter.Command = "run";
                 if (that.runParameter.UserChoice.length > 0) {
-                    foxOne.dataService(that.execUrl, that.runParameter, function (data) {
+                    foxOne.dataService(that.execUrl, JSON.stringify(that.runParameter), function (data) {
                         if (data == true) {
-                            foxOne.alert("发送成功");
-                            if (that.runParameter.IsSimulate == '1') {
-                                window.location.href = "/Workflow/AutoRun/" + that.runParameter.InstanceId;
-                            }
-                            else {
-                                window.close();
-                            }
+                            that.success();
                         }
-                    }, "post", true);
+                    }, "post", true, "application/json");
                 }
                 else {
                     foxOne.alert("没有选中用户");
@@ -137,7 +144,6 @@
         getUserChoice: function () {
             var that = this;
             that.runParameter.OpinionArea = 0;
-            //that.runParameter.OpinionContent = '';
             that.runParameter.UserChoice = [];
             var selected = $("#" + that._STEP_LIST_DIV).find(":checked");
             if (selected.length <= 0) {
@@ -150,7 +156,7 @@
                 var nodes = item.getCheckedNodes();
                 if (nodes.length == 0) {
                     if (ckData.needUser) {
-                        throw "步骤【" + ckData.stepName + "】需要选择参与者"
+                        throw "步骤【" + ckData.label + "】需要选择参与者"
                     }
                     var choice = that.getNewUserChoice();
                     choice.StepName = ckData.stepName;
@@ -182,10 +188,10 @@
             var checked = step.AutoSelectAll;
             var that = this;
             if (!users || users.length == 0) {
-                nodes.push({ nocheck: true, id: 'root', name: "步骤【" + step.StepName + '】无待选用户', open: false, pId: '' });
+                nodes.push({ nocheck: true, id: 'root', name: "步骤【" + step.Label + '】无待选用户', open: false, pId: '' });
             }
             else {
-                nodes.push({ nocheck: nocheck, chkDisabled: chkDisabled, checked: checked, id: 'root', name: "步骤【" + step.StepName + '】的待选用户', open: true, pId: '' });
+                nodes.push({ nocheck: nocheck, chkDisabled: chkDisabled, checked: checked, id: 'root', name: "步骤【" + step.Label + '】的待选用户', open: true, pId: '' });
                 $.each(users, function (index, i) {
                     if (!that.ifExistInNodes(nodes, i.OrgId)) {
                         nodes.push({ nocheck: nocheck, chkDisabled: chkDisabled, checked: checked, id: i.OrgId, name: i.OrgName, open: true, pId: 'root' })

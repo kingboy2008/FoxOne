@@ -161,6 +161,7 @@ namespace FoxOne.Controls
             var renderFields = new List<FormControlBase>();
             foreach (var field in Fields.OrderBy(o => o.Rank))
             {
+                field.FormData = formData;
                 if ((FormMode == FormMode.Edit && !field.CanModity) || FormMode == FormMode.View)
                 {
                     //如果当前Form的模式为编辑模式，而字段又不允许修改，则改为不可用。
@@ -199,11 +200,32 @@ namespace FoxOne.Controls
                 }
                 else
                 {
-                    if (field.ContainerTemplate.IsNullOrEmpty())
+                    if (field is IChildFormControl)
                     {
-                        field.ContainerTemplate = TemplateGenerator.GetFormFieldTemplate();
+                        foreach (var item in (field as IChildFormControl).ChildrenFields)
+                        {
+                            if (item is HiddenField)
+                            {
+                                hiddenResult.AppendLine(item.Render());
+                            }
+                            else
+                            {
+                                if (item.ContainerTemplate.IsNullOrEmpty())
+                                {
+                                    item.ContainerTemplate = TemplateGenerator.GetFormFieldTemplate();
+                                }
+                                renderFields.Add(item);
+                            }
+                        }
                     }
-                    renderFields.Add(field);
+                    else
+                    {
+                        if (field.ContainerTemplate.IsNullOrEmpty())
+                        {
+                            field.ContainerTemplate = TemplateGenerator.GetFormFieldTemplate();
+                        }
+                        renderFields.Add(field);
+                    }
                 }
             }
             string groupTemplate = TemplateGenerator.GetFormGroupTemplate();
@@ -218,7 +240,88 @@ namespace FoxOne.Controls
                     result.Append(groupTemplate.FormatTo(renderFields[i].Render()));
                 }
             }
-            return formTemplate.FormatTo(PostUrl, FormCssClass, hiddenResult.ToString(), result.ToString(), buttonResult.ToString());
+            string btnString = buttonResult.ToString();
+            if (btnString.IsNotNullOrEmpty())
+            {
+                btnString = "<div class=\"form-group\"><label>&nbsp;</label>{0}</div>".FormatTo(btnString);
+            }
+            return formTemplate.FormatTo(PostUrl, FormCssClass, hiddenResult.ToString(), result.ToString(), btnString);
+        }
+
+        public string RenderMobile()
+        {
+            string mobileFormTemplate = "<form action='{1}' id='{2}' pageId='{3}' method='post' enctype=\"multipart/form-data\"><div class=\"weui-cells\">{0}</div><form>";
+            StringBuilder sb = new StringBuilder();
+            StringBuilder hiddenSb = new StringBuilder();
+            var request = HttpContext.Current.Request;
+            if (FormService != null && !Key.IsNullOrEmpty())
+            {
+                var tempData = FormService.Get(Key);
+                if (!tempData.IsNullOrEmpty())
+                {
+                    Data = tempData;
+                }
+            }
+            IDictionary<string, object> formData = null;
+            if (Data != null)
+            {
+                formData = Data as Dictionary<string, object>;
+                if (formData.IsNullOrEmpty())
+                {
+                    formData = Data.ToDictionary();
+                }
+            }
+            var formModeHidden = new HiddenField() { Id = NamingCenter.PARAM_FORM_VIEW_MODE, Value = request[NamingCenter.PARAM_FORM_VIEW_MODE].IsNullOrEmpty() ? FormMode.ToString() : request[NamingCenter.PARAM_FORM_VIEW_MODE], Name = NamingCenter.PARAM_FORM_VIEW_MODE };
+            hiddenSb.Append(formModeHidden.Render());
+            ///添加QueryString的隐藏域
+            if (AppendQueryString)
+            {
+                foreach (var r in request.QueryString.AllKeys)
+                {
+                    if (!r.Equals(NamingCenter.PARAM_FORM_VIEW_MODE, StringComparison.OrdinalIgnoreCase) && Fields.Count(o => o.Id.Equals(r, StringComparison.CurrentCultureIgnoreCase)) == 0)
+                    {
+                        hiddenSb.AppendLine(new HiddenField() { Id = r, Name = r, Value = request.QueryString[r] }.Render());
+                    }
+                }
+            }
+            foreach (var field in Fields.OrderBy(c=>c.Rank))
+            {
+                field.FormData = formData;
+                if (!field.Visiable)
+                {
+                    continue;
+                }
+                if (field.Name.IsNullOrEmpty())
+                {
+                    field.Name = field.Id;
+                }
+                
+                if ((FormMode == FormMode.Edit && !field.CanModity) || FormMode == FormMode.View)
+                {
+                    //如果当前Form的模式为编辑模式，而字段又不允许修改，则改为不可用。
+                    field.Enable = false;
+                }
+                
+                if (!formData.IsNullOrEmpty())
+                {
+                    if (formData.Keys.Contains(field.Id))
+                    {
+                        field.Value = (formData[field.Id] == null) ? "" :formData[field.Id].ToString();
+                    }
+                }
+                if (field.Value.IsNotNullOrEmpty())
+                {
+                    field.Value = Env.Parse(field.Value);
+                }
+                if (field is HiddenField)
+                {
+                    hiddenSb.Append(field.Render());
+                    continue;
+                }
+
+                sb.Append(field.RenderMobile());
+            }
+            return mobileFormTemplate.FormatTo(hiddenSb.ToString()+ sb.ToString(), PostUrl,Id,PageId);
         }
 
         public void Authority(IDictionary<string, UISecurityBehaviour> behaviour)

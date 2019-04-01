@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<ArrayOfWorkflowParam xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<ArrayOfWorkflowParam xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <WorkflowParam>
     <Id>170811</Id>
     <RentId>0</RentId>
@@ -128,56 +128,6 @@
   <WorkflowParam>
     <Id>171011</Id>
     <RentId>0</RentId>
-    <Value>5</Value>
-  </WorkflowParam>
-  <WorkflowParam>
-    <Id>171012</Id>
-    <RentId>0</RentId>
     <Value>4</Value>
-  </WorkflowParam>
-  <WorkflowParam>
-    <Id>171013</Id>
-    <RentId>0</RentId>
-    <Value>3</Value>
-  </WorkflowParam>
-  <WorkflowParam>
-    <Id>171014</Id>
-    <RentId>0</RentId>
-    <Value>5</Value>
-  </WorkflowParam>
-  <WorkflowParam>
-    <Id>171016</Id>
-    <RentId>0</RentId>
-    <Value>12</Value>
-  </WorkflowParam>
-  <WorkflowParam>
-    <Id>171017</Id>
-    <RentId>0</RentId>
-    <Value>7</Value>
-  </WorkflowParam>
-  <WorkflowParam>
-    <Id>171018</Id>
-    <RentId>0</RentId>
-    <Value>4</Value>
-  </WorkflowParam>
-  <WorkflowParam>
-    <Id>171019</Id>
-    <RentId>0</RentId>
-    <Value>6</Value>
-  </WorkflowParam>
-  <WorkflowParam>
-    <Id>171020</Id>
-    <RentId>0</RentId>
-    <Value>2</Value>
-  </WorkflowParam>
-  <WorkflowParam>
-    <Id>171023</Id>
-    <RentId>0</RentId>
-    <Value>5</Value>
-  </WorkflowParam>
-  <WorkflowParam>
-    <Id>171024</Id>
-    <RentId>0</RentId>
-    <Value>5</Value>
   </WorkflowParam>
 </ArrayOfWorkflowParam>

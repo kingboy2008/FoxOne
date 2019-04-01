@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FoxOne.Workflow.DataAccess</RootNamespace>
     <AssemblyName>FoxOne.Workflow.DataAccess</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -47,7 +47,6 @@
     <Compile Include="Entity\WorkflowInstance.cs" />
     <Compile Include="Entity\WorkflowInstanceMethod.cs" />
     <Compile Include="Entity\WorkflowItem.cs" />
-    <Compile Include="Entity\WorkflowParameter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\WorkDayService.cs" />
     <Compile Include="Service\WorkflowInstanceService.cs" />
@@ -69,6 +68,9 @@
       <Project>{26a7e9d1-7fc9-4f88-9433-cecaa553fa18}</Project>
       <Name>FoxOne.Workflow.Kernel</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

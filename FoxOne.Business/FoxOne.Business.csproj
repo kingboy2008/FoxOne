@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FoxOne.Business</RootNamespace>
     <AssemblyName>FoxOne.Business</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -37,11 +37,20 @@
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Net.Http, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System.Net.Http, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>C:\Program Files (x86)\Microsoft ASP.NET\ASP.NET MVC 4\Assemblies\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Extensions.Design" />
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>C:\Program Files (x86)\Microsoft ASP.NET\ASP.NET MVC 4\Assemblies\System.Web.Http.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.30506.0\lib\net40\System.Web.Mvc.dll</HintPath>
@@ -57,9 +66,13 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="TopSdk">
+      <HintPath>..\Lib\TopSdk.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AjaxResultModel.cs" />
+    <Compile Include="Attribute\ApiResultAttribute.cs" />
     <Compile Include="Attribute\CustomAuthorizeAttribute.cs" />
     <Compile Include="Attribute\CustomHandleErrorAttribute.cs" />
     <Compile Include="Attribute\DataSourceAttribute.cs" />
@@ -69,6 +82,7 @@
     <Compile Include="Attribute\ScriptNameAttribute.cs" />
     <Compile Include="Attribute\TableFieldAttribute.cs" />
     <Compile Include="Attribute\TitleFieldAttribute.cs" />
+    <Compile Include="Attribute\TracePropertyChangeAttribute.cs" />
     <Compile Include="Attribute\ValidatorAttribute.cs" />
     <Compile Include="BaseImpl\ComponentBase.cs" />
     <Compile Include="BaseImpl\DataFilterBase.cs" />
@@ -83,6 +97,7 @@
     <Compile Include="ControlModelBinder.cs" />
     <Compile Include="CustomException.cs" />
     <Compile Include="DataFilter\CompositeDataFilter.cs" />
+    <Compile Include="DataFilter\PermissionFilter.cs" />
     <Compile Include="DataFilter\RequestParameterDataFilter.cs" />
     <Compile Include="DataFilter\StaticDataFilter.cs" />
     <Compile Include="DataSource\AllCacheKeyDataSource.cs" />
@@ -93,6 +108,20 @@
     <Compile Include="DataSource\ReferenceDataSource.cs" />
     <Compile Include="DataSource\SqlIdCascadeDataSource.cs" />
     <Compile Include="DataSource\SqlIdListDataSource.cs" />
+    <Compile Include="DDSDK\DDHelper.cs" />
+    <Compile Include="DDSDK\Entity\AccessToken.cs" />
+    <Compile Include="DDSDK\Entity\Department.cs" />
+    <Compile Include="DDSDK\Entity\JSTicket.cs" />
+    <Compile Include="DDSDK\Entity\ResultPackage.cs" />
+    <Compile Include="DDSDK\Entity\Role.cs" />
+    <Compile Include="DDSDK\Entity\SignPackage.cs" />
+    <Compile Include="DDSDK\Entity\User.cs" />
+    <Compile Include="DDSDK\Keys.cs" />
+    <Compile Include="DDSDK\Service\ChatService.cs" />
+    <Compile Include="DDSDK\Service\DepartmentService.cs" />
+    <Compile Include="DDSDK\Service\RoleService.cs" />
+    <Compile Include="DDSDK\Service\UserService.cs" />
+    <Compile Include="DDSDK\Urls.cs" />
     <Compile Include="Entity\ComponentEntity.cs" />
     <Compile Include="Entity\CRUDEntity.cs" />
     <Compile Include="Entity\DataDictionary.cs" />
@@ -109,6 +138,7 @@
     <Compile Include="Entity\DURP\RoleTypePermission.cs" />
     <Compile Include="Entity\DURP\User.cs" />
     <Compile Include="Entity\DURP\UserRole.cs" />
+    <Compile Include="Entity\PropertyChangeRecord.cs" />
     <Compile Include="Enum\CacheType.cs" />
     <Compile Include="Enum\CellTextAlign.cs" />
     <Compile Include="Enum\ControlType.cs" />
@@ -120,7 +150,7 @@
     <Compile Include="Environment\Env.cs" />
     <Compile Include="Environment\EnvironmentContainer.cs" />
     <Compile Include="Environment\Provider\DateTimeProvider.cs" />
-    <Compile Include="Environment\Provider\DefaulttProvider.cs" />
+    <Compile Include="Environment\Provider\DefaultProvider.cs" />
     <Compile Include="Environment\IEnvironmentProvider.cs" />
     <Compile Include="Environment\Provider\HttpContextProvider.cs" />
     <Compile Include="Environment\Provider\UserProvider.cs" />
@@ -150,13 +180,12 @@
     <Compile Include="OAuth\DingDingAuthenticationHandler.cs" />
     <Compile Include="OAuth\QQAuthenticationHandler.cs" />
     <Compile Include="OAuth\WechatAuthenticationHandler.cs" />
-    <Compile Include="OAuth\WeiboAuthenticationHandler.cs" />
     <Compile Include="Operation\ContainOperation.cs" />
     <Compile Include="Operation\EndWithOperation.cs" />
     <Compile Include="Operation\EqualOperation.cs" />
-    <Compile Include="Operation\GreaterThenOperation.cs" />
+    <Compile Include="Operation\NumberOperation.cs" />
     <Compile Include="Operation\IndexOfOperation.cs" />
-    <Compile Include="Operation\LessThenOperation.cs" />
+    <Compile Include="Operation\DateTimeOperation.cs" />
     <Compile Include="Operation\NotContainOperation.cs" />
     <Compile Include="Operation\NotEqualOperation.cs" />
     <Compile Include="Operation\StartWithOperation.cs" />
@@ -168,6 +197,10 @@
     <Compile Include="Security\SecurityProvider.cs" />
     <Compile Include="Security\UISecurityBehaviour.cs" />
     <Compile Include="Service\DURPBaseService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="DataSource.cd" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FoxOne.Core\FoxOne.Core.csproj">

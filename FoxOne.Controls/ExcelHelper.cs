@@ -24,7 +24,7 @@ namespace FoxOne.Controls
             else
             {
                 totalDeep += 1;
-                foreach (var c in column.Children)
+                foreach (var c in column.Children.OrderBy(c=>c.Rank))
                 {
                     GetLeafColumn(result, c, ref rank, ref totalDeep);
                 }
@@ -116,6 +116,101 @@ namespace FoxOne.Controls
                 }
             }
             sheet.CreateFreezePane(freezeColumn, totalDeep);
+            return workbook;
+        }
+
+        public HSSFWorkbook ExportToExcel(IList<Table> tables, int freezeColumn = 0, int rowSpanColumnIndex = 0, string fileName = null, int ignoreRow = 0)
+        {
+
+            if (!fileName.IsNullOrEmpty())
+            {
+                FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+                workbook = new HSSFWorkbook(fs);
+            }
+            else
+            {
+                workbook = new HSSFWorkbook();
+            }
+            ISheet sheet = null;
+            Table table = null;
+            for (int i = 0; i < tables.Count; i++)
+            {
+                table = tables[i];
+                if (!fileName.IsNullOrEmpty())
+                {
+                    sheet = workbook.GetSheetAt(i);
+                }
+                else
+                {
+                    sheet = workbook.CreateSheet(table.Id);
+                }
+
+                table.AllowPaging = false;
+                var data = table.GetData();
+                if (table.AutoGenerateColum)
+                {
+                    table.GenerateTableColumn(data);
+                }
+                if (table.Columns.IsNullOrEmpty()) return new HSSFWorkbook();
+                var tempFields = table.Columns.OrderBy(o => o.Rank).ToList();
+                var fields = new List<TableColumn>();
+                var tempRank = 1;
+                int totalDeep = 1;
+                int tempDeep = 1;
+                foreach (var f in tempFields)
+                {
+                    GetLeafColumn(fields, f, ref tempRank, ref tempDeep);
+                    if (tempDeep > totalDeep)
+                    {
+                        totalDeep = tempDeep;
+                    }
+                    tempDeep = 1;
+                }
+
+                sheet.DefaultColumnWidth = 20;
+                sheet.DefaultRowHeightInPoints = 25;
+                int cellIndex = 0, rowIndex = totalDeep;
+                if (!fileName.IsNullOrEmpty())
+                {
+                    rowIndex = ignoreRow;
+                }
+                else
+                {
+                    foreach (var field in tempFields)
+                    {
+                        CreateHeader(field, sheet, totalDeep, 0, cellIndex);
+                        cellIndex += GetLength(field);
+                    }
+                }
+                var newStartNow = rowIndex;
+                foreach (var d in data)
+                {
+                    var headerRow = sheet.CreateRow(rowIndex++);
+                    headerRow.HeightInPoints = 25;
+                    cellIndex = 0;
+                    foreach (var field in fields)
+                    {
+                        field.RowData = d;
+                        object tempDataValue = field.GetValue();
+                        if (tempDataValue is CustomTd)
+                        {
+                            tempDataValue = (tempDataValue as CustomTd).Value;
+                        }
+                        var cell = headerRow.CreateCell(cellIndex++);
+                        cell.SetCellValue(tempDataValue == null ? "" : tempDataValue.ToString().StripHTML());
+                        cell.SetCellType(NPOI.SS.UserModel.CellType.STRING);
+                        cell.CellStyle = GetCellStyle();
+                    }
+                }
+                if (rowSpanColumnIndex > 0)
+                {
+                    for (cellIndex = 0; cellIndex < rowSpanColumnIndex; cellIndex++)
+                    {
+                        MergeRow(sheet, newStartNow, cellIndex);
+                    }
+                }
+                sheet.CreateFreezePane(freezeColumn, totalDeep); 
+            }
             return workbook;
         }
 
@@ -213,7 +308,7 @@ namespace FoxOne.Controls
             {
                 sheet.AddMergedRegion(new NPOI.SS.Util.CellRangeAddress(currentDeep, currentDeep, cellIndex, cellIndex + length - 1));
                 currentDeep += 1;
-                foreach (var f in field.Children)
+                foreach (var f in field.Children.OrderBy(c=>c.Rank))
                 {
                     CreateHeader(f, sheet, totalDeep, currentDeep, cellIndex);
                     cellIndex += GetLength(f);

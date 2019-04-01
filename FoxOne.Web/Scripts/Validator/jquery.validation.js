@@ -173,10 +173,10 @@
                     "executor": "_customRegex",
                     "alertText": "金额格式输入不正确"
                 },
-                "money1": {
-                    "regex": /^[0-9]+(.[0-9]{1,2})?$/,
+                "number": {
+                    "regex": /^(-)?[0-9]+(.[0-9]{1,2})?$/,
                     "executor": "_customRegex",
-                    "alertText": "金额格式输入不正确"
+                    "alertText": "数字格式输入不正确"
                 },
                 "integer": {
                     "regex": /^\d+$/,
@@ -351,13 +351,7 @@
 
             function _required(caller, rule) {
                 var callerType = $(caller).attr("type");
-                if (caller.tagName == "SPAN") {
-                    if (!$.trim($(caller).text())) {
-                        $.validation.isError = true;
-                        promptText += _buildPromptText("该输入项必填", rule.options[0]);
-                    }
-                }
-                if (caller.tagName == "TEXTAREA" || callerType == "text" || callerType == "password" || callerType == "file") {
+                if (caller.tagName.toUpperCase() == "TEXTAREA" || caller.tagName.toUpperCase() == "SELECT" || callerType == "text" || callerType == "password" || callerType == "file") {
                     if (!$.trim($(caller).val())) {
                         $.validation.isError = true;
                         promptText += _buildPromptText("该输入项必填", rule.options[0]);

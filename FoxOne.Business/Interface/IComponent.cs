@@ -26,7 +26,7 @@
 
     public interface IPageService
     {
-
+        void Filter(Page page);
     }
 
 

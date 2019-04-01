@@ -152,34 +152,29 @@ namespace FoxOne.Business
         public string FilePath { get; set; }
     }
 
-    [DisplayName("请假申请单")]
-    [Table("WF_Form_LeaveApproval")]
-    public class WFormLeaveApprovalEntity : EntityBase, IAutoCreateTable
+    [DisplayName("步骤权限")]
+    [Table("WFL_ActivityPermission")]
+    public class WorkflowActivityPermission : EntityBase, IAutoCreateTable
     {
         [PrimaryKey]
         public override string Id
         {
-            get; set;
+            get;
+            set;
         }
 
-        [Column(DataType = "varchar", Length = "50")]
-        public string CreatorId { get; set; }
+        public string FormMode { get; set; }
 
-        [Column(DataType = "varchar", Length = "50")]
-        public string CreatorDeptId { get; set; }
+        public string ApplicationId { get; set; }
 
-        public DateTime CreateTime { get; set; }
+        public string ActivityName { get; set; }
 
-        public DateTime BeginTime { get; set; }
+        public string UserIds { get; set; }
 
-        public DateTime EndTime { get; set; }
+        public string ControlIds { get; set; }
 
-        [Column(DataType = "varchar", Length = "200")]
-        public string Reason { get; set; }
+        public ControlSecurityBehaviour Behaviour { get; set; }
 
-        [Column(DataType = "varchar", Length = "10")]
-        public string Type { get; set; }
-
-        public int LeaveDays { get; set; }
+        public int Priority { get; set; }
     }
 }

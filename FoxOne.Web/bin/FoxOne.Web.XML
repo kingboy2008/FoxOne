@@ -4,45 +4,45 @@
         <name>FoxOne.Web</name>
     </assembly>
     <members>
-        <member name="T:FoxOne.Web.Controllers.UCController">
+        <member name="T:FoxOne.Web.Controllers.DepartmentController">
             <summary>
-            组织架构服务接口
+            部门信息接口
             </summary>
         </member>
-        <member name="M:FoxOne.Web.Controllers.UCController.GetAllUser">
-            <summary>
-            获取所有用户
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:FoxOne.Web.Controllers.UCController.GetUser(System.String)">
-            <summary>
-            根据ID获取特定用户
-            </summary>
-            <param name="id">用户ID</param>
-            <returns></returns>
-        </member>
-        <member name="M:FoxOne.Web.Controllers.UCController.GetUserByDepartmentId(System.Int32)">
-            <summary>
-            根据部门ID获取该部门的所有用户（不递归）
-            </summary>
-            <param name="id">部门ID</param>
-            <returns></returns>
-        </member>
-        <member name="M:FoxOne.Web.Controllers.UCController.GetAllDepartment">
-            <summary>
-            获取所有部门
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:FoxOne.Web.Controllers.UCController.GetDepartment(System.Int32)">
+        <member name="M:FoxOne.Web.Controllers.DepartmentController.Get(System.String)">
             <summary>
             根据部门ID获取特定部门
             </summary>
             <param name="id">部门ID</param>
             <returns></returns>
         </member>
-        <member name="M:FoxOne.Web.Controllers.UCController.GetAllUserPermission(System.String,System.String)">
+        <member name="M:FoxOne.Web.Controllers.DepartmentController.List">
+            <summary>
+            获取所有部门
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.DepartmentController.ListByMultipleIds(FoxOne.Web.Controllers.IdParameter)">
+            <summary>
+            根据多个部门ID返回多个部门信息
+            </summary>
+            <param name="param"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.DepartmentController.Children(System.String,System.Boolean)">
+            <summary>
+            获取指定部门的子级
+            </summary>
+            <param name="id">部门ID</param>
+            <param name="recursion">是否递归</param>
+            <returns></returns>
+        </member>
+        <member name="T:FoxOne.Web.Controllers.api.PermissionController">
+            <summary>
+            权限信息接口
+            </summary>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.api.PermissionController.List(System.String,System.String)">
             <summary>
             根据系统编号及用户ID获取该用户在指定系统中的所有权限
             </summary>
@@ -50,161 +50,1396 @@
             <param name="systemId">系统编号</param>
             <returns></returns>
         </member>
+        <member name="M:FoxOne.Web.Controllers.api.PermissionController.HasPermission(System.String,System.String,System.String)">
+            <summary>
+            判断用户是否有特定URL的访问权限
+            </summary>
+            <param name="id">用户ID</param>
+            <param name="systemId">系统编号</param>
+            <param name="url">URL</param>
+            <returns></returns>
+        </member>
+        <member name="T:FoxOne.Web.Controllers.api.WorkflowController">
+            <summary>
+            工作流相关api
+            </summary>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.api.WorkflowController.Start(FoxOne.Web.WorkflowStartParameter)">
+            <summary>
+            发起新的流程
+            </summary>
+            <param name="entity">发起流程所需参数</param>
+            <returns>流程实例号</returns>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.api.WorkflowController.Run(FoxOne.Web.WorkflowRunParameter)">
+            <summary>
+            运行流程
+            </summary>
+            <param name="runParameter">流程运行所需参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.api.WorkflowController.Rollback(FoxOne.Web.WorkflowNextStepParameter)">
+            <summary>
+            撤回流程
+            </summary>
+            <param name="runParameter">流程运行所需参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.api.WorkflowController.Pushback(FoxOne.Web.WorkflowNextStepParameter)">
+            <summary>
+            退回上一步
+            </summary>
+            <param name="runParameter">流程运行所需参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.api.WorkflowController.BackToRoot(FoxOne.Web.WorkflowNextStepParameter)">
+            <summary>
+            退回拟稿人
+            </summary>
+            <param name="runParameter">流程运行所需参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.api.WorkflowController.ForceEnd(FoxOne.Web.WorkflowNextStepParameter)">
+            <summary>
+            终止审批
+            </summary>
+            <param name="runParameter">流程运行所需参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.api.WorkflowController.GetToDoList(System.String)">
+            <summary>
+            根据用户ID获取待办事项
+            </summary>
+            <param name="userId">用户ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.api.WorkflowController.GetDoneList(System.String)">
+            <summary>
+            根据用户ID获取已办事项
+            </summary>
+            <param name="userId">用户ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.api.WorkflowController.GetReadList(System.String)">
+            <summary>
+            根据用户ID获取传阅事项
+            </summary>
+            <param name="userId">用户ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.api.WorkflowController.GetWorkItemList(System.String,System.String)">
+            <summary>
+            根据实例Id获取轨迹列表
+            </summary>
+            <param name="instanceId">实例Id</param>
+            <param name="datalocator">主表单Id</param>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.api.WorkflowController.GetNextStep(FoxOne.Web.WorkflowNextStepParameter)">
+            <summary>
+            获取下一步可选步骤，如果下一步不需要选择，则当前操作会引起流程直接发送到下一步
+            </summary>
+            <param name="runParameter"></param>
+            <returns></returns>
+        </member>
         <member name="T:FoxOne.Web.Controllers.UCUser">
             <summary>
             用户信息
             </summary>
         </member>
+        <member name="P:FoxOne.Web.Controllers.UCUser.UserId">
+            <summary>
+            用户ID
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.Controllers.UCUser.LoginId">
+            <summary>
+            登陆账号
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.Controllers.UCUser.DDId">
+            <summary>
+            用户在钉钉中的ID
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.Controllers.UCUser.Name">
+            <summary>
+            用户姓名
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.Controllers.UCUser.Mobile">
+            <summary>
+            用户手机号（唯一）
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.Controllers.UCUser.Mail">
+            <summary>
+            邮箱
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.Controllers.UCUser.DepartmentId">
+            <summary>
+            用户所属部门ID
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.Controllers.UCUser.DepartmentDDId">
+            <summary>
+            用户所属部门在钉钉中的ID
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.Controllers.UCUser.DepartmentName">
+            <summary>
+            用户所属部门名称
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.Controllers.UCUser.DepartmentLevelCode">
+            <summary>
+            用户所属部门层级编码
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.Controllers.UCUser.Status">
+            <summary>
+            用户状态：enabled在职，disabled离职
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.Controllers.UCUser.Avatar">
+            <summary>
+            头像
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.Controllers.UCUser.Role">
+            <summary>
+            用户角色
+            </summary>
+        </member>
+        <member name="T:FoxOne.Web.Controllers.UCRole">
+            <summary>
+            角色信息
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.Controllers.UCRole.RoleId">
+            <summary>
+            角色ID
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.Controllers.UCRole.Name">
+            <summary>
+            角色名称
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.Controllers.UCRole.DepartmentId">
+            <summary>
+            角色所属部门
+            </summary>
+        </member>
+        <member name="T:FoxOne.Web.Controllers.UCDepartment">
+            <summary>
+            部门信息
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.Controllers.UCDepartment.DepartmentId">
+            <summary>
+            部门ID
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.Controllers.UCDepartment.DepartmentDDId">
+            <summary>
+            部门在钉钉中的ID
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.Controllers.UCDepartment.Name">
+            <summary>
+            部门名称
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.Controllers.UCDepartment.LevelCode">
+            <summary>
+            部门层级编码
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.Controllers.UCDepartment.ParentId">
+            <summary>
+            父级部门ID
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.Controllers.UCDepartment.Status">
+            <summary>
+            部门状态：enabled表示可用，disabled表示不可用
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.Controllers.UCDepartment.ParentDDId">
+            <summary>
+            父级部门在钉钉中的ID
+            </summary>
+        </member>
+        <member name="T:FoxOne.Web.Controllers.UCPermission">
+            <summary>
+            权限信息
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.Controllers.UCPermission.Id">
+            <summary>
+            权限ID
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.Controllers.UCPermission.Name">
+            <summary>
+            权限名称
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.Controllers.UCPermission.Url">
+            <summary>
+            页面URL
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.Controllers.UCPermission.ControlIds">
+            <summary>
+            拥有权限的控件ID
+            </summary>
+        </member>
+        <member name="T:FoxOne.Web.Controllers.IdParameter">
+            <summary>
+            请求参数
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.Controllers.IdParameter.Ids">
+            <summary>
+            多个ID的集合，用逗号隔开
+            </summary>
+        </member>
+        <member name="T:FoxOne.Web.Controllers.UserController">
+            <summary>
+            用户信息接口
+            </summary>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.UserController.List">
+            <summary>
+            获取全部用户信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.UserController.Get(System.String)">
+            <summary>
+            获取单个用户信息
+            </summary>
+            <param name="id">用户ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.UserController.ListByName(System.String,System.String)">
+            <summary>
+            根据姓名在指定部门ID下模糊搜索用户
+            </summary>
+            <param name="name">用户姓名</param>
+            <param name="departmentId">部门ID，为空则搜索全部</param>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.UserController.ListByMultipleIds(FoxOne.Web.Controllers.IdParameter)">
+            <summary>
+            根据多个用户ID获取多个用户信息
+            </summary>
+            <param name="param">多个用户ID，用逗号隔开</param>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.UserController.ListByDepartmentId(System.String,System.Boolean)">
+            <summary>
+            根据部门ID获取部门内所有用户
+            </summary>
+            <param name="departmentId">部门ID</param>
+            <param name="recursion">是否递归</param>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.UserController.ListBySupervisorId(System.String)">
+            <summary>
+            根据上级用户ID获取所有下属
+            </summary>
+            <param name="supervisorId">上级用户ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.UserController.GetCurrentUser(System.String)">
+            <summary>
+            根据authCode获取当前用户信息
+            </summary>
+            <param name="authCode">authCode</param>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.DDController.FixUserDDCode(System.String)">
+            <summary>
+            修复用户钉钉号与实际不一致
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.DDController.SyncUserDingDing(System.String)">
+            <summary>
+            同步用户钉钉
+            </summary>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.DDController.SyncDeptDingDing(System.String)">
+            <summary>
+            同步组织钉钉
+            </summary>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.InitController.Out">
+            <summary>
+            备份所有实体数据
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.InitController.BackupConfigData">
+            <summary>
+            备份配置数据
+            </summary>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.InitController.RecoveryConfigData">
+            <summary>
+            恢复备份数据
+            </summary>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.InitController.AsyncTestProduct(System.String,System.String)">
+            <summary>
+            同步测试环境与生产环境的配置数据
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.InitController.RefreshWBS">
+            <summary>
+            重刷WBS数据
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:FoxOne.Web.Controllers.KPITotalDataSource">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:FoxOne.Web.Controllers.KPIEntity">
+            <summary>
+            KPI
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.Controllers.KPIEntity.CreatorId">
+            <summary>
+            创建人
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.Controllers.KPIEntity.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.Controllers.KPIEntity.KPIMonth">
+            <summary>
+            KPI考核月份
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.Controllers.KPIEntity.Approvaler">
+            <summary>
+            审核者
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.Controllers.KPIEntity.ApprovalTime">
+            <summary>
+            审核时间
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.Controllers.KPIEntity.Status">
+            <summary>
+            记录状态：0未提交，1已提交，2已审核
+            </summary>
+        </member>
+        <member name="T:FoxOne.Web.Controllers.KPIDetailEntity">
+            <summary>
+            KPIDetail
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.Controllers.KPIDetailEntity.KPIId">
+            <summary>
+            KPIId
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.Controllers.KPIDetailEntity.Key">
+            <summary>
+            Key
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.Controllers.KPIDetailEntity.Value">
+            <summary>
+            Value
+            </summary>
+        </member>
+        <member name="T:FoxOne.Web.Controllers.MobileController">
+            <summary>
+            OA移动端
+            </summary>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.MobileController.Index">
+            <summary>
+            首页
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.MobileController.StartWorkflow(System.Int32)">
+            <summary>
+            发起流程
+            </summary>
+            <param name="ApplicationId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.MobileController.WorkflowIndex">
+            <summary>
+            审批流程
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.MobileController.WorkflowIndexView">
+            <summary>
+            查看流程详情
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.MobileController.NextStep">
+            <summary>
+            选步骤选人界面
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.MobileController.Opinion">
+            <summary>
+            意见页面
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.MobileController.WorkflowSuccess">
+            <summary>
+            流程成功页面
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.MobileController.ToDoList">
+            <summary>
+            待办列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.MobileController.DoneList">
+            <summary>
+            已办列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.MobileController.ReadList">
+            <summary>
+            知会列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.MobileController.MeetingRoomBookPerView">
+            <summary>
+            会议室预订一览
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.MobileController.MeetingRoomBook(System.String)">
+            <summary>
+            新增预订
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.MobileController.MeetingRoomBook(FoxOne._3VJ.MeetingRoomBookEntity)">
+            <summary>
+            新增预订
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.MobileController.NoticeList">
+            <summary>
+            通知公告内容
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.MobileController.NoticeDetail(System.String)">
+            <summary>
+            通知公告详情
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.MobileController.PartyIndex">
+            <summary>
+            年会首页
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.MobileController.PartySignIn">
+            <summary>
+            年会签到成功
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.MobileController.PartySendMessage">
+            <summary>
+            年会发弹幕
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:FoxOne.Web.Controllers.IndexViewModel.MailCount">
+            <summary>
+            邮件数量
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.Controllers.IndexViewModel.ToDoCount">
+            <summary>
+            待办数量
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.Controllers.IndexViewModel.NoticeCount">
+            <summary>
+            通知公告数量
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.Controllers.IndexViewModel.ReadCount">
+            <summary>
+            知会数量
+            </summary>
+        </member>
+        <member name="T:FoxOne.Web.Controllers.WorkflowController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.WorkflowController.Index">
+            <summary>
+            流程新增或办理页
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.WorkflowController.Batch(System.String)">
+            <summary>
+            流程批量办理页面
+            </summary>
+            <param name="id">流程应用ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.WorkflowController.InitWorkflowHelper(System.Web.HttpRequestBase)">
+            <summary>
+            初始化流程实例
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.WorkflowController.ProcessActivityPermission(FoxOne.Controls.Form,FoxOne.Workflow.Business.WorkflowHelper)">
+            <summary>
+            处理步骤权限
+            </summary>
+            <param name="form"></param>
+            <param name="helper"></param>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.WorkflowController.AutoRun(System.String)">
+            <summary>
+            流程模拟时自动跳到下一步
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.WorkflowController.Save">
+            <summary>
+            保存表单
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.WorkflowController.GetToDoList">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.WorkflowController.Start(FoxOne.Web.WorkflowStartParameter)">
+            <summary>
+            发起流程
+            </summary>
+            <param name="startParameter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.WorkflowController.Delete(System.String)">
+            <summary>
+            删除流程实例
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.WorkflowController.GetForm(FoxOne.Workflow.Business.WorkflowHelper)">
+            <summary>
+            
+            </summary>
+            <param name="helper"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.WorkflowController.BatchRun(System.String,System.String)">
+            <summary>
+            批量审批
+            </summary>
+            <param name="id"></param>
+            <param name="action"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.WorkflowController.GetNextStep(FoxOne.Web.WorkflowParameter)">
+            <summary>
+            
+            </summary>
+            <param name="runParameter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.WorkflowController.FlowSuccess">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.WorkflowController.CC">
+            <summary>
+            传阅
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.Controllers.WorkflowController.ExecCommand(FoxOne.Web.WorkflowRunParameter)">
+            <summary>
+            执行流程流转动作
+            </summary>
+            <param name="runParameter"></param>
+            <returns></returns>
+        </member>
+        <member name="T:FoxOne.Web.Controllers.WorkflowDataSource">
+            <summary>
+            工作流相关的数据源
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.Controllers.WorkflowDataSource.SourceType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.Controllers.WorkflowDataSource.FormData">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:FoxOne.Web.MailUser">
+            <summary>
+            邮箱用户信息
+            </summary>
+        </member>
+        <member name="T:FoxOne.Web.MailDepartment">
+            <summary>
+            邮箱部门信息
+            </summary>
+        </member>
+        <member name="T:FoxOne.Web.MailUserService">
+            <summary>
+            邮箱系统组织用户API
+            </summary>
+        </member>
+        <member name="M:FoxOne.Web.MailUserService.CreateUser(FoxOne.Web.MailUser)">
+            <summary>
+            新增用户
+            </summary>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.MailUserService.GetValidUserId(System.String)">
+            <summary>
+            获取不重复的用户ID
+            </summary>
+            <param name="loginId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.MailUserService.UpdateUser(FoxOne.Web.MailUser)">
+            <summary>
+            更新用户
+            </summary>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.MailUserService.DeleteUser(System.String)">
+            <summary>
+            删除用户
+            </summary>
+            <param name="userAtDomain"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.MailUserService.CreateDept(FoxOne.Web.MailDepartment)">
+            <summary>
+            新增部门
+            </summary>
+            <param name="dept"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.MailUserService.UpdateDept(FoxOne.Web.MailDepartment)">
+            <summary>
+            更新部门
+            </summary>
+            <param name="dept"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.MailUserService.DeleteDept(System.String)">
+            <summary>
+            删除部门
+            </summary>
+            <param name="deptId">部门ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.MailUserService.SyncUserToMail">
+            <summary>
+            同步用户信息到邮箱
+            </summary>
+        </member>
+        <member name="M:FoxOne.Web.MailUserService.UserLogin(System.String)">
+            <summary>
+            获取邮箱登陆sessionId
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FoxOne.Web.MailUserService.GetUnReadMail(System.String)">
+            <summary>
+            获取收件箱未读邮件数
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="T:FoxOne.Web.RegisterCenter">
+            <summary>
+            注册中心
+            </summary>
+        </member>
+        <member name="M:FoxOne.Web.RegisterCenter.RegisterType">
+            <summary>
+            注册接口实现类
+            </summary>
+        </member>
+        <member name="M:FoxOne.Web.RegisterCenter.RegisterEntityEvent">
+            <summary>
+            注册实体增删改查前后触发的事件的处理逻辑
+            </summary>
+        </member>
         <member name="T:FoxOne.Web.FoxOneTips">
             <summary>
-              A strongly-typed resource class, for looking up localized strings, etc.
+              一个强类型的资源类，用于查找本地化的字符串等。
             </summary>
         </member>
         <member name="P:FoxOne.Web.FoxOneTips.ResourceManager">
             <summary>
-              Returns the cached ResourceManager instance used by this class.
+              返回此类使用的缓存的 ResourceManager 实例。
             </summary>
         </member>
         <member name="P:FoxOne.Web.FoxOneTips.Culture">
             <summary>
-              Overrides the current thread's CurrentUICulture property for all
-              resource lookups using this strongly typed resource class.
+              使用此强类型资源类，为所有资源查找
+              重写当前线程的 CurrentUICulture 属性。
             </summary>
         </member>
         <member name="P:FoxOne.Web.FoxOneTips.AllPage">
             <summary>
-              Looks up a localized string similar to 所有页面.
+              查找类似 所有页面 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.FoxOneTips.Can_Not_Delete_Department_With_Children_Or_Member">
+            <summary>
+              查找类似 不允许删除拥有子部门或部门成员的部门信息 的本地化字符串。
             </summary>
         </member>
         <member name="P:FoxOne.Web.FoxOneTips.Component_Editor">
             <summary>
-              Looks up a localized string similar to 组件编辑器.
+              查找类似 组件编辑器 的本地化字符串。
             </summary>
         </member>
         <member name="P:FoxOne.Web.FoxOneTips.Ctrl_Id_Repeat">
             <summary>
-              Looks up a localized string similar to 控件ID：{0} 重复.
+              查找类似 控件ID：{0} 重复 的本地化字符串。
             </summary>
         </member>
         <member name="P:FoxOne.Web.FoxOneTips.Ctrl_Not_Found">
             <summary>
-              Looks up a localized string similar to 控件ID：{0} 不存在.
+              查找类似 控件ID：{0} 不存在 的本地化字符串。
             </summary>
         </member>
         <member name="P:FoxOne.Web.FoxOneTips.DataSource_Return_Empty">
             <summary>
-              Looks up a localized string similar to 数据源返回0行数据.
+              查找类似 数据源返回0行数据 的本地化字符串。
             </summary>
         </member>
         <member name="P:FoxOne.Web.FoxOneTips.Department_Name_Already_In_Use">
             <summary>
-              Looks up a localized string similar to 部门名称已存在.
+              查找类似 部门名称已存在 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.FoxOneTips.Department_Not_Found">
+            <summary>
+              查找类似 不存在部门ID为：&apos;{0}&apos;  的部门信息 的本地化字符串。
             </summary>
         </member>
         <member name="P:FoxOne.Web.FoxOneTips.InValid_Operation">
             <summary>
-              Looks up a localized string similar to 非法操作.
+              查找类似 非法操作 的本地化字符串。
             </summary>
         </member>
         <member name="P:FoxOne.Web.FoxOneTips.Invalid_Original_Password">
             <summary>
-              Looks up a localized string similar to 原始密码错误.
+              查找类似 原始密码错误 的本地化字符串。
             </summary>
         </member>
         <member name="P:FoxOne.Web.FoxOneTips.InValid_Phone_ValidCode">
             <summary>
-              Looks up a localized string similar to 无效的验证码.
+              查找类似 无效的验证码 的本地化字符串。
             </summary>
         </member>
         <member name="P:FoxOne.Web.FoxOneTips.InValid_User_Or_Password">
             <summary>
-              Looks up a localized string similar to 无效的用户名或密码.
+              查找类似 无效的用户名或密码 的本地化字符串。
             </summary>
         </member>
         <member name="P:FoxOne.Web.FoxOneTips.LoginId_Or_MobilePhone_Alerady_Exist">
             <summary>
-              Looks up a localized string similar to 手机号已注册.
+              查找类似 账号或手机号已存在 的本地化字符串。
             </summary>
         </member>
         <member name="P:FoxOne.Web.FoxOneTips.LogOn">
             <summary>
-              Looks up a localized string similar to 登 录.
+              查找类似 登 录 的本地化字符串。
             </summary>
         </member>
         <member name="P:FoxOne.Web.FoxOneTips.Need_DataSource">
             <summary>
-              Looks up a localized string similar to 需要为控件：{0} 指定数据源.
+              查找类似 需要为控件：{0} 指定数据源 的本地化字符串。
             </summary>
         </member>
         <member name="P:FoxOne.Web.FoxOneTips.Need_To_Be_NoPagerListControlBase">
             <summary>
-              Looks up a localized string similar to 控件：{0} 需要继承自NoPagerListControlBase.
+              查找类似 控件：{0} 需要继承自NoPagerListControlBase 的本地化字符串。
             </summary>
         </member>
         <member name="P:FoxOne.Web.FoxOneTips.Need_To_Be_Tree">
             <summary>
-              Looks up a localized string similar to 控件：{0} 不是Tree控件.
+              查找类似 控件：{0} 不是Tree控件 的本地化字符串。
             </summary>
         </member>
         <member name="P:FoxOne.Web.FoxOneTips.NewPassword_NotEqual_ConfirmPassword">
             <summary>
-              Looks up a localized string similar to 新密码与确认密码不一致.
+              查找类似 新密码与确认密码不一致 的本地化字符串。
             </summary>
         </member>
         <member name="P:FoxOne.Web.FoxOneTips.Only_Suppost_Table_Ctrl">
             <summary>
-              Looks up a localized string similar to 当前操作只支持Table组件.
+              查找类似 当前操作只支持Table组件 的本地化字符串。
             </summary>
         </member>
         <member name="P:FoxOne.Web.FoxOneTips.Parameter_Not_Found">
             <summary>
-              Looks up a localized string similar to 参数：&apos;{0}&apos; 不能为空.
+              查找类似 参数：&apos;{0}&apos; 不能为空 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.FoxOneTips.Parameter_Not_Null">
+            <summary>
+              查找类似 参数&apos;{0}&apos;不能为空 的本地化字符串。
             </summary>
         </member>
         <member name="P:FoxOne.Web.FoxOneTips.Password">
             <summary>
-              Looks up a localized string similar to 密码.
+              查找类似 密码 的本地化字符串。
             </summary>
         </member>
         <member name="P:FoxOne.Web.FoxOneTips.PassWord_Required">
             <summary>
-              Looks up a localized string similar to 密码不能为空.
+              查找类似 密码不能为空 的本地化字符串。
             </summary>
         </member>
         <member name="P:FoxOne.Web.FoxOneTips.Phone_Not_Exist">
             <summary>
-              Looks up a localized string similar to 手机号不存在.
+              查找类似 手机号不存在 的本地化字符串。
             </summary>
         </member>
         <member name="P:FoxOne.Web.FoxOneTips.Role_Alerady_Exist">
             <summary>
-              Looks up a localized string similar to 该角色已存在！.
+              查找类似 该角色已存在！ 的本地化字符串。
             </summary>
         </member>
         <member name="P:FoxOne.Web.FoxOneTips.SqlId_Not_Found">
             <summary>
-              Looks up a localized string similar to SqlId：&apos;{0}&apos; 不存在.
+              查找类似 SqlId：&apos;{0}&apos; 不存在 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.FoxOneTips.System_Not_Found">
+            <summary>
+              查找类似 系统：&apos;{0}&apos;  不存在 的本地化字符串。
             </summary>
         </member>
         <member name="P:FoxOne.Web.FoxOneTips.TreeMenu">
             <summary>
-              Looks up a localized string similar to 树型菜单.
+              查找类似 树型菜单 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.FoxOneTips.User_Is_Not_Supervisor">
+            <summary>
+              查找类似 指定用户没有下属员工 的本地化字符串。
             </summary>
         </member>
         <member name="P:FoxOne.Web.FoxOneTips.User_Name_Required">
             <summary>
-              Looks up a localized string similar to 用户名不能为空.
+              查找类似 用户名不能为空 的本地化字符串。
             </summary>
         </member>
         <member name="P:FoxOne.Web.FoxOneTips.User_Not_Found">
             <summary>
-              Looks up a localized string similar to 用户：&apos;{0}&apos;  不存在.
+              查找类似 不存在用户标识为：&apos;{0}&apos;  的用户信息 的本地化字符串。
             </summary>
         </member>
         <member name="P:FoxOne.Web.FoxOneTips.UserName">
             <summary>
-              Looks up a localized string similar to 账号.
+              查找类似 账号 的本地化字符串。
             </summary>
+        </member>
+        <member name="T:FoxOne.Web.AttachmentInfoVO">
+            <summary>
+            附件信息视图对象
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.AttachmentInfoVO.FileId">
+            <summary>
+            附件ID
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.AttachmentInfoVO.FileName">
+            <summary>
+            文件名
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.AttachmentInfoVO.FilePath">
+            <summary>
+            文件路径
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.AttachmentInfoVO.Icon">
+            <summary>
+            文件图标
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.AttachmentInfoVO.FileSize">
+            <summary>
+            文件大小
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.AttachmentInfoVO.CreatorName">
+            <summary>
+            上传者
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.AttachmentInfoVO.CreateTime">
+            <summary>
+            上传时间
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.AttachmentInfoVO.CanDelete">
+            <summary>
+            能否删除此附件
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.AttachmentInfoVO.IsLocalResource">
+            <summary>
+            是否本地附件
+            </summary>
+        </member>
+        <member name="T:FoxOne.Web.WorkflowAttachmentFilter">
+            <summary>
+            工作流附件转换器
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.WorkflowAttachmentFilter.InstanceIdFieldName">
+            <summary>
+            流程实例字段名
+            </summary>
+        </member>
+        <member name="T:FoxOne.Web.WorkflowDataSourceType">
+            <summary>
+            工作流数据源类型
+            </summary>
+        </member>
+        <member name="F:FoxOne.Web.WorkflowDataSourceType.ToDo">
+            <summary>
+            待办
+            </summary>
+        </member>
+        <member name="F:FoxOne.Web.WorkflowDataSourceType.Done">
+            <summary>
+            已办
+            </summary>
+        </member>
+        <member name="F:FoxOne.Web.WorkflowDataSourceType.Read">
+            <summary>
+            知会
+            </summary>
+        </member>
+        <member name="F:FoxOne.Web.WorkflowDataSourceType.Definition">
+            <summary>
+            流程定义
+            </summary>
+        </member>
+        <member name="F:FoxOne.Web.WorkflowDataSourceType.Application">
+            <summary>
+            流程应用
+            </summary>
+        </member>
+        <member name="F:FoxOne.Web.WorkflowDataSourceType.Instance">
+            <summary>
+            流程实例
+            </summary>
+        </member>
+        <member name="T:FoxOne.Web.WorkflowButtonType">
+            <summary>
+            工作流按钮类型
+            </summary>
+        </member>
+        <member name="F:FoxOne.Web.WorkflowButtonType.Save">
+            <summary>
+            保存
+            </summary>
+        </member>
+        <member name="F:FoxOne.Web.WorkflowButtonType.Send">
+            <summary>
+            发送
+            </summary>
+        </member>
+        <member name="F:FoxOne.Web.WorkflowButtonType.Delete">
+            <summary>
+            删除
+            </summary>
+        </member>
+        <member name="F:FoxOne.Web.WorkflowButtonType.Rollback">
+            <summary>
+            撤回
+            </summary>
+        </member>
+        <member name="F:FoxOne.Web.WorkflowButtonType.Pushback">
+            <summary>
+            回退
+            </summary>
+        </member>
+        <member name="F:FoxOne.Web.WorkflowButtonType.BackToRoot">
+            <summary>
+            退回拟稿
+            </summary>
+        </member>
+        <member name="F:FoxOne.Web.WorkflowButtonType.ForceEnd">
+            <summary>
+            终止审批
+            </summary>
+        </member>
+        <member name="F:FoxOne.Web.WorkflowButtonType.SendOtherToRead">
+            <summary>
+            传阅
+            </summary>
+        </member>
+        <member name="T:FoxOne.Web.WorkflowDetailButton">
+            <summary>
+            工具栏按钮对象
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.WorkflowDetailButton.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.WorkflowDetailButton.CssClass">
+            <summary>
+            CssClass
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.WorkflowDetailButton.Name">
+            <summary>
+            按钮名称
+            </summary>
+        </member>
+        <member name="T:FoxOne.Web.WorkflowDetailVO">
+            <summary>
+            流程实例详情视图对象
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.WorkflowDetailVO.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.WorkflowDetailVO.CanDeleteInstance">
+            <summary>
+            是否允许删除实例
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.WorkflowDetailVO.InstanceId">
+            <summary>
+            实例号
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.WorkflowDetailVO.ItemId">
+            <summary>
+            工作项号
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.WorkflowDetailVO.IsSimulate">
+            <summary>
+            是否处于模拟状态
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.WorkflowDetailVO.CanUploadFile">
+            <summary>
+            能否上传附件
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.WorkflowDetailVO.CanEditForm">
+            <summary>
+            能否编辑主表单
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.WorkflowDetailVO.DefinitionId">
+            <summary>
+            当前流程定义ID号
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.WorkflowDetailVO.Attachment">
+            <summary>
+            附件信息
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.WorkflowDetailVO.ShowAttachment">
+            <summary>
+            是否显示附件
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.WorkflowDetailVO.WorkItem">
+            <summary>
+            审批信息
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.WorkflowDetailVO.NoticeItem">
+            <summary>
+            知会信息
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.WorkflowDetailVO.ShowWorkItem">
+            <summary>
+            是否显示审批信息
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.WorkflowDetailVO.ShowOpinionInput">
+            <summary>
+            是否显示意见填写区域
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.WorkflowDetailVO.Form">
+            <summary>
+            主表单
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.WorkflowDetailVO.RelatePage">
+            <summary>
+            关联页面
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.WorkflowDetailVO.ToolbarButtons">
+            <summary>
+            工具栏按钮
+            </summary>
+        </member>
+        <member name="T:FoxOne.Web.WorkflowRunParameter">
+            <summary>
+            流程运行参数
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.WorkflowRunParameter.UserChoice">
+            <summary>
+            用户选择结果
+            </summary>
+        </member>
+        <member name="M:FoxOne.Web.WorkflowRunParameter.RunContext">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:FoxOne.Web.WorkflowRunChoice">
+            <summary>
+            用户选择内容
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.WorkflowRunChoice.Id">
+            <summary>
+            用户ID
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.WorkflowRunChoice.DepartmentId">
+            <summary>
+            部门ID
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.WorkflowRunChoice.StepName">
+            <summary>
+            步骤名称
+            </summary>
+        </member>
+        <member name="T:FoxOne.Web.WorkflowStartParameter">
+            <summary>
+            发起流程所需参数
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.WorkflowStartParameter.AppCode">
+            <summary>
+            流程应用ID
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.WorkflowStartParameter.InstanceName">
+            <summary>
+            流程实例名称
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.WorkflowStartParameter.CreatorId">
+            <summary>
+            发起人ID
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.WorkflowStartParameter.DataLocator">
+            <summary>
+            表单主键
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.WorkflowStartParameter.ImportLevel">
+            <summary>
+            缓急：0普通/1紧急/2特急
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.WorkflowStartParameter.SecurityLevel">
+            <summary>
+            密级：0普通/2机密
+            </summary>
+        </member>
+        <member name="T:FoxOne.Web.WorkflowNextStepParameter">
+            <summary>
+            获取下一步所需参数
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.WorkflowNextStepParameter.InstanceId">
+            <summary>
+            流程实例号
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.WorkflowNextStepParameter.CurrentUserId">
+            <summary>
+            当前操作用户ID
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.WorkflowNextStepParameter.ItemId">
+            <summary>
+            当前工作项ID
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.WorkflowNextStepParameter.OpinionContent">
+            <summary>
+            审批意见
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.WorkflowNextStepParameter.OpinionArea">
+            <summary>
+            意见类型，暂时用不到
+            </summary>
+        </member>
+        <member name="T:FoxOne.Web.WorkflowParameter">
+            <summary>
+            运行流程所需参数
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.WorkflowParameter.Command">
+            <summary>
+            运行命令：run运行/rollback撤回/pushback退回上一步/backtoroot退回拟稿人/forceend终止审批/delete删除流程
+            </summary>
+        </member>
+        <member name="T:FoxOne.Web.WorkflowRunParameterBinder">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:FoxOne.Web.WorkflowRunParameterBinder.BindModel(System.Web.Mvc.ControllerContext,System.Web.Mvc.ModelBindingContext)">
+            <summary>
+            
+            </summary>
+            <param name="controllerContext"></param>
+            <param name="bindingContext"></param>
+            <returns></returns>
+        </member>
+        <member name="T:FoxOne.Web.WorkflowUnreadFilter">
+            <summary>
+            工作流未读过滤器
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.WorkflowUnreadFilter.ExceptFields">
+            <summary>
+            排除的字段
+            </summary>
+        </member>
+        <member name="T:FoxOne.Web.WorkItemVO">
+            <summary>
+            工作流显示视图对象
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.WorkItemVO.Avatar">
+            <summary>
+            用户头像
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.WorkItemVO.CreatorUserId">
+            <summary>
+            参与者ID
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.WorkItemVO.ItemId">
+            <summary>
+            工作项ID
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.WorkItemVO.Creator">
+            <summary>
+            参与者名称
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.WorkItemVO.ActivityName">
+            <summary>
+            步骤名称
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.WorkItemVO.Opinion">
+            <summary>
+            意见内容
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.WorkItemVO.ShowTime">
+            <summary>
+            显示时间
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.WorkItemVO.Status">
+            <summary>
+            状态类型：receive,read,finish
+            </summary>
+        </member>
+        <member name="P:FoxOne.Web.WorkItemVO.StatusText">
+            <summary>
+            状态
+            </summary>
+        </member>
+        <member name="T:FoxOne.Web.MailAPI.ReturnInfo">
+            <remarks/>
+        </member>
+        <member name="P:FoxOne.Web.MailAPI.ReturnInfo.code">
+            <remarks/>
+        </member>
+        <member name="P:FoxOne.Web.MailAPI.ReturnInfo.message">
+            <remarks/>
+        </member>
+        <member name="P:FoxOne.Web.MailAPI.ReturnInfo.result">
+            <remarks/>
         </member>
     </members>
 </doc>

@@ -25,6 +25,7 @@ namespace FoxOne.Business
         [Column(Showable=false)]
         public virtual string Password { get; set; }
 
+        [TracePropertyChange]
         [DisplayName("所属部门")]
         public virtual string DepartmentId { get; set; }
 
@@ -89,6 +90,29 @@ namespace FoxOne.Business
             get;
             set;
         }
+
+        [DisplayName("头像")]
+        [Column(Length = "200")]
+        public string Avatar
+        {
+            get;
+            set;
+        }
+
+        [DisplayName("工号")]
+        [Column(Length = "20")]
+        public string WorkNumber
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 薪资
+        /// </summary>
+        [DisplayName("薪资")]
+        [Column(DataType ="int")]
+        public int Salary { get; set; }
     }
 
     [DisplayName("用户外部授权信息")]
@@ -123,4 +147,23 @@ namespace FoxOne.Business
 
     }
 
+    [Table("SYS_UserValidCode")]
+    public class UserValid:EntityBase,IAutoCreateTable
+    {
+        [PrimaryKey]
+        public override string Id
+        {
+            get;set;
+        }
+
+        [Column(DataType ="varchar",Length ="15")]
+        public string Phone { get; set; }
+
+        [Column(DataType = "varchar", Length = "6")]
+        public string ValidCode { get; set; }
+
+        public DateTime ExpiredTime { get; set; }
+
+
+    }
 }

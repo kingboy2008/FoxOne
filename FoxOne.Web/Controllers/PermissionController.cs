@@ -92,7 +92,7 @@ namespace FoxOne.Web.Controllers
                     foreach (var id in ids)
                     {
                         var item = ObjectHelper.GetObject<IRoleTypePermission>();
-                        item.Id = Guid.NewGuid().ToString();
+                        item.Id = Utility.GetGuid();
                         item.PermissionId = id;
                         item.RoleTypeId = roleId;
                         effectCount += (DBContext<IRoleTypePermission>.Insert(item) ? 1 : 0);
@@ -123,7 +123,7 @@ namespace FoxOne.Web.Controllers
                         }
                     }
                     var item2 = ObjectHelper.GetObject<IRoleTypePermission>();
-                    item2.Id = Guid.NewGuid().ToString();
+                    item2.Id = Utility.GetGuid();
                     item2.PermissionId = ruleId;
                     item2.RoleTypeId = roleId;
                     DBContext<IRoleTypePermission>.Insert(item2);
@@ -155,7 +155,7 @@ namespace FoxOne.Web.Controllers
                     foreach (var id in ids)
                     {
                         var item = ObjectHelper.GetObject<IRolePermission>();
-                        item.Id = Guid.NewGuid().ToString();
+                        item.Id = Utility.GetGuid();
                         item.PermissionId = id;
                         item.RoleId = roleId;
                         effectCount += (DBContext<IRolePermission>.Insert(item) ? 1 : 0);
@@ -187,7 +187,7 @@ namespace FoxOne.Web.Controllers
                         }
                     }
                     var item2 = ObjectHelper.GetObject<IRolePermission>();
-                    item2.Id = Guid.NewGuid().ToString();
+                    item2.Id = Utility.GetGuid();
                     item2.PermissionId = ruleId;
                     item2.RoleId = roleId;
                     DBContext<IRolePermission>.Insert(item2);

@@ -9,13 +9,15 @@ using FoxOne.Business.Environment;
 using System.ComponentModel;
 using System.Web.Script.Serialization;
 using FoxOne.Data.Mapping;
+using FoxOne.Business.Security;
+
 namespace FoxOne.Controls
 {
     /// <summary>
     /// 搜索组件
     /// </summary>
     [DisplayName("搜索组件")]
-    public class Search : PageControlBase, ITargetId
+    public class Search : PageControlBase, ITargetId,IAuthorityComponent
     {
         public Search()
         {
@@ -180,6 +182,8 @@ namespace FoxOne.Controls
             return SearchFormTemplate.FormatTo(FormCssClass, result.ToString(), buttonTemplate);
         }
 
+       
+
         public string FormCssClass
         {
             get;
@@ -200,6 +204,17 @@ namespace FoxOne.Controls
                 result.Fields.Add(field.Clone() as FormControlBase);
             }
             return result;
+        }
+
+        public void Authority(IDictionary<string, UISecurityBehaviour> behaviour)
+        {
+            foreach (var button in Buttons)
+            {
+                if (behaviour.Keys.Contains(button.Id))
+                {
+                    button.Visiable = !behaviour[button.Id].IsInvisible;
+                }
+            }
         }
 
         public string TargetControlId

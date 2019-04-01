@@ -8,6 +8,8 @@ using System.Web.Mvc;
 using System.ComponentModel;
 using System.Web.Script.Serialization;
 using FoxOne.Business.Security;
+using FoxOne.Business.Environment;
+
 namespace FoxOne.Controls
 {
     /// <summary>
@@ -40,6 +42,7 @@ namespace FoxOne.Controls
         [DisplayName("选项卡项")]
         public IList<TabItem> TabItems { get; set; }
 
+
         public override string Render()
         {
             if (DataSource != null)
@@ -70,6 +73,7 @@ namespace FoxOne.Controls
             }
             var tabBox = new TagBuilder("div");
             tabBox.AddCssClass(TabItemContainerCss);
+            tabBox.Attributes.Add("initindex", InitIndex.ToString());
             var content = string.Empty;
             var span = string.Empty;
             foreach (var item in TabItems.OrderBy(o => o.Rank))
@@ -168,7 +172,7 @@ namespace FoxOne.Controls
                     if (Content[0] is IFrame)
                     {
                         var c = Content[0] as IFrame;
-                        c.Attributes["src1"] = c.Src;
+                        c.Attributes["src1"] = Env.Parse(c.Src);
                         c.Attributes["tabItem"] = Id;
                         c.Attributes["id"] = Id;
                         c.Src = "";

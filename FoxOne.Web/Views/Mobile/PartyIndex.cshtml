@@ -1,0 +1,125 @@
+﻿@model FoxOne.Web.Controllers.PartyViewModel
+@using FoxOne.Business.Security;
+<html>
+<head>
+    <meta http-equiv=Content-Type content="text/html;charset=utf-8">
+    <meta charset="gbk">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection" />
+    <meta content="yes" name="apple-touch-fullscreen" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>年会</title>
+    <!--dd_nav_bgcolor-->
+    <link href="~/Mobile/css/style.css" rel="stylesheet" />
+    <style>
+        .contain {
+            height: 100%;
+        }
+
+        .btn {
+            width:100%;
+            margin-top:30px;
+            height:100%;
+        }
+        .btn img {
+            width:200px;
+
+        }
+        .btn-list {
+            position: absolute;
+            top: 3%;
+            left: 50%;
+            margin-left: -100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="contain">
+        <img src="/images/party/bg.png" width="100%" height="100%" />
+        <ul class="btn-list">
+            @if (Model.BtnSignEnable.Length > 0)
+            {
+                <li class="btn" id="btnScan"  @Model.BtnSignEnable><img src="/images/party/btnSigend.png" /></li>
+            }
+            else
+            {
+                <li class="btn" id="btnScan"><img src="/images/party/btnSign.png" /></li>
+            }
+            <li class="btn" id="btnSendMsg" @Model.BtnSendEnable><img src="/images/party/btnSendMsg.png" /></li>
+        </ul>
+    </div>
+    <script src="~/Scripts/zepto.min.js"></script>
+    <script type="text/javascript" src="https://g.alicdn.com/dingding/open-develop/1.6.9/dingtalk.js"></script>
+    <script src="~/DDStatic/js/fastclick.js"></script>
+    <script src="~/DDStatic/js/index.js"></script>
+    <script>
+        dd.ready(function () {
+            Page.defaultBackEvent();
+
+            dd.biz.navigation.setRight({
+                text: "",
+                onSuccess: function (data) {
+                },
+                onFail: function (err) {
+                    logger.e(JSON.stringify(err));
+                }
+            });
+
+
+            $("#btnScan").click(function () {
+                if ($(this).attr("disabled") != null) return;
+                dd.biz.util.scan({
+                    onSuccess: function (data) {
+                        //onSuccess将在扫码成功之后回调
+                        /* data结构
+                          { 'text': String}
+                        */
+                        $.ajax({
+                            url: '/api/Party/Sign?userId=@Sec.User.Id&code='+data.text ,
+                            success: function (data, status, xhr) {
+                                var info = JSON.parse(data);
+                                if (info.Result == "True") {
+                                    window.location = "/Mobile/PartySignIn";
+                                }
+                                else {
+                                    alert(info.Result);
+                                }
+                            },
+                        });
+                    },
+                    onFail: function (err) {
+                    }
+                });
+            });
+        });
+
+        $("#btnSendMsg").click(function () {
+            if ($(this).attr("disabled") != null) {
+                alert('请先扫码签到');
+                return;
+            }
+            location = "/Mobile/PartySendMessage";
+        });
+
+        $("#btnScan").click(function () {
+            if ($(this).attr("disabled") != null) return;
+            $.ajax({
+                url: '/api/Party/Sign?userId=@Sec.User.Id&code=123123' ,
+                success: function (data, status, xhr) {
+                    var info = JSON.parse(data);
+                    if (info.Result == "True") {
+                        window.location = "/Mobile/PartySignIn";
+                    }
+                    else
+                    {
+                        alert(info.Result);
+                    }
+                },
+            });
+        });
+    </script>
+</body>
+</html>

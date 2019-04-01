@@ -1,0 +1,231 @@
+﻿@model FoxOne.Controls.Form
+@{
+    Layout = null;
+}
+@using FoxOne.Business
+@using FoxOne.Controls
+@using FoxOne.Core
+@using FoxOne.Business.Security
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv=Content-Type content="text/html;charset=utf-8">
+    <meta charset="gbk">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection" />
+    <meta content="yes" name="apple-touch-fullscreen" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>会议室预订</title><!--dd_nav_bgcolor-->
+    <link href="~/DDStatic/css/reset.css" rel="stylesheet" />
+    <link href="~/DDStatic/css/task.css" rel="stylesheet" />
+    <link href="~/Mobile/css/weui.css" rel="stylesheet" />
+    <link href="~/Mobile/css/style.css" rel="stylesheet" />
+    <style>
+        .weui-cell__bd input {
+            border: 0px;
+            outline: 0px;
+        }
+    </style>
+</head>
+<body>
+    <div id="task-add">
+        @Html.CustomMobileControl(Model)
+        </div>
+    <script src="~/Scripts/zepto.min.js"></script>
+    <script src="~/Scripts/Validator/zepto.validation.js?ver=18_01_09_00"></script>
+    <script type="text/javascript" src="https://g.alicdn.com/dingding/open-develop/1.6.9/dingtalk.js"></script>
+    <script src="~/DDStatic/js/fastclick.js"></script>
+    <script src="~/DDStatic/js/index.js"></script>
+    <script>
+        var logger = { i: function (info) { }, e: function (err) { dd.device.notification.alert({ message: err, title: '异常提示', buttonName: '关闭' }) } };
+
+        var editable =@((Model.FormMode!= FormMode.View).ToString().ToLower());
+
+        dd.ready(function () {
+
+            dd.biz.navigation.setTitle({
+                title: "会议室预订",
+                onSuccess: function (data) {
+                },
+                onFail: function (err) {
+                    logger.e(JSON.stringify(err));
+                }
+            });
+
+            if (editable) {
+                dd.biz.navigation.setRight({
+                    show: true,
+                    control: true,
+                    text: '保存',
+                    showIcon: true,
+                    onSuccess: function (data) {
+                        $("form").submit();
+                    },
+                    onFail: function (err) {
+                        logger.e(JSON.stringify(err));
+                    }
+                });
+            }
+            else
+            {
+                dd.biz.navigation.setRight({
+                    text: '',
+                    onSuccess: function (data) {
+                    },
+                    onFail: function (err) {
+                        logger.e(JSON.stringify(err));
+                    }
+                });
+            }
+
+            //dd.biz.navigation.setLeft({
+            //    control: true,//是否控制点击事件，true 控制，false 不控制， 默认false
+            //    text: '',//控制显示文本，空字符串表示显示默认文本
+            //    onSuccess: function (result) {
+            //        dd.biz.navigation.close({
+            //            onSuccess: function (result) {
+            //            },
+            //            onFail: function (err) { }
+            //        });
+            //    },
+            //    onFail: function (err) { }
+            //});
+            Page.defaultBackEvent();
+            $("#task-add .datetimepicker.datepicker.timepicker.select-type input").attr("readonly", "readonly");
+            bind();
+
+        });
+
+        dd.error(function (err) {
+            logger.e('dd error: ' + JSON.stringify(err));
+        });
+        $("body").on("submit", "form", function (e) {
+
+            var _this = e.target;
+            if ($.validation) {
+                var validateInfo = $.validation.validate(_this);
+                if (validateInfo.isError) {
+                    var ee = $.Event("form.validateError", validateInfo);
+                    $(_this).trigger(ee);
+                    alert(ee.errorInfo);
+                    return false;
+                }
+            }
+
+            var params = new Object();
+            var items = $(this).find("input[type=hidden]," +
+                "input[type=text]," +
+                "input[type=password]," +
+                "textarea," +
+                "select," +
+                "input[type=radio]:checked," +
+                "input[type=checkbox]:checked");
+
+            items.each(function (index) {
+                params[this.name] = this.value;
+            });
+            $.ajax({
+                async: true,
+                data: params,
+                dataType: 'json',
+                type: 'post',
+                url: $(this).attr('action') + "?_PAGE_ID=" + $(this).attr("pageId") + "&_CTRL_ID=" + $(this).attr("id"),
+                success: function (response) {
+                    if (response.Result) {
+                        if (response.NoAuthority) {
+                            alert(response.ErrorMessage);
+                        }
+                        else {
+                            if (response.LoginTimeOut) {
+                                alert("登录超时，请重新登录");
+                            }
+                            else {
+                                var res = response.Data;
+                                try {
+                                    //window.location = '/Mobile/WorkflowIndex?InstanceId=' + res.InstanceId + "&ItemId=" + res.ItemId;
+                                    dd.biz.navigation.goBack({
+                                        onSuccess: function (result) { },
+                                        onFail: function (err) { }
+                                    });
+                                } catch (e) {
+                                    alert(e);
+                                }
+                            }
+                        }
+                    }
+                    else {
+                        alert(response.ErrorMessage);
+                    }
+                },
+                error: function (xhr, text, error) {
+                    alert(xhr.responseText);
+                }
+            });
+            return false;
+        });
+
+        function bind() {
+            if (!editable)
+            {
+                return;
+            }
+            $('#task-add .datetimepicker').on('click', function () {
+                var node = $(this).find('input');
+                var v = node.val().trim();
+                dd.biz.util.datetimepicker({
+                    format: 'yyyy-MM-dd HH:mm',
+                    value: v,
+                    onSuccess: function (result) {
+                        node.val(result.value);
+                    },
+                    onFail: function () { }
+                });
+            });
+            $('#task-add .datepicker').on('click', function () {
+                var node = $(this).find('input');
+                var v = node.html().trim();
+                dd.biz.util.datepicker({
+                    format: 'yyyy-MM-dd',
+                    value: v,
+                    onSuccess: function (result) {
+                        node.val(result.value);
+                    },
+                    onFail: function () { }
+                });
+            });
+            $('#task-add .timepicker').on('click', function () {
+                var node = $(this).find('input');
+                var v = node.html().trim();
+                dd.biz.util.timepicker({
+                    format: 'HH:mm',
+                    value: v, //默认显示日期
+                    onSuccess: function (result) {
+                        node.val(result.value);
+                    },
+                    onFail: function () { }
+                });
+            });
+
+            $('#task-add .select-type').on('click', function () {
+                var node = $(this).find('.select');
+                var s = $(this).find('input');
+                var v = node.html().trim();
+                var items = JSON.parse($(this).find("[data-selectItem]").attr("data-selectItem"));
+                dd.biz.util.chosen({
+                    source: items,
+                    selectedKey: v,
+                    onSuccess: function (result) {
+                        node.html(result.key);
+                        s.val(result.value);
+                    },
+                    onFail: function () { }
+                })
+            });
+        }
+    </script>
+</body>
+</html>

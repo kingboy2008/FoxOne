@@ -17,6 +17,9 @@
         if (e && e.Data) {
             param = $.extend(param, e.Data);
         }
+        if (param && param.hasOwnProperty("selectUrl")) {
+            selectUrl = param.selectUrl;
+        }
         selectUrl = foxOne.buildUrl(selectUrl, param);
         if (data.showtype.toLowerCase() == "modal") {
             $.modal({
@@ -30,6 +33,10 @@
             var $div = $("#" + containerId);
             $("div[id*='" + sufix + "']").hide();
             if ($div.length > 0) {
+                var iframe = $div.find("iframe");
+                if (iframe.attr("src") != selectUrl) {
+                    iframe.attr("src", selectUrl);
+                }
                 $div.show();
             }
             else {

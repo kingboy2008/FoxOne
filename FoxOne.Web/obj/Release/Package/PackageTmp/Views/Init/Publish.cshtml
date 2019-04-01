@@ -1,0 +1,89 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>系统发布</title>
+    @System.Web.Optimization.Styles.Render("~/style/common.css")
+    @System.Web.Optimization.Scripts.Render("~/script/common.js")
+    <style>
+        html, body {
+            background-color: #EEE;
+        }
+
+        .container {
+            border: 1px solid #CCC;
+            border-radius: 5px;
+            background-color: white;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.15),0 1px 1px rgba(0,0,0,.075);
+            padding: 20px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 200px;
+            margin-left: -180px;
+            margin-top: -300px;
+        }
+
+            .container h1 {
+                border-bottom: 1px solid #ccc;
+                padding-bottom: 10px;
+                font-size: 15px;
+                margin-bottom: 20px;
+            }
+
+            .container p {
+                margin-bottom: 20px;
+            }
+
+        .item {
+            border: 1px solid #CCC;
+            border-radius: 5px;
+            padding: 10px;
+            float: left;
+            margin-left: 50px;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.15),0 1px 1px rgba(0,0,0,.075);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>系统发布</h1>
+        <p><a class="btn btn-primary btn-big" onclick="backupData()">备份配置数据</a></p>
+        <p>
+            <a class="btn btn-success btn-big" onclick="recoveryData()">恢复配置数据</a>
+        </p>
+        <p>
+            <input type="text" placeholder="from" value="TestDB" id="from" name="from" class="form-control" />
+            <br />
+            <input type="text" placeholder="to" value="DefaultDB" id="to" name="to" class="form-control" />
+            <br />
+            <a class="btn btn-warning btn-big" onclick="syncData()">同步数据</a>
+        </p>
+
+    </div>
+    <script>
+        function syncData() {
+            r("/Init/AsyncTestProduct", "同步成功", { from: $("#from").val(), to: $("#to").val() });
+        }
+        function backupData() {
+            r("/Init/BackupConfigData", "备份成功！");
+        }
+        function recoveryData() {
+            r("/Init/RecoveryConfigData", "恢复成功！");
+        }
+        function r(url, msg, data) {
+            data = data || {};
+            foxOne.dataService(url, data, function (res) {
+                if (res) {
+                    foxOne.alert(msg);
+                }
+            }, "post", true);
+        }
+    </script>
+</body>
+</html>

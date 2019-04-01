@@ -71,5 +71,23 @@ namespace FoxOne.Workflow.Kernel
         /// 流程实例服务类
         /// </summary>
         IWorkflowInstanceService InstanceService { get; }
+
+        /// <summary>
+        /// 步骤进入时触发的事件
+        /// </summary>
+        event WorkflowEventHandler OnActivityEnter;
+
+        /// <summary>
+        /// 步骤执行时触发的事件
+        /// </summary>
+        event WorkflowEventHandler OnActivityExecute;
+
+        /// <summary>
+        /// 步骤退出时触发的事件
+        /// </summary>
+        event WorkflowEventHandler OnActivityExit;
     }
+
+
+    public delegate void WorkflowEventHandler(IWorkflowContext context, IActivity activity);
 }

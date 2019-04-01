@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FoxOne.Controls</RootNamespace>
     <AssemblyName>FoxOne.Controls</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -66,6 +66,7 @@
     <Compile Include="FormControl\FileUpload.cs" />
     <Compile Include="FormControl\FormControlBase.cs" />
     <Compile Include="FormControl\HiddenField.cs" />
+    <Compile Include="FormControl\ImageField.cs" />
     <Compile Include="FormControl\KeyValueControlBase.cs" />
     <Compile Include="FormControl\Link.cs" />
     <Compile Include="FormControl\RadioButton.cs" />
@@ -75,6 +76,8 @@
     <Compile Include="FormControl\TextEditor.cs" />
     <Compile Include="FormControl\TextValueTextBox.cs" />
     <Compile Include="FormControl\TimeRangePicker.cs" />
+    <Compile Include="IChildFormControl.cs" />
+    <Compile Include="IFieldDefaultSetting.cs" />
     <Compile Include="PageControl\Form.cs" />
     <Compile Include="PageControl\IFrame.cs" />
     <Compile Include="PageControl\Image.cs" />
@@ -95,6 +98,11 @@
     <Compile Include="PageControl\Tree.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TemplateGenerator.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Control.cd" />
+    <None Include="ControlImpl.cd" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FoxOne.Business\FoxOne.Business.csproj">

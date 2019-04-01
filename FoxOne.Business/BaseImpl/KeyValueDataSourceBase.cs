@@ -17,6 +17,11 @@ namespace FoxOne.Business
             }
         }
 
+        public IDictionary<string, object> FormData
+        {
+            get;set;
+        }
+
         public abstract IEnumerable<TreeNode> SelectItems();
 
         public virtual object Converter(string columnName, object columnValue, IDictionary<string, object> rowData)

@@ -13,11 +13,12 @@ namespace FoxOne.Business
         [Column(Showable = false, DataType = "varchar", Length = "38")]
         public virtual string Id { get; set; }
 
-        [Column(Showable = false)]
+        [Column(Showable = false, IsDataField = false)]
         public virtual int RentId { get; set; }
 
         public override bool Equals(object obj)
         {
+            if (!(obj is EntityBase)) return false;
             return (obj as EntityBase).Id.Equals(this.Id, StringComparison.OrdinalIgnoreCase);
         }
 
@@ -104,19 +105,27 @@ namespace FoxOne.Business
 
         public void SetProperty()
         {
+            var result = DBContext<IDURPProperty>.Instance.Where(o => o.Type.Equals(Id, StringComparison.OrdinalIgnoreCase));
             foreach (var key in Properties.Keys)
             {
-                if (Properties[key] == null || Properties[key].ToString().IsNullOrEmpty()) continue;
-                var item = ObjectHelper.GetObject<IDURPProperty>();
-                item.Id = Guid.NewGuid().ToString();
-                item.Name = key;
-                item.Value = Properties[key].ToString();
-                item.RentId = this.RentId;
-                item.Type = this.Id;
-                if (!DBContext<IDURPProperty>.Update(item))
+                if (Properties[key] == null) continue;
+                var item = result.FirstOrDefault(o => o.Name.Equals(key, StringComparison.OrdinalIgnoreCase));
+                if (item == null)
                 {
+                    item = ObjectHelper.GetObject<IDURPProperty>();
+                    item.Id = Utility.GetGuid();
+                    item.Name = key;
+                    item.Value = Properties[key].ToString();
+                    item.RentId = this.RentId;
+                    item.Type = this.Id;
                     DBContext<IDURPProperty>.Insert(item);
                 }
+                else
+                {
+                    item.Value = Properties[key].ToString();
+                    DBContext<IDURPProperty>.Update(item);
+                }
+               
             }
         }
     }

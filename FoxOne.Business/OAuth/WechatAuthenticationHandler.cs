@@ -9,12 +9,10 @@ namespace FoxOne.Business.OAuth
 {
     public class WechatAuthenticationHandler : AuthenticationHandler
     {
-
-        private readonly HttpClient _httpClient;
+        
         public WechatAuthenticationHandler(AuthenticationOptions options)
             : base(options)
         {
-            this._httpClient = new HttpClient();
         }
         public override string GetAuthorizationUrl(AuthenticationScope scope)
         {
@@ -27,7 +25,7 @@ namespace FoxOne.Business.OAuth
             //构建获取Access Token的参数
             string url = string.Format("{0}/sns/oauth2/access_token?appid={1}&secret={2}&code={3}&grant_type=authorization_code",
                                              this._options.AuthorizeUrl, this._options.AppId, this._options.AppSecret, ticket.Code);
-            string tokenResponse = _httpClient.GetStringAsync(url).Result.ToString();
+            string tokenResponse = HttpHelper.Get(url);
             Logger.Info("请求url：{0}，返回值：{1}", url, tokenResponse);
             if (tokenResponse.IndexOf("errcode") > 0)
             {
@@ -44,23 +42,6 @@ namespace FoxOne.Business.OAuth
             return ticket;
         }
 
-        /*
-        public override IUser GetUserInfo(AuthenticationTicket ticket)
-        {
-            string url = string.Format("{0}/sns/userinfo?access_token={1}&openid={2}",
-                                          this._options.AuthorizeUrl, ticket.AccessToken, ticket.OpenId);
-            string tokenResponse = _httpClient.GetStringAsync(url).Result.ToString();
-            if (tokenResponse.IndexOf("errcode") > 0)
-            {
-                throw new FoxOneException(tokenResponse);
-            }
-            WeChat qzone = JSONHelper.Deserialize(tokenResponse,typeof(WeChat)) as WeChat;
-            return new User
-            {
-                Id = ticket.OpenId,
-                Name = qzone.nickname
-            };
-        }*/
         /// <summary>
         /// 根据access_token获得对应用户身份的openid
         /// </summary>

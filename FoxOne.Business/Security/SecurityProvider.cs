@@ -10,8 +10,6 @@ namespace FoxOne.Business.Security
 {
     public class SecurityProvider : ISecurityProvider
     {
-        private static readonly string UserSessionKey = typeof(SecurityProvider).FullName + "$User";
-        private static readonly string UserPermissionKeyFormat = "{0}_ALL_PERMISSION";
 
         public virtual bool Authenticate(string username, string password)
         {
@@ -51,9 +49,9 @@ namespace FoxOne.Business.Security
 
         public string GetPermissionRule(string operation, IUser user = null)
         {
-            IEnumerable<IPermission> rules =GetAllUserPermission(user).Where(o=>o.Parent.Code.Equals(operation, StringComparison.OrdinalIgnoreCase));
+            IEnumerable<IPermission> rules = GetAllUserPermission(user).Where(o => o.Parent.Code.Equals(operation, StringComparison.OrdinalIgnoreCase));
             int count = rules.Count();
-            if (count  > 0)
+            if (count > 0)
             {
                 return (count == 1 ? rules.First() : rules.OrderBy(rule => rule.Rank).First()).Url;
             }
@@ -83,11 +81,6 @@ namespace FoxOne.Business.Security
 
         public virtual void Abandon()
         {
-            try
-            {
-                RemoveUserFromSession();
-            }
-            catch { }
         }
 
         public virtual IDictionary<string, UISecurityBehaviour> GetUISecurityBehaviours(string virtualPath, string queryString)
@@ -95,7 +88,7 @@ namespace FoxOne.Business.Security
             //获取当前页面中所有受权限控制的控件。
             var permissions = DBContext<IPermission>.Instance.Where(o =>
                 o.Type == PermissionType.Control
-                && !o.ParentId.IsNullOrEmpty() && o.Parent!=null && o.Parent.Url.StartsWith(virtualPath, StringComparison.OrdinalIgnoreCase));
+                && (o.Parent.Url.StartsWith(virtualPath, StringComparison.OrdinalIgnoreCase) || virtualPath.StartsWith(o.Parent.Url, StringComparison.OrdinalIgnoreCase)));
 
             //获取当前用户的所有权限
             var allUserPermission = GetAllUserPermission();
@@ -117,106 +110,52 @@ namespace FoxOne.Business.Security
             return behaviours;
         }
 
-        private SessionProvider _session;
-        public SessionProvider AppSession
-        {
-            get
-            {
-                return _session ?? (_session = new SessionProvider());
-            }
-        }
-
         protected virtual IUser GetUser(IPrincipal principal)
         {
-            string loginId = GetLoginIdFromPrincipal(principal);
-            IUser user = GetUserFromSession(loginId);
-            if (null == user)
-            {
-                user = DBContext<IUser>.Instance.FirstOrDefault(o => o.LoginId.Equals(loginId, StringComparison.OrdinalIgnoreCase));
-                if (null == user)
-                {
-                    throw new Exception(
-                        string.Format("User Not Found!", loginId));
-                }
-                if (AppSession.IsValid)
-                {
-                    AppSession[UserSessionKey] = user;
-                }
-            }
-            return user;
-        }
-
-
-        protected virtual string GetLoginIdFromPrincipal(IPrincipal principal)
-        {
-            string name = principal.Identity.Name;
+            string loginId = principal.Identity.Name;
             if (principal.Identity is WindowsIdentity)
             {
-                int index = name.IndexOf("\\");
-                return index > 0 ? name.Substring(index + 1) : name;
+                int index = loginId.IndexOf("\\");
+                loginId = index > 0 ? loginId.Substring(index + 1) : loginId;
             }
-            else
+            IUser user = DBContext<IUser>.Instance.FirstOrDefault(o => o.LoginId.Equals(loginId, StringComparison.OrdinalIgnoreCase));
+            if (null == user)
             {
-                return name;
-            }
-        }
-
-        protected virtual IUser GetUserFromSession(string name)
-        {
-            IUser user = AppSession.IsValid ? (AppSession[UserSessionKey] as IUser) : null;
-            if (null != user && !user.LoginId.Equals(name))
-            {
-                RemoveUserFromSession();
-                user = null;
+                throw new Exception(
+                    string.Format("User Not Found!", loginId));
             }
             return user;
         }
 
-        protected virtual void RemoveUserFromSession()
-        {
-            if (AppSession.IsValid)
-            {
-                AppSession.Remove(UserPermissionKeyFormat.FormatTo(GetCurrentUser().LoginId));
-                AppSession.Remove(UserSessionKey);
-            }
-        }
 
         public IEnumerable<IPermission> GetAllUserPermission(IUser user = null)
         {
             user = user ?? (user = GetCurrentUser());
-            string key = UserPermissionKeyFormat.FormatTo(user.LoginId);
-            IList<IPermission> result = AppSession.IsValid ? AppSession[key] as IList<IPermission> : null;
-            if (result == null)
+            IList<IPermission> result = new List<IPermission>();
+            foreach (var role in user.Roles)
             {
-                result = new List<IPermission>();
-                foreach (var role in user.Roles)
+                role.Permissions.ForEach(p =>
                 {
-                    role.Permissions.ForEach(p =>
+                    if (result.Count(o => o.Id.Equals(p.Id, StringComparison.OrdinalIgnoreCase)) == 0)
                     {
-                        if (result.Count(o => o.Id.Equals(p.Id, StringComparison.OrdinalIgnoreCase)) == 0)
-                        {
-                            result.Add(p);
-                        }
-                    });
-                }
+                        result.Add(p);
+                    }
+                });
+            }
 
-                //如果用户角色为空，则用户角色中不包含“部门成员”角色的权限，则默认加上“部门成员”拥有的权限。
-                if (user.Roles.IsNullOrEmpty() || user.Roles.Count(o=>o.RoleType.Name==SysConfig.DefaultUserRole)==0)
+            //如果用户角色为空，则用户角色中不包含“部门成员”角色的权限，则默认加上“部门成员”拥有的权限。
+            if (user.Roles.IsNullOrEmpty() || user.Roles.Count(o => o.RoleType.Name == SysConfig.DefaultUserRole) == 0)
+            {
+                IRoleType roleType = DBContext<IRoleType>.Instance.FirstOrDefault(o => o.Name == SysConfig.DefaultUserRole);
+                foreach (var p in roleType.Permissions)
                 {
-                    IRoleType roleType = DBContext<IRoleType>.Instance.FirstOrDefault(o => o.Name == SysConfig.DefaultUserRole);
-                    foreach (var p in roleType.Permissions)
+                    if (result.Count(o => o.Id.Equals(p.Id, StringComparison.OrdinalIgnoreCase)) == 0)
                     {
-                        if (result.Count(o => o.Id.Equals(p.Id, StringComparison.OrdinalIgnoreCase)) == 0)
-                        {
-                            result.Add(p);
-                        }
+                        result.Add(p);
                     }
                 }
-                if (AppSession.IsValid)
-                {
-                    AppSession[key] = result;
-                }
             }
+
             return result;
         }
 

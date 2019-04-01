@@ -64,7 +64,7 @@ namespace FoxOne.Data.Provider
         public override DbConnection CreateDbConnection(string connectionString)
         {
             return new MySqlConnection(connectionString);
-        }
+        } 
 
 
         protected override string GetTablesSql()
@@ -113,7 +113,7 @@ namespace FoxOne.Data.Provider
 
         public override string CreateTableCommand(Table mapping)
         {
-            string createTableSQL = "CREATE TABLE {0}({1})ENGINE=MyISAM DEFAULT CHARSET=utf8;";
+            string createTableSQL = "CREATE TABLE {0}({1})ENGINE=InnoDB DEFAULT CHARSET=utf8;";
             var keys = new List<string>();
             mapping.Keys.Select(o => o.Name).ForEach(o =>
             {
@@ -149,7 +149,7 @@ namespace FoxOne.Data.Provider
                 string.IsNullOrEmpty(field.Length) ? "" : "(" + field.Length + ")",
                 field.IsAutoIncrement ? "AUTO_INCREMENT" : "",
                 field.IsNullable ? "NULL" : "NOT NULL",
-                string.IsNullOrEmpty(field.Comment) ? string.Format("COMMENT {0}", field.Comment) : ""
+                string.IsNullOrEmpty(field.Comment) ? "" : string.Format(" COMMENT '{0}' ", field.Comment)
                 );
         }
 

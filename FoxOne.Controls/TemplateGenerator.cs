@@ -12,7 +12,7 @@ namespace FoxOne.Controls
             StringBuilder result = new StringBuilder();
             result.AppendLine("<form action=\"{0}\" defaultForm=\"true\" method=\"post\" class=\"{1}\" enctype=\"multipart/form-data\">");
             result.AppendLine("{2}{3}");
-            result.AppendLine("<div class=\"form-group\"><label>&nbsp;</label>{4}</div>");
+            result.AppendLine("{4}");
             result.AppendLine("</form>");
             return result.ToString();
         }
@@ -41,7 +41,7 @@ namespace FoxOne.Controls
 
         public static string GetPagerTemplate()
         {
-            return "<div class=\"data-pager-left\"><ul>{0}</ul></div><div class=\"data-pager-right\"><span class=\"data-pager-right-number\">每页</span><ul> {1} </ul><span class=\"data-pager-right-number\">行</span></div>";
+            return "<div class=\"data-pager-left\"><ul>{0}</ul></div><div class=\"data-pager-right\"><span class=\"data-pager-right-number\">共{2}条记录，每页</span><ul> {1} </ul><span class=\"data-pager-right-number\">行</span></div>";
         }
 
         public static string GetPagerItemTemplate()

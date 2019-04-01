@@ -25,6 +25,7 @@
             background-color: white;
             margin: auto;
             margin-top: 50px;
+            border-radius: 5px;
         }
 
         legend {
@@ -37,35 +38,56 @@
     <div style="text-align:center;width:100%;">
         <fieldset>
             <legend>导出</legend>
-            <input type="text" id="LastUpdateTime" name="LastUpdateTime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" />
-            <button onclick="batchExport()" class="btn btn-success btn-big">按更新时间批量导出</button>
-            <button onclick="exportPage(); return false;" class="btn btn-success btn-big">导出当前配置</button>
+            <form action="/PageDesigner/BatchExport" id="importForm" method="post" enctype="multipart/form-data">
+                <div class="form-group form-horizontal">
+                    <div class="form-inline">
+                        <input type="text" class="form-control" placeholder="最后更新时间" id="LastUpdateTime" name="LastUpdateTime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" />
+
+                        <input type="submit" class="btn btn-success btn-big" value="按更新时间批量导出" />
+
+                    </div>
+                </div>
+            </form>
         </fieldset>
         <fieldset>
             <legend>导入</legend>
             <form action="/PageDesigner/Import" id="importForm" method="post" enctype="multipart/form-data">
-                <input type="file" id="xmlFile" name="xmlFile" />
-                <input onclick="Import()" type="button" class="btn btn-danger btn-big" value="导入XML" />
+                <div class="form-group form-horizontal">
+                    <div class="form-inline">
+                        <input type="file" class="form-control" id="xmlFile" name="xmlFile" />
+                        <input type="submit" class="btn btn-danger btn-big" value="导入XML" />
+                        <input type="button" onclick="exportPage()" class="btn btn-success btn-big" value="导出当前配置" />
+                    </div>
+                </div>
             </form>
         </fieldset>
         <fieldset>
-            <legend>其它</legend>
+            <legend>另存副本</legend>
+            <div class="form-group form-horizontal">
+                <div class="form-inline">
+                    <input type="text" class="form-control" placeholder="副本ID" name="NewPageId" id="NewPageId" />
+                    <input type="text" class="form-control" placeholder="副本名称" name="NewPageTitle" id="NewPageTitle" />
+                </div>
+            </div>
+
             <button onclick="saveCopy()" class="btn btn-primary btn-big">另存副本</button>
+        </fieldset>
+        <fieldset>
+            <legend>其它</legend>
             <button onclick="addToFunction()" class="btn btn-primary btn-big">发布到功能管理</button>
             <button onclick="clearCache()" class="btn btn-primary btn-big">清除页面缓存</button>
         </fieldset>
         <div id="divToUpdate" style="visibility:hidden"></div>
     </div>
     <script>
-        @{ var page = ViewData["page"] as FoxOne.Business.PageEntity;
-
-              }
+        @{ var page = ViewData["page"] as FoxOne.Business.PageEntity;}
 
         var pageId = '@page.Id';
         var pageTitle = '@page.Title';
 
         function saveCopy() {
-            foxOne.dataService("/PageDesigner/Copy", { id: pageId }, function (res) {
+            var param = { id: pageId, newPageId: $("#NewPageId").val(), newPageTitle: $("#NewPageTitle").val() };
+            foxOne.dataService("/PageDesigner/Copy", param, function (res) {
                 if (res) {
                     alert("复制成功");
                 }
@@ -74,17 +96,18 @@
 
         function addToFunction() {
             var url = "/Page/PermissionEdit";
-            var param = { Type: 1, Name: pageTitle, Code: pageId, Url: '/Page/' + pageId };
+            var param = { Type: 1, Name: pageTitle, Code: pageId, Url: '/Page/' + pageId, Type: 'Page' };
             url = foxOne.buildUrl(url, param);
             $.modal({
+                title: '添加到功能管理',
                 url: url,
                 onClose: function (res) {
-                    if (res != 'false') {
-                        alert("添加成功！");
+                    if (res) {
+                        //alert("添加成功！");
                     }
                 },
-                width: 700,
-                height: 500,
+                width: 980,
+                height: 600,
                 overlayClose: true
             });
         }
@@ -101,9 +124,12 @@
         }
 
         function exportPage() {
-            window.open("/PageDesigner/ExportPage/"+pageId);
+            window.open("/PageDesigner/ExportPage/" + pageId);
         }
 
+        function batchExport() {
+            window.open("/PageDesigner/BatchExport/" + $("#LastUpdateTime").val());
+        }
     </script>
 </body>
 </html>

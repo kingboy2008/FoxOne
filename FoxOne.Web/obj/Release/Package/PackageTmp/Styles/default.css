@@ -60,71 +60,18 @@
         .ul-1 li.user a {
             color: #fff;
             line-height: 18px;
-            padding: 15px 23px 0 32px;
-            background: url(../images/default/icon-user.png) no-repeat 2px center;
+            padding-top: 10px;
             display: block;
             position: relative;
+            font-weight:bold;
         }
-
-            .ul-1 li.user a:hover {
-                background: url(../images/default/icon-user.png) no-repeat 2px center #006493;
-            }
 
             .ul-1 li.user a img {
                 margin: 0 5px 0 0;
+                border: 1px solid white;
+                padding: 1px;
             }
 
-            .ul-1 li.user a em {
-                position: absolute;
-                background: url(../images/default/icon-down.png) no-repeat;
-                width: 7px;
-                height: 6px;
-                display: block;
-                top: 23px;
-                right: 7px;
-            }
-
-        .ul-1 li.user .ul-2 {
-            display: none;
-            position: absolute;
-            top: 43px;
-            left: 10px;
-            width: 80px;
-            border: solid 1px #d7d8d8;
-            background: #fff;
-            padding-bottom: 2px;
-            padding-top: 2px;
-            z-index: 3;
-            -moz-box-shadow: 0 2px 5px 0px #c4c4c4; /* FF3.5+ */
-            -webkit-box-shadow: 0 2px 5px 0px #c4c4c4; /* Saf3.0+, Chrome */
-            box-shadow: 0 2px 5px 0px #c4c4c4; /* Opera 10.5, IE 9.0 */
-        }
-
-            .ul-1 li.user .ul-2 span {
-                position: absolute;
-                top: -13px;
-                left: 36px;
-            }
-
-            .ul-1 li.user .ul-2 a {
-                display: block;
-                text-align: center;
-                line-height: 30px;
-                color: #333;
-                background: none;
-                padding: 0;
-                height: auto;
-            }
-
-                .ul-1 li.user .ul-2 a:hover {
-                    background: #f3f3f4;
-                    text-decoration: none;
-                    color: #029ac9;
-                }
-
-.open > .dropdown-menu {
-    display: block !important;
-}
 /*头部结束*/
 
 /*导航开始*/
@@ -528,7 +475,6 @@
 
     .search > p, .search .contrl {
         display: inline-block;
-   
         margin-left: 15px;
     }
 
@@ -767,6 +713,7 @@ table.dataTable.cell-border tbody tr th, table.dataTable.cell-border tbody td {
     background-position: 8px center;
     padding-left: 27px;
 }
+
 .delete-button-w {
     background-image: url(../images/default/btn-del.png);
     background-repeat: no-repeat;
@@ -821,7 +768,7 @@ table.dataTable.cell-border tbody tr th, table.dataTable.cell-border tbody td {
 
 /*分页开始*/
 .data-pager {
-    float:right;
+    float: right;
     padding: 10px 0 10px 0;
 }
 

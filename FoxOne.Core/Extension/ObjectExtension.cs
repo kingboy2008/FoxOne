@@ -17,10 +17,22 @@ namespace FoxOne.Core
 
         public static object ConvertToType(this object value, Type type)
         {
+
             if (null == value || value is DBNull ||
                 (typeof(string) != type && (value is string) && string.IsNullOrEmpty((string)value)))
             {
                 return type.IsValueType ? Activator.CreateInstance(type) : null;
+            }
+            if(type==typeof(bool))
+            {
+                if(value.ToString()=="1")
+                {
+                    return true;
+                }
+                if(value.ToString()=="0")
+                {
+                    return false;
+                }
             }
             Type valueType = value.GetType();
             if (valueType == type || type.IsAssignableFrom(valueType))
@@ -65,7 +77,7 @@ namespace FoxOne.Core
         {
             if (value == null) return null;
             IDictionary<string, object> dictionary = null;
-            if (typeof(IDictionary<string,object>).IsAssignableFrom( value.GetType()))
+            if (typeof(IDictionary<string, object>).IsAssignableFrom(value.GetType()))
             {
                 dictionary = value as IDictionary<string, object>;
             }
@@ -81,10 +93,10 @@ namespace FoxOne.Core
             else
             {
                 dictionary = new FoxOneDictionary<string, object>(StringComparer.OrdinalIgnoreCase);
-                if(value is IExtProperty)
+                if (value is IExtProperty)
                 {
                     var prop = (value as IExtProperty).Properties;
-                    if(!prop.IsNullOrEmpty())
+                    if (!prop.IsNullOrEmpty())
                     {
                         dictionary.AddRange(prop);
                     }

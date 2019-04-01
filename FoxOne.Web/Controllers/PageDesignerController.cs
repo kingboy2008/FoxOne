@@ -13,6 +13,7 @@ using FoxOne.Data.Mapping;
 using System.IO;
 using System.Text;
 using System.Transactions;
+using System.Web;
 
 namespace FoxOne.Web.Controllers
 {
@@ -62,7 +63,7 @@ namespace FoxOne.Web.Controllers
             {
                 typeName = component.Type;
                 var tempCtrlType = TypeHelper.GetType(typeName);
-                if (tempCtrlType.IsSubclassOf(typeof(FormControlBase)))
+                if (tempCtrlType!=null && tempCtrlType.IsSubclassOf(typeof(FormControlBase)))
                 {
                     if (!component.JsonContent.IsNullOrEmpty())
                     {
@@ -137,12 +138,12 @@ namespace FoxOne.Web.Controllers
             return View(models.OrderByDescending(o => o.ComponentTypeName).ToList());
         }
 
-        public JsonResult Copy(string id)
+        public JsonResult Copy(string id, string newPageId, string newPageTitle)
         {
             var page = PageBuilder.BuildPage(id);
             var newPage = DBContext<PageEntity>.Instance.FirstOrDefault(o => o.Id.Equals(id, StringComparison.OrdinalIgnoreCase));
-            newPage.Id += "_Copy";
-            newPage.Title += "_副本";
+            newPage.Id = newPageId;
+            newPage.Title = newPageTitle;
             using (TransactionScope tran = new TransactionScope())
             {
                 DBContext<PageEntity>.Insert(newPage);
@@ -186,7 +187,7 @@ namespace FoxOne.Web.Controllers
             filter.DataFilters = new List<IDataFilter>();
             filter.DataFilters.Add(new StaticDataFilter() { ColumnName = "ParentId", Operator = typeof(EqualsOperation).FullName, Value = "$QueryString._PARENT_ID$" });
             filter.DataFilters.Add(new StaticDataFilter() { ColumnName = "PageId", Operator = typeof(EqualsOperation).FullName, Value = "$QueryString._PAGE_ID" });
-            if(Request.QueryString.AllKeys.Contains("_TARGET_ID"))
+            if (Request.QueryString.AllKeys.Contains("_TARGET_ID"))
             {
                 filter.DataFilters.Add(new StaticDataFilter() { ColumnName = "TargetId", Operator = typeof(EqualsOperation).FullName, Value = "$QueryString._TARGET_ID" });
             }
@@ -199,14 +200,14 @@ namespace FoxOne.Web.Controllers
             return View();
         }
 
-        public class ControlNameConverter:ColumnConverterBase
+        public class ControlNameConverter : ColumnConverterBase
         {
             public override object Converter(object value)
             {
-                if(value!=null)
+                if (value != null)
                 {
                     string temp = value.ToString();
-                    if(temp.IsNotNullOrEmpty())
+                    if (temp.IsNotNullOrEmpty())
                     {
                         temp = temp.Substring(temp.LastIndexOf('.') + 1);
                         return temp;
@@ -250,6 +251,7 @@ namespace FoxOne.Web.Controllers
             ViewData["Type"] = type;
 
             var service = new List<SelectListItem>();
+            service.Add(new SelectListItem() { Text = "请选择", Value = "" });
             foreach (var item in TypeHelper.GetAllImpl<IPageService>())
             {
                 service.Add(new SelectListItem() { Text = item.FullName, Value = item.FullName, Selected = item.FullName.Equals(model.Service) });
@@ -472,16 +474,74 @@ namespace FoxOne.Web.Controllers
             return View();
         }
 
-        public ContentResult ExportPage(string id)
+        [ValidateInput(false)]
+        public FileResult BatchExport(string LastUpdateTime)
+        {
+            List<PageEntity> pageEntities = null;
+            if (LastUpdateTime.IsNullOrEmpty())
+            {
+                pageEntities = DBContext<PageEntity>.Instance.Select(o => PageBuilder.BuildPageEntity(o.Id)).ToList();
+            }
+            else
+            {
+                DateTime lastUpdateTime = LastUpdateTime.ConvertTo<DateTime>();
+                pageEntities = DBContext<PageEntity>.Instance.Where(o => o.LastUpdateTime > lastUpdateTime).Select(o => PageBuilder.BuildPageEntity(o.Id)).ToList();
+            }
+            string contentType = "text/xml";
+            using (MemoryStream ms = new MemoryStream())
+            {
+                System.Xml.Serialization.XmlSerializer serializer = new System.Xml.Serialization.XmlSerializer(typeof(List<PageEntity>));
+                string fileName = "{0}.xml".FormatTo(DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss"));
+                fileName = HttpUtility.UrlEncode(fileName, Encoding.UTF8);
+                serializer.Serialize(ms, pageEntities);
+                return File(ms.GetBuffer(), contentType, fileName);
+            }
+        }
+
+        [ValidateInput(false)]
+        public FileResult ExportPage(string id)
         {
             var page = PageBuilder.BuildPageEntity(id);
-            System.Xml.Serialization.XmlSerializer serializer = new System.Xml.Serialization.XmlSerializer(typeof(PageEntity));
-            var fileStream = new MemoryStream();
-            using (var writer = new StringWriter())
+            string contentType = "text/xml";
+            using (MemoryStream ms = new MemoryStream())
             {
-                serializer.Serialize(writer, page);
-                Response.AddHeader("Content-Disposition", string.Format("attachment;filename={0}", page.Title + ".xml"));
-                return Content(writer.ToString(), "text/xml");
+                System.Xml.Serialization.XmlSerializer serializer = new System.Xml.Serialization.XmlSerializer(typeof(List<PageEntity>));
+                string fileName = "{0}-{1}.xml".FormatTo(page.Title, DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss"));
+                fileName = HttpUtility.UrlEncode(fileName, Encoding.UTF8);
+                serializer.Serialize(ms, new List<PageEntity>() { page });
+                return File(ms.GetBuffer(), contentType, fileName);
+            }
+        }
+
+        public JsonResult Import()
+        {
+            if (Request.Files.Count > 0)
+            {
+                if (Request.Files[0].InputStream.Length > 0)
+                {
+                    var serializer = new System.Xml.Serialization.XmlSerializer(typeof(List<PageEntity>));
+                    var pages = serializer.Deserialize(Request.Files[0].InputStream) as List<PageEntity>;
+                    InnerImportPages(pages);
+                    return Json(true);
+                }
+            }
+            return Json(false);
+        }
+
+        private void InnerImportPages(List<PageEntity> pages)
+        {
+            foreach (var page in pages)
+            {
+                if (DBContext<PageEntity>.Get(page.Id) != null)
+                {
+                    DBContext<PageEntity>.Delete(page.Id);
+                }
+                foreach (var item in page.Components)
+                {
+                    DBContext<ComponentEntity>.Insert(item);
+                }
+                
+                DBContext<PageEntity>.Insert(page);
             }
         }
 
@@ -529,6 +589,13 @@ namespace FoxOne.Web.Controllers
                     }
                     typeName = type.FullName;
                     model.Tab = ComponentHelper.GetTabComponent(instance, ctrlId, pageId);
+                }
+                else
+                {
+                    if(TypeHelper.GetType(typeName).IsAbstract)
+                    {
+                        typeName = component.Type;
+                    }
                 }
             }
             if (typeName.IsNullOrEmpty())

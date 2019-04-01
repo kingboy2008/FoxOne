@@ -1,188 +1,344 @@
-﻿@{Layout = null;}
+﻿@model FoxOne.Web.WorkflowDetailVO
+@{Layout = null; }
 @using FoxOne.Business
 @using FoxOne.Controls
+@using FoxOne.Core
+@using System.Linq
 <!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewData["Title"]</title>
+    <title>@Model.Title</title>
     @System.Web.Optimization.Styles.Render("~/style/common.css")
     <link href="~/Scripts/xheditor/xheditor_skin/default/ui.css" rel="stylesheet" />
-    <style>
-        h1 {
-            font-size: 14px;
-            font-weight: bold;
-            padding: 10px;
-            background-color: #f6f8f9;
-            border-bottom: 1px solid #dcdcdc;
-        }
-
-        .user-select {
-            width: 700px;
-            background-color: white;
-            padding: 15px;
-            display: none;
-        }
-
-        .user-select-table td {
-            vertical-align: top;
-            border: 1px solid #DCDCDC;
-            color: black;
-            font-weight: bold;
-            font-size: 14px;
-            padding: 6px;
-        }
-
-        .user-select-td-bg {
-            background-color: #F6F8F9;
-        }
-
-        .step-list-td {
-            width: 50%;
-        }
-
-        .step-list {
-            overflow-y: auto;
-            height: 250px;
-            font-size: 14px;
-        }
-
-            .step-list p {
-                margin-top: 5px;
-            }
-
-        .tree-list-td {
-            width: 50%;
-        }
-
-        .selected-list {
-            width: 100%;
-            height: 145px;
-            margin-top: 5px;
-        }
-
-        .form-horizontal textarea.xh-editor {
-            width: 747px;
-            height: 200px;
-        }
-    </style>
+    <link href="~/Styles/workflowold.css" rel="stylesheet" />
 </head>
 <body class="easyui-layout">
-    <h1>@ViewData["Title"]</h1>
-    <div widget="Tab" initindex="0">
-        <div class="tab-box">
-            <span class="tab-item" key="formInfo">表单信息</span>
-            @foreach (var item in (ViewData["Tab"] as IList<PageRelateEntity>))
-            {
-                <span class="tab-item" key="@item.Id">@item.TabName</span>
-            }
-            <span class="tab-item" key="approvalInfo">审批信息</span>
-            <span class="tab-item" key="noticeInfo">知会信息</span>
-            <span class="tab-item" key="flowImage">流程图</span>
-            <span style="color:red;">保存后才能上传附件</span>
-        </div>
-        @foreach (var item in (ViewData["Tab"] as IList<PageRelateEntity>))
+
+    <div class="left" id="wfToolbar">
+        @foreach (var item in Model.ToolbarButtons.OrderBy(o => o))
         {
-            <div tabitem="@item.Id" src1="@item.RelateUrl">
-                <iframe class="autoHeightFrame" src="" width="100%" scrolling="auto" frameborder="0" allowtransparency="true"></iframe>
+            <button class="btn btn-default" id="@item.ToString().ToLower()">
+                <em class="icon-@item.ToString().ToLower()"></em>@item.GetDescription()
+            </button>
+        }
+        <button class="btn btn-warning" id="FlowImage">
+            <em class="icon-flag"></em>流程图
+        </button>
+    </div>
+
+    <div class="right main-container">
+        <h1>
+            <img src="~/images/word.png" style="width:30px;padding:5px;" />
+            @Model.Title
+        </h1>
+        <div class="main-content">
+            <div class="area">
+                <h2><img src="~/images/form.png" style="height:24px;width:18px;margin-right:6px;" />表单信息</h2>
+                <div class="form-number">
+                    审批单据号：@Model.InstanceId
+                </div>
+                @Html.CustomControl(Model.Form)
             </div>
-        }
-        <div tabitem="formInfo">
-
-            @foreach (IComponent item in (ViewData["Form"] as IList<IComponent>))
+            @if (!Model.RelatePage.IsNullOrEmpty())
             {
-                @Html.CustomControl(item)
+                foreach (var rp in Model.RelatePage)
+                {
+                    <div class="area">
+                        <h2><img src="~/images/form.png" style="height:24px;width:18px;margin-right:6px;" />@rp.Title</h2>
+                        @foreach (var c in rp.Children.OrderBy(o => o.Rank))
+                        {
+                            @Html.CustomControl(c)
+                        }
+                    </div>
+                }
+
+                <script>
+                    @foreach(var p in Model.RelatePage)
+                    {
+                        @p.ScriptBlock
+                    }
+                </script>
+            }
+            @if (Model.ShowAttachment || Model.CanUploadFile)
+            {
+                <div class="area">
+                    <h2><img src="~/images/attachment.png" style="height:24px;width:15px;" /> 附件信息</h2>
+                    @if (Model.CanUploadFile)
+                    {
+                        <div class="upload-container">
+                            <form id="uploadForm" action="/Attachment/Upload" method="post" enctype="multipart/form-data">
+                                <input type="file" name="file" id="file" />
+                                <input type="hidden" name="relateId" id="relateId" value="@Model.Form.Key" />
+                                <button id="uploadFile" class="btn btn-success">
+                                    <em class="icon-upload"></em>
+                                    上传附件
+                                </button>
+                            </form>
+                        </div>
+                    }
+                    <div class="attachment-info">
+                        @if (Model.ShowAttachment)
+                        {
+                            foreach (var item in Model.Attachment)
+                            {
+                            <p class="attachment-item">
+                                <a target="_blank" href="/Attachment/Download/@item.FileId">
+                                    <img src="~/images/FileIcon/@item.Icon" />
+                                </a>
+                                <span class="attachment-label">
+                                @if (item.IsLocalResource)
+                                {
+                                    <a class="atta-download" title="@item.FileName" target="_blank" href="/Attachment/Download/@item.FileId">@item.FileName.Substring(16, "...")</a>
+                                }
+                                else
+                                {
+                                    if (SysConfig.IsProductEnv)
+                                    {
+                                        <a class="atta-download" title="@item.FileName" target="_blank" href="~/@item.FileId">@item.FileName.Substring(16, "...")</a>
+                                    }
+                                    else
+                                    {
+                                        <a class="atta-download" title="@item.FileName" target="_blank" href="http://oa.3weijia.com/@item.FileId">@item.FileName.Substring(16, "...")</a>
+                                    }
+                                }
+                                    </span><br />
+                                <span class="attachment-user-label">@item.CreatorName</span>
+                                @if (item.CanDelete)
+                                {
+                                    <a class="atta-del" href1="/Attachment/Delete/@item.FileId">删除</a>
+                                }
+                                <br />
+                                <span class="attachment-user-label">@item.FileSize</span>
+                            </p>
+                            }
+                        }
+                    </div>
+                </div>
+            }
+
+            @if (Model.ShowWorkItem)
+            {
+                <div class="area">
+                    <h2><img src="~/images/flow.png" style="height:20px;width:20px;margin-right:4px;" />审批信息</h2>
+                    @if (Model.ShowOpinionInput)
+                    {
+                        <p class="opinion-content">
+                            <textarea class="form-control" placeholder="输入您的审批意见" id="opinionContent" style="width:90%;height:100px;margin:auto;"></textarea>
+                        </p>
+                        <p class="opinion-content">
+                            <label>快捷意见输入：</label>
+                            <a onclick="$('#opinionContent').val('同意')">同意</a>
+                            <a onclick="$('#opinionContent').val('不同意')">不同意</a>
+                            <a onclick="$('#opinionContent').val('已办理')">已办理</a>
+                            <a onclick="$('#opinionContent').val('已阅')">已阅</a>
+                        </p>
+                    }
+                    @foreach (var item in Model.WorkItem)
+                    {
+                        <div class="work-item">
+                            <div class="work-item-left">
+                                <p><img src="@item.Avatar" /></p>
+                            </div>
+                            <div class="work-item-right">
+                                <p class="cap"><span class="name">@item.ActivityName - @item.Creator</span><span class="time">@item.ShowTime</span></p>
+
+                                <p class="opinion">
+                                    @item.Opinion
+                                </p>
+                            </div>
+                            <div class="work-item-status @item.Status.ToLower()">
+                                @item.StatusText
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+
+            @if (!Model.NoticeItem.IsNullOrEmpty())
+            {
+                <div class="area">
+                    <h2><img src="~/images/user.png" style="height:20px;width:25px;margin-right:4px;" />已知会人员</h2>
+                    @foreach (var item in Model.NoticeItem)
+                    {
+                        <div class="notice-item">
+                            <p>
+                                <img src="@item.Avatar" />
+                            </p>
+                            <p>
+                                @item.Creator
+                            </p>
+                            <p class="status @item.Status.ToLower()">（@item.StatusText）</p>
+                        </div>
+                    }
+                </div>
             }
         </div>
-        <div tabitem="approvalInfo">
-            @Html.CustomControl((ViewData["Table"] as Table))
-        </div>
-        <div tabitem="noticeInfo">
-            @Html.CustomControl((ViewData["NoticeTable"] as Table))
-        </div>
-        <div tabitem="flowImage" src1="/WorkflowDesigner/FlowImage/@ViewData["DefinitionId"].ToString()">
-            <iframe class="autoHeightFrame" src="" width="100%" scrolling="auto" frameborder="0" allowtransparency="true"></iframe>
-        </div>
     </div>
-    <div class="toolbar" id="wfToolbar" style="position:fixed;bottom:0;left:0;width:100%;padding:20px;border-top:1px solid #dcdcdc;">
-        <p style="margin-bottom:10px;">
-            <textarea class="form-control" placeholder="输入您的审批意见" id="opinionContent" style="width:500px;height:50px;"></textarea>
 
-        </p>
-        @*<input class="btn btn-success" id="btnSaveAndSend" type="button" value="保存并发送" />*@
-        <input class="btn btn-success" id="btnSend" type="button" value="发送" />
-        <input class="btn btn-primary" id="btnSave" type="button" value="保存" />
-        @if ((bool)ViewData["CanDelete"])
-        {
-            <input class="btn btn-danger" id="btnDelete" type="button" value="删除" />
-        }
-        <input class="btn btn-danger" id="btnPushback" type="button" value="退回上一步" />
-        <input class="btn btn-default" id="btnBackToRoot" type="button" value="退回拟稿人" />
-        @*<input class="btn btn-default" id="btnFoceEnd" type="button" value="强制结束" />*@
-        <input class="btn btn-default" id="btnSendOtherToRead" type="button" value="传阅" />
-    </div>
+
+    @*<div class="user-select" style="display:none;">
+            <h2>
+                <img src="~/images/nextstep.png" style="width:40px;height:40px;margin-right:10px;" />
+                选择后续步骤及相关参与者
+            </h2>
+            <div class="user-select-button">
+                <button id="btnOK" class="btn btn-success">
+                    <em class="icon-send"></em>
+                    确定
+                </button>
+                <button id="btnCancel" class="btn btn-warning">
+                    <em class="icon-delete"></em>
+                    取消
+                </button>
+            </div>
+            <div class="step-list" id="stepListDiv">
+            </div>
+        </div>
+
+        <div id="stepTemplate" style="display:none;">
+            <div class="step-item {Selected}" needuser="{NeedUser}" allowSelect="{AllowSelect}" alias="{Label}" step="{StepName}" singleSelect="{OnlySingleSel}" autoSelectAll="{AutoSelectAll}">
+                <h3>
+                    <img src="~/images/{Icon}.png" />
+                    {Label}
+                </h3>
+                <p>
+                    {LabelDescription}
+                </p>
+                <div class="user-list">
+                    {UserItem}
+                </div>
+            </div>
+        </div>
+
+        <div id="userItemTemplate" style="display:none;">
+            <div class="user-item" userid="{ID}" deptid="{OrgId}" name="{Name}">
+                <img src="{Avatar}" />
+                <p class="user-name">{Name}</p>
+            </div>
+        </div>*@
+
     @System.Web.Optimization.Scripts.Render("~/script/common.js")
     @System.Web.Optimization.Scripts.Render("~/script/widget.js")
     <script src="~/Scripts/xheditor/xheditor-1.2.2.min.js"></script>
     <script src="~/Scripts/xheditor/xheditor_lang/zh-cn.js"></script>
-    <script src="~/Scripts/WorkflowUserSelect.js"></script>
+    <script src="~/Scripts/WorkflowUserSelect.js?ver=18_01_08"></script>
     <script type="text/javascript">
         var isSaveAndSend = false;
+        foxOne.workflow.runParameter.InstanceId = '@Model.InstanceId';
+        foxOne.workflow.runParameter.ItemId = @Model.ItemId;
+        foxOne.workflow.runParameter.IsSimulate = '@Model.IsSimulate';
         function autoSize() {
-            var height = $(window).height() - $("#wfToolbar").height() - 130;
-            $("[tabitem],.autoHeightFrame").css("height", height).css("overflow-y", "auto");
+            var height = Math.min($(document).height(), $(window).height());
+            $(".right").css("height", height)
+            $(".main-content").css("height", height - $(".right>h1").outerHeight());
         }
 
         $(function () {
+            $("#send,#save").removeClass("btn-default").addClass("btn-success");
             autoSize();
+            $(window).resize(autoSize);
             $("[TextEditor]").xheditor({
                 upImgUrl: "/Default/FileUpload",
                 upImgExt: "jpg,jpeg,gif,png,bmp",
                 tools: 'simple'
             });
-            $(window).on("size", autoSize);
+
+            $("input[disabled],select[disabled],textarea[disabled]").each(function () {
+                var el = $(this);
+                if (el.attr("type") == "hidden") {
+                    return;
+                }
+                var val = el.val();
+                if (val != '' && el.is("select")) {
+                    val = el.find("option[selected]").text();
+                }
+                val = val == "" ? "<span style='color:#aaa;font-style:italic;'>（空）</span>" : val;
+                var large = el.is('textarea') ? "style='width:730px;'" : "";
+                $("<span class='form-control' " + large + ">" + val + "</span>").appendTo(el.parent());
+                el.hide();
+            });
+
+            $("#uploadFile").bind("click", function () {
+                if ($("#file").val() == "") {
+                    foxOne.alert("请选择要上传的文件！");
+                }
+                else {
+                    $("#uploadForm").ajaxSubmit({
+                        type: 'post',
+                        success: function (response) {
+                            window.location.href = window.location.href;
+                        },
+                        error: function (xhr, text, error) {
+                            foxOne.alert(xhr.responseText);
+                        }
+                    });
+                }
+                return false;
+            });
+
+            $(".atta-del").bind("click", function () {
+                if (confirm("您确定删除该附件吗？")) {
+                    $.post($(this).attr("href1"), {}, function () {
+                        window.location.href = window.location.href;
+                    });
+                }
+            }).css("cursor", "pointer");
+
             $("body").on("click", "#wfToolbar", function (e) {
                 var btn = $(e.target);
-                if (!btn.is("input")) return;
-                var id = btn.attr("id").substr(3);
+                if (!btn.is("button")) return;
+                var id = btn.attr("id").toLowerCase();
                 var flowEvent = $.Event("before" + id);
-                foxOne.workflow.runParameter.OpinionContent = $("#opinionContent").val();
                 switch (id) {
-                    case "Save":
+                    case "flowimage":
+                        $.modal({
+                            title: '流程流转示意图',
+                            width: 1020,
+                            height: 650,
+                            url: '/WorkflowDesigner/FlowImage/@Model.DefinitionId',
+                            overlayClose: true,
+                            onClose: function (res) { }
+                        });
+                        break;
+                    case "save":
                         $("[defaultForm]").submit();
                         break;
-                    case "SaveAndSend":
+                    case "saveandsend":
                         isSaveAndSend = true;
                         $("[defaultForm]").submit();
-                        break;
-                    case "SendOtherToRead":
-                        if (foxOne.workflow.runParameter.InstanceId == '') {
-                            foxOne.alert("请先保存表单！");
-                            return;
-                        }
-                        $.modal({
-                            url: '/Page/UserSelector_Copy_Copy', width: 980, height: 600, overlayClose: false, onClose: function (res) {
-                                if (res.length > 0) {
-                                    foxOne.dataService('/Workflow/CC', { InstanceId: parameter.InstanceId, UserIds: res.join(',') }, function (r) {
-                                        if (r) {
-                                            foxOne.alert("传阅成功！");
-                                        }
-                                    }, "post", true);
-                                }
-                            }
-                        });
                         break;
                     default:
                         if (foxOne.workflow.runParameter.InstanceId == '') {
                             foxOne.alert("请先保存表单！");
                         }
                         else {
-                            if (id == "Send") {
-                                foxOne.workflow.getNextStep();
+                            if(id=="sendothertoread")
+                            {
+                                $.modal({
+                                    url: '/Page/UserSelector_Copy_Copy', width: 980, height: 600, overlayClose: false, onClose: function (res) {
+                                        if (res.length > 0) {
+                                            foxOne.dataService('/Workflow/CC', { InstanceId: foxOne.workflow.runParameter.InstanceId, UserIds: res.join(',') }, function (r) {
+                                                if (r) {
+                                                    foxOne.alert("传阅成功！");
+                                                }
+                                            }, "post", true);
+                                        }
+                                    }
+                                });
+                                return;
+                            }
+                            foxOne.workflow.runParameter.OpinionContent = $("#opinionContent").val();
+                            if (id == "send") {
+                                isSaveAndSend = true;
+                                $("[defaultForm]").submit();
                             }
                             else {
+                                if (!confirm("您确定吗？")) {
+                                    return;
+                                }
                                 foxOne.workflow.exec(id);
                             }
                         }
@@ -190,29 +346,42 @@
                 }
             });
             $("[defaultForm]").bind("form.afterSubmit", function (e) {
-                foxOne.alert("保存成功");
                 var result = e.d;
                 if (result.Insert) {
+                    foxOne.workflow.runParameter.InstanceId = result.InstanceId;
+                    foxOne.workflow.runParameter.ItemId = result.ItemId;
                     window.location.href = "/Workflow/Index?InstanceId=" + result.InstanceId + "&ItemId=" + result.ItemId;
                 }
                 else {
-                    foxOne.workflow.runParameter.InstanceId = result.InstanceId;
-                    foxOne.workflow.runParameter.ItemId = result.ItemId;
                     if (isSaveAndSend) {
-                        foxOne.workflow.runParameter.OpinionContent = $("#opinionContent").val();
                         foxOne.workflow.getNextStep();
                     }
                 }
-            }).bind("form.validateError", function (ee) {
-                foxOne.alert(ee.errorInfo);
             });
-            var parameter = foxOne.getQueryString();
-            if (parameter.hasOwnProperty("InstanceId")) {
-                foxOne.workflow.runParameter.InstanceId = parameter.InstanceId;
-                foxOne.workflow.runParameter.ItemId = parameter.ItemId;
-                foxOne.workflow.runParameter.IsSimulate = parameter.hasOwnProperty("IsSimulate") ? parameter.IsSimulate : '0';
+
+            $(document).on("onBeforeRefresh", "div[widget='Table']", function (e) {
+                window.location.reload();
+                e.Data = {};
+                e.Data.isCancel = true;
+            });
+
+
+            @if(!Model.RelatePage.IsNullOrEmpty())
+            {
+                foreach(var p in Model.RelatePage)
+                {
+                    @p.StartUpScript
+                }
             }
         });
+
+        @if(!Model.RelatePage.IsNullOrEmpty())
+            {
+                    foreach(var p in Model.RelatePage)
+                    {
+                        @p.ScriptBlock
+                    }
+            }
     </script>
 </body>
 </html>

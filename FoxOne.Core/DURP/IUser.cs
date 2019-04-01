@@ -22,7 +22,7 @@ namespace FoxOne.Core
 
         IDepartment Department { get; }
 
-        IEnumerable<IRole> Roles { get;  }
+        IEnumerable<IRole> Roles { get; }
 
         string MobilePhone { get; set; }
 
@@ -35,5 +35,11 @@ namespace FoxOne.Core
         DateTime Birthdate { get; set; }
 
         string Sex { get; set; }
+
+        string Avatar { get; set; }
+
+        string WorkNumber { get; set; }
+
+        int Salary { get; set; } 
     }
 }

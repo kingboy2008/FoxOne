@@ -1,0 +1,238 @@
+﻿@model FoxOne.Web.Controllers.IndexViewModel
+@{
+    Layout = null;
+}
+@using FoxOne.Business
+@using FoxOne.Controls
+@using FoxOne.Core
+@using System.Linq
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv=Content-Type content="text/html;charset=utf-8">
+    <meta charset="gbk">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection" />
+    <meta content="yes" name="apple-touch-fullscreen" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>OA</title>
+    <!--dd_nav_bgcolor-->
+    <link href="~/Mobile/css/style.css" rel="stylesheet" />
+    <link href="~/DDStatic/css/reset.css" rel="stylesheet" />
+    <link href="~/DDStatic/css/task.css" rel="stylesheet" />
+
+</head>
+<body>
+    @*<div class="page_hd">
+            <a href="javascript:;" class="back"><i class="iconfont back_i">&#xe76e;</i></a>
+            <span class="title">OA</span>
+            <span><a href="javascript:;" class="name">@FoxOne.Business.Security.Sec.User.Name</a></span>
+        </div>*@
+    <div class="page_bd">
+        <h3 class="bd_h3">待办事项</h3>
+        <div class="contents">
+            <a href="javascript:;" class="contents_icon" link="ToDoList">
+                <div class="content_icon bg_orange">
+                    <i class="iconfont" count="@Model.ToDoCount">&#xe650;</i>
+                    <span class="sign">@Model.ToDoCount</span>
+                </div>
+                <p class="content_label">待办事项</p>
+            </a>
+            <a href="javascript:;" class="contents_icon" link="ReadList">
+                <div class="content_icon bg_blue">
+                    <i class="iconfont" count="@Model.ReadCount">&#xe638;</i>
+                    <span class="sign">@Model.ReadCount</span>
+                </div>
+                <p class="content_label">知会事项</p>
+            </a>
+            <a href="javascript:;" class="contents_icon" link="DoneList">
+                <div class="content_icon bg_green">
+                    <i class="iconfont" count="0">&#xe656;</i>
+                    <span class="sign">0</span>
+                </div>
+                <p class="content_label">已办事项</p>
+            </a>
+            @*<a href="javascript:;" class="contents_icon" link="http://oa.3weijia.com/home/GoToMobileMail">
+                <div class="content_icon bg_red">
+                    <i class="iconfont" count="@Model.MailCount">&#xe600;</i>
+                    <span class="sign">@Model.MailCount</span>
+                </div>
+                <p class="content_label">邮件</p>
+            </a>
+            @*<a href="javascript:;" class="contents_icon" link="NoticeList">
+                <div class="content_icon bg_blue">
+                    <i class="iconfont" count="@Model.NoticeCount">&#xe60d;</i>
+                    <span class="sign">@Model.NoticeCount</span>
+                </div>
+                <p class="content_label">通知公告</p>
+            </a>*@
+        </div>
+    </div>
+    <div class="page_bd">
+        <h3 class="bd_h3">发起审批</h3>
+        <div class="contents">
+            <a href="javascript:;" class="contents_icon" appId="12">
+                <div class="content_icon bg_blue">
+                    <i class="iconfont">&#xe628;</i>
+                </div>
+                <p class="content_label">出差申请</p>
+            </a>
+            <a href="javascript:;" class="contents_icon" appId="2">
+                <div class="content_icon bg_green">
+                    <i class="iconfont">&#xe607;</i>
+                </div>
+                <p class="content_label">请假申请</p>
+            </a>
+            <a href="javascript:;" class="contents_icon" appId="4">
+                <div class="content_icon  bg_orange">
+                    <i class="iconfont">&#xe61a;</i>
+                </div>
+                <p class="content_label">用车申请</p>
+            </a>
+            <a href="javascript:;" class="contents_icon" appId="5">
+                <div class="content_icon bg_orange">
+                    <i class="iconfont">&#xe93f;</i>
+                </div>
+                <p class="content_label">用章申请</p>
+            </a>
+            <a href="javascript:;" class="contents_icon" appId="7">
+                <div class="content_icon bg_orange">
+                    <i class="iconfont">&#xe666;</i>
+                </div>
+                <p class="content_label">加班申请</p>
+            </a>
+            <a href="javascript:;" class="contents_icon" appId="8">
+                <div class="content_icon bg_green">
+                    <i class="iconfont">&#xe64e;</i>
+                </div>
+                <p class="content_label">调休申请</p>
+            </a>
+            <a href="javascript:;" class="contents_icon" appId="10">
+                <div class="content_icon bg_blue">
+                    <i class="iconfont">&#xe612;</i>
+                </div>
+                <p class="content_label">考勤补登</p>
+            </a>
+            <a href="javascript:;" class="contents_icon" appId="13">
+                <div class="content_icon bg_blue">
+                    <i class="iconfont">&#xe6d5;</i>
+                </div>
+                <p class="content_label">证件借用</p>
+            </a>
+            <a href="javascript:;" class="contents_icon" appId="40">
+                <div class="content_icon bg_red">
+                    <i class="iconfont">&#xe60c;</i>
+                </div>
+                <p class="content_label">物品领用</p>
+            </a>
+        </div>
+    </div>
+    <div class="page_bd">
+        <h3 class="bd_h3">常用功能</h3>
+        <div class="contents">
+            <a href="javascript:;" class="contents_icon" link="MeetingRoomBookPerView">
+                <div class="content_icon bg_blue">
+                    <i class="iconfont">&#xe738;</i>
+                </div>
+                <p class="content_label">订会议室</p>
+            </a>
+            @*<a href="javascript:;" class="contents_icon" link="PartyIndex">
+                <div class="content_icon bg_red">
+                    <i class="iconfont">&#xe657;</i>
+                </div>
+                <p class="content_label">年会</p>
+            </a>
+            <a href="javascript:;" class="contents_icon" link="WikiAreaList">
+                <div class="content_icon bg_blue">
+                    <i class="iconfont">&#xe69a;</i>
+                </div>
+                <p class="content_label">知识库</p>
+            </a>*@
+        </div>
+    </div>
+
+    <script src="~/Scripts/zepto.min.js"></script>
+    <script type="text/javascript" src="https://g.alicdn.com/dingding/open-develop/1.6.9/dingtalk.js"></script>
+    <script src="~/DDStatic/js/fastclick.js"></script>
+    <script src="~/DDStatic/js/index.js"></script>
+    <script>
+        var logger = { i: function (info) { }, e: function (err) { dd.device.notification.alert({ message: err, title: '异常提示', buttonName: '关闭' }) } };
+
+        //dd.config({
+        //    agentId: _config.agentId,
+        //    corpId: _config.corpId,
+        //    timeStamp: _config.timeStamp,
+        //    nonceStr: _config.nonceStr,
+        //    signature: _config.signature,
+        //    jsApiList: ['runtime.info', 'biz.contact.choose',
+        //        'device.notification.confirm', 'device.notification.alert',
+        //        'device.notification.prompt', 'biz.ding.post', 'biz.util.scanCard',
+        //        'biz.util.openLink']
+        //});
+
+        dd.ready(function () {
+
+            dd.biz.navigation.setTitle({
+                title: "OA",
+                onSuccess: function (data) {
+                },
+                onFail: function (err) {
+                    logger.e(JSON.stringify(err));
+                }
+            });
+            dd.biz.navigation.setRight({
+                text: "@FoxOne.Business.Security.Sec.User.Name",
+                onSuccess: function (data) {
+                },
+                onFail: function (err) {
+                    logger.e(JSON.stringify(err));
+                }
+            });
+
+            Page.defaultBackEvent();
+            
+
+            //绑定每个任务的点击事件，事件采用代理的方式
+            $(document).on('click', '.contents_icon', function () {
+                var _this = $(this);
+                if (_this.attr("appId") &&_this.attr("appId") != "") {
+                    goFlow(_this.attr("appId"));
+                }
+                else {
+                    goLink(_this.attr("link"));
+                }
+            });
+
+            $("i.iconfont[count='0']").parent().find("span").remove();
+
+            window.onpageshow = function () {
+                location.reload();
+            };
+        });
+
+        dd.error(function (err) {
+            logger.e('dd error: ' + JSON.stringify(err));
+        });
+
+        var defaultURL = "http://www.foxone.cc/Mobile/";
+        function goLink(link) {
+            if (link.indexOf("http://") != -1) {
+                Page.go2URL(link);
+            }
+            else {
+                //Page.go2URL(Util.getTargetUrl('Index', link));
+                Page.go2URL(defaultURL + link);
+            }
+        }
+
+        function goFlow(appId) {
+            //Page.go2URL(Util.getTargetUrl('Index', 'StartWorkflow?id =' + appId));
+            Page.go2URL(defaultURL + 'StartWorkflow?ApplicationId=' + appId);
+        }
+    </script>
+</body>
+</html>

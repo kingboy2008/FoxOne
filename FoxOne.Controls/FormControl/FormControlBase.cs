@@ -17,7 +17,10 @@ namespace FoxOne.Controls
             Enable = true;
             Visiable = true;
             CanModity = true;
-            _tagBuilder = new TagBuilder(TagName);
+            if (TagName.IsNotNullOrEmpty())
+            {
+                _tagBuilder = new TagBuilder(TagName);
+            }
             CssClass = "form-control";
         }
 
@@ -25,6 +28,16 @@ namespace FoxOne.Controls
         {
             get;
         }
+
+        [FormField(Editable = false)]
+        public IDictionary<string, object> FormData
+        {
+            get;
+            set;
+        }
+
+        [DisplayName("宽度")]
+        public string Width { get; set; }
 
         public string Name
         {
@@ -54,7 +67,7 @@ namespace FoxOne.Controls
         [DisplayName("是否跨行")]
         public bool EditColSpan { get; set; }
 
-        [FormField(Editable =false)]
+        [FormField(Editable = false)]
         public bool CanModity { get; set; }
 
         [DisplayName("标签")]
@@ -121,6 +134,35 @@ namespace FoxOne.Controls
             return string.Empty;
         }
 
+        public virtual string RenderMobile()
+        {
+            if (Enable)
+            {
+                return $"<div class=\"weui-cell {MobileControlName}\"><div class=\"weui-cell__hd\"><label class=\"weui-label\">{Label}：</label></div><div class=\"weui-cell__bd\"><input id='{Id}' name='{Name}' type='text' value='{MobileValue}' /></div></div>";
+            }
+            else
+            {
+                //return $"<div class=\"weui-cell {MobileControlName}\"><div class=\"weui-cell__hd\"><label class=\"weui-label\">{Label}：</label></div><div class=\"weui-cell__bd\"><input id='{Id}' name='{Name}' type='text' readonly='readonly' value='{MobileValue}' /></div></div>";
+                return $"<div class=\"weui-cell {MobileControlName}\"><div class=\"weui-cell__hd\"><label class=\"weui-label\">{Label}：</label></div><div class=\"weui-cell__bd\"><span>{MobileValue}</span></div></div>";
+            }
+        }
+
+        public virtual string MobileValue
+        {
+            get
+            {
+                return Value;
+            }
+        }
+
+        public virtual string MobileControlName
+        {
+            get
+            {
+                return string.Empty;
+            }
+        }
+
         protected virtual bool SelfClosing
         {
             get
@@ -142,7 +184,7 @@ namespace FoxOne.Controls
         internal virtual void AddAttributes()
         {
             Attributes["id"] = Id;
-            Attributes["name"] = Name;
+            Attributes["name"] = Name.IsNullOrEmpty() ? Id : Name;
             if (!Enable)
             {
                 Attributes["disabled"] = "disabled";
@@ -155,6 +197,17 @@ namespace FoxOne.Controls
             {
                 Attributes["validator"] = Validator;
                 Attributes["validatorFieldLabel"] = Label;
+            }
+            if (Description.IsNotNullOrEmpty())
+            {
+                Attributes["placeholder"] = Description;
+            }
+            if (Width.IsNotNullOrEmpty())
+            {
+                if (Attributes.ContainsKey("style"))
+                    Attributes["style"] += "width:{0}px;".FormatTo(Width);
+                else
+                    Attributes["style"] = "width:{0}px;".FormatTo(Width);
             }
             if (!AttributeString.IsNullOrEmpty())
             {

@@ -18,6 +18,7 @@ namespace FoxOne.Web
             bundles.Add(new ScriptBundle("~/script/common.js")
                 .Include("~/Scripts/jquery-1.8.2.js")
                 .Include("~/Scripts/layout/jquery.easyui.js")
+                .Include("~/Scripts/jquery.form.js")
                 .Include("~/Scripts/zTree/jquery.ztree.all-3.5.js")
                 .Include("~/Scripts/jquery.blockui.js")
                 .Include("~/Scripts/modal.js")

@@ -27,6 +27,36 @@ namespace FoxOne.Workflow.Business
         [DisplayName("运算类型")]
         public OperateType OperateType { get; set; }
 
+        public override bool PreResolve(IWorkflowContext context)
+        {
+            bool tempResult = false;
+            if (OperateType == OperateType.AND)
+            {
+                foreach (var c in InnerConditions)
+                {
+                    c.Owner = this.Owner;
+                    tempResult = c.PreResolve(context);
+                    if (!tempResult)
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
+            else
+            {
+                foreach (var c in InnerConditions)
+                {
+                    c.Owner = this.Owner;
+                    if (c.PreResolve(context))
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        }
+
         public override bool Resolve(IWorkflowContext context)
         {
             bool tempResult = false;

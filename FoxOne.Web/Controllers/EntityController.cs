@@ -7,6 +7,8 @@ using System.Web.Mvc;
 using System.IO;
 using System.Transactions;
 using FoxOne.Business;
+using System.Web;
+using FoxOne.Data;
 
 namespace FoxOne.Web.Controllers
 {
@@ -22,6 +24,18 @@ namespace FoxOne.Web.Controllers
             var ds = GetFormService();
             using (TransactionScope tran = new TransactionScope())
             {
+                if(HttpContext.Request.Files.Count>0)
+                {
+                    foreach (string fileKey in HttpContext.Request.Files.AllKeys)
+                    {
+                        var file = HttpContext.Request.Files[fileKey];
+                        string fileName = file.FileName;
+                        string ext = System.IO.Path.GetExtension(fileName).ToLower();
+                        fileName = fileName.Replace(ext, "") + DateTime.Now.ToString("_yyyy_MM_dd_HH_mm_ss");
+                        var filePath = UploadHelper.Upload(file, "uploadFiles", fileName, true);
+                        data[fileKey] = filePath;
+                    }
+                }
                 int effectCount = 0;
                 if (formViewMode.Equals(FormMode.Edit.ToString(), StringComparison.OrdinalIgnoreCase))
                 {
@@ -175,21 +189,28 @@ namespace FoxOne.Web.Controllers
             }
             if (Add)
             {
-                result = DBContext<UserRole>.Insert(new UserRole()
+                if (DBContext<IUserRole>.Instance.Count(o => o.RoleId.Equals(RoleId) && o.UserId.Equals(UserId)) > 0)
                 {
-                    Id = Guid.NewGuid().ToString(),
-                    RentId = 1,
-                    RoleId = RoleId,
-                    Status = DefaultStatus.Enabled.ToString(),
-                    UserId = UserId
-                });
+                    throw new FoxOneException("当前用户拥有该角色");
+                }
+                else
+                {
+                    result = DBContext<IUserRole>.Insert(new UserRole()
+                    {
+                        Id = Utility.GetGuid(),
+                        RentId = 1,
+                        RoleId = RoleId,
+                        Status = DefaultStatus.Enabled.ToString(),
+                        UserId = UserId
+                    });
+                }
             }
             else
             {
-                var entity = DBContext<UserRole>.Instance.FirstOrDefault(o => o.UserId.Equals(UserId, StringComparison.OrdinalIgnoreCase) && o.RoleId.Equals(RoleId, StringComparison.OrdinalIgnoreCase));
+                var entity = DBContext<IUserRole>.Instance.FirstOrDefault(o => o.UserId.Equals(UserId, StringComparison.OrdinalIgnoreCase) && o.RoleId.Equals(RoleId, StringComparison.OrdinalIgnoreCase));
                 if(entity!=null)
                 {
-                    result = DBContext<UserRole>.Delete(entity);
+                    result = DBContext<IUserRole>.Delete(entity);
                 }
             }
             return Json(result, JsonRequestBehavior.AllowGet);
@@ -199,24 +220,39 @@ namespace FoxOne.Web.Controllers
         [ValidateInput(false)]
         public JsonResult UserProfile()
         {
-            var data = Request.Form.ToEntity<User>();
+            var data = Request.Form.ToDictionary().ToEntity<User>();
             string key = Request.Form[NamingCenter.PARAM_KEY_NAME];
 
             var user = DBContext<IUser>.Instance.Get(key);
             if(user!=null)
             {
-                user.Name = data.Name;
+                //user.Name = data.Name;
                 user.Birthdate = data.Birthdate;
-                user.Alias = data.Alias;
-                user.Code = data.Code;
                 user.QQ = data.QQ;
-                user.MobilePhone = data.MobilePhone;
                 user.LastUpdateTime = DateTime.Now;
                 user.Sex = data.Sex;
-                user.Mail = data.Mail;
                 user.Identity = data.Identity;
-                Logger.GetLogger("SystemUse").InfoFormat("{0}:【{1}】修改个人信息，IP：{2}，修改的信息有：{3}", user.Id, user.Name, Utility.GetWebClientIp(), JSONHelper.Serialize(data));
-                return Json(DBContext<IUser>.Update(user));
+                user.WorkNumber = data.WorkNumber;
+                if(!data.Properties.IsNullOrEmpty())
+                {
+                    foreach (var item in data.Properties.Keys)
+                    {
+                        user.Properties[item] = data.Properties[item];
+                    }
+                }
+                if (SysConfig.IsProductEnv)
+                {
+                    if (data.Password.IsNotNullOrEmpty())
+                    {
+                        new MailUserService().UpdateUser(new MailUser() { DepartmentId = user.Department.Code, Mobile = user.MobilePhone, Name = user.Name, Password = data.Password, UserId = user.Mail });
+                    }
+                }
+                if(Dao.Get().Update(user)>0)
+                {
+                    (user as IExtProperty).SetProperty();
+                    Logger.Info("System:{0}:【{1}】修改个人信息，IP：{2}，修改的信息有：{3}", user.Id, user.Name, Utility.GetWebClientIp(), JSONHelper.Serialize(user));
+                    return Json(true);
+                }
             }
             return Json(false);
         }

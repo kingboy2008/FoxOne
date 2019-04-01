@@ -1,2 +1,1227 @@
 <?xml version="1.0"?>
-<ArrayOfWorkflowItemRead xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+<ArrayOfWorkflowItemRead xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <WorkflowItemRead>
+    <Id>14</Id>
+    <RentId>0</RentId>
+    <InstanceId>17092200005</InstanceId>
+    <ItemId>10001</ItemId>
+    <ItemSeq>0</ItemSeq>
+    <Status>Finished</Status>
+    <OpinionType>0</OpinionType>
+    <AppCode>1</AppCode>
+    <PreItemId>5</PreItemId>
+    <PartUserId>713B9F4C-35A9-4816-974C-A243E3C66C3F</PartUserId>
+    <PartUserName>李月江</PartUserName>
+    <PartDepartmentId>efccd063-5ff1-4631-9d54-04a968f44001</PartDepartmentId>
+    <PartDepepartmentName>运维部</PartDepepartmentName>
+    <CurrentActivity>传阅</CurrentActivity>
+    <Alias>传阅</Alias>
+    <AutoFinish>false</AutoFinish>
+    <PasserUserId>01537D91-83F8-460D-8137-A24AEFF2A853</PasserUserId>
+    <PasserUserName>庄建超</PasserUserName>
+    <ReceiveTime>2017-09-22T16:19:49</ReceiveTime>
+    <ReadTime>2017-09-25T14:36:30</ReadTime>
+    <FinishTime>2017-09-25T14:36:30</FinishTime>
+    <ExpiredTime xsi:nil="true" />
+  </WorkflowItemRead>
+  <WorkflowItemRead>
+    <Id>13</Id>
+    <RentId>0</RentId>
+    <InstanceId>17092100010</InstanceId>
+    <ItemId>10001</ItemId>
+    <ItemSeq>0</ItemSeq>
+    <Status>Sent</Status>
+    <OpinionType>0</OpinionType>
+    <AppCode>1</AppCode>
+    <PreItemId>4</PreItemId>
+    <PartUserId>0AA07AED-B133-4B26-9309-3D896B4C96DB</PartUserId>
+    <PartUserName>卢健智</PartUserName>
+    <PartDepartmentId>71ae4bd3-cc87-4119-8a26-0ae7f1510899</PartDepartmentId>
+    <PartDepepartmentName>平台部</PartDepepartmentName>
+    <CurrentActivity>传阅</CurrentActivity>
+    <Alias>传阅</Alias>
+    <AutoFinish>false</AutoFinish>
+    <PasserUserId>01537D91-83F8-460D-8137-A24AEFF2A853</PasserUserId>
+    <PasserUserName>庄建超</PasserUserName>
+    <ReceiveTime>2017-09-22T16:17:20</ReceiveTime>
+    <ReadTime xsi:nil="true" />
+    <FinishTime xsi:nil="true" />
+    <ExpiredTime xsi:nil="true" />
+  </WorkflowItemRead>
+  <WorkflowItemRead>
+    <Id>11</Id>
+    <RentId>0</RentId>
+    <InstanceId>17092200003</InstanceId>
+    <ItemId>10001</ItemId>
+    <ItemSeq>0</ItemSeq>
+    <Status>Sent</Status>
+    <OpinionType>0</OpinionType>
+    <AppCode>1</AppCode>
+    <PreItemId>5</PreItemId>
+    <PartUserId>65B89BB2-00AD-4C5E-9CB8-C73F29D89760</PartUserId>
+    <PartUserName>李梁</PartUserName>
+    <PartDepartmentId>efccd063-5ff1-4631-9d54-04a968f44001</PartDepartmentId>
+    <PartDepepartmentName>运维部</PartDepepartmentName>
+    <CurrentActivity>传阅</CurrentActivity>
+    <Alias>传阅</Alias>
+    <AutoFinish>false</AutoFinish>
+    <PasserUserId>01537D91-83F8-460D-8137-A24AEFF2A853</PasserUserId>
+    <PasserUserName>庄建超</PasserUserName>
+    <ReceiveTime>2017-09-22T16:13:10</ReceiveTime>
+    <ReadTime xsi:nil="true" />
+    <FinishTime xsi:nil="true" />
+    <ExpiredTime xsi:nil="true" />
+  </WorkflowItemRead>
+  <WorkflowItemRead>
+    <Id>12</Id>
+    <RentId>0</RentId>
+    <InstanceId>17092100005</InstanceId>
+    <ItemId>10001</ItemId>
+    <ItemSeq>0</ItemSeq>
+    <Status>Sent</Status>
+    <OpinionType>0</OpinionType>
+    <AppCode>1</AppCode>
+    <PreItemId>5</PreItemId>
+    <PartUserId>1E8BF4CD-6FB5-40B3-8E95-48B321D7A496</PartUserId>
+    <PartUserName>佘朝杭</PartUserName>
+    <PartDepartmentId>71ae4bd3-cc87-4119-8a26-0ae7f1510899</PartDepartmentId>
+    <PartDepepartmentName>平台部</PartDepepartmentName>
+    <CurrentActivity>传阅</CurrentActivity>
+    <Alias>传阅</Alias>
+    <AutoFinish>false</AutoFinish>
+    <PasserUserId>01537D91-83F8-460D-8137-A24AEFF2A853</PasserUserId>
+    <PasserUserName>庄建超</PasserUserName>
+    <ReceiveTime>2017-09-22T16:15:09</ReceiveTime>
+    <ReadTime xsi:nil="true" />
+    <FinishTime xsi:nil="true" />
+    <ExpiredTime xsi:nil="true" />
+  </WorkflowItemRead>
+  <WorkflowItemRead>
+    <Id>9</Id>
+    <RentId>0</RentId>
+    <InstanceId>17092100004</InstanceId>
+    <ItemId>10001</ItemId>
+    <ItemSeq>0</ItemSeq>
+    <Status>Sent</Status>
+    <OpinionType>0</OpinionType>
+    <AppCode>1</AppCode>
+    <PreItemId>3</PreItemId>
+    <PartUserId>48DF3181-BFD2-4DEE-A909-20199EA7BCFE</PartUserId>
+    <PartUserName>李晓冬</PartUserName>
+    <PartDepartmentId>efccd063-5ff1-4631-9d54-04a968f44001</PartDepartmentId>
+    <PartDepepartmentName>运维部</PartDepepartmentName>
+    <CurrentActivity>传阅</CurrentActivity>
+    <Alias>传阅</Alias>
+    <AutoFinish>false</AutoFinish>
+    <PasserUserId>01537D91-83F8-460D-8137-A24AEFF2A853</PasserUserId>
+    <PasserUserName>庄建超</PasserUserName>
+    <ReceiveTime>2017-09-21T16:28:23</ReceiveTime>
+    <ReadTime xsi:nil="true" />
+    <FinishTime xsi:nil="true" />
+    <ExpiredTime xsi:nil="true" />
+  </WorkflowItemRead>
+  <WorkflowItemRead>
+    <Id>15</Id>
+    <RentId>0</RentId>
+    <InstanceId>17092100011</InstanceId>
+    <ItemId>10001</ItemId>
+    <ItemSeq>0</ItemSeq>
+    <Status>Sent</Status>
+    <OpinionType>0</OpinionType>
+    <AppCode>1</AppCode>
+    <PreItemId>11</PreItemId>
+    <PartUserId>48FC1F33-D114-44EA-A754-BE6DDE259825</PartUserId>
+    <PartUserName>肖锡燕</PartUserName>
+    <PartDepartmentId>71ae4bd3-cc87-4119-8a26-0ae7f1510899</PartDepartmentId>
+    <PartDepepartmentName>平台部</PartDepepartmentName>
+    <CurrentActivity>传阅</CurrentActivity>
+    <Alias>传阅</Alias>
+    <AutoFinish>false</AutoFinish>
+    <PasserUserId>01537D91-83F8-460D-8137-A24AEFF2A853</PasserUserId>
+    <PasserUserName>庄建超</PasserUserName>
+    <ReceiveTime>2017-09-22T16:30:25</ReceiveTime>
+    <ReadTime xsi:nil="true" />
+    <FinishTime xsi:nil="true" />
+    <ExpiredTime xsi:nil="true" />
+  </WorkflowItemRead>
+  <WorkflowItemRead>
+    <Id>16</Id>
+    <RentId>0</RentId>
+    <InstanceId>17092100003</InstanceId>
+    <ItemId>10001</ItemId>
+    <ItemSeq>0</ItemSeq>
+    <Status>Sent</Status>
+    <OpinionType>0</OpinionType>
+    <AppCode>1</AppCode>
+    <PreItemId>7</PreItemId>
+    <PartUserId>3F99F8E0-5A05-4A35-8EEB-4C808AB09334</PartUserId>
+    <PartUserName>尹小平</PartUserName>
+    <PartDepartmentId>71ae4bd3-cc87-4119-8a26-0ae7f1510899</PartDepartmentId>
+    <PartDepepartmentName>平台部</PartDepepartmentName>
+    <CurrentActivity>传阅</CurrentActivity>
+    <Alias>传阅</Alias>
+    <AutoFinish>false</AutoFinish>
+    <PasserUserId>01537D91-83F8-460D-8137-A24AEFF2A853</PasserUserId>
+    <PasserUserName>庄建超</PasserUserName>
+    <ReceiveTime>2017-09-23T10:57:26</ReceiveTime>
+    <ReadTime xsi:nil="true" />
+    <FinishTime xsi:nil="true" />
+    <ExpiredTime xsi:nil="true" />
+  </WorkflowItemRead>
+  <WorkflowItemRead>
+    <Id>17</Id>
+    <RentId>0</RentId>
+    <InstanceId>17092300002</InstanceId>
+    <ItemId>10001</ItemId>
+    <ItemSeq>0</ItemSeq>
+    <Status>Finished</Status>
+    <OpinionType>0</OpinionType>
+    <AppCode>1</AppCode>
+    <PreItemId>2</PreItemId>
+    <PartUserId>42BD7042-0F3C-49FA-943A-5CE162BB14DB</PartUserId>
+    <PartUserName>刘佑成</PartUserName>
+    <PartDepartmentId>efccd063-5ff1-4631-9d54-04a968f44001</PartDepartmentId>
+    <PartDepepartmentName>运维部</PartDepepartmentName>
+    <CurrentActivity>传阅</CurrentActivity>
+    <Alias>传阅</Alias>
+    <AutoFinish>false</AutoFinish>
+    <PasserUserId>01537D91-83F8-460D-8137-A24AEFF2A853</PasserUserId>
+    <PasserUserName>庄建超</PasserUserName>
+    <ReceiveTime>2017-09-23T11:29:21</ReceiveTime>
+    <ReadTime>2017-09-23T11:34:07</ReadTime>
+    <FinishTime>2017-09-23T11:34:07</FinishTime>
+    <ExpiredTime xsi:nil="true" />
+  </WorkflowItemRead>
+  <WorkflowItemRead>
+    <Id>18</Id>
+    <RentId>0</RentId>
+    <InstanceId>17092500002</InstanceId>
+    <ItemId>10001</ItemId>
+    <ItemSeq>0</ItemSeq>
+    <Status>Sent</Status>
+    <OpinionType>0</OpinionType>
+    <AppCode>1</AppCode>
+    <PreItemId>5</PreItemId>
+    <PartUserId>48FC1F33-D114-44EA-A754-BE6DDE259825</PartUserId>
+    <PartUserName>肖锡燕</PartUserName>
+    <PartDepartmentId>71ae4bd3-cc87-4119-8a26-0ae7f1510899</PartDepartmentId>
+    <PartDepepartmentName>平台部</PartDepepartmentName>
+    <CurrentActivity>传阅</CurrentActivity>
+    <Alias>传阅</Alias>
+    <AutoFinish>false</AutoFinish>
+    <PasserUserId>01537D91-83F8-460D-8137-A24AEFF2A853</PasserUserId>
+    <PasserUserName>庄建超</PasserUserName>
+    <ReceiveTime>2017-09-25T14:30:33</ReceiveTime>
+    <ReadTime xsi:nil="true" />
+    <FinishTime xsi:nil="true" />
+    <ExpiredTime xsi:nil="true" />
+  </WorkflowItemRead>
+  <WorkflowItemRead>
+    <Id>19</Id>
+    <RentId>0</RentId>
+    <InstanceId>17092500005</InstanceId>
+    <ItemId>10001</ItemId>
+    <ItemSeq>0</ItemSeq>
+    <Status>Sent</Status>
+    <OpinionType>0</OpinionType>
+    <AppCode>1</AppCode>
+    <PreItemId>5</PreItemId>
+    <PartUserId>8CA0663E-AC98-4A8E-BB38-F358A1C33420</PartUserId>
+    <PartUserName>林国祥</PartUserName>
+    <PartDepartmentId>efccd063-5ff1-4631-9d54-04a968f44001</PartDepartmentId>
+    <PartDepepartmentName>运维部</PartDepepartmentName>
+    <CurrentActivity>传阅</CurrentActivity>
+    <Alias>传阅</Alias>
+    <AutoFinish>false</AutoFinish>
+    <PasserUserId>01537D91-83F8-460D-8137-A24AEFF2A853</PasserUserId>
+    <PasserUserName>庄建超</PasserUserName>
+    <ReceiveTime>2017-09-25T17:23:25</ReceiveTime>
+    <ReadTime xsi:nil="true" />
+    <FinishTime xsi:nil="true" />
+    <ExpiredTime xsi:nil="true" />
+  </WorkflowItemRead>
+  <WorkflowItemRead>
+    <Id>20</Id>
+    <RentId>0</RentId>
+    <InstanceId>17092500004</InstanceId>
+    <ItemId>10001</ItemId>
+    <ItemSeq>0</ItemSeq>
+    <Status>Sent</Status>
+    <OpinionType>0</OpinionType>
+    <AppCode>1</AppCode>
+    <PreItemId>5</PreItemId>
+    <PartUserId>48FC1F33-D114-44EA-A754-BE6DDE259825</PartUserId>
+    <PartUserName>肖锡燕</PartUserName>
+    <PartDepartmentId>71ae4bd3-cc87-4119-8a26-0ae7f1510899</PartDepartmentId>
+    <PartDepepartmentName>平台部</PartDepepartmentName>
+    <CurrentActivity>传阅</CurrentActivity>
+    <Alias>传阅</Alias>
+    <AutoFinish>false</AutoFinish>
+    <PasserUserId>01537D91-83F8-460D-8137-A24AEFF2A853</PasserUserId>
+    <PasserUserName>庄建超</PasserUserName>
+    <ReceiveTime>2017-09-25T17:24:48</ReceiveTime>
+    <ReadTime xsi:nil="true" />
+    <FinishTime xsi:nil="true" />
+    <ExpiredTime xsi:nil="true" />
+  </WorkflowItemRead>
+  <WorkflowItemRead>
+    <Id>21</Id>
+    <RentId>0</RentId>
+    <InstanceId>17092500007</InstanceId>
+    <ItemId>10001</ItemId>
+    <ItemSeq>0</ItemSeq>
+    <Status>Sent</Status>
+    <OpinionType>0</OpinionType>
+    <AppCode>1</AppCode>
+    <PreItemId>4</PreItemId>
+    <PartUserId>1E3E17E0-B8A4-4025-AB08-BAF57985190A</PartUserId>
+    <PartUserName>张有静</PartUserName>
+    <PartDepartmentId>71ae4bd3-cc87-4119-8a26-0ae7f1510899</PartDepartmentId>
+    <PartDepepartmentName>平台部</PartDepepartmentName>
+    <CurrentActivity>传阅</CurrentActivity>
+    <Alias>传阅</Alias>
+    <AutoFinish>false</AutoFinish>
+    <PasserUserId>01537D91-83F8-460D-8137-A24AEFF2A853</PasserUserId>
+    <PasserUserName>庄建超</PasserUserName>
+    <ReceiveTime>2017-09-25T18:42:47</ReceiveTime>
+    <ReadTime xsi:nil="true" />
+    <FinishTime xsi:nil="true" />
+    <ExpiredTime xsi:nil="true" />
+  </WorkflowItemRead>
+  <WorkflowItemRead>
+    <Id>22</Id>
+    <RentId>0</RentId>
+    <InstanceId>17092500003</InstanceId>
+    <ItemId>10001</ItemId>
+    <ItemSeq>0</ItemSeq>
+    <Status>Sent</Status>
+    <OpinionType>0</OpinionType>
+    <AppCode>1</AppCode>
+    <PreItemId>4</PreItemId>
+    <PartUserId>6A4392F8-56DE-4996-AC8E-94A8D754469C</PartUserId>
+    <PartUserName>刘兆威</PartUserName>
+    <PartDepartmentId>5178aec0-2b72-47b9-b2f7-39dd7044d019</PartDepartmentId>
+    <PartDepepartmentName>IWO部</PartDepepartmentName>
+    <CurrentActivity>传阅</CurrentActivity>
+    <Alias>传阅</Alias>
+    <AutoFinish>false</AutoFinish>
+    <PasserUserId>01537D91-83F8-460D-8137-A24AEFF2A853</PasserUserId>
+    <PasserUserName>庄建超</PasserUserName>
+    <ReceiveTime>2017-09-26T12:35:53</ReceiveTime>
+    <ReadTime xsi:nil="true" />
+    <FinishTime xsi:nil="true" />
+    <ExpiredTime xsi:nil="true" />
+  </WorkflowItemRead>
+  <WorkflowItemRead>
+    <Id>23</Id>
+    <RentId>0</RentId>
+    <InstanceId>17092500009</InstanceId>
+    <ItemId>10001</ItemId>
+    <ItemSeq>0</ItemSeq>
+    <Status>Sent</Status>
+    <OpinionType>0</OpinionType>
+    <AppCode>1</AppCode>
+    <PreItemId>7</PreItemId>
+    <PartUserId>3F99F8E0-5A05-4A35-8EEB-4C808AB09334</PartUserId>
+    <PartUserName>尹小平</PartUserName>
+    <PartDepartmentId>71ae4bd3-cc87-4119-8a26-0ae7f1510899</PartDepartmentId>
+    <PartDepepartmentName>平台部</PartDepepartmentName>
+    <CurrentActivity>传阅</CurrentActivity>
+    <Alias>传阅</Alias>
+    <AutoFinish>false</AutoFinish>
+    <PasserUserId>01537D91-83F8-460D-8137-A24AEFF2A853</PasserUserId>
+    <PasserUserName>庄建超</PasserUserName>
+    <ReceiveTime>2017-09-26T19:59:47</ReceiveTime>
+    <ReadTime xsi:nil="true" />
+    <FinishTime xsi:nil="true" />
+    <ExpiredTime xsi:nil="true" />
+  </WorkflowItemRead>
+  <WorkflowItemRead>
+    <Id>24</Id>
+    <RentId>0</RentId>
+    <InstanceId>17092600004</InstanceId>
+    <ItemId>10001</ItemId>
+    <ItemSeq>0</ItemSeq>
+    <Status>Sent</Status>
+    <OpinionType>0</OpinionType>
+    <AppCode>1</AppCode>
+    <PreItemId>4</PreItemId>
+    <PartUserId>044DE993-7573-4BFB-9AE1-7F4E39EAEEF0</PartUserId>
+    <PartUserName>何强</PartUserName>
+    <PartDepartmentId>70ef5427-c420-426b-a307-56ed7df01ba0</PartDepartmentId>
+    <PartDepepartmentName>3D部</PartDepepartmentName>
+    <CurrentActivity>传阅</CurrentActivity>
+    <Alias>传阅</Alias>
+    <AutoFinish>false</AutoFinish>
+    <PasserUserId>01537D91-83F8-460D-8137-A24AEFF2A853</PasserUserId>
+    <PasserUserName>庄建超</PasserUserName>
+    <ReceiveTime>2017-09-27T09:27:30</ReceiveTime>
+    <ReadTime xsi:nil="true" />
+    <FinishTime xsi:nil="true" />
+    <ExpiredTime xsi:nil="true" />
+  </WorkflowItemRead>
+  <WorkflowItemRead>
+    <Id>25</Id>
+    <RentId>0</RentId>
+    <InstanceId>17092600005</InstanceId>
+    <ItemId>10001</ItemId>
+    <ItemSeq>0</ItemSeq>
+    <Status>Sent</Status>
+    <OpinionType>0</OpinionType>
+    <AppCode>1</AppCode>
+    <PreItemId>4</PreItemId>
+    <PartUserId>044DE993-7573-4BFB-9AE1-7F4E39EAEEF0</PartUserId>
+    <PartUserName>何强</PartUserName>
+    <PartDepartmentId>70ef5427-c420-426b-a307-56ed7df01ba0</PartDepartmentId>
+    <PartDepepartmentName>3D部</PartDepepartmentName>
+    <CurrentActivity>传阅</CurrentActivity>
+    <Alias>传阅</Alias>
+    <AutoFinish>false</AutoFinish>
+    <PasserUserId>01537D91-83F8-460D-8137-A24AEFF2A853</PasserUserId>
+    <PasserUserName>庄建超</PasserUserName>
+    <ReceiveTime>2017-09-27T09:29:43</ReceiveTime>
+    <ReadTime xsi:nil="true" />
+    <FinishTime xsi:nil="true" />
+    <ExpiredTime xsi:nil="true" />
+  </WorkflowItemRead>
+  <WorkflowItemRead>
+    <Id>26</Id>
+    <RentId>0</RentId>
+    <InstanceId>17092700006</InstanceId>
+    <ItemId>10001</ItemId>
+    <ItemSeq>0</ItemSeq>
+    <Status>Finished</Status>
+    <OpinionType>0</OpinionType>
+    <AppCode>1</AppCode>
+    <PreItemId>2</PreItemId>
+    <PartUserId>0359FA14-4249-4E69-91CC-A0BA71A2623C</PartUserId>
+    <PartUserName>安龙飞</PartUserName>
+    <PartDepartmentId>71ae4bd3-cc87-4119-8a26-0ae7f1510899</PartDepartmentId>
+    <PartDepepartmentName>平台部</PartDepepartmentName>
+    <CurrentActivity>传阅</CurrentActivity>
+    <Alias>传阅</Alias>
+    <AutoFinish>false</AutoFinish>
+    <PasserUserId>01537D91-83F8-460D-8137-A24AEFF2A853</PasserUserId>
+    <PasserUserName>庄建超</PasserUserName>
+    <ReceiveTime>2017-09-27T11:19:22</ReceiveTime>
+    <ReadTime>2017-09-28T19:20:08</ReadTime>
+    <FinishTime>2017-09-28T19:20:08</FinishTime>
+    <ExpiredTime xsi:nil="true" />
+  </WorkflowItemRead>
+  <WorkflowItemRead>
+    <Id>27</Id>
+    <RentId>0</RentId>
+    <InstanceId>17092100009</InstanceId>
+    <ItemId>10001</ItemId>
+    <ItemSeq>0</ItemSeq>
+    <Status>Finished</Status>
+    <OpinionType>0</OpinionType>
+    <AppCode>1</AppCode>
+    <PreItemId>6</PreItemId>
+    <PartUserId>49C56CCD-9776-49C6-B7DE-67F4AA3B91BC</PartUserId>
+    <PartUserName>陈柳鹏</PartUserName>
+    <PartDepartmentId>71ae4bd3-cc87-4119-8a26-0ae7f1510899</PartDepartmentId>
+    <PartDepepartmentName>平台部</PartDepepartmentName>
+    <CurrentActivity>传阅</CurrentActivity>
+    <Alias>传阅</Alias>
+    <AutoFinish>false</AutoFinish>
+    <PasserUserId>01537D91-83F8-460D-8137-A24AEFF2A853</PasserUserId>
+    <PasserUserName>庄建超</PasserUserName>
+    <ReceiveTime>2017-09-27T11:27:40</ReceiveTime>
+    <ReadTime>2017-09-27T20:47:38</ReadTime>
+    <FinishTime>2017-09-27T20:47:38</FinishTime>
+    <ExpiredTime xsi:nil="true" />
+  </WorkflowItemRead>
+  <WorkflowItemRead>
+    <Id>28</Id>
+    <RentId>0</RentId>
+    <InstanceId>17092600006</InstanceId>
+    <ItemId>10001</ItemId>
+    <ItemSeq>0</ItemSeq>
+    <Status>Sent</Status>
+    <OpinionType>0</OpinionType>
+    <AppCode>1</AppCode>
+    <PreItemId>4</PreItemId>
+    <PartUserId>044DE993-7573-4BFB-9AE1-7F4E39EAEEF0</PartUserId>
+    <PartUserName>何强</PartUserName>
+    <PartDepartmentId>70ef5427-c420-426b-a307-56ed7df01ba0</PartDepartmentId>
+    <PartDepepartmentName>3D部</PartDepepartmentName>
+    <CurrentActivity>传阅</CurrentActivity>
+    <Alias>传阅</Alias>
+    <AutoFinish>false</AutoFinish>
+    <PasserUserId>01537D91-83F8-460D-8137-A24AEFF2A853</PasserUserId>
+    <PasserUserName>庄建超</PasserUserName>
+    <ReceiveTime>2017-09-27T11:43:36</ReceiveTime>
+    <ReadTime xsi:nil="true" />
+    <FinishTime xsi:nil="true" />
+    <ExpiredTime xsi:nil="true" />
+  </WorkflowItemRead>
+  <WorkflowItemRead>
+    <Id>29</Id>
+    <RentId>0</RentId>
+    <InstanceId>17092500006</InstanceId>
+    <ItemId>10001</ItemId>
+    <ItemSeq>0</ItemSeq>
+    <Status>Sent</Status>
+    <OpinionType>0</OpinionType>
+    <AppCode>1</AppCode>
+    <PreItemId>6</PreItemId>
+    <PartUserId>35EE4007-FA96-4710-B327-FA53132C7BF9</PartUserId>
+    <PartUserName>苏镇城</PartUserName>
+    <PartDepartmentId>acc837ae-4c6a-4859-bf63-83e36a4b9e29</PartDepartmentId>
+    <PartDepepartmentName>生产软件一部</PartDepepartmentName>
+    <CurrentActivity>传阅</CurrentActivity>
+    <Alias>传阅</Alias>
+    <AutoFinish>false</AutoFinish>
+    <PasserUserId>01537D91-83F8-460D-8137-A24AEFF2A853</PasserUserId>
+    <PasserUserName>庄建超</PasserUserName>
+    <ReceiveTime>2017-09-27T11:43:58</ReceiveTime>
+    <ReadTime xsi:nil="true" />
+    <FinishTime xsi:nil="true" />
+    <ExpiredTime xsi:nil="true" />
+  </WorkflowItemRead>
+  <WorkflowItemRead>
+    <Id>30</Id>
+    <RentId>0</RentId>
+    <InstanceId>17092700001</InstanceId>
+    <ItemId>10001</ItemId>
+    <ItemSeq>0</ItemSeq>
+    <Status>Sent</Status>
+    <OpinionType>0</OpinionType>
+    <AppCode>1</AppCode>
+    <PreItemId>4</PreItemId>
+    <PartUserId>35EE4007-FA96-4710-B327-FA53132C7BF9</PartUserId>
+    <PartUserName>苏镇城</PartUserName>
+    <PartDepartmentId>acc837ae-4c6a-4859-bf63-83e36a4b9e29</PartDepartmentId>
+    <PartDepepartmentName>生产软件一部</PartDepepartmentName>
+    <CurrentActivity>传阅</CurrentActivity>
+    <Alias>传阅</Alias>
+    <AutoFinish>false</AutoFinish>
+    <PasserUserId>01537D91-83F8-460D-8137-A24AEFF2A853</PasserUserId>
+    <PasserUserName>庄建超</PasserUserName>
+    <ReceiveTime>2017-09-27T12:43:40</ReceiveTime>
+    <ReadTime xsi:nil="true" />
+    <FinishTime xsi:nil="true" />
+    <ExpiredTime xsi:nil="true" />
+  </WorkflowItemRead>
+  <WorkflowItemRead>
+    <Id>31</Id>
+    <RentId>0</RentId>
+    <InstanceId>17092700005</InstanceId>
+    <ItemId>10001</ItemId>
+    <ItemSeq>0</ItemSeq>
+    <Status>Sent</Status>
+    <OpinionType>0</OpinionType>
+    <AppCode>1</AppCode>
+    <PreItemId>5</PreItemId>
+    <PartUserId>0F51B82D-D219-4B99-986A-32DA9F62E737</PartUserId>
+    <PartUserName>陈堪仕</PartUserName>
+    <PartDepartmentId>71ae4bd3-cc87-4119-8a26-0ae7f1510899</PartDepartmentId>
+    <PartDepepartmentName>平台部</PartDepepartmentName>
+    <CurrentActivity>传阅</CurrentActivity>
+    <Alias>传阅</Alias>
+    <AutoFinish>false</AutoFinish>
+    <PasserUserId>01537D91-83F8-460D-8137-A24AEFF2A853</PasserUserId>
+    <PasserUserName>庄建超</PasserUserName>
+    <ReceiveTime>2017-09-27T16:51:57</ReceiveTime>
+    <ReadTime xsi:nil="true" />
+    <FinishTime xsi:nil="true" />
+    <ExpiredTime xsi:nil="true" />
+  </WorkflowItemRead>
+  <WorkflowItemRead>
+    <Id>32</Id>
+    <RentId>0</RentId>
+    <InstanceId>17092700002</InstanceId>
+    <ItemId>10001</ItemId>
+    <ItemSeq>0</ItemSeq>
+    <Status>Sent</Status>
+    <OpinionType>0</OpinionType>
+    <AppCode>1</AppCode>
+    <PreItemId>5</PreItemId>
+    <PartUserId>334E2DC2-1990-452E-803C-56D47D275812</PartUserId>
+    <PartUserName>黄振煌</PartUserName>
+    <PartDepartmentId>71ae4bd3-cc87-4119-8a26-0ae7f1510899</PartDepartmentId>
+    <PartDepepartmentName>平台部</PartDepepartmentName>
+    <CurrentActivity>传阅</CurrentActivity>
+    <Alias>传阅</Alias>
+    <AutoFinish>false</AutoFinish>
+    <PasserUserId>01537D91-83F8-460D-8137-A24AEFF2A853</PasserUserId>
+    <PasserUserName>庄建超</PasserUserName>
+    <ReceiveTime>2017-09-27T16:52:12</ReceiveTime>
+    <ReadTime xsi:nil="true" />
+    <FinishTime xsi:nil="true" />
+    <ExpiredTime xsi:nil="true" />
+  </WorkflowItemRead>
+  <WorkflowItemRead>
+    <Id>33</Id>
+    <RentId>0</RentId>
+    <InstanceId>17092600002</InstanceId>
+    <ItemId>10001</ItemId>
+    <ItemSeq>0</ItemSeq>
+    <Status>Sent</Status>
+    <OpinionType>0</OpinionType>
+    <AppCode>1</AppCode>
+    <PreItemId>6</PreItemId>
+    <PartUserId>1E8BF4CD-6FB5-40B3-8E95-48B321D7A496</PartUserId>
+    <PartUserName>佘朝杭</PartUserName>
+    <PartDepartmentId>71ae4bd3-cc87-4119-8a26-0ae7f1510899</PartDepartmentId>
+    <PartDepepartmentName>平台部</PartDepepartmentName>
+    <CurrentActivity>传阅</CurrentActivity>
+    <Alias>传阅</Alias>
+    <AutoFinish>false</AutoFinish>
+    <PasserUserId>01537D91-83F8-460D-8137-A24AEFF2A853</PasserUserId>
+    <PasserUserName>庄建超</PasserUserName>
+    <ReceiveTime>2017-09-27T16:52:34</ReceiveTime>
+    <ReadTime xsi:nil="true" />
+    <FinishTime xsi:nil="true" />
+    <ExpiredTime xsi:nil="true" />
+  </WorkflowItemRead>
+  <WorkflowItemRead>
+    <Id>34</Id>
+    <RentId>0</RentId>
+    <InstanceId>17092700009</InstanceId>
+    <ItemId>10001</ItemId>
+    <ItemSeq>0</ItemSeq>
+    <Status>Finished</Status>
+    <OpinionType>0</OpinionType>
+    <AppCode>1</AppCode>
+    <PreItemId>2</PreItemId>
+    <PartUserId>42BD7042-0F3C-49FA-943A-5CE162BB14DB</PartUserId>
+    <PartUserName>刘佑成</PartUserName>
+    <PartDepartmentId>efccd063-5ff1-4631-9d54-04a968f44001</PartDepartmentId>
+    <PartDepepartmentName>运维部</PartDepepartmentName>
+    <CurrentActivity>传阅</CurrentActivity>
+    <Alias>传阅</Alias>
+    <AutoFinish>false</AutoFinish>
+    <PasserUserId>01537D91-83F8-460D-8137-A24AEFF2A853</PasserUserId>
+    <PasserUserName>庄建超</PasserUserName>
+    <ReceiveTime>2017-09-27T18:19:36</ReceiveTime>
+    <ReadTime>2017-09-29T14:43:15</ReadTime>
+    <FinishTime>2017-09-29T14:43:15</FinishTime>
+    <ExpiredTime xsi:nil="true" />
+  </WorkflowItemRead>
+  <WorkflowItemRead>
+    <Id>35</Id>
+    <RentId>0</RentId>
+    <InstanceId>17092600003</InstanceId>
+    <ItemId>10001</ItemId>
+    <ItemSeq>0</ItemSeq>
+    <Status>Sent</Status>
+    <OpinionType>0</OpinionType>
+    <AppCode>1</AppCode>
+    <PreItemId>5</PreItemId>
+    <PartUserId>48FC1F33-D114-44EA-A754-BE6DDE259825</PartUserId>
+    <PartUserName>肖锡燕</PartUserName>
+    <PartDepartmentId>71ae4bd3-cc87-4119-8a26-0ae7f1510899</PartDepartmentId>
+    <PartDepepartmentName>平台部</PartDepepartmentName>
+    <CurrentActivity>传阅</CurrentActivity>
+    <Alias>传阅</Alias>
+    <AutoFinish>false</AutoFinish>
+    <PasserUserId>01537D91-83F8-460D-8137-A24AEFF2A853</PasserUserId>
+    <PasserUserName>庄建超</PasserUserName>
+    <ReceiveTime>2017-09-27T18:21:59</ReceiveTime>
+    <ReadTime xsi:nil="true" />
+    <FinishTime xsi:nil="true" />
+    <ExpiredTime xsi:nil="true" />
+  </WorkflowItemRead>
+  <WorkflowItemRead>
+    <Id>36</Id>
+    <RentId>0</RentId>
+    <InstanceId>17092700011</InstanceId>
+    <ItemId>10001</ItemId>
+    <ItemSeq>0</ItemSeq>
+    <Status>Sent</Status>
+    <OpinionType>0</OpinionType>
+    <AppCode>1</AppCode>
+    <PreItemId>3</PreItemId>
+    <PartUserId>49C56CCD-9776-49C6-B7DE-67F4AA3B91BC</PartUserId>
+    <PartUserName>陈柳鹏</PartUserName>
+    <PartDepartmentId>71ae4bd3-cc87-4119-8a26-0ae7f1510899</PartDepartmentId>
+    <PartDepepartmentName>平台部</PartDepepartmentName>
+    <CurrentActivity>传阅</CurrentActivity>
+    <Alias>传阅</Alias>
+    <AutoFinish>false</AutoFinish>
+    <PasserUserId>01537D91-83F8-460D-8137-A24AEFF2A853</PasserUserId>
+    <PasserUserName>庄建超</PasserUserName>
+    <ReceiveTime>2017-09-28T11:06:01</ReceiveTime>
+    <ReadTime xsi:nil="true" />
+    <FinishTime xsi:nil="true" />
+    <ExpiredTime xsi:nil="true" />
+  </WorkflowItemRead>
+  <WorkflowItemRead>
+    <Id>37</Id>
+    <RentId>0</RentId>
+    <InstanceId>17092700007</InstanceId>
+    <ItemId>10001</ItemId>
+    <ItemSeq>0</ItemSeq>
+    <Status>Sent</Status>
+    <OpinionType>0</OpinionType>
+    <AppCode>1</AppCode>
+    <PreItemId>5</PreItemId>
+    <PartUserId>49C56CCD-9776-49C6-B7DE-67F4AA3B91BC</PartUserId>
+    <PartUserName>陈柳鹏</PartUserName>
+    <PartDepartmentId>71ae4bd3-cc87-4119-8a26-0ae7f1510899</PartDepartmentId>
+    <PartDepepartmentName>平台部</PartDepepartmentName>
+    <CurrentActivity>传阅</CurrentActivity>
+    <Alias>传阅</Alias>
+    <AutoFinish>false</AutoFinish>
+    <PasserUserId>01537D91-83F8-460D-8137-A24AEFF2A853</PasserUserId>
+    <PasserUserName>庄建超</PasserUserName>
+    <ReceiveTime>2017-09-28T11:06:35</ReceiveTime>
+    <ReadTime xsi:nil="true" />
+    <FinishTime xsi:nil="true" />
+    <ExpiredTime xsi:nil="true" />
+  </WorkflowItemRead>
+  <WorkflowItemRead>
+    <Id>38</Id>
+    <RentId>0</RentId>
+    <InstanceId>17092700012</InstanceId>
+    <ItemId>10001</ItemId>
+    <ItemSeq>0</ItemSeq>
+    <Status>Finished</Status>
+    <OpinionType>0</OpinionType>
+    <AppCode>1</AppCode>
+    <PreItemId>5</PreItemId>
+    <PartUserId>334E2DC2-1990-452E-803C-56D47D275812</PartUserId>
+    <PartUserName>黄振煌</PartUserName>
+    <PartDepartmentId>71ae4bd3-cc87-4119-8a26-0ae7f1510899</PartDepartmentId>
+    <PartDepepartmentName>平台部</PartDepepartmentName>
+    <CurrentActivity>传阅</CurrentActivity>
+    <Alias>传阅</Alias>
+    <AutoFinish>false</AutoFinish>
+    <PasserUserId>01537D91-83F8-460D-8137-A24AEFF2A853</PasserUserId>
+    <PasserUserName>庄建超</PasserUserName>
+    <ReceiveTime>2017-09-28T11:21:58</ReceiveTime>
+    <ReadTime>2017-09-28T14:13:12</ReadTime>
+    <FinishTime>2017-09-28T14:13:12</FinishTime>
+    <ExpiredTime xsi:nil="true" />
+  </WorkflowItemRead>
+  <WorkflowItemRead>
+    <Id>39</Id>
+    <RentId>0</RentId>
+    <InstanceId>17092800001</InstanceId>
+    <ItemId>10001</ItemId>
+    <ItemSeq>0</ItemSeq>
+    <Status>Sent</Status>
+    <OpinionType>0</OpinionType>
+    <AppCode>1</AppCode>
+    <PreItemId>2</PreItemId>
+    <PartUserId>1E8BF4CD-6FB5-40B3-8E95-48B321D7A496</PartUserId>
+    <PartUserName>佘朝杭</PartUserName>
+    <PartDepartmentId>71ae4bd3-cc87-4119-8a26-0ae7f1510899</PartDepartmentId>
+    <PartDepepartmentName>平台部</PartDepepartmentName>
+    <CurrentActivity>传阅</CurrentActivity>
+    <Alias>传阅</Alias>
+    <AutoFinish>false</AutoFinish>
+    <PasserUserId>01537D91-83F8-460D-8137-A24AEFF2A853</PasserUserId>
+    <PasserUserName>庄建超</PasserUserName>
+    <ReceiveTime>2017-09-28T15:51:33</ReceiveTime>
+    <ReadTime xsi:nil="true" />
+    <FinishTime xsi:nil="true" />
+    <ExpiredTime xsi:nil="true" />
+  </WorkflowItemRead>
+  <WorkflowItemRead>
+    <Id>40</Id>
+    <RentId>0</RentId>
+    <InstanceId>17092700004</InstanceId>
+    <ItemId>10001</ItemId>
+    <ItemSeq>0</ItemSeq>
+    <Status>Sent</Status>
+    <OpinionType>0</OpinionType>
+    <AppCode>1</AppCode>
+    <PreItemId>7</PreItemId>
+    <PartUserId>49C56CCD-9776-49C6-B7DE-67F4AA3B91BC</PartUserId>
+    <PartUserName>陈柳鹏</PartUserName>
+    <PartDepartmentId>71ae4bd3-cc87-4119-8a26-0ae7f1510899</PartDepartmentId>
+    <PartDepepartmentName>平台部</PartDepepartmentName>
+    <CurrentActivity>传阅</CurrentActivity>
+    <Alias>传阅</Alias>
+    <AutoFinish>false</AutoFinish>
+    <PasserUserId>01537D91-83F8-460D-8137-A24AEFF2A853</PasserUserId>
+    <PasserUserName>庄建超</PasserUserName>
+    <ReceiveTime>2017-09-28T15:57:57</ReceiveTime>
+    <ReadTime xsi:nil="true" />
+    <FinishTime xsi:nil="true" />
+    <ExpiredTime xsi:nil="true" />
+  </WorkflowItemRead>
+  <WorkflowItemRead>
+    <Id>41</Id>
+    <RentId>0</RentId>
+    <InstanceId>17092700003</InstanceId>
+    <ItemId>10001</ItemId>
+    <ItemSeq>0</ItemSeq>
+    <Status>Sent</Status>
+    <OpinionType>0</OpinionType>
+    <AppCode>1</AppCode>
+    <PreItemId>11</PreItemId>
+    <PartUserId>49C56CCD-9776-49C6-B7DE-67F4AA3B91BC</PartUserId>
+    <PartUserName>陈柳鹏</PartUserName>
+    <PartDepartmentId>71ae4bd3-cc87-4119-8a26-0ae7f1510899</PartDepartmentId>
+    <PartDepepartmentName>平台部</PartDepepartmentName>
+    <CurrentActivity>传阅</CurrentActivity>
+    <Alias>传阅</Alias>
+    <AutoFinish>false</AutoFinish>
+    <PasserUserId>01537D91-83F8-460D-8137-A24AEFF2A853</PasserUserId>
+    <PasserUserName>庄建超</PasserUserName>
+    <ReceiveTime>2017-09-28T22:09:36</ReceiveTime>
+    <ReadTime xsi:nil="true" />
+    <FinishTime xsi:nil="true" />
+    <ExpiredTime xsi:nil="true" />
+  </WorkflowItemRead>
+  <WorkflowItemRead>
+    <Id>42</Id>
+    <RentId>0</RentId>
+    <InstanceId>17092700010</InstanceId>
+    <ItemId>10001</ItemId>
+    <ItemSeq>0</ItemSeq>
+    <Status>Sent</Status>
+    <OpinionType>0</OpinionType>
+    <AppCode>1</AppCode>
+    <PreItemId>7</PreItemId>
+    <PartUserId>1ED2DC10-F556-41DC-A2F8-AF5652721570</PartUserId>
+    <PartUserName>谢跃</PartUserName>
+    <PartDepartmentId>71ae4bd3-cc87-4119-8a26-0ae7f1510899</PartDepartmentId>
+    <PartDepepartmentName>平台部</PartDepepartmentName>
+    <CurrentActivity>传阅</CurrentActivity>
+    <Alias>传阅</Alias>
+    <AutoFinish>false</AutoFinish>
+    <PasserUserId>01537D91-83F8-460D-8137-A24AEFF2A853</PasserUserId>
+    <PasserUserName>庄建超</PasserUserName>
+    <ReceiveTime>2017-09-28T22:09:57</ReceiveTime>
+    <ReadTime xsi:nil="true" />
+    <FinishTime xsi:nil="true" />
+    <ExpiredTime xsi:nil="true" />
+  </WorkflowItemRead>
+  <WorkflowItemRead>
+    <Id>43</Id>
+    <RentId>0</RentId>
+    <InstanceId>17092800004</InstanceId>
+    <ItemId>10001</ItemId>
+    <ItemSeq>0</ItemSeq>
+    <Status>Finished</Status>
+    <OpinionType>0</OpinionType>
+    <AppCode>1</AppCode>
+    <PreItemId>6</PreItemId>
+    <PartUserId>0359FA14-4249-4E69-91CC-A0BA71A2623C</PartUserId>
+    <PartUserName>安龙飞</PartUserName>
+    <PartDepartmentId>71ae4bd3-cc87-4119-8a26-0ae7f1510899</PartDepartmentId>
+    <PartDepepartmentName>平台部</PartDepepartmentName>
+    <CurrentActivity>传阅</CurrentActivity>
+    <Alias>传阅</Alias>
+    <AutoFinish>false</AutoFinish>
+    <PasserUserId>01537D91-83F8-460D-8137-A24AEFF2A853</PasserUserId>
+    <PasserUserName>庄建超</PasserUserName>
+    <ReceiveTime>2017-09-29T09:30:34</ReceiveTime>
+    <ReadTime>2017-09-29T14:34:26</ReadTime>
+    <FinishTime>2017-09-29T14:34:26</FinishTime>
+    <ExpiredTime xsi:nil="true" />
+  </WorkflowItemRead>
+  <WorkflowItemRead>
+    <Id>44</Id>
+    <RentId>0</RentId>
+    <InstanceId>17092800002</InstanceId>
+    <ItemId>10001</ItemId>
+    <ItemSeq>0</ItemSeq>
+    <Status>Sent</Status>
+    <OpinionType>0</OpinionType>
+    <AppCode>1</AppCode>
+    <PreItemId>5</PreItemId>
+    <PartUserId>3B236C8E-F2A0-4C84-A101-33BD2B57E14D</PartUserId>
+    <PartUserName>王远鹏</PartUserName>
+    <PartDepartmentId>71ae4bd3-cc87-4119-8a26-0ae7f1510899</PartDepartmentId>
+    <PartDepepartmentName>平台部</PartDepepartmentName>
+    <CurrentActivity>传阅</CurrentActivity>
+    <Alias>传阅</Alias>
+    <AutoFinish>false</AutoFinish>
+    <PasserUserId>01537D91-83F8-460D-8137-A24AEFF2A853</PasserUserId>
+    <PasserUserName>庄建超</PasserUserName>
+    <ReceiveTime>2017-09-29T09:30:50</ReceiveTime>
+    <ReadTime xsi:nil="true" />
+    <FinishTime xsi:nil="true" />
+    <ExpiredTime xsi:nil="true" />
+  </WorkflowItemRead>
+  <WorkflowItemRead>
+    <Id>45</Id>
+    <RentId>0</RentId>
+    <InstanceId>17092900002</InstanceId>
+    <ItemId>10001</ItemId>
+    <ItemSeq>0</ItemSeq>
+    <Status>Sent</Status>
+    <OpinionType>0</OpinionType>
+    <AppCode>1</AppCode>
+    <PreItemId>2</PreItemId>
+    <PartUserId>1E8BF4CD-6FB5-40B3-8E95-48B321D7A496</PartUserId>
+    <PartUserName>佘朝杭</PartUserName>
+    <PartDepartmentId>71ae4bd3-cc87-4119-8a26-0ae7f1510899</PartDepartmentId>
+    <PartDepepartmentName>平台部</PartDepepartmentName>
+    <CurrentActivity>传阅</CurrentActivity>
+    <Alias>传阅</Alias>
+    <AutoFinish>false</AutoFinish>
+    <PasserUserId>01537D91-83F8-460D-8137-A24AEFF2A853</PasserUserId>
+    <PasserUserName>庄建超</PasserUserName>
+    <ReceiveTime>2017-09-29T09:58:03</ReceiveTime>
+    <ReadTime xsi:nil="true" />
+    <FinishTime xsi:nil="true" />
+    <ExpiredTime xsi:nil="true" />
+  </WorkflowItemRead>
+  <WorkflowItemRead>
+    <Id>46</Id>
+    <RentId>0</RentId>
+    <InstanceId>17092900004</InstanceId>
+    <ItemId>10001</ItemId>
+    <ItemSeq>0</ItemSeq>
+    <Status>Sent</Status>
+    <OpinionType>0</OpinionType>
+    <AppCode>1</AppCode>
+    <PreItemId>4</PreItemId>
+    <PartUserId>044DE993-7573-4BFB-9AE1-7F4E39EAEEF0</PartUserId>
+    <PartUserName>何强</PartUserName>
+    <PartDepartmentId>70ef5427-c420-426b-a307-56ed7df01ba0</PartDepartmentId>
+    <PartDepepartmentName>3D部</PartDepepartmentName>
+    <CurrentActivity>传阅</CurrentActivity>
+    <Alias>传阅</Alias>
+    <AutoFinish>false</AutoFinish>
+    <PasserUserId>01537D91-83F8-460D-8137-A24AEFF2A853</PasserUserId>
+    <PasserUserName>庄建超</PasserUserName>
+    <ReceiveTime>2017-09-29T09:58:18</ReceiveTime>
+    <ReadTime xsi:nil="true" />
+    <FinishTime xsi:nil="true" />
+    <ExpiredTime xsi:nil="true" />
+  </WorkflowItemRead>
+  <WorkflowItemRead>
+    <Id>47</Id>
+    <RentId>0</RentId>
+    <InstanceId>17092900008</InstanceId>
+    <ItemId>10001</ItemId>
+    <ItemSeq>0</ItemSeq>
+    <Status>Sent</Status>
+    <OpinionType>0</OpinionType>
+    <AppCode>1</AppCode>
+    <PreItemId>4</PreItemId>
+    <PartUserId>0AA07AED-B133-4B26-9309-3D896B4C96DB</PartUserId>
+    <PartUserName>卢健智</PartUserName>
+    <PartDepartmentId>71ae4bd3-cc87-4119-8a26-0ae7f1510899</PartDepartmentId>
+    <PartDepepartmentName>平台部</PartDepepartmentName>
+    <CurrentActivity>传阅</CurrentActivity>
+    <Alias>传阅</Alias>
+    <AutoFinish>false</AutoFinish>
+    <PasserUserId>01537D91-83F8-460D-8137-A24AEFF2A853</PasserUserId>
+    <PasserUserName>庄建超</PasserUserName>
+    <ReceiveTime>2017-09-29T14:56:24</ReceiveTime>
+    <ReadTime xsi:nil="true" />
+    <FinishTime xsi:nil="true" />
+    <ExpiredTime xsi:nil="true" />
+  </WorkflowItemRead>
+  <WorkflowItemRead>
+    <Id>48</Id>
+    <RentId>0</RentId>
+    <InstanceId>17092900009</InstanceId>
+    <ItemId>10001</ItemId>
+    <ItemSeq>0</ItemSeq>
+    <Status>Sent</Status>
+    <OpinionType>0</OpinionType>
+    <AppCode>1</AppCode>
+    <PreItemId>5</PreItemId>
+    <PartUserId>3D1C548C-6227-4CDC-B428-47FEF703407F</PartUserId>
+    <PartUserName>周晓德</PartUserName>
+    <PartDepartmentId>71ae4bd3-cc87-4119-8a26-0ae7f1510899</PartDepartmentId>
+    <PartDepepartmentName>平台部</PartDepepartmentName>
+    <CurrentActivity>传阅</CurrentActivity>
+    <Alias>传阅</Alias>
+    <AutoFinish>false</AutoFinish>
+    <PasserUserId>01537D91-83F8-460D-8137-A24AEFF2A853</PasserUserId>
+    <PasserUserName>庄建超</PasserUserName>
+    <ReceiveTime>2017-09-29T16:55:10</ReceiveTime>
+    <ReadTime xsi:nil="true" />
+    <FinishTime xsi:nil="true" />
+    <ExpiredTime xsi:nil="true" />
+  </WorkflowItemRead>
+  <WorkflowItemRead>
+    <Id>49</Id>
+    <RentId>0</RentId>
+    <InstanceId>17092900003</InstanceId>
+    <ItemId>10001</ItemId>
+    <ItemSeq>0</ItemSeq>
+    <Status>Finished</Status>
+    <OpinionType>0</OpinionType>
+    <AppCode>1</AppCode>
+    <PreItemId>12</PreItemId>
+    <PartUserId>26E07B14-5B81-4624-9763-AE7028115A1C</PartUserId>
+    <PartUserName>冯举</PartUserName>
+    <PartDepartmentId>acc837ae-4c6a-4859-bf63-83e36a4b9e29</PartDepartmentId>
+    <PartDepepartmentName>生产软件一部</PartDepepartmentName>
+    <CurrentActivity>传阅</CurrentActivity>
+    <Alias>传阅</Alias>
+    <AutoFinish>false</AutoFinish>
+    <PasserUserId>01537D91-83F8-460D-8137-A24AEFF2A853</PasserUserId>
+    <PasserUserName>庄建超</PasserUserName>
+    <ReceiveTime>2017-09-29T19:09:38</ReceiveTime>
+    <ReadTime>2017-09-30T11:07:47</ReadTime>
+    <FinishTime>2017-09-30T11:07:47</FinishTime>
+    <ExpiredTime xsi:nil="true" />
+  </WorkflowItemRead>
+  <WorkflowItemRead>
+    <Id>50</Id>
+    <RentId>0</RentId>
+    <InstanceId>17100200003</InstanceId>
+    <ItemId>10001</ItemId>
+    <ItemSeq>0</ItemSeq>
+    <Status>Sent</Status>
+    <OpinionType>0</OpinionType>
+    <AppCode>1</AppCode>
+    <PreItemId>2</PreItemId>
+    <PartUserId>42BD7042-0F3C-49FA-943A-5CE162BB14DB</PartUserId>
+    <PartUserName>刘佑成</PartUserName>
+    <PartDepartmentId>efccd063-5ff1-4631-9d54-04a968f44001</PartDepartmentId>
+    <PartDepepartmentName>运维部</PartDepepartmentName>
+    <CurrentActivity>传阅</CurrentActivity>
+    <Alias>传阅</Alias>
+    <AutoFinish>false</AutoFinish>
+    <PasserUserId>01537D91-83F8-460D-8137-A24AEFF2A853</PasserUserId>
+    <PasserUserName>庄建超</PasserUserName>
+    <ReceiveTime>2017-10-02T22:55:20</ReceiveTime>
+    <ReadTime xsi:nil="true" />
+    <FinishTime xsi:nil="true" />
+    <ExpiredTime xsi:nil="true" />
+  </WorkflowItemRead>
+  <WorkflowItemRead>
+    <Id>51</Id>
+    <RentId>0</RentId>
+    <InstanceId>17100600001</InstanceId>
+    <ItemId>10001</ItemId>
+    <ItemSeq>0</ItemSeq>
+    <Status>Sent</Status>
+    <OpinionType>0</OpinionType>
+    <AppCode>1</AppCode>
+    <PreItemId>2</PreItemId>
+    <PartUserId>42BD7042-0F3C-49FA-943A-5CE162BB14DB</PartUserId>
+    <PartUserName>刘佑成</PartUserName>
+    <PartDepartmentId>efccd063-5ff1-4631-9d54-04a968f44001</PartDepartmentId>
+    <PartDepepartmentName>运维部</PartDepepartmentName>
+    <CurrentActivity>传阅</CurrentActivity>
+    <Alias>传阅</Alias>
+    <AutoFinish>false</AutoFinish>
+    <PasserUserId>01537D91-83F8-460D-8137-A24AEFF2A853</PasserUserId>
+    <PasserUserName>庄建超</PasserUserName>
+    <ReceiveTime>2017-10-06T18:20:36</ReceiveTime>
+    <ReadTime xsi:nil="true" />
+    <FinishTime xsi:nil="true" />
+    <ExpiredTime xsi:nil="true" />
+  </WorkflowItemRead>
+  <WorkflowItemRead>
+    <Id>52</Id>
+    <RentId>0</RentId>
+    <InstanceId>17100900001</InstanceId>
+    <ItemId>10001</ItemId>
+    <ItemSeq>0</ItemSeq>
+    <Status>Sent</Status>
+    <OpinionType>0</OpinionType>
+    <AppCode>1</AppCode>
+    <PreItemId>2</PreItemId>
+    <PartUserId>0359FA14-4249-4E69-91CC-A0BA71A2623C</PartUserId>
+    <PartUserName>安龙飞</PartUserName>
+    <PartDepartmentId>71ae4bd3-cc87-4119-8a26-0ae7f1510899</PartDepartmentId>
+    <PartDepepartmentName>平台部</PartDepepartmentName>
+    <CurrentActivity>传阅</CurrentActivity>
+    <Alias>传阅</Alias>
+    <AutoFinish>false</AutoFinish>
+    <PasserUserId>01537D91-83F8-460D-8137-A24AEFF2A853</PasserUserId>
+    <PasserUserName>庄建超</PasserUserName>
+    <ReceiveTime>2017-10-09T10:38:50</ReceiveTime>
+    <ReadTime xsi:nil="true" />
+    <FinishTime xsi:nil="true" />
+    <ExpiredTime xsi:nil="true" />
+  </WorkflowItemRead>
+  <WorkflowItemRead>
+    <Id>53</Id>
+    <RentId>0</RentId>
+    <InstanceId>17101000001</InstanceId>
+    <ItemId>10001</ItemId>
+    <ItemSeq>0</ItemSeq>
+    <Status>Sent</Status>
+    <OpinionType>0</OpinionType>
+    <AppCode>1</AppCode>
+    <PreItemId>2</PreItemId>
+    <PartUserId>0359FA14-4249-4E69-91CC-A0BA71A2623C</PartUserId>
+    <PartUserName>安龙飞</PartUserName>
+    <PartDepartmentId>71ae4bd3-cc87-4119-8a26-0ae7f1510899</PartDepartmentId>
+    <PartDepepartmentName>平台部</PartDepepartmentName>
+    <CurrentActivity>传阅</CurrentActivity>
+    <Alias>传阅</Alias>
+    <AutoFinish>false</AutoFinish>
+    <PasserUserId>01537D91-83F8-460D-8137-A24AEFF2A853</PasserUserId>
+    <PasserUserName>庄建超</PasserUserName>
+    <ReceiveTime>2017-10-10T09:30:32</ReceiveTime>
+    <ReadTime xsi:nil="true" />
+    <FinishTime xsi:nil="true" />
+    <ExpiredTime xsi:nil="true" />
+  </WorkflowItemRead>
+  <WorkflowItemRead>
+    <Id>54</Id>
+    <RentId>0</RentId>
+    <InstanceId>17101000003</InstanceId>
+    <ItemId>10001</ItemId>
+    <ItemSeq>0</ItemSeq>
+    <Status>Sent</Status>
+    <OpinionType>0</OpinionType>
+    <AppCode>1</AppCode>
+    <PreItemId>3</PreItemId>
+    <PartUserId>7B7F55A3-99F6-4194-978D-C4AF3457DA00</PartUserId>
+    <PartUserName>何晓明</PartUserName>
+    <PartDepartmentId>71ae4bd3-cc87-4119-8a26-0ae7f1510899</PartDepartmentId>
+    <PartDepepartmentName>平台部</PartDepepartmentName>
+    <CurrentActivity>传阅</CurrentActivity>
+    <Alias>传阅</Alias>
+    <AutoFinish>false</AutoFinish>
+    <PasserUserId>01537D91-83F8-460D-8137-A24AEFF2A853</PasserUserId>
+    <PasserUserName>庄建超</PasserUserName>
+    <ReceiveTime>2017-10-10T14:13:44</ReceiveTime>
+    <ReadTime xsi:nil="true" />
+    <FinishTime xsi:nil="true" />
+    <ExpiredTime xsi:nil="true" />
+  </WorkflowItemRead>
+  <WorkflowItemRead>
+    <Id>55</Id>
+    <RentId>0</RentId>
+    <InstanceId>17101000002</InstanceId>
+    <ItemId>10001</ItemId>
+    <ItemSeq>0</ItemSeq>
+    <Status>Sent</Status>
+    <OpinionType>0</OpinionType>
+    <AppCode>1</AppCode>
+    <PreItemId>5</PreItemId>
+    <PartUserId>3D1C548C-6227-4CDC-B428-47FEF703407F</PartUserId>
+    <PartUserName>周晓德</PartUserName>
+    <PartDepartmentId>71ae4bd3-cc87-4119-8a26-0ae7f1510899</PartDepartmentId>
+    <PartDepepartmentName>平台部</PartDepepartmentName>
+    <CurrentActivity>传阅</CurrentActivity>
+    <Alias>传阅</Alias>
+    <AutoFinish>false</AutoFinish>
+    <PasserUserId>01537D91-83F8-460D-8137-A24AEFF2A853</PasserUserId>
+    <PasserUserName>庄建超</PasserUserName>
+    <ReceiveTime>2017-10-10T17:22:52</ReceiveTime>
+    <ReadTime xsi:nil="true" />
+    <FinishTime xsi:nil="true" />
+    <ExpiredTime xsi:nil="true" />
+  </WorkflowItemRead>
+  <WorkflowItemRead>
+    <Id>56</Id>
+    <RentId>0</RentId>
+    <InstanceId>17101000006</InstanceId>
+    <ItemId>10001</ItemId>
+    <ItemSeq>0</ItemSeq>
+    <Status>Sent</Status>
+    <OpinionType>0</OpinionType>
+    <AppCode>1</AppCode>
+    <PreItemId>2</PreItemId>
+    <PartUserId>42BD7042-0F3C-49FA-943A-5CE162BB14DB</PartUserId>
+    <PartUserName>刘佑成</PartUserName>
+    <PartDepartmentId>efccd063-5ff1-4631-9d54-04a968f44001</PartDepartmentId>
+    <PartDepepartmentName>运维部</PartDepepartmentName>
+    <CurrentActivity>传阅</CurrentActivity>
+    <Alias>传阅</Alias>
+    <AutoFinish>false</AutoFinish>
+    <PasserUserId>01537D91-83F8-460D-8137-A24AEFF2A853</PasserUserId>
+    <PasserUserName>庄建超</PasserUserName>
+    <ReceiveTime>2017-10-10T19:13:03</ReceiveTime>
+    <ReadTime xsi:nil="true" />
+    <FinishTime xsi:nil="true" />
+    <ExpiredTime xsi:nil="true" />
+  </WorkflowItemRead>
+  <WorkflowItemRead>
+    <Id>57</Id>
+    <RentId>0</RentId>
+    <InstanceId>17101000005</InstanceId>
+    <ItemId>10001</ItemId>
+    <ItemSeq>0</ItemSeq>
+    <Status>Sent</Status>
+    <OpinionType>0</OpinionType>
+    <AppCode>1</AppCode>
+    <PreItemId>5</PreItemId>
+    <PartUserId>1ED2DC10-F556-41DC-A2F8-AF5652721570</PartUserId>
+    <PartUserName>谢跃</PartUserName>
+    <PartDepartmentId>71ae4bd3-cc87-4119-8a26-0ae7f1510899</PartDepartmentId>
+    <PartDepepartmentName>平台部</PartDepepartmentName>
+    <CurrentActivity>传阅</CurrentActivity>
+    <Alias>传阅</Alias>
+    <AutoFinish>false</AutoFinish>
+    <PasserUserId>01537D91-83F8-460D-8137-A24AEFF2A853</PasserUserId>
+    <PasserUserName>庄建超</PasserUserName>
+    <ReceiveTime>2017-10-11T10:36:27</ReceiveTime>
+    <ReadTime xsi:nil="true" />
+    <FinishTime xsi:nil="true" />
+    <ExpiredTime xsi:nil="true" />
+  </WorkflowItemRead>
+  <WorkflowItemRead>
+    <Id>58</Id>
+    <RentId>0</RentId>
+    <InstanceId>17101000004</InstanceId>
+    <ItemId>10001</ItemId>
+    <ItemSeq>0</ItemSeq>
+    <Status>Sent</Status>
+    <OpinionType>0</OpinionType>
+    <AppCode>1</AppCode>
+    <PreItemId>5</PreItemId>
+    <PartUserId>48DF3181-BFD2-4DEE-A909-20199EA7BCFE</PartUserId>
+    <PartUserName>李晓冬</PartUserName>
+    <PartDepartmentId>efccd063-5ff1-4631-9d54-04a968f44001</PartDepartmentId>
+    <PartDepepartmentName>运维部</PartDepepartmentName>
+    <CurrentActivity>传阅</CurrentActivity>
+    <Alias>传阅</Alias>
+    <AutoFinish>false</AutoFinish>
+    <PasserUserId>01537D91-83F8-460D-8137-A24AEFF2A853</PasserUserId>
+    <PasserUserName>庄建超</PasserUserName>
+    <ReceiveTime>2017-10-11T10:36:53</ReceiveTime>
+    <ReadTime xsi:nil="true" />
+    <FinishTime xsi:nil="true" />
+    <ExpiredTime xsi:nil="true" />
+  </WorkflowItemRead>
+  <WorkflowItemRead>
+    <Id>59</Id>
+    <RentId>0</RentId>
+    <InstanceId>17101100003</InstanceId>
+    <ItemId>10001</ItemId>
+    <ItemSeq>0</ItemSeq>
+    <Status>Sent</Status>
+    <OpinionType>0</OpinionType>
+    <AppCode>1</AppCode>
+    <PreItemId>2</PreItemId>
+    <PartUserId>1E8BF4CD-6FB5-40B3-8E95-48B321D7A496</PartUserId>
+    <PartUserName>佘朝杭</PartUserName>
+    <PartDepartmentId>71ae4bd3-cc87-4119-8a26-0ae7f1510899</PartDepartmentId>
+    <PartDepepartmentName>平台部</PartDepepartmentName>
+    <CurrentActivity>传阅</CurrentActivity>
+    <Alias>传阅</Alias>
+    <AutoFinish>false</AutoFinish>
+    <PasserUserId>01537D91-83F8-460D-8137-A24AEFF2A853</PasserUserId>
+    <PasserUserName>庄建超</PasserUserName>
+    <ReceiveTime>2017-10-11T14:15:32</ReceiveTime>
+    <ReadTime xsi:nil="true" />
+    <FinishTime xsi:nil="true" />
+    <ExpiredTime xsi:nil="true" />
+  </WorkflowItemRead>
+  <WorkflowItemRead>
+    <Id>60</Id>
+    <RentId>0</RentId>
+    <InstanceId>17101100002</InstanceId>
+    <ItemId>10001</ItemId>
+    <ItemSeq>0</ItemSeq>
+    <Status>Sent</Status>
+    <OpinionType>0</OpinionType>
+    <AppCode>1</AppCode>
+    <PreItemId>3</PreItemId>
+    <PartUserId>7BEF8F09-1D28-4876-81D8-59A3D61187E1</PartUserId>
+    <PartUserName>龚四维</PartUserName>
+    <PartDepartmentId>71ae4bd3-cc87-4119-8a26-0ae7f1510899</PartDepartmentId>
+    <PartDepepartmentName>平台部</PartDepepartmentName>
+    <CurrentActivity>传阅</CurrentActivity>
+    <Alias>传阅</Alias>
+    <AutoFinish>false</AutoFinish>
+    <PasserUserId>01537D91-83F8-460D-8137-A24AEFF2A853</PasserUserId>
+    <PasserUserName>庄建超</PasserUserName>
+    <ReceiveTime>2017-10-11T14:16:24</ReceiveTime>
+    <ReadTime xsi:nil="true" />
+    <FinishTime xsi:nil="true" />
+    <ExpiredTime xsi:nil="true" />
+  </WorkflowItemRead>
+</ArrayOfWorkflowItemRead>

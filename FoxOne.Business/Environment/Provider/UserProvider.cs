@@ -19,20 +19,46 @@ namespace FoxOne.Business.Environment
 
         public object Resolve(string name)
         {
-            object value;
-            var fastType = FastType.Get(Sec.User.GetType());
-            var getter = fastType.GetGetter(name);
             if (name == "RoleName")
             {
                 return string.Join("|", Sec.User.Roles.Select(o => o.RoleType.Name));
             }
-            if (getter != null)
+            if(name == "IsSuperAdmin")
             {
-                return getter.GetValue(Sec.User);
+                return Sec.IsSuperAdmin;
+            }
+            object value = Sec.User;
+            FastType fastType = null;
+            if (name.IndexOf(".") > 0)
+            {
+                string[] propAtt = name.Split('.');
+                foreach (var item in propAtt)
+                {
+                    fastType = FastType.Get(value.GetType());
+                    var getter = fastType.GetGetter(item);
+                    if (getter != null)
+                    {
+                        value = getter.GetValue(value);
+                    }
+                    else
+                    {
+                        throw new FoxOneException("Express_Not_Found", name);
+                    }
+                }
+                return value;
             }
             else
             {
-                return Sec.User.Properties.TryGetValue(name, out value) ? value : null;
+                fastType = FastType.Get(value.GetType());
+                var getter = fastType.GetGetter(name);
+                if (getter != null)
+                {
+                    return getter.GetValue(Sec.User);
+                }
+                else
+                {
+                    return Sec.User.Properties.TryGetValue(name, out value) ? value : null;
+                }
             }
         }
     }

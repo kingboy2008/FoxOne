@@ -1,0 +1,237 @@
+﻿@model FoxOne.Web.Controllers.WikiDocumentViewModel
+@{
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>@Model.Document["Title"]_@Model.Document["CreatorId_Text"]_@Model.Document["LastUpdateTime"]</title>
+    <meta http-equiv=Content-Type content="text/html;charset=utf-8">
+    <meta charset="gbk">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="copyright" content="" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=yes" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+
+    <link href="~/DDStatic/css/reset.css" rel="stylesheet" />
+    <link href="~/DDStatic/css/task.css" rel="stylesheet" />
+    <link href="~/Mobile/css/common.css" rel="stylesheet" type="text/css" />
+    <link href="~/Mobile/css/wiki.css" rel="stylesheet" />
+    <style>
+        .operation {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            background: #f0f0f0;
+            padding: 0.08rem 0 0.05rem 0;
+            width: 100%;
+        }
+
+        .operation__nav {
+            display: flex;
+        }
+
+        .operation__item {
+            float: left;
+            flex: 1;
+            text-align: center;
+            font-size: .22rem;
+        }
+
+            .operation__item a {
+                color: #555;
+            }
+
+            .operation__item span {
+                display: block;
+                width: .52rem;
+                height: .52rem;
+                margin: 0 auto;
+            }
+
+                .operation__item span img {
+                    width: 100%;
+                    height: 100%;
+                }
+    </style>
+</head>
+<body>
+    <header class="comhead" style="display:none">
+        <h2>@Model.Document["Title"]</h2>
+        <p class="info">
+            <span class="author">作者：</span><span class="name clo666">@Model.Document["CreatorId_Text"]</span>
+            <span class="time ml40">时间：</span><span class="date clo666">@Model.Document["LastUpdateTime"]</span>
+        </p>
+    </header>
+    <div class="main"delp="@Model.Document["btnDelete"]" downp="@Model.Document["btnAttachDownload"]" prep="@Model.Document["AttachRepeater"]" sharep="@Model.Document["btnEdit"]">
+        <p class="mian__text">
+            @Html.Raw( Model.Document["Content"])
+        </p>
+        @if (Model.Document["AttachRepeater"].ToString() == "1")
+        {
+        <div class="attachment">
+            <ul class="attachment__content">
+                
+                @foreach (var attachment in Model.AttachmentList)
+                {
+                    <li class="attachment__item">
+                        <a href="/wiki/ViewAttachment?attachmentId=@attachment["Id"]" target="_blank">@attachment["FileName"]</a>
+                    </li>
+                }
+            </ul>
+        </div>
+        }
+    </div>
+
+    <div class="dialog-mask"></div>
+    <div class="operation">
+        <ul class="operation__nav">
+            <li class="operation__item" onclick="share()">
+                <span><img src="/images/share.png" prel="sharep"></span>
+                分享
+            </li>
+            <li class="operation__item" onclick="download()">
+                <span><img src="/images/download.png" prel="downp"></span>
+                下载
+            </li>
+        </ul>
+    </div>
+
+
+    <div id="shareDoc" class="dialog dialog__new" style="display: none">
+        <div class="dialog__content">
+            <p class="dialog__title">分享文章</p>
+            <form>
+                <input id="pw1" type="password" class="dialog__ipt mb20" name="name" placeholder="分享密码">
+                <input id="pw2" type="password" class="dialog__ipt mb20" name="number" placeholder="确认密码">
+            </form>
+            <div class="btn__box">
+                <a href="javascript:viod(0)" onclick="$('.dialog-mask').hide();$('#shareDoc').hide();">取消</a>
+                <a href="javascript:shareRequest()" class="ml20">分享</a>
+            </div>
+        </div>
+    </div>  
+    <script src="~/Scripts/zepto.min.js"></script>
+    <script type="text/javascript" src="https://g.alicdn.com/dingding/open-develop/1.6.9/dingtalk.js"></script>
+    <script src="~/DDStatic/js/fastclick.js"></script>
+    <script src="~/DDStatic/js/index.js"></script>
+    <script>
+        function setRootSize() {
+            var deviceWidth = document.documentElement.clientWidth;
+            if (deviceWidth > 750) { deviceWidth = 750; }
+            document.documentElement.style.fontSize = deviceWidth / 7.5 + 'px';
+            var h = $(window).height() - $(".comhead").height() - $(".operation").height() - $(".dialog-mask").height();
+
+            $(".main").css({ "overflow-y": "scroll", "padding": "0","margin":"0"}).height(h);
+
+            $("img").each(function () {
+                $(this).width("100%");
+            });
+        }
+        setRootSize();
+        window.addEventListener('resize', function () {
+            setRootSize();
+        }, false);
+        $(function () {
+            setRootSize();
+            refreshOptArea($(".main"));
+
+        });
+        dd.ready(function () {
+            
+            dd.biz.navigation.setRight({
+                text: '@FoxOne.Business.Security.Sec.User.Name',
+                onSuccess: function (data) {
+                },
+                onFail: function (err) {
+                    logger.e(JSON.stringify(err));
+                }
+            });
+
+            //Page.defaultBackEvent();
+        });
+        function refreshOptArea(j) {
+            $("[prel]").hide();
+            $("[prel]").each(function () {
+                var attr = $(this).attr("prel");
+                if (j.attr(attr) == "1")
+                {
+                    $(this).show();
+                }
+
+            });
+        }
+
+        function share() {
+
+            $('.dialog-mask').show();
+            $('#shareDoc').show();
+        }
+
+        function shareRequest() {
+            var pw1 = $("#pw1").val();
+            var pw2 = $("#pw2").val();
+            if (pw1.length == 0 || pw2.length == 0)
+            {
+                alert(" 请输入完整信息");
+                return;
+            }
+            if (pw2 != pw1)
+            {
+                alert("密码不一致");
+            }
+            var shareId = '@FoxOne.Core.Utility.GetGuid().Substring(0,18)@DateTime.Now.ToString("yyyyMMddHHmmss")';//32- 14;
+            var data = {
+                DocId: '@Model.Document["Id"]',
+                ShareUser: '@FoxOne.Business.Security.Sec.User.Id',
+                ValidateCode: pw1,
+                StartTime: '@DateTime.Now.Date.ToString("yyyy-MM-dd")',
+                EndTime: '@DateTime.Now.Date.AddMonths(1).ToString("yyyy-MM-dd")',
+                Status: 'Enabled',
+                Id: shareId,
+
+                _FORM_VIEW_MODE: 'Insert',
+                _PAGE_ID: 'shareEdit',
+                _CTRL_ID:'shareEditForm',
+            };
+
+            $.ajax({
+                url: '/Entity/Edit',
+                data: data,
+                type: 'POST',
+                dataType: "json",
+                success: function (data, status, xhr) {
+                    if (data) {
+                        dd.setClipboard({
+                            text:"http://oa.3weijia.com/Wiki/ShareDocument?shareCode="+ shareId,
+                        });
+                        var err = data.Result ? "分享成功,地址已拷贝入粘贴板" : data.ErrorMessage;
+                        dd.device.notification.alert({
+                            message: err,
+                            title: "提示",
+                            buttonName: "确认",
+                            onSuccess: function () { window.reload(); },
+                            onFail: function (err) { }
+                        });
+                    }
+                },
+                error: function (xhr, errorType, error) {
+                    logger.e(errorType + "," + error);
+                    alert("操作出错");
+                }
+            });
+        }
+
+        function download() {
+            window.open("/Wiki/BatchDownload?docId=@Model.Document["Id"]");
+        }
+    </script>
+</body>
+</html>

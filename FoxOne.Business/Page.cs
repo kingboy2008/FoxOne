@@ -35,17 +35,26 @@ namespace FoxOne.Business
             var componentEntities = pageEntity.Components;
             JavaScriptSerializer serializer = new JavaScriptSerializer();
             serializer.RegisterConverters(new[] { new ComponentConverter() });
+            if(pageEntity.Service.IsNotNullOrEmpty())
+            {
+                Service = Activator.CreateInstance(TypeHelper.GetType(pageEntity.Service)) as IPageService;
+            }
             foreach (var component in componentEntities)
             {
                 var type = TypeHelper.GetType(component.Type);
                 if (!component.JsonContent.IsNullOrEmpty())
                 {
-                    var instance = serializer.Deserialize(component.JsonContent, type);
-                    var control = instance as IControl;
-                    control.ParentId = component.ParentId;
-                    control.PageId = component.PageId;
-                    control.TargetId = component.TargetId;
-                    Controls.Add(control);
+                    try
+                    {
+                        var instance = serializer.Deserialize(component.JsonContent, type);
+                        var control = instance as IControl;
+                        control.ParentId = component.ParentId;
+                        control.PageId = component.PageId;
+                        control.TargetId = component.TargetId;
+                        Controls.Add(control);
+                    }
+                    catch { }
+
                 }
             }
             foreach (var e in Controls)
@@ -259,6 +268,10 @@ namespace FoxOne.Business
         /// </summary>
         public void PreRender()
         {
+            if(Service!=null)
+            {
+                Service.Filter(this);
+            }
             Layout.Render();
             foreach (var extCssFile in ExtFiles.Where(o => o.Type == "CSS").OrderBy(o => o.Rank))
             {
@@ -323,6 +336,10 @@ namespace FoxOne.Business
             }
             script.AppendInnerHtml("$(function(){\n" + startUpScript.ToString() + "\n});");
             body.AppendInnerHtml(script.ToString());
+            if(!SysConfig.IsProductEnv && Sec.IsSuperAdmin)
+            {
+                body.AppendInnerHtml("<div style='position:fixed;bottom:10px;right:10px;padding:10px;color:red;border:1px dashed red;'><a target='_blank' href='/PageDesigner/PageManagement?_PAGE_ID=" + Id + "&_TYPE_NAME=Page'>进入设计</a></div>");
+            }
             return body.ToString();
         }
 
@@ -433,8 +450,11 @@ namespace FoxOne.Business
             pageEntity.Layout = DBContext<LayoutEntity>.Instance.Get(pageEntity.LayoutId);
             var pageFiles = DBContext<PageLayoutFileEntity>.Instance.Where(o => o.PageOrLayoutId.Equals(pageEntity.Id, StringComparison.CurrentCultureIgnoreCase)).Select(o => o.FileId);
             pageEntity.ExtFiles = DBContext<ExternalFileEntity>.Instance.Where(o => pageFiles.Contains(o.Id, StringComparer.OrdinalIgnoreCase)).ToList();
-            var layoutFiles = DBContext<PageLayoutFileEntity>.Instance.Where(o => o.PageOrLayoutId.Equals(pageEntity.LayoutId, StringComparison.OrdinalIgnoreCase)).Select(o => o.FileId);
-            pageEntity.Layout.ExtFiles = DBContext<ExternalFileEntity>.Instance.Where(o => layoutFiles.Contains(o.Id, StringComparer.OrdinalIgnoreCase)).ToList();
+            if (pageEntity.Layout != null)
+            {
+                var layoutFiles = DBContext<PageLayoutFileEntity>.Instance.Where(o => o.PageOrLayoutId.Equals(pageEntity.LayoutId, StringComparison.OrdinalIgnoreCase)).Select(o => o.FileId);
+                pageEntity.Layout.ExtFiles = DBContext<ExternalFileEntity>.Instance.Where(o => layoutFiles.Contains(o.Id, StringComparer.OrdinalIgnoreCase)).ToList();
+            }
             return pageEntity;
         }
     }

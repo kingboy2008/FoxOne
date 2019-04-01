@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="FoxOne.Business.ControlBase">
+    <Position X="6.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAABAAA=</HashCode>
+      <FileName>BaseImpl\ControlBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FoxOne.Business.KeyValueDataSourceBase">
+    <Position X="9.25" Y="0.75" Width="2" />
+    <InheritanceLine Type="FoxOne.Business.ControlBase" FixedToPoint="true">
+      <Path>
+        <Point X="7" Y="2.75" />
+        <Point X="7" Y="2" />
+        <Point X="9.25" Y="2" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQBAACAAAAAAAAAAAAAAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>BaseImpl\KeyValueDataSourceBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FoxOne.Business.ListDataSourceBase">
+    <Position X="9" Y="3.5" Width="2.25" />
+    <InheritanceLine Type="FoxOne.Business.ControlBase" FixedFromPoint="true">
+      <Path>
+        <Point X="7.438" Y="4.421" />
+        <Point X="7.438" Y="4.815" />
+        <Point X="9" Y="4.815" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAABCAAAAAAAAAIAAAAAAAAAQABgAAAAAAAAAAAI=</HashCode>
+      <FileName>BaseImpl\ListDataSourceBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FoxOne.Business.ColumnConverterBase">
+    <Position X="3.5" Y="5.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAwAAAAAAAAABAAAAAEEAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>BaseImpl\ColumnConverterBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FoxOne.Business.SortableControlBase">
+    <Position X="3.25" Y="3" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BaseImpl\SortableControlBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FoxOne.Business.DataFilterBase">
+    <Position X="3.5" Y="0.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BaseImpl\DataFilterBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FoxOne.Business.DataFormatColumnConverter" Collapsed="true">
+    <Position X="0.75" Y="4.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAAAACAAAAAAAAAAAAAAAAAEAAAAAA=</HashCode>
+      <FileName>Converter\DataFormatColumnConverter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxOne.Business.DictionaryColumnConverter" Collapsed="true">
+    <Position X="0.5" Y="5.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAEAAAAAAAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Converter\DictionaryColumnConverter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxOne.Business.EntityColumnConverter" Collapsed="true">
+    <Position X="0.5" Y="6.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAIAAAAAAAAAQEAAAAAAQEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Converter\EntityColumnConverter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxOne.Business.EnumColumnConverter" Collapsed="true">
+    <Position X="0.75" Y="7.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAEAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Converter\EnumColumnConverter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxOne.Business.CompositeDataFilter" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAAAAAACAAAAAABAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DataFilter\CompositeDataFilter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxOne.Business.RequestParameterDataFilter" Collapsed="true">
+    <Position X="0.5" Y="1.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAQAAAAAAAAABAQAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>DataFilter\RequestParameterDataFilter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxOne.Business.StaticDataFilter" Collapsed="true">
+    <Position X="0.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAAAAAABAAAAAABAAAAAAQAAgAAAAIAA=</HashCode>
+      <FileName>DataFilter\StaticDataFilter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxOne.Business.CRUDDataSource" Collapsed="true">
+    <Position X="12" Y="3.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>EAQgCEAAQAAACABAAAAAAAAAABEAAAAAAAAAEAAAIAo=</HashCode>
+      <FileName>DataSource\CRUDDataSource.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FoxOne.Business.DataTableDataSource" Collapsed="true">
+    <Position X="12" Y="5.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAQAAEAAQAAACABAAAEAAAABABEAAAgAAAAAJQAAIAA=</HashCode>
+      <FileName>DataSource\DataTableDataSource.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FoxOne.Business.EntityDataSource" Collapsed="true">
+    <Position X="12" Y="7.25" Width="2.25" />
+    <InheritanceLine Type="FoxOne.Business.ListDataSourceBase" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="10.875" Y="6.131" />
+        <Point X="10.875" Y="6.371" />
+        <Point X="11.76" Y="6.371" />
+        <Point X="11.76" Y="7.375" />
+        <Point X="12" Y="7.375" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>QAQAAEIAQAAACABAQAAAAAAAQBEAAAgAAAAAAAAAIAA=</HashCode>
+      <FileName>DataSource\EntityDataSource.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FoxOne.Business.ReferenceDataSource" Collapsed="true">
+    <Position X="9.5" Y="7.25" Width="2" />
+    <InheritanceLine Type="FoxOne.Business.ListDataSourceBase" FixedToPoint="true">
+      <Path>
+        <Point X="10.125" Y="6.131" />
+        <Point X="10.125" Y="6.875" />
+        <Point X="10" Y="6.875" />
+        <Point X="10" Y="7.25" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAEAAAAAAEAAAAAAAAAAAIAAAAAI=</HashCode>
+      <FileName>DataSource\ReferenceDataSource.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxOne.Business.SqlIdListDataSource" Collapsed="true">
+    <Position X="7" Y="7.25" Width="2" />
+    <InheritanceLine Type="FoxOne.Business.ListDataSourceBase" FixedFromPoint="true">
+      <Path>
+        <Point X="9.625" Y="6.131" />
+        <Point X="9.625" Y="6.875" />
+        <Point X="8" Y="6.875" />
+        <Point X="8" Y="7.25" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAACAAAAAAAAAAAABAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>DataSource\SqlIdListDataSource.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxOne.Business.DictionaryDataSource" Collapsed="true">
+    <Position X="12" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>KeyValueDataSource\DictionaryDataSource.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxOne.Business.EnumDataSource" Collapsed="true">
+    <Position X="12" Y="1.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAAAgAAAAAEIAA=</HashCode>
+      <FileName>KeyValueDataSource\EnumDataSource.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxOne.Business.StringSplitDataSource" Collapsed="true">
+    <Position X="12" Y="2.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>KeyValueDataSource\StringSplitDataSource.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="微软雅黑" Size="9" />
+</ClassDiagram>

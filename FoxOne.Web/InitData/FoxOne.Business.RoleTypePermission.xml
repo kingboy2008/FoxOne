@@ -1,6 +1,18 @@
 <?xml version="1.0"?>
 <ArrayOfRoleTypePermission xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <RoleTypePermission>
+    <Id>648c6aa9-ec94-43a0-812b-289daf017113</Id>
+    <RentId>0</RentId>
+    <RoleTypeId>81c8d21c-c018-4f18-979b-4c5da1d97f18</RoleTypeId>
+    <PermissionId>dd7ea3f1-66f2-4b1a-9702-55d6c1425f80</PermissionId>
+  </RoleTypePermission>
+  <RoleTypePermission>
+    <Id>ab5dc372-98c0-4d71-8126-4e09d94cc1eb</Id>
+    <RentId>0</RentId>
+    <RoleTypeId>81c8d21c-c018-4f18-979b-4c5da1d97f18</RoleTypeId>
+    <PermissionId>8906a58a-a74c-45a6-b283-82577dae66dc</PermissionId>
+  </RoleTypePermission>
+  <RoleTypePermission>
     <Id>0e6b944c-3f51-4218-94b3-9832299979f1</Id>
     <RentId>0</RentId>
     <RoleTypeId>81c8d21c-c018-4f18-979b-4c5da1d97f18</RoleTypeId>
@@ -49,6 +61,18 @@
     <PermissionId>0ac5868e-6ba3-4e6a-8989-cb392ffa9af0</PermissionId>
   </RoleTypePermission>
   <RoleTypePermission>
+    <Id>991f72a7-c51b-4b42-9bb0-0dacb8929eba</Id>
+    <RentId>0</RentId>
+    <RoleTypeId>97a542bf-9780-4f93-bbac-cc877a06ffd1</RoleTypeId>
+    <PermissionId>b4c3f57f-4a04-4d88-97e1-5a644eead738</PermissionId>
+  </RoleTypePermission>
+  <RoleTypePermission>
+    <Id>6d277314-62de-446c-9a8a-da7fcc7c239c</Id>
+    <RentId>0</RentId>
+    <RoleTypeId>2b7b9cde-cab7-4621-a5a2-101f77d7a784</RoleTypeId>
+    <PermissionId>0ac5868e-6ba3-4e6a-8989-cb392ffa9af0</PermissionId>
+  </RoleTypePermission>
+  <RoleTypePermission>
     <Id>7fcb1796-94ed-438b-b400-5726e1386d32</Id>
     <RentId>0</RentId>
     <RoleTypeId>81c8d21c-c018-4f18-979b-4c5da1d97f18</RoleTypeId>
@@ -73,6 +97,12 @@
     <PermissionId>74627841-b950-45d6-a15f-86fb249e8a4b</PermissionId>
   </RoleTypePermission>
   <RoleTypePermission>
+    <Id>9929e46c-b975-41f2-9389-eb50d18210ca</Id>
+    <RentId>0</RentId>
+    <RoleTypeId>2b7b9cde-cab7-4621-a5a2-101f77d7a784</RoleTypeId>
+    <PermissionId>c9150161-a30f-4815-9e76-9f0a2d18e864</PermissionId>
+  </RoleTypePermission>
+  <RoleTypePermission>
     <Id>33070769-5054-45a0-93cc-b9398c772dda</Id>
     <RentId>0</RentId>
     <RoleTypeId>81c8d21c-c018-4f18-979b-4c5da1d97f18</RoleTypeId>
@@ -85,10 +115,28 @@
     <PermissionId>3eed305c-ec29-4ba7-8156-ad11d56343e9</PermissionId>
   </RoleTypePermission>
   <RoleTypePermission>
+    <Id>0a968935-01f8-455d-a2ed-ab38f5463ca6</Id>
+    <RentId>0</RentId>
+    <RoleTypeId>eb924101-88a2-4cfd-befa-ba411a502aa4</RoleTypeId>
+    <PermissionId>7a916c20-f763-48d9-9084-f924440f32a7</PermissionId>
+  </RoleTypePermission>
+  <RoleTypePermission>
+    <Id>a5b2e7cd-3da7-46b0-9bb0-f68a8691f8d1</Id>
+    <RentId>0</RentId>
+    <RoleTypeId>38a09a4d-a165-40df-bfe1-37b74a66264a</RoleTypeId>
+    <PermissionId>4710237e-9f79-46e9-b332-836d4b0f3fde</PermissionId>
+  </RoleTypePermission>
+  <RoleTypePermission>
     <Id>bb953d1d-b009-4f42-bd49-a190ce4f2c0b</Id>
     <RentId>0</RentId>
     <RoleTypeId>81c8d21c-c018-4f18-979b-4c5da1d97f18</RoleTypeId>
     <PermissionId>43fa759b-8b74-4f7b-af55-569a8c987534</PermissionId>
+  </RoleTypePermission>
+  <RoleTypePermission>
+    <Id>eac9d6fa-bdf8-4eb4-bcac-011c86139e69</Id>
+    <RentId>0</RentId>
+    <RoleTypeId>598eeefd-7460-45d9-95fd-d4641e2660a7</RoleTypeId>
+    <PermissionId>0ac5868e-6ba3-4e6a-8989-cb392ffa9af0</PermissionId>
   </RoleTypePermission>
   <RoleTypePermission>
     <Id>e57a5728-1f93-440f-94ad-bdaa075715e7</Id>
@@ -115,10 +163,160 @@
     <PermissionId>95ed11e7-78d2-418b-9269-3d2bf93ae960</PermissionId>
   </RoleTypePermission>
   <RoleTypePermission>
-    <Id>82585f5b-fa31-4885-bc2d-1a3f71389c6e</Id>
+    <Id>9e20d2ed-097f-4209-b0c4-55cac6d71824</Id>
+    <RentId>0</RentId>
+    <RoleTypeId>598eeefd-7460-45d9-95fd-d4641e2660a7</RoleTypeId>
+    <PermissionId>c9150161-a30f-4815-9e76-9f0a2d18e864</PermissionId>
+  </RoleTypePermission>
+  <RoleTypePermission>
+    <Id>997ae5a5-8814-4a81-ad1e-f11b6b1c30ff</Id>
+    <RentId>0</RentId>
+    <RoleTypeId>598eeefd-7460-45d9-95fd-d4641e2660a7</RoleTypeId>
+    <PermissionId>389dfc20-1cfb-468b-a555-9abc56ca5554</PermissionId>
+  </RoleTypePermission>
+  <RoleTypePermission>
+    <Id>1ed3cf35-99e2-4802-bc3a-97d2d900b589</Id>
+    <RentId>0</RentId>
+    <RoleTypeId>9aa0ea13-c9ef-45d8-ad6d-cac90ec375b1</RoleTypeId>
+    <PermissionId>0ac5868e-6ba3-4e6a-8989-cb392ffa9af0</PermissionId>
+  </RoleTypePermission>
+  <RoleTypePermission>
+    <Id>ef617b6e-420a-4cbe-be77-e4884ae44e56</Id>
+    <RentId>0</RentId>
+    <RoleTypeId>9aa0ea13-c9ef-45d8-ad6d-cac90ec375b1</RoleTypeId>
+    <PermissionId>c9150161-a30f-4815-9e76-9f0a2d18e864</PermissionId>
+  </RoleTypePermission>
+  <RoleTypePermission>
+    <Id>74fdf879-c0bd-4769-89e0-13b7f0165de7</Id>
+    <RentId>0</RentId>
+    <RoleTypeId>9aa0ea13-c9ef-45d8-ad6d-cac90ec375b1</RoleTypeId>
+    <PermissionId>389dfc20-1cfb-468b-a555-9abc56ca5554</PermissionId>
+  </RoleTypePermission>
+  <RoleTypePermission>
+    <Id>5fa6e3fc-6db0-4648-ac5c-c04abe30c9e0</Id>
+    <RentId>0</RentId>
+    <RoleTypeId>38a09a4d-a165-40df-bfe1-37b74a66264a</RoleTypeId>
+    <PermissionId>0ac5868e-6ba3-4e6a-8989-cb392ffa9af0</PermissionId>
+  </RoleTypePermission>
+  <RoleTypePermission>
+    <Id>0690a0c0-cfd8-4cdc-aaa3-ce3d47cac302</Id>
+    <RentId>0</RentId>
+    <RoleTypeId>38a09a4d-a165-40df-bfe1-37b74a66264a</RoleTypeId>
+    <PermissionId>c9150161-a30f-4815-9e76-9f0a2d18e864</PermissionId>
+  </RoleTypePermission>
+  <RoleTypePermission>
+    <Id>6b83d372-255d-4996-b1cf-0f2f9291be37</Id>
+    <RentId>0</RentId>
+    <RoleTypeId>38a09a4d-a165-40df-bfe1-37b74a66264a</RoleTypeId>
+    <PermissionId>389dfc20-1cfb-468b-a555-9abc56ca5554</PermissionId>
+  </RoleTypePermission>
+  <RoleTypePermission>
+    <Id>d0243b0f-98d9-4792-9602-d85bd5efa813</Id>
+    <RentId>0</RentId>
+    <RoleTypeId>9aa0ea13-c9ef-45d8-ad6d-cac90ec375b1</RoleTypeId>
+    <PermissionId>0cc0e977-ec5b-4df7-a027-f400bb789e34</PermissionId>
+  </RoleTypePermission>
+  <RoleTypePermission>
+    <Id>53b9b58f-d5d8-4d19-a683-e2a6dff3d011</Id>
+    <RentId>0</RentId>
+    <RoleTypeId>9aa0ea13-c9ef-45d8-ad6d-cac90ec375b1</RoleTypeId>
+    <PermissionId>bbdc23e7-8787-40b5-a3e0-b11002f74739</PermissionId>
+  </RoleTypePermission>
+  <RoleTypePermission>
+    <Id>c5290529-a1e9-4ce1-81d6-1de3ad860952</Id>
+    <RentId>0</RentId>
+    <RoleTypeId>598eeefd-7460-45d9-95fd-d4641e2660a7</RoleTypeId>
+    <PermissionId>0cfc63a2-c7be-4be9-9058-cf6a7bc1ebcf</PermissionId>
+  </RoleTypePermission>
+  <RoleTypePermission>
+    <Id>efc415a7-6631-4aba-99c1-58ab6e8cab5a</Id>
+    <RentId>0</RentId>
+    <RoleTypeId>2b7b9cde-cab7-4621-a5a2-101f77d7a784</RoleTypeId>
+    <PermissionId>0cc0e977-ec5b-4df7-a027-f400bb789e34</PermissionId>
+  </RoleTypePermission>
+  <RoleTypePermission>
+    <Id>21c74334-5423-419d-a38c-7b18ac06a1b9</Id>
+    <RentId>0</RentId>
+    <RoleTypeId>eb924101-88a2-4cfd-befa-ba411a502aa4</RoleTypeId>
+    <PermissionId>bbdc23e7-8787-40b5-a3e0-b11002f74739</PermissionId>
+  </RoleTypePermission>
+  <RoleTypePermission>
+    <Id>6e7ecf25-ad3d-41f9-aac2-2338456d76d0</Id>
+    <RentId>0</RentId>
+    <RoleTypeId>eb924101-88a2-4cfd-befa-ba411a502aa4</RoleTypeId>
+    <PermissionId>0cc0e977-ec5b-4df7-a027-f400bb789e34</PermissionId>
+  </RoleTypePermission>
+  <RoleTypePermission>
+    <Id>22f47040-a84b-4377-920a-da02e055e249</Id>
     <RentId>0</RentId>
     <RoleTypeId>81c8d21c-c018-4f18-979b-4c5da1d97f18</RoleTypeId>
-    <PermissionId>33cbb6f3-0267-4578-b040-eb113a465b49</PermissionId>
+    <PermissionId>bbdc23e7-8787-40b5-a3e0-b11002f74739</PermissionId>
+  </RoleTypePermission>
+  <RoleTypePermission>
+    <Id>8af35f19-abcf-4305-aae0-0a3769be5a4e</Id>
+    <RentId>0</RentId>
+    <RoleTypeId>81c8d21c-c018-4f18-979b-4c5da1d97f18</RoleTypeId>
+    <PermissionId>0cc0e977-ec5b-4df7-a027-f400bb789e34</PermissionId>
+  </RoleTypePermission>
+  <RoleTypePermission>
+    <Id>97a37fc5-96e4-4a87-a0a6-19006dc2565c</Id>
+    <RentId>0</RentId>
+    <RoleTypeId>9aa0ea13-c9ef-45d8-ad6d-cac90ec375b1</RoleTypeId>
+    <PermissionId>0cfc63a2-c7be-4be9-9058-cf6a7bc1ebcf</PermissionId>
+  </RoleTypePermission>
+  <RoleTypePermission>
+    <Id>8dbf64ba-de2c-40b7-9ec7-eb776fca8570</Id>
+    <RentId>0</RentId>
+    <RoleTypeId>38a09a4d-a165-40df-bfe1-37b74a66264a</RoleTypeId>
+    <PermissionId>0cfc63a2-c7be-4be9-9058-cf6a7bc1ebcf</PermissionId>
+  </RoleTypePermission>
+  <RoleTypePermission>
+    <Id>da82c870-1bf0-4e03-a341-edbf94f3dad1</Id>
+    <RentId>0</RentId>
+    <RoleTypeId>38a09a4d-a165-40df-bfe1-37b74a66264a</RoleTypeId>
+    <PermissionId>0cc0e977-ec5b-4df7-a027-f400bb789e34</PermissionId>
+  </RoleTypePermission>
+  <RoleTypePermission>
+    <Id>7bcae6c0-dc1c-4f2b-baec-6aa063981b0a</Id>
+    <RentId>0</RentId>
+    <RoleTypeId>38a09a4d-a165-40df-bfe1-37b74a66264a</RoleTypeId>
+    <PermissionId>bbdc23e7-8787-40b5-a3e0-b11002f74739</PermissionId>
+  </RoleTypePermission>
+  <RoleTypePermission>
+    <Id>1b7e0f67-c79c-4ed5-9601-1d1f98aabcdd</Id>
+    <RentId>0</RentId>
+    <RoleTypeId>2b7b9cde-cab7-4621-a5a2-101f77d7a784</RoleTypeId>
+    <PermissionId>bbdc23e7-8787-40b5-a3e0-b11002f74739</PermissionId>
+  </RoleTypePermission>
+  <RoleTypePermission>
+    <Id>eae8dd91-e48b-4fca-9b2b-ed5d7ae78222</Id>
+    <RentId>0</RentId>
+    <RoleTypeId>2b7b9cde-cab7-4621-a5a2-101f77d7a784</RoleTypeId>
+    <PermissionId>0cfc63a2-c7be-4be9-9058-cf6a7bc1ebcf</PermissionId>
+  </RoleTypePermission>
+  <RoleTypePermission>
+    <Id>9e3a48f3-6b38-4a31-8355-997f6f571099</Id>
+    <RentId>0</RentId>
+    <RoleTypeId>2b7b9cde-cab7-4621-a5a2-101f77d7a784</RoleTypeId>
+    <PermissionId>389dfc20-1cfb-468b-a555-9abc56ca5554</PermissionId>
+  </RoleTypePermission>
+  <RoleTypePermission>
+    <Id>daf0fca0-0edc-47ae-a52c-d86e039c7068</Id>
+    <RentId>0</RentId>
+    <RoleTypeId>598eeefd-7460-45d9-95fd-d4641e2660a7</RoleTypeId>
+    <PermissionId>0cc0e977-ec5b-4df7-a027-f400bb789e34</PermissionId>
+  </RoleTypePermission>
+  <RoleTypePermission>
+    <Id>637d12d1-c56c-45e5-9b51-22f14fe56edf</Id>
+    <RentId>0</RentId>
+    <RoleTypeId>598eeefd-7460-45d9-95fd-d4641e2660a7</RoleTypeId>
+    <PermissionId>bbdc23e7-8787-40b5-a3e0-b11002f74739</PermissionId>
+  </RoleTypePermission>
+  <RoleTypePermission>
+    <Id>0854b645-491d-4261-97e3-aaa6366846e3</Id>
+    <RentId>0</RentId>
+    <RoleTypeId>81c8d21c-c018-4f18-979b-4c5da1d97f18</RoleTypeId>
+    <PermissionId>10ac092b-866c-484b-9b29-fb6598292f98</PermissionId>
   </RoleTypePermission>
   <RoleTypePermission>
     <Id>91de4ce4-7c41-4f8a-bf98-82c2d83ac8d1</Id>
@@ -127,16 +325,88 @@
     <PermissionId>4710237e-9f79-46e9-b332-836d4b0f3fde</PermissionId>
   </RoleTypePermission>
   <RoleTypePermission>
+    <Id>f53027ac-827c-44f7-b2c4-95ac6899cae8</Id>
+    <RentId>0</RentId>
+    <RoleTypeId>46b00903-8afb-4469-ba86-6590e7db0002</RoleTypeId>
+    <PermissionId>10ac092b-866c-484b-9b29-fb6598292f98</PermissionId>
+  </RoleTypePermission>
+  <RoleTypePermission>
+    <Id>bdddc439-7954-4e3e-9420-7737b8cfca03</Id>
+    <RentId>0</RentId>
+    <RoleTypeId>81c8d21c-c018-4f18-979b-4c5da1d97f18</RoleTypeId>
+    <PermissionId>1cb4b510-1e2f-444f-9c07-2b57546ea762</PermissionId>
+  </RoleTypePermission>
+  <RoleTypePermission>
+    <Id>b87cf35f-9afa-4819-9745-6aa06db1fea2</Id>
+    <RentId>0</RentId>
+    <RoleTypeId>97a542bf-9780-4f93-bbac-cc877a06ffd1</RoleTypeId>
+    <PermissionId>77e1f5a1-60ed-4b4e-892f-88376003dae0</PermissionId>
+  </RoleTypePermission>
+  <RoleTypePermission>
+    <Id>3ce6ce0a-1dbf-4b5b-abc8-721d6916e017</Id>
+    <RentId>0</RentId>
+    <RoleTypeId>eb924101-88a2-4cfd-befa-ba411a502aa4</RoleTypeId>
+    <PermissionId>9829fcd6-1279-4458-8074-2c0ac831a9a6</PermissionId>
+  </RoleTypePermission>
+  <RoleTypePermission>
+    <Id>b1c3ccd7-a59f-4697-a036-3536e7eec32e</Id>
+    <RentId>0</RentId>
+    <RoleTypeId>eb924101-88a2-4cfd-befa-ba411a502aa4</RoleTypeId>
+    <PermissionId>5f088cdf-62ee-4b3a-b44a-483a1989976a</PermissionId>
+  </RoleTypePermission>
+  <RoleTypePermission>
+    <Id>d9f34af7-168f-4ace-901b-19cadc6a8768</Id>
+    <RentId>0</RentId>
+    <RoleTypeId>eb924101-88a2-4cfd-befa-ba411a502aa4</RoleTypeId>
+    <PermissionId>1cb4b510-1e2f-444f-9c07-2b57546ea762</PermissionId>
+  </RoleTypePermission>
+  <RoleTypePermission>
     <Id>0758d1e2-7858-4040-a867-0ef03a8d4225</Id>
     <RentId>0</RentId>
     <RoleTypeId>81c8d21c-c018-4f18-979b-4c5da1d97f18</RoleTypeId>
     <PermissionId>4710237e-9f79-46e9-b332-836d4b0f3fde</PermissionId>
   </RoleTypePermission>
   <RoleTypePermission>
-    <Id>10e12399-094f-4490-af56-a40805667fc6</Id>
+    <Id>192a284b-7445-4466-bf49-4fba3795e6ce</Id>
     <RentId>0</RentId>
     <RoleTypeId>81c8d21c-c018-4f18-979b-4c5da1d97f18</RoleTypeId>
-    <PermissionId>7f729936-863e-49a2-97fa-1b006dc8afcb</PermissionId>
+    <PermissionId>7a916c20-f763-48d9-9084-f924440f32a7</PermissionId>
+  </RoleTypePermission>
+  <RoleTypePermission>
+    <Id>82e6b584-7063-4987-a298-5b65931faff8</Id>
+    <RentId>0</RentId>
+    <RoleTypeId>81c8d21c-c018-4f18-979b-4c5da1d97f18</RoleTypeId>
+    <PermissionId>b4c3f57f-4a04-4d88-97e1-5a644eead738</PermissionId>
+  </RoleTypePermission>
+  <RoleTypePermission>
+    <Id>18e8a0ee-a145-4b35-99ed-bda1a9549f09</Id>
+    <RentId>0</RentId>
+    <RoleTypeId>97a542bf-9780-4f93-bbac-cc877a06ffd1</RoleTypeId>
+    <PermissionId>5f088cdf-62ee-4b3a-b44a-483a1989976a</PermissionId>
+  </RoleTypePermission>
+  <RoleTypePermission>
+    <Id>05906089-ac72-4b4f-920b-776311a9f347</Id>
+    <RentId>0</RentId>
+    <RoleTypeId>81c8d21c-c018-4f18-979b-4c5da1d97f18</RoleTypeId>
+    <PermissionId>77e1f5a1-60ed-4b4e-892f-88376003dae0</PermissionId>
+  </RoleTypePermission>
+  <RoleTypePermission>
+    <Id>637a7671-54e9-4a62-94a1-178be404c061</Id>
+    <RentId>0</RentId>
+    <RoleTypeId>81c8d21c-c018-4f18-979b-4c5da1d97f18</RoleTypeId>
+    <PermissionId>5f088cdf-62ee-4b3a-b44a-483a1989976a</PermissionId>
+  </RoleTypePermission>
+  <RoleTypePermission>
+    <Id>b5ba1afd-de77-49b9-903f-5b79f67e191b</Id>
+    <RentId>0</RentId>
+    <RoleTypeId>97a542bf-9780-4f93-bbac-cc877a06ffd1</RoleTypeId>
+    <PermissionId>7a916c20-f763-48d9-9084-f924440f32a7</PermissionId>
+  </RoleTypePermission>
+  <RoleTypePermission>
+    <Id>777c29dd-2d15-4af9-aa4b-b655f886b41b</Id>
+    <RentId>0</RentId>
+    <RoleTypeId>81c8d21c-c018-4f18-979b-4c5da1d97f18</RoleTypeId>
+    <PermissionId>ce876403-3172-4433-9ac2-651d21df6167</PermissionId>
   </RoleTypePermission>
   <RoleTypePermission>
     <Id>e28f9837-cfa3-4d03-b8c6-b89cac9d35ed</Id>
@@ -151,15 +421,51 @@
     <PermissionId>eba8e84f-4c48-451c-b7d6-72c33134cc54</PermissionId>
   </RoleTypePermission>
   <RoleTypePermission>
+    <Id>8d1018f7-a508-4cfe-a7f3-e394b0b4b121</Id>
+    <RentId>0</RentId>
+    <RoleTypeId>81c8d21c-c018-4f18-979b-4c5da1d97f18</RoleTypeId>
+    <PermissionId>3bc258d6-3479-4b2a-b1ae-113254eb0e60</PermissionId>
+  </RoleTypePermission>
+  <RoleTypePermission>
     <Id>1b377011-0f0e-4f76-9af6-787bf6863970</Id>
     <RentId>0</RentId>
     <RoleTypeId>81c8d21c-c018-4f18-979b-4c5da1d97f18</RoleTypeId>
     <PermissionId>70b3184f-901e-43ec-b205-b8a1fc72e72d</PermissionId>
   </RoleTypePermission>
   <RoleTypePermission>
-    <Id>f63ff00f-96f8-4d0b-b620-d9fd43b28baa</Id>
+    <Id>f37e026d-1792-4403-904b-083a3b5c1776</Id>
     <RentId>0</RentId>
-    <RoleTypeId>81c8d21c-c018-4f18-979b-4c5da1d97f18</RoleTypeId>
-    <PermissionId>7f8f9a24-6948-47e4-a3ee-553089975b7a</PermissionId>
+    <RoleTypeId>b5cc9ce7-df55-45be-b776-27646f042a4e</RoleTypeId>
+    <PermissionId>088b979e-6079-497c-897b-ef13348b36c9</PermissionId>
+  </RoleTypePermission>
+  <RoleTypePermission>
+    <Id>df393ae1-9da8-456c-8186-3bf3b805fe9e</Id>
+    <RentId>0</RentId>
+    <RoleTypeId>b5cc9ce7-df55-45be-b776-27646f042a4e</RoleTypeId>
+    <PermissionId>ce876403-3172-4433-9ac2-651d21df6167</PermissionId>
+  </RoleTypePermission>
+  <RoleTypePermission>
+    <Id>b73fb09b-41c1-47fe-bdde-b45b85bee60b</Id>
+    <RentId>0</RentId>
+    <RoleTypeId>b5cc9ce7-df55-45be-b776-27646f042a4e</RoleTypeId>
+    <PermissionId>3bc258d6-3479-4b2a-b1ae-113254eb0e60</PermissionId>
+  </RoleTypePermission>
+  <RoleTypePermission>
+    <Id>798eb93a-6566-41dc-9544-dfdc45e57ee2</Id>
+    <RentId>0</RentId>
+    <RoleTypeId>b5cc9ce7-df55-45be-b776-27646f042a4e</RoleTypeId>
+    <PermissionId>eba8e84f-4c48-451c-b7d6-72c33134cc54</PermissionId>
+  </RoleTypePermission>
+  <RoleTypePermission>
+    <Id>eeda6269-a887-4800-ad86-3425efebf1af</Id>
+    <RentId>0</RentId>
+    <RoleTypeId>b5cc9ce7-df55-45be-b776-27646f042a4e</RoleTypeId>
+    <PermissionId>8906a58a-a74c-45a6-b283-82577dae66dc</PermissionId>
+  </RoleTypePermission>
+  <RoleTypePermission>
+    <Id>20fdaa6a-104c-4d02-b46d-5e95daf5047b</Id>
+    <RentId>0</RentId>
+    <RoleTypeId>b5cc9ce7-df55-45be-b776-27646f042a4e</RoleTypeId>
+    <PermissionId>71ac43ea-4f4d-4278-972b-64dcdea5d982</PermissionId>
   </RoleTypePermission>
 </ArrayOfRoleTypePermission>

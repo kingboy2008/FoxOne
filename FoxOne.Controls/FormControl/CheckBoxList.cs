@@ -33,6 +33,12 @@ namespace FoxOne.Controls
             this.CssClass = "";
             base.AddAttributes();
             Attributes.Remove("name");
+            string style = "display:inline-block;";
+            if (this.Width.IsNotNullOrEmpty())
+            {
+                this.Width = "700px";
+            }
+            this.Attributes["style"] = style + "whidth:" + this.Width;
         }
 
         protected override string RenderInner()

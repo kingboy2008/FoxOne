@@ -5,6 +5,8 @@ using System.Text;
 using FoxOne.Core;
 using System.ComponentModel;
 using System.Web.Mvc;
+using FoxOne.Business.Environment;
+
 namespace FoxOne.Controls
 {
 
@@ -105,6 +107,48 @@ namespace FoxOne.Controls
             });
             Attributes["onclick"] = "WdatePicker({{{0}}});".FormatTo(innerAttrStr.ToString().Substring(1));
             Attributes["value"] = Value;
+
+            Attributes["autocomplete"] = "off";
+        }
+
+        public override string MobileControlName
+        {
+            get
+            {
+                if (DateTimeFormat.IsNullOrEmpty())
+                {
+                    return "datepicker";
+                }
+                else
+                {
+                    if (DateTimeFormat.StartsWith("yyyy-MM-dd HH:mm"))
+                    {
+                        return "datetimepicker";
+                    }
+                    else if (DateTimeFormat.StartsWith("yyyy-MM-dd"))
+                    {
+                        return "datepicker";
+                    }
+                    else
+                    {
+                        return "timepicker";
+                    }
+                }
+            }
+        }
+
+        public override string MobileValue
+        {
+            get
+            {
+                var result =Env.Parse( base.MobileValue);
+                if (result.IsNotNullOrEmpty())
+                {
+                    var format = DateTimeFormat.IsNullOrEmpty() ? "yyyy-MM-dd HH:mm" : DateTimeFormat;
+                    result= result.ConvertTo<DateTime>().ToString(format);
+                }
+                return result;
+            }
         }
 
         /*

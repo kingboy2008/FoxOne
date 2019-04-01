@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv=Content-Type content="text/html;charset=utf-8">
+    <meta charset="gbk">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection" />
+    <meta content="yes" name="apple-touch-fullscreen" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>签到成功</title>
+    <!--dd_nav_bgcolor-->
+    <link href="~/Mobile/css/style.css" rel="stylesheet" />
+    <link href="~/DDStatic/css/reset.css" rel="stylesheet" />
+    <link href="~/DDStatic/css/task.css" rel="stylesheet" />
+    <style>
+        .contain {
+            height: 100%;
+        }
+        .btn {
+            width: 100%;
+            margin-top: 60px;
+            height: 100%;
+        }
+
+            .btn img {
+                width: 200px;
+            }
+
+        .btn-list {
+            position: absolute;
+            top: 3%;
+            left: 50%;
+            margin-left: -100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="contain">
+        <img src="/images/party/bg.png" width="100%" height="100%" />
+        <div style="width:100%;height:100%;background-color:black;opacity: 0.5;position:absolute;top:0px;"></div>
+        <ul class="btn-list">
+            <li class="btn"><img src="/images/party/imgSuc.png" /></li>
+        </ul>
+    </div>
+    <script src="~/Scripts/zepto.min.js"></script>
+    <script type="text/javascript" src="https://g.alicdn.com/dingding/open-develop/1.6.9/dingtalk.js"></script>
+    <script src="~/DDStatic/js/fastclick.js"></script>
+    <script src="~/DDStatic/js/index.js"></script>
+    <script>
+        dd.ready(function () {
+            Page.defaultBackEvent();
+
+            dd.biz.navigation.setRight({
+                text: "",
+                onSuccess: function (data) {
+                },
+                onFail: function (err) {
+                    logger.e(JSON.stringify(err));
+                }
+            });
+        });
+            $(".btn").bind("click", function () {
+                location = "/Mobile/PartyIndex";
+            });
+    </script>
+</body>
+</html>

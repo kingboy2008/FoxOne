@@ -7,31 +7,15 @@
     *margin-right: .3em;
     line-height: 14px;
     vertical-align: text-top;
-    background-image: url("../icons/glyphicons-halflings.png");
+    background-image: url("../images/icons/glyphicons-halflings-white.png");
     background-position: 14px 14px;
     background-repeat: no-repeat;
 }
 
-/* White icons  */
 
-.icon-white,
-.nav-pills > .active > a > [class^="icon-"],
-.nav-pills > .active > a > [class*=" icon-"],
-.nav-list > .active > a > [class^="icon-"],
-.nav-list > .active > a > [class*=" icon-"],
-.navbar-inverse .nav > .active > a > [class^="icon-"],
-.navbar-inverse .nav > .active > a > [class*=" icon-"],
-.dropdown-menu > li > a:hover > [class^="icon-"],
-.dropdown-menu > li > a:focus > [class^="icon-"],
-.dropdown-menu > li > a:hover > [class*=" icon-"],
-.dropdown-menu > li > a:focus > [class*=" icon-"],
-.dropdown-menu > .active > a > [class^="icon-"],
-.dropdown-menu > .active > a > [class*=" icon-"],
-.dropdown-submenu:hover > a > [class^="icon-"],
-.dropdown-submenu:focus > a > [class^="icon-"],
-.dropdown-submenu:hover > a > [class*=" icon-"],
-.dropdown-submenu:focus > a > [class*=" icon-"] {
-    background-image: url("../icons/glyphicons-halflings-white.png");
+.btn-default>[class^="icon-"],
+.btn-default>[class*=" icon-"] {
+    background-image: url("../images/icons/glyphicons-halflings.png");
 }
 
 .icon-glass {
@@ -82,11 +66,11 @@
     background-position: -264px 0;
 }
 
-.icon-ok {
+.icon-book {
     background-position: -288px 0;
 }
 
-.icon-remove {
+.icon-delete {
     background-position: -312px 0;
 }
 
@@ -98,7 +82,7 @@
     background-position: -360px 0;
 }
 
-.icon-off {
+.icon-forceend {
     background-position: -384px 0;
 }
 
@@ -170,7 +154,7 @@
     background-position: -312px -24px;
 }
 
-.icon-headphones {
+.icon-hearphone {
     background-position: -336px -24px;
 }
 
@@ -202,7 +186,7 @@
     background-position: -25px -48px;
 }
 
-.icon-book {
+.icon-save {
     background-position: -48px -48px;
 }
 
@@ -294,7 +278,7 @@
     background-position: -96px -72px;
 }
 
-.icon-share {
+.icon-sendothertoread {
     background-position: -120px -72px;
 }
 
@@ -306,19 +290,19 @@
     background-position: -168px -72px;
 }
 
-.icon-step-backward {
+.icon-pushback {
     background-position: -192px -72px;
 }
 
-.icon-fast-backward {
+.icon-rollback {
     background-position: -216px -72px;
 }
 
-.icon-backward {
+.icon-backtoroot {
     background-position: -240px -72px;
 }
 
-.icon-play {
+.icon-send {
     background-position: -264px -72px;
 }
 
@@ -338,7 +322,7 @@
     background-position: -360px -72px;
 }
 
-.icon-step-forward {
+.icon-haha {
     background-position: -384px -72px;
 }
 

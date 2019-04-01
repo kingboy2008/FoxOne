@@ -9,6 +9,8 @@ using FoxOne.Data.Sql;
 using FoxOne.Data.Util;
 using FoxOne.Core;
 using System.Configuration;
+using System.Text;
+
 namespace FoxOne.Data
 {
     public class Dao
@@ -25,7 +27,7 @@ namespace FoxOne.Data
 
         public static Dao Get(string name)
         {
-            return new Dao(name);// DaoFactory.GetDao(name);
+            return DaoFactory.GetDao(name);
         }
         public Dao(string name)
         {
@@ -46,50 +48,6 @@ namespace FoxOne.Data
         public string ConnectionString
         {
             get { return _connectionString; }
-        }
-
-        public DbTransaction Transaction
-        {
-            get;
-            set;
-        }
-
-        public DbConnection Connection
-        {
-            get;
-            set;
-        }
-
-        private bool IsUseTran { get; set; }
-
-        public void UseTran(Action action)
-        {
-            IsUseTran = true;
-            try
-            {
-                Connection = Provider.CreateDbConnection(ConnectionString);
-                if (Connection.State != ConnectionState.Open)
-                {
-                    Connection.Open();
-                }
-                Transaction = Connection.BeginTransaction();
-                action();
-                Transaction.Commit();
-            }
-            catch
-            {
-                Transaction.Rollback();
-            }
-            finally
-            {
-                if (Connection.State == ConnectionState.Open)
-                {
-                    Connection.Close();
-                }
-                Connection = null;
-                Transaction = null;
-                IsUseTran = false;
-            }
         }
 
         public int ExecuteNonQuery(string sql, object parameters = null)
@@ -335,7 +293,7 @@ namespace FoxOne.Data
             return this.UpdateFields(entity, includedProperties.ToArray());
         }
 
-        public DaoDeleteable<T> Delete<T>() where T : class,new()
+        public DaoDeleteable<T> Delete<T>() where T : class, new()
         {
             return new DaoDeleteable<T>(this);
         }
@@ -412,7 +370,7 @@ namespace FoxOne.Data
             return Exec<int>(command, () =>
             {
                 return command.ExecuteNonQuery();
-            }, !IsUseTran);
+            }, true);
         }
 
         private object ExecuteScalar(DbCommand command)
@@ -420,7 +378,7 @@ namespace FoxOne.Data
             return Exec<object>(command, () =>
             {
                 return command.ExecuteScalar();
-            }, !IsUseTran);
+            }, true);
         }
 
         private IDataReader QueryReader(ISqlCommand command)
@@ -432,7 +390,7 @@ namespace FoxOne.Data
         {
             return Exec<IDataReader>(command, () =>
             {
-                return command.ExecuteReader(IsUseTran ? CommandBehavior.Default : CommandBehavior.CloseConnection);
+                return command.ExecuteReader(false ? CommandBehavior.Default : CommandBehavior.CloseConnection);
             }, false);
         }
 
@@ -457,7 +415,7 @@ namespace FoxOne.Data
             }
             catch (Exception ex)
             {
-                if (!IsUseTran && !closeConnection)
+                if (!closeConnection)
                 {
                     //未使用事务且要求不关闭连接，说明是在ExecuteReader中使用，如果语句报错，Reader不执行Dispose()，连接
                     //也不会关闭，所以要在catch中显示关闭连接。
@@ -471,74 +429,35 @@ namespace FoxOne.Data
                 if (closeConnection)
                 {
                     command.Connection.Close();
-                    this.Connection = null;
-                    this.Transaction = null;
                 }
             }
         }
 
         private T Execute<T>(string sql, object parameters, Func<DbCommand, T> func)
         {
-            CheckArguments(sql, parameters);
-
             ISqlStatement statement;
 
             //sql变量是否是sqlid，若是直接提取sqlstatement,若否则需要sqlparser提取转换
             bool isKey = FindStatement(sql, out statement);
-            Logger.Debug("\n------------Begin-----------\n");
-            if (isKey)
+            if (!isKey)
             {
-                Logger.Debug("Dao -> Found Statement For Key : \n'{0}'", sql);
-            }
-            else
-            {
-                Logger.Debug("Dao -> Parse Statement For Sql : \n{0}", sql);
                 statement = SqlParser.Parse(sql);
                 DaoFactory.GetSqlSource().Add(sql, statement);
             }
 
             var sw = Stopwatch.StartNew();
+            var command = statement.CreateCommand(Provider, parameters);
             try
             {
-                var command = statement.CreateCommand(Provider, parameters);
                 return func(CreateDbCommand(command));
             }
             finally
             {
                 sw.Stop();
-                if (isKey)
-                {
-                    Logger.Debug("Dao -> Execute Command '{0}' Used {1}ms", sql, sw.ElapsedMilliseconds);
-                }
-                else
-                {
-                    Logger.Debug("Dao -> Execute Sql Used {0}ms", sw.ElapsedMilliseconds);
-                }
-                Logger.Debug("\n------------End-----------\n");
+                Logger.Debug("Execute Command '{0}' Used {1} ms", command.ToString(), sw.ElapsedMilliseconds);
             }
         }
 
-        /// <summary>
-        /// 检查sql参数是否为空，以及sql中的参数载体类型是否是简单类型
-        /// </summary>
-        private void CheckArguments(string sql, object parameters)
-        {
-            if (string.IsNullOrEmpty(sql))
-            {
-                throw new ArgumentNullException("sql");
-            }
-
-            if (null != parameters)
-            {
-                Type type = parameters.GetType();
-
-                if (type.IsPrimitive || type.IsValueType)
-                {
-                    throw new InvalidOperationException(
-                        string.Format("Not Supported Type '{0}' of Argument 'object paramters'", type.FullName));
-                }
-            }
-        }
 
         /// <summary>
         /// 检查sqlId是否存在，如果存在则以ISqlStatement返回其sql
@@ -560,20 +479,9 @@ namespace FoxOne.Data
 
         private DbCommand CreateDbCommand(ISqlCommand command)
         {
-            Logger.Debug("\n\nSql -> \n{0}", command.CommandText);
-
-
             DbCommand dbCommand = Provider.CreateDbCommand(command.CommandText);
             dbCommand.CommandType = CommandType.Text;
-            if (IsUseTran)
-            {
-                dbCommand.Connection = this.Connection;
-                dbCommand.Transaction = this.Transaction;
-            }
-            else
-            {
-                dbCommand.Connection = Provider.CreateDbConnection(ConnectionString);
-            }
+            dbCommand.Connection = Provider.CreateDbConnection(ConnectionString);
             foreach (var parameter in command.Parameters)
             {
                 if (Provider.SupportsNamedParameter &&
@@ -589,7 +497,6 @@ namespace FoxOne.Data
 
                 object value = parameter.Value;
                 dbParameter.Value = value ?? DBNull.Value;
-                Logger.Debug("  #Parameter : '{0}' = '{1}' Type:{2}", parameter.Key, value, value == null ? "null" : value.GetType().ToString());
                 dbCommand.Parameters.Add(dbParameter);
             }
             return dbCommand;
