@@ -41,10 +41,13 @@
 </head>
 <body>
     <div class="succ-container">
-        <img src="~/images/check.png" /> 
+        <img src="~/images/check.png" />
         <br /><br />
         <p>
             @ViewData["Message"]
+        </p>
+        <p>
+            <span style="color:red;" id="min">5</span>秒后关闭窗口
         </p>
         <p class="link">
             【<a href="/Page/WorkItemList" target="_self">待办列表</a>】
@@ -53,5 +56,24 @@
             【<a href="/Page/NewFlow" target="_self">发起流程</a>】
         </p>
     </div>
+    <script src="/Scripts/jquery-1.8.2.js"></script>
+    <script>
+        var cmin = 5;
+        $(function () {
+            setInterval(function () {
+                //要执行的代码
+                cmin -= 1;
+                if (cmin >= 0) {
+                    $("#min").text(cmin);
+                }
+                else
+                {
+                    $("#min").parent().html("窗口无法关闭");
+                }
+            }, 1000);
+            setTimeout("window.opener=null;window.close()", 5000);
+        });
+    </script>
+
 </body>
 </html>

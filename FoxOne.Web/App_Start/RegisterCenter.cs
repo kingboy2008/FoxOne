@@ -438,11 +438,11 @@ namespace FoxOne.Web
                                         var user = DBContext<IUser>.Instance.Get(workitem.PartUserId);
                                         if (user != null)
                                         {
-                                            string message = string.Format("OA：{0}", instance.InstanceName);
-                                            if (user.MobilePhone.IsNotNullOrEmpty())
-                                            {
-                                                bool result = Swj.Sms.SuppliersHelper.MSMHelper.SendSMS(user.MobilePhone, message, Swj.Sms.SuppliersHelper.MSMType.ChuangLan, Swj.Sms.SuppliersHelper.MSType.Identifying);
-                                            }
+                                            //string message = string.Format("OA：{0}", instance.InstanceName);
+                                            //if (user.MobilePhone.IsNotNullOrEmpty())
+                                            //{
+                                            //    bool result = Swj.Sms.SuppliersHelper.MSMHelper.SendSMS(user.MobilePhone, message, Swj.Sms.SuppliersHelper.MSMType.ChuangLan, Swj.Sms.SuppliersHelper.MSType.Identifying);
+                                            //}
 
                                             //if (user.Mail.IsNotNullOrEmpty())
                                             //{

@@ -57,6 +57,8 @@
     <Compile Include="DataSource\AttendanceListDataSource.cs" />
     <Compile Include="DataSource\AttendanceSummaryDataSource.cs" />
     <Compile Include="DataSource\ChangeManagementDataSource.cs" />
+    <Compile Include="DataSource\OtApplyListDataSource.cs" />
+    <Compile Include="DataSource\SrbBxDetailFormService.cs" />
     <Compile Include="DataSource\SRBWebApiDataSource.cs" />
     <Compile Include="DataSource\TotalDataSource.cs" />
     <Compile Include="DataSource\TeslaWebApiDataSource.cs" />

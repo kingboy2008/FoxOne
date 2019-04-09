@@ -35,3 +35,12 @@ obj\
 /FoxOne.Workflow.Kernel/bin/Debug/FoxOne.Business.dll.config
 /FoxOne.Workflow.Kernel/obj/Debug/FoxOne.Workflow.Kernel.csproj.CoreCompileInputs.cache
 *.p7s
+/FoxOne.Business/obj/Release/FoxOne.Business.csprojAssemblyReference.cache
+/FoxOne.Business/obj/Release/FoxOne.Business.csproj.CoreCompileInputs.cache
+/FoxOne.Web/obj/Release
+/FoxOne.Workflow.Business/obj/Release/FoxOne.Workflow.Business.csprojAssemblyReference.cache
+/FoxOne.Workflow.Business/obj/Release/FoxOne.Workflow.Business.csproj.CoreCompileInputs.cache
+/FoxOne.Workflow.DataAccess/obj/Release
+/FoxOne.Workflow.DataAccess/bin/Release
+/FoxOne.Workflow.Kernel/obj/Release
+/FoxOne.Workflow.Kernel/bin/Release
