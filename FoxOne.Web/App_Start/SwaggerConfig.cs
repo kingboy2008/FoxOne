@@ -15,10 +15,10 @@ namespace FoxOne.Web
             return System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bin","FoxOne.Web.XML");
         }
 
-        private static string GetXmlCommentsPath1()
-        {
-            return System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bin", "FoxOne.PMO.XML");
-        }
+        //private static string GetXmlCommentsPath1()
+        //{
+        //    return System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bin", "FoxOne.PMO.XML");
+        //}
 
         private static string GetXmlCommentsPath2()
         {
@@ -123,7 +123,7 @@ namespace FoxOne.Web
                         // more Xml comment files.
                         //
                         c.IncludeXmlComments(GetXmlCommentsPath());
-                        c.IncludeXmlComments(GetXmlCommentsPath1());
+                        //c.IncludeXmlComments(GetXmlCommentsPath1());
                         c.IncludeXmlComments(GetXmlCommentsPath2());
                         c.IncludeXmlComments(GetXmlCommentsPath3());
                         // Swashbuckle makes a best attempt at generating Swagger compliant JSON schemas for the various types
