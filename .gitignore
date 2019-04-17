@@ -44,3 +44,14 @@ obj\
 /FoxOne.Workflow.DataAccess/bin/Release
 /FoxOne.Workflow.Kernel/obj/Release
 /FoxOne.Workflow.Kernel/bin/Release
+/FoxOne.Business/bin/Debug/FoxOne.Business.dll.config
+/FoxOne.Business/obj/Debug/FoxOne.Business.csproj.CoreCompileInputs.cache
+/FoxOne.Business/obj/Debug/FoxOne.Business.csproj.FileListAbsolute.txt
+/FoxOne.Business/obj/Debug/FoxOne.Business.csprojAssemblyReference.cache
+*.cache
+/FoxOne.Workflow.Business/obj/Debug/FoxOne.Workflow.Business.csproj.FileListAbsolute.txt
+/FoxOne.Workflow.DataAccess/bin/Debug/FoxOne.Workflow.DataAccess.dll.config
+/FoxOne.Workflow.DataAccess/bin/Debug/FoxOne.Workflow.Kernel.dll.config
+/FoxOne.Workflow.DataAccess/obj/Debug/FoxOne.Workflow.DataAccess.csproj.FileListAbsolute.txt
+/FoxOne.Workflow.Kernel/bin/Debug/FoxOne.Workflow.Kernel.dll.config
+/FoxOne.Workflow.Kernel/obj/Debug/FoxOne.Workflow.Kernel.csproj.FileListAbsolute.txt
